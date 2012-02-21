@@ -1,0 +1,16 @@
+<package>
+  <description brief="openni_skeleton">
+
+     openni_skeleton
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/openni_skeleton</url>
+  <depend package="visualization_msgs"/>
+  <depend package="tf"/>
+
+</package>
+
+

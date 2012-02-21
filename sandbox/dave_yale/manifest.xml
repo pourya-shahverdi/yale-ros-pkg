@@ -1,0 +1,14 @@
+<package>
+  <description brief="dave_yale">
+
+     dave_yale
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dave_yale</url>
+
+</package>
+
+

@@ -1,0 +1,11 @@
+<stack>
+  <description brief="openni_person">openni_person</description>
+  <author>Maintained by David Feil-Seifer</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/openni_person</url>
+  <depend stack="common_msgs" /> <!-- visualization_msgs -->
+  <depend stack="geometry" /> <!-- tf -->
+  <depend stack="ros" />
+
+</stack>

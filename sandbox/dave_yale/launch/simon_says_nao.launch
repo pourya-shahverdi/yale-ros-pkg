@@ -1,0 +1,11 @@
+<launch>
+  <include file="$(find dave_demo)/turn_taking.launch"/>
+  <include file="$(find simon_says)/launch/simon_says.launch"/>
+
+  <node pkg="bandit_to_nao" type="bandit_to_nao" name="bandit_to_nao">
+    <remap from="output_joint_state" to="target_joints"/>
+  </node>
+
+  <include file="$(find nao_teleop)/launch/teleop_nao.launch"/>
+
+</launch>

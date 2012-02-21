@@ -1,0 +1,18 @@
+<package>
+  <description brief="nao_joint_align">
+
+     nao_joint_align
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/nao_joint_align</url>
+  <depend package="tf"/>
+  <depend package="kdl"/>
+  <depend package="nao_msgs"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

@@ -1,0 +1,17 @@
+<package>
+  <description brief="nao_sit_stand">
+
+     nao_sit_stand
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/nao_sit_stand</url>
+  <depend package="actionlib"/>
+  <depend package="nao_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="std_srvs"/>
+</package>
+
+
