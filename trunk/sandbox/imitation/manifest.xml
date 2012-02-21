@@ -1,0 +1,18 @@
+<package>
+  <description brief="imitation">
+
+     imitation
+
+  </description>
+  <author>Max Uhlenhuth</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/imitation</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+
+</package>
+
+
