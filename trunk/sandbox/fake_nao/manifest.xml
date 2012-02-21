@@ -1,0 +1,17 @@
+<package>
+  <description brief="fake_nao">
+
+     fake_nao
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/fake_nao</url>
+  <depend package="sensor_msgs"/>
+  <depend package="nao_msgs"/>
+  <depend package="nao_description"/>
+  <depend package="kdl_parser"/>
+</package>
+
+

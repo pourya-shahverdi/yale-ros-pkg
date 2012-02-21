@@ -1,0 +1,14 @@
+<package>
+  <description brief="skeleton_data">
+
+     skeleton_data
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/skeleton_data</url>
+
+</package>
+
+

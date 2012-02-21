@@ -1,0 +1,17 @@
+<package>
+  <description brief="eye_player">
+
+     eye_player
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/eye_player</url>
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

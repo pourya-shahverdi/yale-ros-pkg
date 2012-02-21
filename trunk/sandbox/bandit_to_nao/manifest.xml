@@ -1,0 +1,17 @@
+<package>
+  <description brief="bandit_to_nao">
+
+     bandit_to_nao
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/bandit_to_nao</url>
+  <depend package="nao_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

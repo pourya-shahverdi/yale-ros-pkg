@@ -1,0 +1,23 @@
+<package>
+  <description brief="nao_led">
+
+     nao_led
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/nao_led</url>
+  <depend package="std_msgs"/>
+  <depend package="std_srvs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="nao_driver"/>
+  <depend package="nao_msgs"/>
+  <depend package="rospy"/>
+  <depend package="dynamic_reconfigure"/>
+  <depend package="actionlib"/>
+
+</package>
+
+

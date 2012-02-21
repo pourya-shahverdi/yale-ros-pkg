@@ -1,0 +1,17 @@
+<package>
+  <description brief="nao_mover">
+
+     nao_mover
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/nao_mover</url>
+  <depend package="nao_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+
