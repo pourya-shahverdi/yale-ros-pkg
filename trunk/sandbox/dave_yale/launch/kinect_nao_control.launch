@@ -1,0 +1,15 @@
+<launch>
+
+  <!-- load nao description -->
+
+  <include file="$(find nao_description)/launch/nao_state_publisher.launch"/>
+  <node pkg="fake_nao" type="fake_nao" name="fake_nao"/>
+
+  <!-- convert kinect tf frames to joint angles -->
+
+  <node pkg="tf_to_pose" type="tf_to_angles" name="angles">
+  </node>
+
+  <node pkg="bandit_to_nao" type="bandit_to_nao" name="bandit_to_nao"/>
+
+</launch>

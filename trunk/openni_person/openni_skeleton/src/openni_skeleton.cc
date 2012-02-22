@@ -1,5 +1,5 @@
 /*
- * nao_mover
+ * openni_skeleton
  * Copyright (c) 2012, David Feil-Seifer
  * All rights reserved.
  * 

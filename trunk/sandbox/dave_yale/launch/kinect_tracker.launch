@@ -1,13 +1,11 @@
 <launch>
-  <param name="/camera/driver/image_mode" type="int" value="2"/>
-  <param name="/camera/driver/depth_mode" type="int" value="2"/>
-
   <include file="$(find openni_launch)/launch/openni.launch"/>
-  <node pkg="openni_tracker" name="openni_tracker" type="openni_tracker" respawn="true"/>
+  <node pkg="openni_tracker_yale" name="openni_tracker" type="openni_tracker" respawn="true"/>
   <node pkg="openni_skeleton" type="openni_skeleton" name="person_vis">
+    <param name="suffix" type="str" value=""/>
   </node>
-  <node pkg="tf" type="static_transform_publisher" name="tracker_kinect" args="0 0 0 0 0 0  /camera_link /openni_depth_frame 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="tracker_kinect" args="0 0 0 3.141927 3.1415927  0  /camera_depth_optical_frame /camera_skeleton_frame 10"/>
 
-  <node pkg="tf" type="static_transform_publisher" name="nao_kinect" args=" 1 1 0 3.1415927 0 0  /openni_depth_frame /base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="nao_kinect" args=" 1 1 0 3.1415927 0 0  /camera_depth_frame /base_link 100"/>
 
 </launch>

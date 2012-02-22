@@ -1,0 +1,11 @@
+<launch>
+  <include file="$(find dave_yale)/launch/kinect_tracker.launch"/>
+  <node pkg="tf_to_pose" type="tf_to_angles" name="angles">
+    <!--<remap from="/output_joint_state" to="/target_joints"/>-->
+  </node>
+  <node pkg="sound_play" type="soundplay_node.py" name="sound_play" respawn="true"/>
+  <!--<node pkg="openni_vis" type="openni_vis" name="person_vis">
+    <param name="prefix" type="str" value=""/>
+  </node>-->
+  <node pkg="tf" type="static_transform_publisher" name="bandit_kinect" args=" 1 1 0 3.1415927 0 0  /camera_depth_frame /bandit_torso_link 100"/>
+</launch>
