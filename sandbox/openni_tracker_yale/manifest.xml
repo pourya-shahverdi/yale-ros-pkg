@@ -1,0 +1,21 @@
+<package>
+  <description brief="openni_tracker_yale">
+
+     openni_tracker_yale
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/openni_tracker_yale</url>
+  <depend package="roscpp"/>
+  <depend package="roslib"/>
+  <depend package="geometry_msgs"/>
+  <depend package="openni"/>
+  <depend package="nite"/>
+  <depend package="kdl"/>
+  <depend package="tf"/>
+
+</package>
+
+
