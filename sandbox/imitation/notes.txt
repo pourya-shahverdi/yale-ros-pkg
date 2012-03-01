@@ -1,0 +1,30 @@
+Run the following after package creation to make sure on path:
+$ rospack profile
+$ rospack find imitation
+
+Install dependencies:
+$ rosdep install imitation
+
+Make package:
+$ rosmake imitation
+
+Make nodes executable:
+$ chmod +x imitation/nodes/skeleton_listener.py
+
+To run roscore:
+$ roscore
+
+To play the bag file:
+$ rosbag play sandbox/skeleton_data/data/2012-02-07-15-16-03.bag
+
+To run rviz:
+$ rosrun rviz rviz
+Set Fixed Frame to: /openni_depth
+Set Target Frame to: /right_shoulder_1
+
+To run skeleton_listener:
+$ rosrun imitation skeleton_listener.py
+
+Before committing:
+$ cd sandbox/imitation
+$ make clean
