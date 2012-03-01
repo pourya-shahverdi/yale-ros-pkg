@@ -15,7 +15,7 @@ To run roscore:
 $ roscore
 
 To play the bag file:
-$ rosbag play sandbox/skeleton_data/data/2012-02-07-15-16-03.bag
+$ rosbag play sandbox/skeleton_data/data/2012-02-21-15-37-28.bag
 
 To run rviz:
 $ rosrun rviz rviz
