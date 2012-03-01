@@ -12,8 +12,8 @@ if __name__ == '__main__':
     rate = rospy.Rate(10.0)
     while not rospy.is_shutdown():
         try:
-            r_elbow_trans, r_elbow_rot = listener.lookupTransform('right_elbow_1', '/right_shoulder_1', rospy.Time(0))
-            r_hand_trans, r_hand_rot = listener.lookupTransform('right_hand_1', '/right_shoulder_1', rospy.Time(0))
+            r_elbow_trans, r_elbow_rot = listener.lookupTransform('right_elbow', '/right_shoulder', rospy.Time(0))
+            r_hand_trans, r_hand_rot = listener.lookupTransform('right_hand', '/right_shoulder', rospy.Time(0))
             print "Right Elbow | transform: %s rotation: %s" % (r_elbow_trans, r_elbow_rot)
             print "Right Hand | transform: %s rotation: %s" % (r_hand_trans, r_hand_rot)
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException): #TODO handle Extrapolation better?
