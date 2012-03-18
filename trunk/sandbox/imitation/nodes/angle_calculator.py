@@ -82,7 +82,7 @@ def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
     return (yaw, roll)
     
 if __name__ == '__main__':
-    rospy.init_node('skeleton_listener')
+    rospy.init_node('angle_calculator')
     listener = tf.TransformListener()
     publisher = rospy.Publisher('jointInfo', jointInfo)
     
@@ -93,10 +93,10 @@ if __name__ == '__main__':
                 shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
                 e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
-                publisher.publish(jointInfo(s_pitch, 'pitch', '%_shoulder' % side))
-                publisher.publish(jointInfo(s_roll, 'roll', '%_shoulder' % side))
-                publisher.publish(jointInfo(e_yaw, 'yaw', '%_elbow' % side))
-                publisher.publish(jointInfo(e_roll, 'roll', '%_elbow' % side))
+                publisher.publish(jointInfo(s_pitch, 'pitch', '%s_shoulder' % side))
+                publisher.publish(jointInfo(s_roll, 'roll', '%s_shoulder' % side))
+                publisher.publish(jointInfo(e_yaw, 'yaw', '%s_elbow' % side))
+                publisher.publish(jointInfo(e_roll, 'roll', '%s_elbow' % side))
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
