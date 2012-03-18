@@ -1,9 +1,12 @@
 #!/usr/bin/env python  
+import math
+
 import roslib
 roslib.load_manifest('imitation')
 import rospy
-import math
 import tf
+
+from imitation.msg import jointInfo
 
 def get_coords(side_name):
     """
@@ -81,6 +84,7 @@ def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
 if __name__ == '__main__':
     rospy.init_node('skeleton_listener')
     listener = tf.TransformListener()
+    publisher = rospy.Publisher('jointInfo', jointInfo)
     
     rate = rospy.Rate(10.0)
     while not rospy.is_shutdown():
@@ -88,7 +92,11 @@ if __name__ == '__main__':
             for side in ('left', 'right'):
                 shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
-                print "%s shoulder pitch/roll: %s/%s" % (side, s_pitch, s_roll)
+                e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
+                publisher.publish(jointInfo(s_pitch, 'pitch', '%_shoulder' % side))
+                publisher.publish(jointInfo(s_roll, 'roll', '%_shoulder' % side))
+                publisher.publish(jointInfo(e_yaw, 'yaw', '%_elbow' % side))
+                publisher.publish(jointInfo(e_roll, 'roll', '%_elbow' % side))
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
