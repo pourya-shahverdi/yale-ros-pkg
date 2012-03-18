@@ -9,7 +9,7 @@ Make package:
 $ rosmake imitation
 
 Make nodes executable:
-$ chmod +x imitation/nodes/skeleton_listener.py
+$ chmod +x imitation/nodes/angle_calculator.py
 
 To run roscore:
 $ roscore
@@ -22,8 +22,8 @@ $ rosrun rviz rviz
 Set Fixed Frame to: /openni_depth
 Set Target Frame to: /right_shoulder_1
 
-To run skeleton_listener:
-$ rosrun imitation skeleton_listener.py
+To run angle_calculator:
+$ rosrun imitation angle_calculator.py
 
 Before committing:
 $ cd sandbox/imitation
