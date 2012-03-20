@@ -3,10 +3,12 @@ import math
 
 import roslib
 roslib.load_manifest('imitation')
+roslib.load_manifest('nao_msgs')
 import rospy
 import tf
 
-from imitation.msg import jointInfo
+from std_msgs.msg import Header
+from nao_msgs.msg import JointAnglesWithSpeed
 
 def get_coords(side_name):
     """
@@ -43,6 +45,10 @@ def shoulder_pitch_roll(shoulder_coords, elbow_coords):
     roll = math.acos((os2s**2 + s2e**2 - os2e**2) / (2 * os2s * s2e))
     
     #PITCH
+    #subtract shoulder-shoulder vector from shoulder-elbow vector to
+    #normalize relative to camera
+    norm_elbow_coords = [ec - sc for ec, sc in zip(elbow_coords, shoulder_coords)]
+    
     #find equation of plane through shoulder, perpendicular to line through shoulders
         #shoulder coords of (A,B,C)  and opposite shoulder at (0,0,0) 
         #yield plane of Ax + By + Cz + (A^2 + B^2 + C^2) = 0
@@ -84,19 +90,27 @@ def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
 if __name__ == '__main__':
     rospy.init_node('angle_calculator')
     listener = tf.TransformListener()
-    publisher = rospy.Publisher('jointInfo', jointInfo)
+    publisher = rospy.Publisher('jaws', JointAnglesWithSpeed) #TODO what to name this?
     
-    rate = rospy.Rate(10.0)
+    rate = rospy.Rate(5) #TODO 10.0)
+    FRAME = 1;
+    ASSOCIATED_FRAME = 0 #TODO?
+    # 0: no frame
+    # 1: global frame
     while not rospy.is_shutdown():
         try:
-            for side in ('left', 'right'):
+            for side in ('left', ): #TODO 'right'):
                 shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
                 e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
-                publisher.publish(jointInfo(s_pitch, 'pitch', '%s_shoulder' % side))
-                publisher.publish(jointInfo(s_roll, 'roll', '%s_shoulder' % side))
-                publisher.publish(jointInfo(e_yaw, 'yaw', '%s_elbow' % side))
-                publisher.publish(jointInfo(e_roll, 'roll', '%s_elbow' % side))
+                TIMESTAMP = '' #TODO how?
+                header = Header(FRAME, TIMESTAMP)
+                FRAME += 1
+                joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll']
+                joint_angles = [s_pitch, s_roll, e_yaw, e_roll]
+                speed = 0.5 #half of max velocity
+                relative = 0 #absolute angle
+                publisher.publish(JointAnglesWithSpeed(header, joint_names, joint_angles, speed, relative))
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
