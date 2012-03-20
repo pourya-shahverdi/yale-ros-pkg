@@ -1,0 +1,14 @@
+<launch>
+
+  <param name="use_sim_time" value="true" type="bool" />
+
+  <!-- load nao description -->
+
+  <include file="$(find nao_description)/launch/nao_state_publisher.launch"/>
+  <node pkg="fake_nao" type="fake_nao" name="fake_nao"/>
+
+  <!-- convert tf frames to joint angles -->
+
+  <node pkg="imitation" type="angle_calculator.py" name="angle_calculator"></node>
+
+</launch>
