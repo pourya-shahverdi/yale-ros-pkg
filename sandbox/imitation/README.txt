@@ -35,8 +35,7 @@ Set Target Frame to: <Fixed Frame>
 
 If you want to use the fake Nao model in rviz:
 $ rosmake fake_nao
-$ rosmake bandit_to_nao
-$ roslaunch dave_yale kinect_fake_nao_control.launch
+$ roslaunch imitation fake_robo.launch
 
 To run angle_calculator:
 $ rosrun imitation angle_calculator.py

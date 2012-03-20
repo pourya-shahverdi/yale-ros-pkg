@@ -15,16 +15,18 @@ def get_coords(side_name):
     Given a side ("left" or "right"),
     Find all the coordinates of the shoulder, elbow, and wrist
     in terms of the opposite shoulder.
-    Return a tuple of (shoulder_coords, elbow_coords, wrist_coords) 
+    Return a tuple of (timestamp, shoulder_coords, elbow_coords, wrist_coords) 
     """
     if side_name == 'right':
         opposite_shoulder = '/left_shoulder'
     elif side_name == 'left':
         opposite_shoulder = '/right_shoulder'
+    #TODO better job of getting time actually associated w/ transforms
+    timestamp = rospy.Time.now()
     shoulder_trans, shoulder_rot = listener.lookupTransform('%s_shoulder' % side_name, opposite_shoulder, rospy.Time(0))
     elbow_trans, elbow_rot = listener.lookupTransform('%s_elbow' % side_name, opposite_shoulder, rospy.Time(0))
     wrist_trans, wrist_rot = listener.lookupTransform('%s_hand' % side_name, opposite_shoulder, rospy.Time(0))
-    return (shoulder_trans, elbow_trans, wrist_trans)
+    return (timestamp, shoulder_trans, elbow_trans, wrist_trans)
 
 def shoulder_pitch_roll(shoulder_coords, elbow_coords):
     """
@@ -90,22 +92,19 @@ def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
 if __name__ == '__main__':
     rospy.init_node('angle_calculator')
     listener = tf.TransformListener()
-    publisher = rospy.Publisher('jaws', JointAnglesWithSpeed) #TODO what to name this?
+    publisher = rospy.Publisher('joint_angles', JointAnglesWithSpeed)
     
-    rate = rospy.Rate(5) #TODO 10.0)
-    FRAME = 1;
-    ASSOCIATED_FRAME = 0 #TODO?
-    # 0: no frame
-    # 1: global frame
+    rate = rospy.Rate(5) #TODO 10.0
+    FRAME_NUM = 1;
+    ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
     while not rospy.is_shutdown():
         try:
             for side in ('left', ): #TODO 'right'):
-                shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
+                timestamp, shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
                 e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
-                TIMESTAMP = '' #TODO how?
-                header = Header(FRAME, TIMESTAMP)
-                FRAME += 1
+                header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
+                FRAME_NUM += 1
                 joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll']
                 joint_angles = [s_pitch, s_roll, e_yaw, e_roll]
                 speed = 0.5 #half of max velocity
