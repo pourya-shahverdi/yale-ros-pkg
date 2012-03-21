@@ -10,6 +10,7 @@ import tf
 
 from std_msgs.msg import Header
 from nao_msgs.msg import JointAnglesWithSpeed
+from imitation.msg import Coords
 
 def get_coords(side_name):
     """
@@ -95,6 +96,12 @@ if __name__ == '__main__':
     listener = tf.TransformListener()
     publisher = rospy.Publisher('joint_angles', JointAnglesWithSpeed)
     
+    #for debugging
+    ls_pub = rospy.Publisher('left_shoulder_coords', Coords)
+    rs_pub = rospy.Publisher('right_shoulder_coords', Coords)
+    le_pub = rospy.Publisher('left_elbow_coords', Coords)
+    re_pub = rospy.Publisher('right_elbow_coords', Coords)
+    
     rate = rospy.Rate(5) #TODO 10.0
     FRAME_NUM = 1;
     ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
@@ -102,6 +109,12 @@ if __name__ == '__main__':
         try:
             for side in ('left', ): #TODO 'right'):
                 timestamp, shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
+                if side == 'left':
+                    ls_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
+                    le_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
+                elif side == 'right':
+                    rs_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
+                    re_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
                 e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
                 header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
