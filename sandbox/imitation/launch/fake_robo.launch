@@ -19,10 +19,11 @@
   
   <!-- play the bag file -->
   <node pkg="rosbag" type="play" name="rosbag_node" 
-  	args="--clock $(env HOME)/ros_workspace/yale-ros-pkg/sandbox/skeleton_data/data/2012-02-21-15-37-28.bag">
-  </node>
+  	args="--clock $(env HOME)/ros_workspace/yale-ros-pkg/sandbox/skeleton_data/data/2012-02-21-15-37-28.bag" />
   
   <!-- start graphing stuff -->
-  <node pkg="rxtools" type="rxplot" name="joint_graph" args="/joint_angles/joint_angles[0]:joint_angles[1]:joint_angles[2]:joint_angles[3]" />
-
+<!--  <node pkg="rxtools" type="rxplot" name="joint_angles" -->
+<!--  	args="/joint_angles/joint_angles[0]:joint_angles[1]:joint_angles[2]:joint_angles[3]" /> -->
+	<node pkg="rxtools" type="rxplot" name="joint_coords"
+		args="/left_elbow_coords/x:y:z" />
 </launch>
