@@ -7,8 +7,19 @@
   <include file="$(find nao_description)/launch/nao_state_publisher.launch"/>
   <node pkg="fake_nao" type="fake_nao" name="fake_nao"/>
 
-  <!-- convert tf frames to joint angles -->
+  <!-- tf package -->
+  <node pkg="tf" type="static_transform_publisher" name="nao_kinect"
+	args=" 1 1 0 3.1415927 0 0  /openni_rgb_frame /base_link 100"/>
 
+  <!-- convert tf frames to joint angles -->
   <node pkg="imitation" type="angle_calculator.py" name="angle_calculator"></node>
+
+  <!-- run rviz -->
+  <node pkg="rviz" type="rviz" name="rviz_node"></node>
+  
+  <!-- play the bag file -->
+  <node pkg="rosbag" type="play" name="rosbag_node" 
+  	args="--clock $(env HOME)/ros_workspace/yale-ros-pkg/sandbox/skeleton_data/data/2012-02-21-15-37-28.bag">
+  </node>
 
 </launch>
