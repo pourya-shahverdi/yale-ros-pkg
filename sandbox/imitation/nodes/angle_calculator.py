@@ -1,5 +1,6 @@
 #!/usr/bin/env python  
 import math
+import time
 
 import roslib
 roslib.load_manifest('imitation')
@@ -113,5 +114,5 @@ if __name__ == '__main__':
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
-        
+
         rate.sleep()
