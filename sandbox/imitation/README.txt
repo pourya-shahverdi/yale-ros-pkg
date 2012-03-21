@@ -43,3 +43,9 @@ $ rosrun imitation angle_calculator.py
 Before committing:
 $ cd sandbox/imitation
 $ make clean
+
+Coordinates:
+Z coordinate is front/back of robot
+X coordinate is left/right of robot
+Y coordinate is up/down (up is a smaller y value)
+

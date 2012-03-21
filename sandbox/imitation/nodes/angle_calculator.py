@@ -101,20 +101,24 @@ if __name__ == '__main__':
     rs_pub = rospy.Publisher('right_shoulder_coords', Coords)
     le_pub = rospy.Publisher('left_elbow_coords', Coords)
     re_pub = rospy.Publisher('right_elbow_coords', Coords)
+    lw_pub = rospy.Publisher('left_wrist_coords', Coords)
+    rw_pub = rospy.Publisher('right_wrist_coords', Coords)
     
     rate = rospy.Rate(5) #TODO 10.0
     FRAME_NUM = 1;
     ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
     while not rospy.is_shutdown():
         try:
-            for side in ('left', ): #TODO 'right'):
+            for side in ('left', 'right'):
                 timestamp, shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
                 if side == 'left':
                     ls_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
                     le_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
+                    lw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
                 elif side == 'right':
                     rs_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
                     re_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
+                    rw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
                 s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
                 e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
                 header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
