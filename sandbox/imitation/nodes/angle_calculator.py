@@ -12,6 +12,8 @@ from std_msgs.msg import Header
 from nao_msgs.msg import JointAnglesWithSpeed
 from imitation.msg import Coords
 
+FIXED_FRAME = 'openni_rgb_frame'
+
 def get_coords(side_name):
     """
     Given a side ("left" or "right"),
@@ -23,11 +25,19 @@ def get_coords(side_name):
         opposite_shoulder = '/left_shoulder'
     elif side_name == 'left':
         opposite_shoulder = '/right_shoulder'
-    #TODO better job of getting time actually associated w/ transforms
+
     timestamp = rospy.Time.now()
-    shoulder_trans, shoulder_rot = listener.lookupTransform('%s_shoulder' % side_name, opposite_shoulder, rospy.Time(0))
-    elbow_trans, elbow_rot = listener.lookupTransform('%s_elbow' % side_name, opposite_shoulder, rospy.Time(0))
-    wrist_trans, wrist_rot = listener.lookupTransform('%s_hand' % side_name, opposite_shoulder, rospy.Time(0))
+    #get coordinates relative to the fixed frame (can't do relative to opposite shoulder - coord frame is rotating over time!) 
+    opp_shoulder_trans, opp_shoulder_rot = listener.lookupTransform(opposite_shoulder, FIXED_FRAME, rospy.Time(0))
+    shoulder_trans, shoulder_rot = listener.lookupTransform('%s_shoulder' % side_name, FIXED_FRAME, rospy.Time(0))
+    elbow_trans, elbow_rot = listener.lookupTransform('%s_elbow' % side_name, FIXED_FRAME, rospy.Time(0))
+    wrist_trans, wrist_rot = listener.lookupTransform('%s_hand' % side_name, FIXED_FRAME, rospy.Time(0))
+    
+    #normalize coords relative to opposite shoulder translation
+    shoulder_trans = [s - os for s, os in zip(shoulder_trans, opp_shoulder_trans)]
+    elbow_trans = [e - os for e, os in zip(elbow_trans, opp_shoulder_trans)]
+    wrist_trans = [w - os for w, os in zip(wrist_trans, opp_shoulder_trans)]
+    
     return (timestamp, shoulder_trans, elbow_trans, wrist_trans)
 
 def shoulder_pitch_roll(shoulder_coords, elbow_coords):
@@ -52,16 +62,12 @@ def shoulder_pitch_roll(shoulder_coords, elbow_coords):
     #subtract shoulder-shoulder vector from shoulder-elbow vector to
     #normalize relative to camera
     norm_elbow_coords = [ec - sc for ec, sc in zip(elbow_coords, shoulder_coords)]
+    y, z = norm_elbow_coords[1:3]
+    pitch = math.atan2(y, z)
     
-    #find equation of plane through shoulder, perpendicular to line through shoulders
-        #shoulder coords of (A,B,C)  and opposite shoulder at (0,0,0) 
-        #yield plane of Ax + By + Cz + (A^2 + B^2 + C^2) = 0
-    #project elbow onto plane - http://www.9math.com/book/projection-point-plane
-    #project neck onto plane (assumes that this is always "up" perpendicular to shoulders)
-    #Find elbow-shoulder-neck angle in this plane using law of cosines
-    #Somehow determine whether the angle is positive or negative
+    le_dist_pub.publish(Coords(pitch, roll, 0))
     
-    pitch = 3
+    pitch = 0
     return (pitch, roll)
 
 def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
@@ -83,12 +89,7 @@ def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
     roll = math.acos((s2e**2 + e2w**2 - s2w**2) / (2 * s2e * e2w))
     
     #YAW
-    #find equation of plane through elbow, perpendicular to line from shoulder to elbow
-        #elbow coords of (A,B,C) and shoulder coords of (D,E,F) 
-        #yield plane of (A-D)x + (B-E)y + (C-F)z + (AD + BE + CF - A^2 - B^2 - C^2) = 0
-    #project wrist onto plane - http://www.9math.com/book/projection-point-plane
-    #... how to orient this angle?!
-    yaw = 3
+    yaw, roll = 0,0
     return (yaw, roll)
     
 if __name__ == '__main__':
@@ -104,7 +105,9 @@ if __name__ == '__main__':
     lw_pub = rospy.Publisher('left_wrist_coords', Coords)
     rw_pub = rospy.Publisher('right_wrist_coords', Coords)
     
-    rate = rospy.Rate(5) #TODO 10.0
+    le_dist_pub = rospy.Publisher('left_elbow_dist', Coords)
+    
+    rate = rospy.Rate(10)
     FRAME_NUM = 1;
     ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
     while not rospy.is_shutdown():
@@ -115,19 +118,23 @@ if __name__ == '__main__':
                     ls_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
                     le_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
                     lw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
+                    ls_pitch, ls_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
+                    le_yaw, le_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
                 elif side == 'right':
                     rs_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
                     re_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
                     rw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
-                s_pitch, s_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
-                e_yaw, e_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
-                header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
-                FRAME_NUM += 1
-                joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll']
-                joint_angles = [s_pitch, s_roll, e_yaw, e_roll]
-                speed = 0.5 #half of max velocity
-                relative = 0 #absolute angle
-                publisher.publish(JointAnglesWithSpeed(header, joint_names, joint_angles, speed, relative))
+                    rs_pitch, rs_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
+                    re_yaw, re_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
+            
+            header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
+            FRAME_NUM += 1
+            joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll',
+                           'RShoulderPitch', 'RShoulderRoll', 'RElbowYaw', 'RElbowRoll']
+            joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
+            speed = 0.5 #half of max velocity
+            relative = 0 #absolute angle
+            publisher.publish(JointAnglesWithSpeed(header, joint_names, joint_angles, speed, relative))
 
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             continue
