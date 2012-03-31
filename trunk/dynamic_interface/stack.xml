@@ -1,0 +1,11 @@
+<stack>
+  <description brief="dynamic_interface">dynamic_interface</description>
+  <author>Maintained by David Feil-Seifer</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dynamic_interface</url>
+  <depend stack="common" /> <!-- yaml_cpp -->
+  <depend stack="ros" />
+  <depend stack="ros_comm" /> <!-- roscpp -->
+
+</stack>

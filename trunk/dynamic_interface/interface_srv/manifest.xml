@@ -1,0 +1,20 @@
+<package>
+  <description brief="interface_srv">
+
+     interface_srv
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/interface_srv</url>
+  <depend package="roscpp"/>
+  <depend package="yaml_cpp"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/srv/cpp -I${prefix}/msg/cpp"/>
+  </export>
+
+</package>
+
+

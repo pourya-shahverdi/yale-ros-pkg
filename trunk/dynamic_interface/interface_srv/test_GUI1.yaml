@@ -1,0 +1,9 @@
+- gui: TestGUI1
+  elements:
+    - type: slider
+      label: Test_Slider
+      min: 5
+      max: 10
+      topic: GUI/Test_Slider
+    - type: button
+      label: OK
