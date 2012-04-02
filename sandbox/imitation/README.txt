@@ -45,7 +45,14 @@ $ cd sandbox/imitation
 $ make clean
 
 Coordinates:
+X coordinate is front/back of robot
+Y coordinate is left/right of robot
 Z coordinate is front/back of robot
-X coordinate is left/right of robot
-Y coordinate is up/down (up is a smaller y value)
 
+Joints:
+http://developer.aldebaran-robotics.com/doc/1-12/nao/hardware/kinematics/nao-joints-33.html
+
+Offsets:
+Shoulder:
+	0 pitch is perpendicular to torso.  Positive rotates down.  Negative rotates up.
+	0 roll is straight out in front of body

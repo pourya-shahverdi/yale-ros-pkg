@@ -14,32 +14,23 @@ from imitation.msg import Coords
 
 FIXED_FRAME = 'openni_rgb_frame'
 
-def get_coords(side_name):
+def get_coords():
     """
-    Given a side ("left" or "right"),
-    Find all the coordinates of the shoulder, elbow, and wrist
-    in terms of the opposite shoulder.
-    Return a tuple of (timestamp, shoulder_coords, elbow_coords, wrist_coords) 
+    Find all the coordinates of the left/right shoulder, elbow, and wrist
+    Return a tuple of (timestamp, ls, le, lw, rs, re, rw) 
     """
-    if side_name == 'right':
-        opposite_shoulder = '/left_shoulder'
-    elif side_name == 'left':
-        opposite_shoulder = '/right_shoulder'
-
     timestamp = rospy.Time.now()
-    #get coordinates relative to the fixed frame (can't do relative to opposite shoulder - coord frame is rotating over time!) 
-    opp_shoulder_trans, opp_shoulder_rot = listener.lookupTransform(opposite_shoulder, FIXED_FRAME, rospy.Time(0))
-    shoulder_trans, shoulder_rot = listener.lookupTransform('%s_shoulder' % side_name, FIXED_FRAME, rospy.Time(0))
-    elbow_trans, elbow_rot = listener.lookupTransform('%s_elbow' % side_name, FIXED_FRAME, rospy.Time(0))
-    wrist_trans, wrist_rot = listener.lookupTransform('%s_hand' % side_name, FIXED_FRAME, rospy.Time(0))
-    
-    #normalize coords relative to opposite shoulder translation
-    shoulder_trans = [s - os for s, os in zip(shoulder_trans, opp_shoulder_trans)]
-    elbow_trans = [e - os for e, os in zip(elbow_trans, opp_shoulder_trans)]
-    wrist_trans = [w - os for w, os in zip(wrist_trans, opp_shoulder_trans)]
-    
-    return (timestamp, shoulder_trans, elbow_trans, wrist_trans)
+    #get coordinates relative to the fixed frame 
+    left_shoulder, _ = listener.lookupTransform('left_shoulder', FIXED_FRAME, rospy.Time(0))
+    left_elbow, _ = listener.lookupTransform('left_elbow', FIXED_FRAME, rospy.Time(0))
+    left_wrist, _ = listener.lookupTransform('left_hand', FIXED_FRAME, rospy.Time(0))
+    right_shoulder, _ = listener.lookupTransform('right_shoulder', FIXED_FRAME, rospy.Time(0))
+    right_elbow, _ = listener.lookupTransform('right_elbow', FIXED_FRAME, rospy.Time(0))
+    right_wrist, _ = listener.lookupTransform('right_hand', FIXED_FRAME, rospy.Time(0))
 
+    return (timestamp, left_shoulder, left_elbow, left_wrist, right_shoulder, right_elbow, right_wrist)
+
+PITCH_OFFSET = 0
 def shoulder_pitch_roll(shoulder_coords, elbow_coords):
     """
     Given the shoulder and elbow coordinates
@@ -59,16 +50,16 @@ def shoulder_pitch_roll(shoulder_coords, elbow_coords):
     roll = math.acos((os2s**2 + s2e**2 - os2e**2) / (2 * os2s * s2e))
     
     #PITCH
-    #subtract shoulder-shoulder vector from shoulder-elbow vector to
-    #normalize relative to camera
-    norm_elbow_coords = [ec - sc for ec, sc in zip(elbow_coords, shoulder_coords)]
-    y, z = norm_elbow_coords[1:3]
-    pitch = math.atan2(y, z)
+    #project elbow onto shoulder plane.  This assumes that the shoulders are parallel to the ground
+    projected_elbow_coords = [elbow_coords[0], elbow_coords[1], shoulder_coords[2]]
+    elbow_proj_dist = elbow_coords[2] - shoulder_coords[2] #straight drop to plane
+    shoulder_proj_dist = math.sqrt(sum([(p-s)**2 for p,s in zip(projected_elbow_coords, shoulder_coords)])) #shoulder to projected elbow point
+    pitch = math.atan2(elbow_proj_dist, shoulder_proj_dist)
+    pitch += PITCH_OFFSET
     
-    le_dist_pub.publish(Coords(pitch, roll, 0))
+    coords = Coords(elbow_proj_dist, shoulder_proj_dist, 0)
     
-    pitch = 0
-    return (pitch, roll)
+    return (pitch, roll, coords)
 
 def elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords):
     """
@@ -105,34 +96,34 @@ if __name__ == '__main__':
     lw_pub = rospy.Publisher('left_wrist_coords', Coords)
     rw_pub = rospy.Publisher('right_wrist_coords', Coords)
     
-    le_dist_pub = rospy.Publisher('left_elbow_dist', Coords)
+    cd_pub = rospy.Publisher('coord_data', Coords)
     
     rate = rospy.Rate(10)
     FRAME_NUM = 1;
     ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
     while not rospy.is_shutdown():
         try:
-            for side in ('left', 'right'):
-                timestamp, shoulder_coords, elbow_coords, wrist_coords = get_coords(side)
-                if side == 'left':
-                    ls_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
-                    le_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
-                    lw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
-                    ls_pitch, ls_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
-                    le_yaw, le_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
-                elif side == 'right':
-                    rs_pub.publish(Coords(shoulder_coords[0], shoulder_coords[1], shoulder_coords[2]))
-                    re_pub.publish(Coords(elbow_coords[0], elbow_coords[1], elbow_coords[2]))
-                    rw_pub.publish(Coords(wrist_coords[0], wrist_coords[1], wrist_coords[2]))
-                    rs_pitch, rs_roll = shoulder_pitch_roll(shoulder_coords, elbow_coords)
-                    re_yaw, re_roll = elbow_yaw_roll(shoulder_coords, elbow_coords, wrist_coords)
+            timestamp, ls, le, lw, rs, re, rw = get_coords()
+            ls_pub.publish(Coords(ls[0], ls[1], ls[2]))
+            le_pub.publish(Coords(le[0], le[1], le[2]))
+            lw_pub.publish(Coords(lw[0], lw[1], lw[2]))
+            ls_pitch, ls_roll, info = shoulder_pitch_roll(ls, le)
+            le_yaw, le_roll = elbow_yaw_roll(ls, le, lw)
+            cd_pub.publish(info)
+            
+            rs_pub.publish(Coords(rs[0], rs[1], rs[2]))
+            re_pub.publish(Coords(re[0], re[1], re[2]))
+            rw_pub.publish(Coords(rw[0], rw[1], rw[2]))
+            rs_pitch, rs_roll, info = shoulder_pitch_roll(rs, re)
+            re_yaw, re_roll = elbow_yaw_roll(rs, re, rw)
             
             header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
             FRAME_NUM += 1
             joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll',
                            'RShoulderPitch', 'RShoulderRoll', 'RElbowYaw', 'RElbowRoll']
-            joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
-            speed = 0.5 #half of max velocity
+            joint_angles = [0,0,0,0,0,0,0,0]
+            #joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
+            speed = 1
             relative = 0 #absolute angle
             publisher.publish(JointAnglesWithSpeed(header, joint_names, joint_angles, speed, relative))
 
