@@ -45,9 +45,9 @@ $ cd sandbox/imitation
 $ make clean
 
 Coordinates:
-X coordinate is front/back of robot
-Y coordinate is left/right of robot
-Z coordinate is front/back of robot
+X coordinate is front/back of robot (back is more positive)
+Y coordinate is left/right of robot (left is more positive)
+Z coordinate is top/bottom of robot (top is more positive)
 
 Joints:
 http://developer.aldebaran-robotics.com/doc/1-12/nao/hardware/kinematics/nao-joints-33.html
