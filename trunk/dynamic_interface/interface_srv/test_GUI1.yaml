@@ -7,3 +7,4 @@
       topic: GUI/Test_Slider
     - type: button
       label: OK
+      topic: GUI/Test_Button
