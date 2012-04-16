@@ -120,14 +120,6 @@ if __name__ == '__main__':
     listener = tf.TransformListener()
     publisher = rospy.Publisher('joint_angles', JointAnglesWithSpeed)
     
-    #for debugging
-    ls_pub = rospy.Publisher('left_shoulder_coords', Coords)
-    rs_pub = rospy.Publisher('right_shoulder_coords', Coords)
-    le_pub = rospy.Publisher('left_elbow_coords', Coords)
-    re_pub = rospy.Publisher('right_elbow_coords', Coords)
-    lw_pub = rospy.Publisher('left_wrist_coords', Coords)
-    rw_pub = rospy.Publisher('right_wrist_coords', Coords)
-    
     cd_pub = rospy.Publisher('coord_data', Coords)
     
     rate = rospy.Rate(10)
@@ -136,16 +128,10 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         try:
             timestamp, ls, le, lw, rs, re, rw = get_coords()
-            ls_pub.publish(Coords(ls[0], ls[1], ls[2]))
-            le_pub.publish(Coords(le[0], le[1], le[2]))
-            lw_pub.publish(Coords(lw[0], lw[1], lw[2]))
             ls_pitch, ls_roll, info = shoulder_pitch_roll('left', rs, ls, le)
             le_yaw, le_roll = elbow_yaw_roll('left', rs, ls, le, lw)
             cd_pub.publish(info)
-            
-            rs_pub.publish(Coords(rs[0], rs[1], rs[2]))
-            re_pub.publish(Coords(re[0], re[1], re[2]))
-            rw_pub.publish(Coords(rw[0], rw[1], rw[2]))
+
             rs_pitch, rs_roll, info = shoulder_pitch_roll('right', ls, rs, re)
             re_yaw, re_roll = elbow_yaw_roll('right', ls, rs, re, rw)
             
