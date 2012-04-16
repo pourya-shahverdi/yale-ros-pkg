@@ -1,5 +1,6 @@
 #!/usr/bin/env python  
 import math
+import numpy
 import time
 
 import roslib
@@ -62,8 +63,17 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
     pitch = math.atan2(elbow_proj_dist, shoulder_proj_dist)
     pitch += PITCH_OFFSET
     pitch *= PITCH_FACTOR
+
+
+#    norm_shoulder = normalize([(s-o) for s,o in zip(shoulder_coords, opp_shoulder_coords)])
+#    norm_elbow = normalize([(e-s) for e,s in zip(elbow_coords, shoulder_coords)])
+#    angle_vector = numpy.subtract(norm_elbow, norm_shoulder)
+#    
+#    pitch = math.atan2(angle_vector[2], angle_vector[0])
+#    pitch += PITCH_OFFSET
+#    pitch *= PITCH_FACTOR
     
-    coords = Coords(elbow_proj_dist, shoulder_proj_dist, 0)
+    coords = Coords(0,0,0)
     
     return (pitch, roll, coords)
 
@@ -89,122 +99,21 @@ def elbow_yaw_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords, wri
         roll *= -1
     
     #YAW
-    #find plane through elbow perpendicular to shoulder-elbow vector
-    perp_plane = perp_plane_thru_point([e-s for e,s in zip(elbow_coords, shoulder_coords)], elbow_coords)
-    #project wrist onto that plane
-    perp_proj_wrist = proj_point_to_plane(wrist_coords, perp_plane)
-    #find plane through opp_shoulder, shoulder, and elbow
-    base_plane = plane_thru_points(opp_shoulder_coords, shoulder_coords, elbow_coords)
-    #project wrist point onto that plane
-    base_proj_wrist = proj_point_to_plane(wrist_coords, base_plane)
-    #Find the line that is the intersection of the 2 planes
-    plane_intersect = plane_plane_intersect(perp_plane, base_plane)
-    #then project the point onto that line
-    base_perp_proj_wrist = proj_point_to_line(wrist_coords, plane_intersect)
-    #atan2
-    perp_to_base = math.sqrt(sum([(p-b)**2 for p,b in zip(perp_proj_wrist, base_perp_proj_wrist)]))
-    base_to_elbow = math.sqrt(sum([(b-e)**2 for b,e in zip(base_perp_proj_wrist, elbow_coords)]))
-    yaw = math.atan2(perp_to_base, base_to_elbow)
+    norm_elbow = normalize([(e-s) for e,s in zip(elbow_coords, shoulder_coords)])
+    norm_wrist = normalize([(w-e) for w,e in zip(wrist_coords, elbow_coords)])
+    angle_vector = numpy.subtract(norm_wrist, norm_elbow)
+    yaw = math.atan2(angle_vector[0], angle_vector[1])
+    
+    yaw += math.pi / 2
 
     return (yaw, roll)
 
-###############
-# TODO figure out how to move this to utility file
-###############
-import numpy
-
-def perp_plane_thru_point(perp_vector, pnt):
+def normalize(vector):
     """
-    Given a perpendicular vector and a point,
-    Return the [A,B,C] of the Ax + By + Cz + D = 0 plane equation
-    
-    Eqn from: http://www.jtaylor1142001.net/calcjat/Solutions/VPlanes/VPPtNorm.htm
+    Given a vector, normalize it
     """
-    vx, vy, vz = perp_vector
-    px, py, pz = pnt
-    
-    A,B,C = vx, vy, vz
-    D = -1 * (vx*px + vy*py + vz*pz)
-    
-    return A,B,C,D
-
-def proj_point_to_plane(pnt, perp_plane):
-    """
-    Given a point and the [A,B,C,D] of the plane equation,
-    orthogonally project the point onto the plane.
-    Return the [x,y,z] of the projected point
-    
-    Eqn from: http://www.9math.com/book/projection-point-plane
-    """
-    a,b,c,d = perp_plane
-    u,v,w = pnt
-    
-    numerator = (a*u + b*v + c*w + d)
-    denominator = numpy.square((a,b,c)).sum()
-    t_0 = numerator / denominator
-    
-    x = u - a*t_0
-    y = v - b*t_0
-    z = w - c*t_0
-    return x,y,z
-
-def proj_point_to_line(pnt, line):
-    """
-    Given a 3-D point and the equation of a 3-D line,
-    Orthogonally project the point onto the line and
-    Return the [x,y,z] of the new point
-    
-    Eqn from: http://sci.tech-archive.net/Archive/sci.math/2006-09/msg04431.html
-    """
-    origin, dir_vector = line
-    #calculate unit vector of the direction vector:
-    u = numpy.sqrt(numpy.square(dir_vector).sum())
-    #calculate vector from line origin to point
-    v = [(p-o) for p,o in zip(pnt, origin)]
-    #project v onto u
-    proj = numpy.dot(u,v) * u
-    
-    return [(o + p) for o, p in zip(origin, proj)]
-
-def plane_thru_points(pt1, pt2, pt3):
-    """
-    Given 3 3-dimensional points, return the
-    [A,B,C,D] of the plane through those points
-    
-    Eqn from: http://www.jtaylor1142001.net/calcjat/Solutions/VPlanes/VP3Pts.htm
-    """
-    #Get 2 vectors in the plane
-    v1 = [a-b for a,b in zip(pt1, pt2)]
-    v2 = [a-b for a,b in zip(pt1, pt3)]
-    
-    perp_vector = numpy.cross(v1,v2)
-    
-    return perp_plane_thru_point(perp_vector, pt1)
-
-def plane_plane_intersect(p1, p2):
-    """
-    Given the [A,B,C,D] form of 2 planes,
-    Return the line that is their intersection in parametric form:
-    x = A + Dt
-    y = B + Et
-    z = C + Ft
-    [(A,B,C), (D,E,F)]
-    
-    Eqn from: http://www.jtaylor1142001.net/calcjat/Solutions/VPlanes/V2PLOfInt.htm
-    """
-    A1,B1,C1,D1 = p1
-    A2,B2,C2,D2 = p2
-    perp_vector = numpy.cross((A1,B1,C1), (A2,B2,C2))
-    
-    #TODO make sure that this doesn't screw up when parallel to X axis
-    #set x to zero to find point on intersection of 2 planes
-    y,z = numpy.linalg.solve(
-        ((B1,C1), (B2,C2)), #solves the eqns B1x + C1y = -D1 and B2x + C2y = -D2
-        (-1 * D1, -1 * D2)
-    )
-    
-    return (0,y,z), perp_vector
-
+    mag = numpy.sqrt(numpy.square(vector).sum())
+    return numpy.divide(vector, mag)
     
 if __name__ == '__main__':
     rospy.init_node('angle_calculator')
@@ -223,7 +132,7 @@ if __name__ == '__main__':
     
     rate = rospy.Rate(10)
     FRAME_NUM = 1;
-    ASSOCIATED_FRAME = '0' #TODO? 0: no frame | 1: global frame
+    ASSOCIATED_FRAME = '0' #no frame
     while not rospy.is_shutdown():
         try:
             timestamp, ls, le, lw, rs, re, rw = get_coords()
@@ -244,8 +153,7 @@ if __name__ == '__main__':
             FRAME_NUM += 1
             joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll',
                            'RShoulderPitch', 'RShoulderRoll', 'RElbowYaw', 'RElbowRoll']
-            joint_angles = [ls_pitch,ls_roll,0,le_roll,
-                            rs_pitch,rs_roll,0,re_roll]
+            joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
             #joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
             speed = 1
             relative = 0 #absolute angle
