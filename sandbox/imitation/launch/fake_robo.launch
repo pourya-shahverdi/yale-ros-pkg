@@ -19,11 +19,11 @@
   
   <!-- play the bag file -->
   <node pkg="rosbag" type="play" name="rosbag_node" 
-  	args="--clock -s 6 -r 0.2 $(find skeleton_data)/data/2012-02-21-15-37-28.bag" />
+  	args="--clock -s 10 -r 0.2 $(find skeleton_data)/data/2012-02-21-15-37-28.bag" />
   
   <!-- start graphing stuff -->
   <node pkg="imitation" type="shape_display.py" name="shape_display"></node>
-  <node pkg="rxtools" type="rxplot" name="joint_angles" args="/joint_angles/joint_angles[3]" />
+  <node pkg="rxtools" type="rxplot" name="joint_angles" args="/joint_angles/joint_angles[0]" />
 
 <!--	<node pkg="rxtools" type="rxplot" name="joint_coords" args="/left_elbow_coords/x:y:z /left_shoulder_coords/x:y:z" /> -->
 <!--   <node pkg="rxtools" type="rxplot" name="joint_angles" args="/joint_angles/joint_angles[0] /coord_data/x" /> -->

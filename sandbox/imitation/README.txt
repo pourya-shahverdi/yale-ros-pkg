@@ -49,6 +49,8 @@ X coordinate is front/back of robot (back is more positive)
 Y coordinate is left/right of robot (left is more positive)
 Z coordinate is top/bottom of robot (top is more positive)
 
+
+
 Joints:
 http://developer.aldebaran-robotics.com/doc/1-12/nao/hardware/kinematics/nao-joints-33.html
 
