@@ -17,7 +17,7 @@ interface_srv::GUI::Response response;
 bool gui_srv(interface_srv::GUI::Request   &req,
 	     interface_srv::GUI::Response  &res )
 {
-	res = response;
+	res = response;//dereference?
 	return true;
 }
 
@@ -51,23 +51,35 @@ int main( int argc, char* argv[] )
 	doc[0]["gui"] >> guiname;
 	
 	// copy data into GUI response msg
-
+ 
 	response.guiname = guiname;
 	ROS_INFO( "GUIName: %s", guiname.c_str() );
 
 	const YAML::Node& y_elements = doc[0]["elements"];
 
-	for( int i = 0; i < y_elements.size(); i++ )
+	for( unsigned int i = 0; i < y_elements.size(); i++ )
 	{
-		interface_srv::GUIElement element;
+		interface_srv::GUIElement element;	
+		
 		// copy label
+		y_elements[i]["label"] >> element.label;
 
 		// copy type 0: button 1: slider
+		std::string elem_type;
+		y_elements[i]["type"] >> elem_type;
+		if(!elem_type.compare("button"))
+			element.type = 0;
+		if(!elem_type.compare("slider"))
+			element.type = 1;
 
 		// copy topic
+		y_elements[i]["topic"] >> element.topic;
 
-		// if slider
+		if (element.type == 1){
 			// copy min/max
+			y_elements[i]["min"] >> element.min;
+			y_elements[i]["max"] >> element.max;
+		}
 
 		response.elements.push_back(element);
 	}
