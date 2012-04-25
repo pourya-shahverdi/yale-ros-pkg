@@ -56,6 +56,7 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
         roll *= -1
     
     #PITCH
+#THIS IS MAX METHOD
     #project elbow onto shoulder plane.  This assumes that the shoulders are parallel to the ground
     projected_elbow_coords = [elbow_coords[0], elbow_coords[1], shoulder_coords[2]]
     elbow_proj_dist = elbow_coords[2] - shoulder_coords[2] #straight drop to plane
@@ -63,8 +64,15 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
     pitch = math.atan2(elbow_proj_dist, shoulder_proj_dist)
     pitch += PITCH_OFFSET
     pitch *= PITCH_FACTOR
+    
+    #CHECK IF ELBOW_X > SHOULDER_X and ELBOW_Z < SHOULDER_Z (elbow behind body - sort of a weird position)
+    #NOTE: this hack depends on the user facing the camera straight on
+    if (elbow_coords[0] > shoulder_coords[0]) and (shoulder_coords[2] - elbow_coords[2] > 0.05):
+         #need to shift elbow to back of body instead of front
+         diff = abs((math.pi/2) - pitch) #find angle diff to straight down arm
+         pitch = (math.pi/2) + diff #add this angle diff to straight down arm to get same angle on other side of body
 
-
+#THIS IS DAVID METHOD
 #    norm_shoulder = normalize([(s-o) for s,o in zip(shoulder_coords, opp_shoulder_coords)])
 #    norm_elbow = normalize([(e-s) for e,s in zip(elbow_coords, shoulder_coords)])
 #    angle_vector = numpy.subtract(norm_elbow, norm_shoulder)
@@ -73,7 +81,7 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
 #    pitch += PITCH_OFFSET
 #    pitch *= PITCH_FACTOR
     
-    coords = Coords(0,0,0)
+    coords = Coords(elbow_coords[2],shoulder_coords[2],0) #TODO remove this debug line
     
     return (pitch, roll, coords)
 
@@ -140,7 +148,6 @@ if __name__ == '__main__':
             joint_names = ['LShoulderPitch', 'LShoulderRoll', 'LElbowYaw', 'LElbowRoll',
                            'RShoulderPitch', 'RShoulderRoll', 'RElbowYaw', 'RElbowRoll']
             joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
-            #joint_angles = [ls_pitch, ls_roll, le_yaw, le_roll, rs_pitch, rs_roll, re_yaw, re_roll]
             speed = 1
             relative = 0 #absolute angle
             publisher.publish(JointAnglesWithSpeed(header, joint_names, joint_angles, speed, relative))
