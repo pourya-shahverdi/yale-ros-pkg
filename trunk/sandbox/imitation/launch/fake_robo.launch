@@ -22,7 +22,7 @@
   	args="--clock -s 9 -r 0.2 $(find skeleton_data)/data/2012-02-21-15-37-28.bag" />
   
   <!-- start graphing stuff -->
-<!--  <node pkg="imitation" type="im_vis.py" name="imitation_visualization"></node> -->
+  <node pkg="imitation" type="im_vis.py" name="imitation_visualization"></node>
 
 <!--	<node pkg="rxtools" type="rxplot" name="joint_coords" args="/left_elbow_coords/x:y:z /left_shoulder_coords/x:y:z" /> -->
 <!--   <node pkg="rxtools" type="rxplot" name="joint_angles" args="/joint_angles/joint_angles[0] /coord_data/x" /> -->
