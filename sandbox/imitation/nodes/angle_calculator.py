@@ -65,12 +65,12 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
     pitch += PITCH_OFFSET
     pitch *= PITCH_FACTOR
     
-    #CHECK IF ELBOW_X > SHOULDER_X and ELBOW_Z < SHOULDER_Z (elbow behind body - sort of a weird position)
-    #NOTE: this hack depends on the user facing the camera straight on
-    if (elbow_coords[0] > shoulder_coords[0]) and (shoulder_coords[2] - elbow_coords[2] > 0.05):
-         #need to shift elbow to back of body instead of front
-         diff = abs((math.pi/2) - pitch) #find angle diff to straight down arm
-         pitch = (math.pi/2) + diff #add this angle diff to straight down arm to get same angle on other side of body
+#    #CHECK IF ELBOW_X > SHOULDER_X and ELBOW_Z < SHOULDER_Z (elbow behind body - sort of a weird position)
+#    #NOTE: this hack depends on the user facing the camera straight on
+#    if (elbow_coords[0] > shoulder_coords[0]) and (shoulder_coords[2] - elbow_coords[2] > 0.05):
+#         #need to shift elbow to back of body instead of front
+#         diff = abs((math.pi/2) - pitch) #find angle diff to straight down arm
+#         pitch = (math.pi/2) + diff #add this angle diff to straight down arm to get same angle on other side of body
 
 #THIS IS DAVID METHOD
 #    norm_shoulder = normalize([(s-o) for s,o in zip(shoulder_coords, opp_shoulder_coords)])
