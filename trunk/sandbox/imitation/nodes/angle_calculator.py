@@ -56,7 +56,6 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
         roll *= -1
     
     #PITCH
-#THIS IS MAX METHOD
     #project elbow onto shoulder plane.  This assumes that the shoulders are parallel to the ground
     projected_elbow_coords = [elbow_coords[0], elbow_coords[1], shoulder_coords[2]]
     elbow_proj_dist = elbow_coords[2] - shoulder_coords[2] #straight drop to plane
@@ -65,25 +64,7 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
     pitch += PITCH_OFFSET
     pitch *= PITCH_FACTOR
     
-#    #CHECK IF ELBOW_X > SHOULDER_X and ELBOW_Z < SHOULDER_Z (elbow behind body - sort of a weird position)
-#    #NOTE: this hack depends on the user facing the camera straight on
-#    if (elbow_coords[0] > shoulder_coords[0]) and (shoulder_coords[2] - elbow_coords[2] > 0.05):
-#         #need to shift elbow to back of body instead of front
-#         diff = abs((math.pi/2) - pitch) #find angle diff to straight down arm
-#         pitch = (math.pi/2) + diff #add this angle diff to straight down arm to get same angle on other side of body
-
-#THIS IS DAVID METHOD
-#    norm_shoulder = normalize([(s-o) for s,o in zip(shoulder_coords, opp_shoulder_coords)])
-#    norm_elbow = normalize([(e-s) for e,s in zip(elbow_coords, shoulder_coords)])
-#    angle_vector = numpy.subtract(norm_elbow, norm_shoulder)
-#    
-#    pitch = math.atan2(angle_vector[2], angle_vector[0])
-#    pitch += PITCH_OFFSET
-#    pitch *= PITCH_FACTOR
-    
-    coords = Coords(elbow_coords[2],shoulder_coords[2],0) #TODO remove this debug line
-    
-    return (pitch, roll, coords)
+    return (pitch, roll)
 
 ELBOW_ROLL_OFFSET = -1 * math.pi
 def elbow_yaw_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords, wrist_coords):
@@ -137,11 +118,10 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         try:
             timestamp, ls, le, lw, rs, re, rw = get_coords()
-            ls_pitch, ls_roll, info = shoulder_pitch_roll('left', rs, ls, le)
+            ls_pitch, ls_roll = shoulder_pitch_roll('left', rs, ls, le)
             le_yaw, le_roll = elbow_yaw_roll('left', rs, ls, le, lw)
-            cd_pub.publish(info)
 
-            rs_pitch, rs_roll, info = shoulder_pitch_roll('right', ls, rs, re)
+            rs_pitch, rs_roll = shoulder_pitch_roll('right', ls, rs, re)
             re_yaw, re_roll = elbow_yaw_roll('right', ls, rs, re, rw)
             
             header = Header(FRAME_NUM, timestamp, ASSOCIATED_FRAME)
