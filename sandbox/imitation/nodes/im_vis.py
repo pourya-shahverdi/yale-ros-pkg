@@ -154,6 +154,10 @@ JOINT_INFO = { #min/max angles from http://developer.aldebaran-robotics.com/doc/
 'LShoulderRoll': {'id_start':5, 'min_angle':-0.3142, 'max_angle':1.3265, 'coords':[0,1,0.5 - 1*BAR_OFFSET]},
 'LElbowYaw': {'id_start':10, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,1,0.5 - 2*BAR_OFFSET]},
 'LElbowRoll': {'id_start':15, 'min_angle':-1.5446, 'max_angle':-.0349, 'coords':[0,1,0.5 - 3*BAR_OFFSET]},
+'RShoulderPitch': {'id_start':20, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,-1,0.5]},
+'RShoulderRoll': {'id_start':25, 'min_angle':-1.3265, 'max_angle':0.3142, 'coords':[0,-1,0.5 - 1*BAR_OFFSET]},
+'RElbowYaw': {'id_start':30, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,-1,0.5 - 2*BAR_OFFSET]},
+'RElbowRoll': {'id_start':35, 'min_angle':.0349, 'max_angle':1.5446, 'coords':[0,-1,0.5 - 3*BAR_OFFSET]},
 }
 
 def create_msgs(val, angle_type):

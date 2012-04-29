@@ -85,7 +85,7 @@ def shoulder_pitch_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords
     
     return (pitch, roll, coords)
 
-ELBOW_ROLL_OFFSET = math.pi
+ELBOW_ROLL_OFFSET = -1 * math.pi
 def elbow_yaw_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords, wrist_coords):
     """
     Given the opposite shoulder, shoulder, elbow, and wrist coordinates
@@ -105,6 +105,7 @@ def elbow_yaw_roll(side, opp_shoulder_coords, shoulder_coords, elbow_coords, wri
     roll += ELBOW_ROLL_OFFSET
     if side == 'right':
         roll *= -1
+    
     
     #YAW
     norm_elbow = normalize([(e-s) for e,s in zip(elbow_coords, shoulder_coords)])
