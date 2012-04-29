@@ -16,11 +16,11 @@ from nao_msgs.msg import JointAnglesWithSpeed
 FIXED_FRAME = 'openni_rgb_frame'
 IM_NAMESPACE = 'imitation_robo'
 
-BAR_LEN = 1.0
+BAR_LEN = 0.7
 BAR_HEIGHT = 0.1
 LINE_WIDTH = 0.01
 SLIDER_WIDTH = 0.03
-TEXT_HEIGHT = 0.1
+TEXT_HEIGHT = 0.08
 BAR_SPACING = 0.05
 
 def handle_joint_angles(data):
@@ -136,6 +136,9 @@ def customize_msgs(val, angle_type, box, slider, min_text, max_text, joint_text,
     S2 = Point(x, slider_y, z + BAR_HEIGHT)
     for pt in [S1, S2]:
         slider.points.append(pt)
+    if not (0 <= percentage <= 1): #make slider blue if out of parameter
+        slider.color.b = 1
+        slider.color.r = 0
     
     A = Point(x, y, z)
     B = Point(x, y + BAR_LEN, z)
@@ -150,14 +153,14 @@ def customize_msgs(val, angle_type, box, slider, min_text, max_text, joint_text,
 
 BAR_OFFSET = BAR_HEIGHT + LINE_WIDTH*2 + TEXT_HEIGHT + BAR_SPACING
 JOINT_INFO = { #min/max angles from http://developer.aldebaran-robotics.com/doc/1-12/nao/hardware/kinematics/nao-joints-33.html
-'LShoulderPitch': {'id_start':0, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,1,0.5]},
-'LShoulderRoll': {'id_start':5, 'min_angle':-0.3142, 'max_angle':1.3265, 'coords':[0,1,0.5 - 1*BAR_OFFSET]},
-'LElbowYaw': {'id_start':10, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,1,0.5 - 2*BAR_OFFSET]},
-'LElbowRoll': {'id_start':15, 'min_angle':-1.5446, 'max_angle':-.0349, 'coords':[0,1,0.5 - 3*BAR_OFFSET]},
-'RShoulderPitch': {'id_start':20, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,-1,0.5]},
-'RShoulderRoll': {'id_start':25, 'min_angle':-1.3265, 'max_angle':0.3142, 'coords':[0,-1,0.5 - 1*BAR_OFFSET]},
-'RElbowYaw': {'id_start':30, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[0,-1,0.5 - 2*BAR_OFFSET]},
-'RElbowRoll': {'id_start':35, 'min_angle':.0349, 'max_angle':1.5446, 'coords':[0,-1,0.5 - 3*BAR_OFFSET]},
+'LShoulderPitch': {'id_start':0, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[1,1.5,0.5]},
+'LShoulderRoll': {'id_start':5, 'min_angle':-0.3142, 'max_angle':1.3265, 'coords':[1,1.5,0.5 - 1*BAR_OFFSET]},
+'LElbowYaw': {'id_start':10, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[1,1.5,0.5 - 2*BAR_OFFSET]},
+'LElbowRoll': {'id_start':15, 'min_angle':-1.5446, 'max_angle':-.0349, 'coords':[1,1.5,0.5 - 3*BAR_OFFSET]},
+'RShoulderPitch': {'id_start':20, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[1,0,0.5]},
+'RShoulderRoll': {'id_start':25, 'min_angle':-1.3265, 'max_angle':0.3142, 'coords':[1,0,0.5 - 1*BAR_OFFSET]},
+'RElbowYaw': {'id_start':30, 'min_angle':-2.0857, 'max_angle':2.0857, 'coords':[1,0,0.5 - 2*BAR_OFFSET]},
+'RElbowRoll': {'id_start':35, 'min_angle':.0349, 'max_angle':1.5446, 'coords':[1,0,0.5 - 3*BAR_OFFSET]},
 }
 
 def create_msgs(val, angle_type):

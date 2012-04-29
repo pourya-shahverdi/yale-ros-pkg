@@ -2,12 +2,6 @@ Get Nao dependencies:
 Install rosinstall: http://www.ros.org/wiki/rosinstall#Installation
 Install Nao ROS packages: http://www.ros.org/wiki/nao/Installation
 
-Install some of Dave's old code:
-$ svn co https://usc-ros-pkg.svn.sourceforge.net/svnroot/usc-ros-pkg/trunk/turn_taking/tf_to_pose
-$ rospack profile
-$ rosdep install tf_to_pose
-$ rosmake tf_to_pose
-
 Run the following after package creation to make sure on path:
 $ rospack profile
 $ rospack find imitation
@@ -56,9 +50,3 @@ Offsets:
 Shoulder:
 	0 pitch is perpendicular to torso.  Positive rotates down.  Negative rotates up.
 	0 roll is straight out in front of body
-	
-TESTING:
-	SHOULDER PITCH: Meh
-	SHOULDER ROLL: GOOD
-	ELBOW YAW: Meh
-	ELBOW ROLL: Meh
