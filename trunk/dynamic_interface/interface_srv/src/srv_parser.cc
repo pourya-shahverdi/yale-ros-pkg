@@ -10,12 +10,12 @@
 #include <yaml-cpp/yaml.h>
 
 // service and message includes
-#include <interface_srv/GUI.h>
+#include <interface_srv/GUIList.h>
 
-interface_srv::GUI::Response response;
+interface_srv::GUIList::Response response;
 
-bool gui_srv(interface_srv::GUI::Request   &req,
-	     interface_srv::GUI::Response  &res )
+bool gui_srv(interface_srv::GUIList::Request   &req,
+	           interface_srv::GUIList::Response  &res )
 {
 	res = response;//dereference?
 	return true;
@@ -51,8 +51,9 @@ int main( int argc, char* argv[] )
 	doc[0]["gui"] >> guiname;
 	
 	// copy data into GUI response msg
- 
-	response.guiname = guiname;
+  interface_srv::GUI gui;
+
+	gui.guiname = guiname;
 	ROS_INFO( "GUIName: %s", guiname.c_str() );
 
 	const YAML::Node& y_elements = doc[0]["elements"];
@@ -88,8 +89,9 @@ int main( int argc, char* argv[] )
 			y_elements[i]["max"] >> element.max;
 		}
 
-		response.elements.push_back(element);
+		gui.elements.push_back(element);
 	}
+  response.guis.push_back(gui);
 
 	// wait for requests
 	ros::ServiceServer service = nh.advertiseService("gui_srv", gui_srv);	
