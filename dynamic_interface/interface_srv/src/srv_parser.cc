@@ -68,14 +68,21 @@ int main( int argc, char* argv[] )
 		std::string elem_type;
 		y_elements[i]["type"] >> elem_type;
 		if(!elem_type.compare("button"))
-			element.type = 0;
-		if(!elem_type.compare("slider"))
-			element.type = 1;
-
+			element.type = interface_srv::GUIElement::BUTTON_ID;
+		else if(!elem_type.compare("slider"))
+			element.type = interface_srv::GUIElement::SLIDER_ID;
+    else if(!elem_type.compare("stopwatch"))
+      element.type = interface_srv::GUIElement::STOPWATCH_ID;
+    else if(!elem_type.compare("countdown_timer"))
+      element.type = interface_srv::GUIElement::COUNTDOWN_ID;
+    else
+    {
+      ROS_WARN( "element type: %s unrecognized", elem_type.c_str() );
+    }
 		// copy topic
 		y_elements[i]["topic"] >> element.topic;
 
-		if (element.type == 1){
+		if (element.type == interface_srv::GUIElement::SLIDER_ID){
 			// copy min/max
 			y_elements[i]["min"] >> element.min;
 			y_elements[i]["max"] >> element.max;
