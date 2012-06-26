@@ -30,4 +30,4 @@ rosbuild_gensrv()
 #target_link_libraries(example ${PROJECT_NAME})
 
 rosbuild_add_executable(srv_parser src/srv_parser.cc)
-
+target_link_libraries(srv_parser yaml-cpp)
