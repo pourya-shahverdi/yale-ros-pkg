@@ -8,3 +8,15 @@
     - type: button
       label: OK
       topic: GUI/Test_Button
+- gui: TestGUI2
+  elements:
+    - type: slider
+      label: Test_Slider2
+      min: 5
+      max: 10
+      topic: GUI/Test_Slider2
+    - type: slider
+      label: Test_Slider3
+      min: 10
+      max: 100
+      topic: GUI/Test_Slider3

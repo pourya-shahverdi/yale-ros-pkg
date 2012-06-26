@@ -9,8 +9,9 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/interface_srv</url>
   <depend package="roscpp"/>
-  <depend package="yaml_cpp"/>
-
+  <!--<depend package="yaml_cpp"/>-->
+  <depend package="common_rosdeps" />
+  <rosdep name="yaml-cpp" />
   <export>
     <cpp cflags="-I${prefix}/srv/cpp -I${prefix}/msg/cpp"/>
   </export>
