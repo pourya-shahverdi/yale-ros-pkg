@@ -80,6 +80,8 @@ int main( int argc, char* argv[] )
         element.type = interface_srv::GUIElement::STOPWATCH_ID;
       else if(!elem_type.compare("countdown_timer"))
         element.type = interface_srv::GUIElement::COUNTDOWN_ID;
+      else if(!elem_type.compare("image_view"))
+        element.type = interface_srv::GUIElement::IMAGE_ID;
       else
       {
         ROS_WARN( "element type: %s unrecognized", elem_type.c_str() );

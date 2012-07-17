@@ -1,5 +1,8 @@
 - gui: TestGUI1
   elements:
+    - type: image_view
+      label: test_image
+      topic: /usb_cam/image_raw/compressed
     - type: slider
       label: Test_Slider
       min: 5
@@ -8,6 +11,9 @@
     - type: button
       label: OK
       topic: GUI/Test_Button
+    - type: stopwatch
+      label: Test_StopWatch
+      topic: GUI/Test_Stopwatch
 - gui: TestGUI2
   elements:
     - type: slider
