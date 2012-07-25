@@ -10,6 +10,7 @@ int32 COUNTDOWN     =   6
 int32 IMAGE_ID      =   7
 
 string label
+string label_string
 int32 type
 float64 min
 float64 max

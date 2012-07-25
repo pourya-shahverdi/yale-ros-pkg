@@ -66,33 +66,41 @@ int main( int argc, char* argv[] )
 	  {
 		  interface_srv::GUIElement element;	
 		
-	  	// copy label
+	 	// copy label
   		y_elements[i]["label"] >> element.label;
 
-		  // copy type 0: button 1: slider
-	  	std::string elem_type;
+		// copy type 0: button 1: slider
+		std::string elem_type;
   		y_elements[i]["type"] >> elem_type;
-		  if(!elem_type.compare("button"))
-	  		element.type = interface_srv::GUIElement::BUTTON_ID;
+  		
+		if(!elem_type.compare("button"))
+  			element.type = interface_srv::GUIElement::BUTTON_ID;
   		else if(!elem_type.compare("slider"))
-			  element.type = interface_srv::GUIElement::SLIDER_ID;
-      else if(!elem_type.compare("stopwatch"))
-        element.type = interface_srv::GUIElement::STOPWATCH_ID;
-      else if(!elem_type.compare("countdown_timer"))
-        element.type = interface_srv::GUIElement::COUNTDOWN_ID;
-      else if(!elem_type.compare("image_view"))
-        element.type = interface_srv::GUIElement::IMAGE_ID;
-      else
-      {
-        ROS_WARN( "element type: %s unrecognized", elem_type.c_str() );
-      }
+			element.type = interface_srv::GUIElement::SLIDER_ID;
+      		else if(!elem_type.compare("stopwatch"))
+        		element.type = interface_srv::GUIElement::STOPWATCH_ID;
+     		else if(!elem_type.compare("countdown_timer"))
+        		element.type = interface_srv::GUIElement::COUNTDOWN_ID;
+      		else if(!elem_type.compare("image_view"))
+        		element.type = interface_srv::GUIElement::IMAGE_ID;
+        	else if(!elem_type.compare("int_slider"))
+			element.type = interface_srv::GUIElement::INTSLIDER_ID;
+		else if(!elem_type.compare("button_group"))
+			element.type = interface_srv::GUIElement::BUTTONGROUP_ID;
+     		else
+      		{
+       		 	ROS_WARN( "element type: %s unrecognized", elem_type.c_str() );
+     		}
   		// copy topic
 		  y_elements[i]["topic"] >> element.topic;
 
-		  if (element.type == interface_srv::GUIElement::SLIDER_ID){
+		  if (element.type == interface_srv::GUIElement::INTSLIDER_ID || element.type == interface_srv::GUIElement::SLIDER_ID){
 	  		// copy min/max
   			y_elements[i]["min"] >> element.min;
 			  y_elements[i]["max"] >> element.max;
+		  }
+		  if (element.type == interface_srv::GUIElement::BUTTONGROUP_ID){
+		  	y_elements[i]["label_string"] >> element.label_string;
 		  }
 
 		  gui.elements.push_back(element);
