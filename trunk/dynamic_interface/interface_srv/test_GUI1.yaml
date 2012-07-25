@@ -3,8 +3,8 @@
     - type: image_view
       label: test_image
       topic: /usb_cam/image_raw/compressed
-    - type: slider
-      label: Test_Slider
+    - type: int_slider
+      label: Test_IntSlider
       min: 5
       max: 10
       topic: GUI/Test_Slider
@@ -14,6 +14,10 @@
     - type: stopwatch
       label: Test_StopWatch
       topic: GUI/Test_Stopwatch
+    - type: button_group
+      label: test_button_group
+      label_string: 1;2;3;4;5
+      topic: GUI/Test_ButtonGroup
 - gui: TestGUI2
   elements:
     - type: slider
