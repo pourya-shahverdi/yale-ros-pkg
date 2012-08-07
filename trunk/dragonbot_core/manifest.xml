@@ -1,0 +1,14 @@
+<package>
+  <description brief="dragonbot_core">
+
+     dragonbot_core
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_core</url>
+
+</package>
+
+
