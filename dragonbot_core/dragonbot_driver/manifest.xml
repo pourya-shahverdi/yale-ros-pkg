@@ -1,0 +1,15 @@
+<package>
+  <description brief="dragonbot_driver">
+
+     dragonbot_driver
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_driver</url>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+
