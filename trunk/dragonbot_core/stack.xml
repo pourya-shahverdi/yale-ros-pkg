@@ -1,4 +1,4 @@
-<package>
+<stack>
   <description brief="dragonbot_core">
 
      dragonbot_core
@@ -9,6 +9,6 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/dragonbot_core</url>
 
-</package>
+</stack>
 
 
