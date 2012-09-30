@@ -20,12 +20,12 @@
       topic: GUI/Test_ButtonGroup
 - gui: TestGUI2
   elements:
-    - type: slider
+    - type: int_slider
       label: Test_Slider2
       min: 5
       max: 10
       topic: GUI/Test_Slider2
-    - type: slider
+    - type: int_slider
       label: Test_Slider3
       min: 10
       max: 100
