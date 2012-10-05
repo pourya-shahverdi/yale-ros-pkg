@@ -22,13 +22,18 @@ bool gui_srv(interface_srv::GUIList::Request &req, interface_srv::GUIList::Respo
 int main(int argc, char* argv[]){
   ros::init(argc, argv, "srv_parser");
   ros::NodeHandle nh;
+  ros::NodeHandle nh_priv("~");
 
   // read from YAML file to build 2-D array of GUI's and their elements
-  if( argc < 2 ){
+  std::string filename = std::string("");
+  nh_priv.param( "guifilename", filename, std::string("") );
+
+
+  if( filename == std::string("") ){
     ROS_WARN( "no file name specified" );
     return false;
   }
-  std::string filename=argv[1];
+
   std::ifstream fin;
   fin.open(filename.c_str());
   if(fin.fail()){
