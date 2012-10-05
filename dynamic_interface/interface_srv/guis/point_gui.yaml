@@ -1,0 +1,5 @@
+- gui: CameraView
+  elements:
+    - type: image_view
+      label: Kinect Image
+      topic: /camera/rgb/image_rect_color/compressed
