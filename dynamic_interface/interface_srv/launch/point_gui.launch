@@ -1,5 +1,5 @@
 <launch>
   <node pkg="interface_srv" type="srv_parser" name="gui_srv">
-    <param name="guifilename" type="str" value="$(find interface_srv)/guis/point_gui.yaml"/>
+    <param name="guifilename" type="str" value="$(find interface_srv)/guis/test_GUI1.yaml"/>
   </node>
 </launch>
