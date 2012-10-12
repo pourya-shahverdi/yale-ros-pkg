@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="interface_srv" type="srv_parser" name="gui_srv">
+    <param name="guifilename" type="str" value="$(find interface_srv)/guis/point_gui.yaml"/>
+  </node>
+</launch>
