@@ -1,0 +1,4 @@
+<launch>
+  <param name="/dragonbot/config_file" type="str" value="$(find dragonbot_driver)/config/example_motor_config.xml"/>
+  <param name="/dragonbot/debug" type="bool" value="0"/>
+</launch>
