@@ -53,6 +53,8 @@ import org.ros.node.NodeMain;
 import org.ros.node.parameter.ParameterTree;
 import org.ros.node.topic.Publisher;
 
+import sensor_msgs.JointState;
+
 /**
   pending permission from original author, code will be BSD licensed, but for now all redistribution rights reserved
 **/
@@ -67,8 +69,12 @@ public class DragonbotDriver extends AbstractNodeMain {
   private boolean mDebug;
   private String mConfigFileName;
 			
+    // TODO: modify to handle multiple boards
+
       private MCBMiniServer server = null;
 			private MCBMiniBoard board;
+
+  private sensor_msgs.JointState mJointMsg;
 
   @Override
   public GraphName getDefaultNodeName() {
@@ -82,7 +88,6 @@ public class DragonbotDriver extends AbstractNodeMain {
     mConfigFileName = params.getString("/dragonbot/config_file", "");
     mDebug = params.getBoolean("/dragonbot/debug");
 
-
 		/*
 		 * Read the xml (currently as a hard-coded default file, change to filename passed in as a param)
 		 */
@@ -95,19 +100,25 @@ public class DragonbotDriver extends AbstractNodeMain {
   		System.exit(0);
 	  }
 
-    		/*
-		     * Initialize the server with the board list and serial port name from the xml file
-    		 */
-    		try {
-		    	// This allows us to not have a connected stack, for debugging purposes
-    			if( mDebug ) server = new DebugMCBMiniServer(results.boards);
-		    	else server = new MCBMiniServer(results.port_name, results.boards);
-          //			server = new AndroidIOIOMCBMiniServer(boards, ioio_rx_pin, ioio_tx_pin)
-		    } catch (IOException e) {
-    			// TODO Auto-generated catch block
-		    	e.printStackTrace();
-    		}
+ 		/*
+     * Initialize the server with the board list and serial port name from the xml file
+ 		 */
+ 		try {
+     	// This allows us to not have a connected stack, for debugging purposes
+  		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
+	  	else server = new MCBMiniServer(results.port_name, results.boards);
+       //			server = new AndroidIOIOMCBMiniServer(boards, ioio_rx_pin, ioio_tx_pin)
+	  } catch (IOException e) {
+      // TODO Auto-generated catch block
+		  e.printStackTrace();
 
+      // TODO: double-check to make sure correct behavior
+      System.exit(0);
+    }
+
+    // declare publisher for motor pos
+    final Publisher<sensor_msgs.JointState> joint_pub = 
+      connectedNode.newPublisher("joint_state", sensor_msgs.JointState._TYPE);
 
 		/*
 		 * Create a loop that loops at 50Hz forever
@@ -122,17 +133,30 @@ public class DragonbotDriver extends AbstractNodeMain {
       protected void setup() {
         sequenceNumber = 0;
 
-
-
 		    /*
     		 * Enable the board
 		     * We could also change any other parameters if we wanted to
+         * TODO: handle mulitple boards
     		 */
 		    board = server.getBoards().get(0);
     		board.setChannelBParameter(ChannelParameter.ENABLED, 1);
+  
+        // TODO: modify to handle multiple boards
+        java.util.ArrayList<java.lang.String> names = new java.util.ArrayList<java.lang.String>();
+        names.add("0_A");
+        names.add("0_B");
+        double[] zeros = new double[]{0,0};
+
+        mJointMsg = joint_pub.newMessage();
+        mJointMsg.setPosition(zeros);
+        mJointMsg.setEffort(zeros);
+        mJointMsg.setVelocity(zeros);
+        mJointMsg.setName(names);
+        
 
 		    /*
     		 * Register a handler for disable events (boards can be disabled on timeouts or fault conditions like overheating)
+         * TODO: handle multiple boards
 		     */
     		server.addBoardDisabledEventHandler(new MCBMiniBoardDisabledHandler() {
 		    	@Override
@@ -140,6 +164,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 		    		System.out.println("Board notified disable event: "+board.getId()+": "+ch);
     			}
     		});
+
       }
 
       @Override
@@ -149,6 +174,8 @@ public class DragonbotDriver extends AbstractNodeMain {
 //        Thread.sleep(1000);
 		  	// Update the server, this is important and has to be done in an update loop of the application main thread
 			  server.update();
+        
+        
 
   			// Create the sinusoidal signal
 	  		int sin = (int)( 512 + 500 * Math.sin( (float)sequenceNumber/20f ) );
@@ -156,8 +183,17 @@ public class DragonbotDriver extends AbstractNodeMain {
 		  	// Set the target position of the motor to the sinusoidal signal
 			  board.setChannelBParameter(ChannelParameter.TARGET_TICK, sin);
 
-  			// Print out the actual tick position for the motor
+  			// publish tick position for motor
 	  		System.out.println("Actual tick: " + board.getChannelBParameter(ChannelParameter.CURRENT_TICK) );
+        double[] motor_vals = mJointMsg.getPosition();
+        motor_vals[0] = board.getChannelAParameter(ChannelParameter.CURRENT_TICK);
+        motor_vals[1] = board.getChannelBParameter(ChannelParameter.CURRENT_TICK);
+        mJointMsg.setPosition(motor_vals);
+        std_msgs.Header header = mJointMsg.getHeader();
+        header.setStamp( connectedNode.getCurrentTime() );
+        mJointMsg.setHeader(header);
+        joint_pub.publish(mJointMsg);        
+
 
 		  	// Every now and then make a request for a parameter just for fun
 			  if( sequenceNumber % 200 == 0 ){
