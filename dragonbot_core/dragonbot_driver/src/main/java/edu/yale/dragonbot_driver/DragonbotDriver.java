@@ -51,7 +51,9 @@ import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
 import org.ros.node.parameter.ParameterTree;
-import org.ros.node.topic.Publisher;
+import org.ros.node.topic.*;
+import org.apache.commons.logging.Log;
+import org.ros.message.MessageListener;
 
 import sensor_msgs.JointState;
 
@@ -75,6 +77,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 			private MCBMiniBoard board;
 
   private sensor_msgs.JointState mJointMsg;
+  private sensor_msgs.JointState mJointCmd;
 
   @Override
   public GraphName getDefaultNodeName() {
@@ -85,6 +88,7 @@ public class DragonbotDriver extends AbstractNodeMain {
   public void onStart(final ConnectedNode connectedNode) {
     
     ParameterTree params = connectedNode.getParameterTree();
+
     mConfigFileName = params.getString("/dragonbot/config_file", "");
     mDebug = params.getBoolean("/dragonbot/debug");
 
@@ -116,9 +120,51 @@ public class DragonbotDriver extends AbstractNodeMain {
       System.exit(0);
     }
 
+    final Log log = connectedNode.getLog();
+    
     // declare publisher for motor pos
     final Publisher<sensor_msgs.JointState> joint_pub = 
       connectedNode.newPublisher("joint_state", sensor_msgs.JointState._TYPE);
+
+    // initialize message to have proper names
+    // TODO: make work for multiple boards
+    java.util.ArrayList<java.lang.String> names = new java.util.ArrayList<java.lang.String>();
+    names.add("0_A");
+    names.add("0_B");
+    double[] zeros = new double[]{0,0};
+
+    mJointCmd = joint_pub.newMessage();
+    mJointCmd.setPosition(zeros);
+    mJointCmd.setEffort(zeros);
+    mJointCmd.setVelocity(zeros);
+    mJointCmd.setName(names);
+
+    // declare subscriber for motor pos
+    Subscriber<sensor_msgs.JointState> subscriber = connectedNode.newSubscriber("cmd_pos", sensor_msgs.JointState._TYPE);
+    subscriber.addMessageListener(new MessageListener<sensor_msgs.JointState>() {
+      @Override
+      public void onNewMessage(sensor_msgs.JointState cmd) {
+        // copy data from cmd into mJointCmd
+        java.util.ArrayList<java.lang.String> cnames = new java.util.ArrayList<java.lang.String>( cmd.getName() );
+        double[] motor_vals = cmd.getPosition();
+
+        java.util.ArrayList<java.lang.String> pnames = new java.util.ArrayList<java.lang.String>( mJointCmd.getName() );
+        double[] cmd_vals = mJointCmd.getPosition();
+
+        for( int i = 0; i < cnames.size(); i++ )
+        {
+          for( int j = 0; j < pnames.size(); j++ )
+          {
+            if( pnames.get(j).equals(cnames.get(i)) )
+            {
+              //copy val into motor array
+              cmd_vals[j] = motor_vals[i];
+              System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
+            }
+          }
+        }
+      }
+    });
 
 		/*
 		 * Create a loop that loops at 50Hz forever
@@ -152,7 +198,7 @@ public class DragonbotDriver extends AbstractNodeMain {
         mJointMsg.setEffort(zeros);
         mJointMsg.setVelocity(zeros);
         mJointMsg.setName(names);
-        
+       
 
 		    /*
     		 * Register a handler for disable events (boards can be disabled on timeouts or fault conditions like overheating)
@@ -161,7 +207,7 @@ public class DragonbotDriver extends AbstractNodeMain {
     		server.addBoardDisabledEventHandler(new MCBMiniBoardDisabledHandler() {
 		    	@Override
     			public void handleBoardDisableEvent(MCBMiniBoard board, Channel ch) {
-		    		System.out.println("Board notified disable event: "+board.getId()+": "+ch);
+		    		log.info("Board notified disable event: "+board.getId()+": "+ch);
     			}
     		});
 
@@ -178,13 +224,32 @@ public class DragonbotDriver extends AbstractNodeMain {
         
 
   			// Create the sinusoidal signal
-	  		int sin = (int)( 512 + 500 * Math.sin( (float)sequenceNumber/20f ) );
+	  		//int sin = (int)( 512 + 500 * Math.sin( (float)sequenceNumber/20f ) );
 
-		  	// Set the target position of the motor to the sinusoidal signal
-			  board.setChannelBParameter(ChannelParameter.TARGET_TICK, sin);
+		  	// Set the target position of the motor to the commanded tick
+        java.util.ArrayList<java.lang.String> cmd_names = new java.util.ArrayList<java.lang.String>(mJointCmd.getName());
+        double[] cmd_vals = mJointCmd.getPosition();
+        for( int i = 0; i < cmd_names.size(); i++ )
+        {
+          // TODO: make work for muiltiple boards
+          char motor_id = cmd_names.get(i).charAt(2);
+          int board_id = Integer.parseInt( cmd_names.get(i).substring(0,1) );
+          log.debug( "setting: "+motor_id+","+board_id );
+          if( board_id == 0 )
+          {
+            if( motor_id == 'A' )
+              board.setChannelAParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
+            else if( motor_id == 'B' )
+              board.setChannelBParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
+          }
+        }
+
+        
+
+			  //board.setChannelBParameter(ChannelParameter.TARGET_TICK, sin);
 
   			// publish tick position for motor
-	  		System.out.println("Actual tick: " + board.getChannelBParameter(ChannelParameter.CURRENT_TICK) );
+	  		log.debug("Actual tick: " + board.getChannelBParameter(ChannelParameter.CURRENT_TICK) );
         double[] motor_vals = mJointMsg.getPosition();
         motor_vals[0] = board.getChannelAParameter(ChannelParameter.CURRENT_TICK);
         motor_vals[1] = board.getChannelBParameter(ChannelParameter.CURRENT_TICK);
@@ -200,7 +265,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 				  server.sendRequestForResponse(board, Channel.B, Command.MOTOR_CURRENT, new MCBMiniResponseHandler() {
 					  @Override
   					public void handleResponse(MCBMiniBoard board, Channel channel, Command command, int value) {
-	  					System.out.println("Received response to request: "+command+": "+value);
+	  					log.debug("Received response to request: "+command+": "+value);
 		  			}
 			  	});
   			} // if sequenceNUmber
@@ -211,8 +276,8 @@ public class DragonbotDriver extends AbstractNodeMain {
   			 */
 	  		if( sequenceNumber % 100 == 0 ){
   				float[] fps = server.getUpdateRates(null);
-	  			System.out.println("Internal update rate: "+fps[0]+" Hz");
-		  		System.out.println("Board cycle update rate: "+fps[1]+" Hz");
+	  			log.debug("Internal update rate: "+fps[0]+" Hz");
+		  		log.debug("Board cycle update rate: "+fps[1]+" Hz");
 			  	board.setChannelBParameter(ChannelParameter.ENABLED, 1);
   			} //if sequenceNumber
 
