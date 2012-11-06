@@ -50,12 +50,13 @@ import org.ros.namespace.GraphName;
 import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
-import org.ros.node.parameter.ParameterTree;
+import org.ros.node.parameter.*;
 import org.ros.node.topic.*;
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
 
 import sensor_msgs.JointState;
+import std_msgs.Int32;
 
 /**
   pending permission from original author, code will be BSD licensed, but for now all redistribution rights reserved
@@ -95,18 +96,19 @@ public class DragonbotDriver extends AbstractNodeMain {
 		/*
 		 * Read the xml (currently as a hard-coded default file, change to filename passed in as a param)
 		 */
-		//args = new String[]{"test.xml"};
+
     XMLResults results = null;
  		try {
     	results = XMLUtils.parseMCBMiniConfigFile( mConfigFileName );
  		} catch (Exception e1) {
-     	System.err.println("Can't parse input file: "+e1.getMessage());
+     	connectedNode.getLog().error("Can't parse input file: ", e1);
   		System.exit(0);
 	  }
 
  		/*
      * Initialize the server with the board list and serial port name from the xml file
  		 */
+
  		try {
      	// This allows us to not have a connected stack, for debugging purposes
   		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
@@ -114,14 +116,32 @@ public class DragonbotDriver extends AbstractNodeMain {
        //			server = new AndroidIOIOMCBMiniServer(boards, ioio_rx_pin, ioio_tx_pin)
 	  } catch (IOException e) {
       // TODO Auto-generated catch block
-		  e.printStackTrace();
+		  connectedNode.getLog().error( "error opening MCBMini server: ", e );
 
       // TODO: double-check to make sure correct behavior
       System.exit(0);
     }
+      
 
-    final Log log = connectedNode.getLog();
-    
+    /*
+     * Server update and identify default values for PID gains
+     * Set dynamic reconfigure params for PID gains 
+     */
+
+      // TODO
+
+    params.addParameterListener("/0_A_pgain", new ParameterListener() {
+      @Override
+      public void onNewValue(Object value) {
+        int chg_val = Integer.parseInt(value.toString());
+        System.out.println( "param changed: " + chg_val );
+      }
+    });
+
+    /*
+     * ROS Node publisher and subscriber declarations
+     */
+
     // declare publisher for motor pos
     final Publisher<sensor_msgs.JointState> joint_pub = 
       connectedNode.newPublisher("joint_state", sensor_msgs.JointState._TYPE);
@@ -141,6 +161,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
     // declare subscriber for motor pos
     Subscriber<sensor_msgs.JointState> subscriber = connectedNode.newSubscriber("cmd_pos", sensor_msgs.JointState._TYPE);
+    // handler that is run whenever a joint state command is received
     subscriber.addMessageListener(new MessageListener<sensor_msgs.JointState>() {
       @Override
       public void onNewMessage(sensor_msgs.JointState cmd) {
@@ -159,7 +180,7 @@ public class DragonbotDriver extends AbstractNodeMain {
             {
               //copy val into motor array
               cmd_vals[j] = motor_vals[i];
-              System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
+              connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
             }
           }
         }
@@ -185,6 +206,7 @@ public class DragonbotDriver extends AbstractNodeMain {
          * TODO: handle mulitple boards
     		 */
 		    board = server.getBoards().get(0);
+    		board.setChannelAParameter(ChannelParameter.ENABLED, 1);
     		board.setChannelBParameter(ChannelParameter.ENABLED, 1);
   
         // TODO: modify to handle multiple boards
@@ -199,15 +221,27 @@ public class DragonbotDriver extends AbstractNodeMain {
         mJointMsg.setVelocity(zeros);
         mJointMsg.setName(names);
        
-
 		    /*
     		 * Register a handler for disable events (boards can be disabled on timeouts or fault conditions like overheating)
          * TODO: handle multiple boards
 		     */
+
+        Subscriber<std_msgs.Int32> disable_subscriber = connectedNode.newSubscriber("disable", std_msgs.Int32._TYPE);
+        disable_subscriber.addMessageListener(new MessageListener<std_msgs.Int32>() {
+          @Override
+          public void onNewMessage(std_msgs.Int32 disable) {
+            // TODO: make work for all boards
+            connectedNode.getLog().info( "setting motor disabled state: " + disable.getData() );
+            board.setChannelAParameter(ChannelParameter.ENABLED, 1-disable.getData());
+            board.setChannelBParameter(ChannelParameter.ENABLED, 1-disable.getData());
+
+          }
+        });
+
     		server.addBoardDisabledEventHandler(new MCBMiniBoardDisabledHandler() {
 		    	@Override
     			public void handleBoardDisableEvent(MCBMiniBoard board, Channel ch) {
-		    		log.info("Board notified disable event: "+board.getId()+": "+ch);
+		    		connectedNode.getLog().info("Board notified disable event: "+board.getId()+": "+ch);
     			}
     		});
 
@@ -217,15 +251,9 @@ public class DragonbotDriver extends AbstractNodeMain {
       protected void loop() throws InterruptedException {
 
         sequenceNumber++;
-//        Thread.sleep(1000);
 		  	// Update the server, this is important and has to be done in an update loop of the application main thread
-			  server.update();
+        server.update();
         
-        
-
-  			// Create the sinusoidal signal
-	  		//int sin = (int)( 512 + 500 * Math.sin( (float)sequenceNumber/20f ) );
-
 		  	// Set the target position of the motor to the commanded tick
         java.util.ArrayList<java.lang.String> cmd_names = new java.util.ArrayList<java.lang.String>(mJointCmd.getName());
         double[] cmd_vals = mJointCmd.getPosition();
@@ -234,7 +262,7 @@ public class DragonbotDriver extends AbstractNodeMain {
           // TODO: make work for muiltiple boards
           char motor_id = cmd_names.get(i).charAt(2);
           int board_id = Integer.parseInt( cmd_names.get(i).substring(0,1) );
-          log.debug( "setting: "+motor_id+","+board_id );
+          connectedNode.getLog().debug( "setting: "+motor_id+","+board_id );
           if( board_id == 0 )
           {
             if( motor_id == 'A' )
@@ -244,12 +272,9 @@ public class DragonbotDriver extends AbstractNodeMain {
           }
         }
 
-        
-
-			  //board.setChannelBParameter(ChannelParameter.TARGET_TICK, sin);
 
   			// publish tick position for motor
-	  		log.debug("Actual tick: " + board.getChannelBParameter(ChannelParameter.CURRENT_TICK) );
+        // TODO: make work for multiple boards
         double[] motor_vals = mJointMsg.getPosition();
         motor_vals[0] = board.getChannelAParameter(ChannelParameter.CURRENT_TICK);
         motor_vals[1] = board.getChannelBParameter(ChannelParameter.CURRENT_TICK);
@@ -259,26 +284,26 @@ public class DragonbotDriver extends AbstractNodeMain {
         mJointMsg.setHeader(header);
         joint_pub.publish(mJointMsg);        
 
-
+/*
 		  	// Every now and then make a request for a parameter just for fun
 			  if( sequenceNumber % 200 == 0 ){
 				  server.sendRequestForResponse(board, Channel.B, Command.MOTOR_CURRENT, new MCBMiniResponseHandler() {
 					  @Override
   					public void handleResponse(MCBMiniBoard board, Channel channel, Command command, int value) {
-	  					log.debug("Received response to request: "+command+": "+value);
+	  					connectedNode.getLog().debug("Received response to request: "+command+": "+value);
 		  			}
 			  	});
   			} // if sequenceNUmber
-
+*/
 	  		/*
 		  	 * Every now and then we print out the update rates of the system (the 2nd one is more interesting, it is the response frequency of the boards
 			   * if it is ever very different from our internal one then we might have a comm problem)
   			 */
 	  		if( sequenceNumber % 100 == 0 ){
   				float[] fps = server.getUpdateRates(null);
-	  			log.debug("Internal update rate: "+fps[0]+" Hz");
-		  		log.debug("Board cycle update rate: "+fps[1]+" Hz");
-			  	board.setChannelBParameter(ChannelParameter.ENABLED, 1);
+	  			connectedNode.getLog().debug("Internal update rate: "+fps[0]+" Hz");
+		  		connectedNode.getLog().debug("Board cycle update rate: "+fps[1]+" Hz");
+			  	//board.setChannelBParameter(ChannelParameter.ENABLED, 1);
   			} //if sequenceNumber
 
 	  		// Sleep to set the update frequency
@@ -286,7 +311,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 			  	Thread.sleep(20);
   			} catch (InterruptedException e) {
 	  			// TODO Auto-generated catch block
-		  		e.printStackTrace();
+		  	  //e.printStackTrace();
 			  } // catch
 		  } // loop
     });
