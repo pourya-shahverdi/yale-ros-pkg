@@ -32,13 +32,57 @@ package edu.yale.dragonbot_driver;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.res.AssetManager;
+
+import android.view.*;
 import android.widget.*;
+
+import java.io.*;
+//import java.io.InputStream;
+
+import android.util.Log;
 
 public class DragonbotAndroidMainActivity extends Activity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Load XML for parsing.
+    AssetManager assetManager = getAssets();
+
+    InputStream xmlFileStream = null;
+    try {
+      xmlFileStream = assetManager.open("example_motor_config.xml");
+    } catch (IOException e) {
+      Log.e("xml", e.getMessage() );
+    }
+    String s = readTextFile(xmlFileStream);
+    TextView tv = new TextView(this);
+    tv.setText(s);
+    LinearLayout ll = new LinearLayout(this);
+    ScrollView sv = new ScrollView(this);
+    ll.addView(tv);
+    sv.addView(ll);
+    setContentView(sv);
   }
+
+  private String readTextFile(InputStream inputStream) {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    byte buf[] = new byte[1024];
+    int len;
+    try {
+        while ((len = inputStream.read(buf)) != -1) {
+            outputStream.write(buf, 0, len);
+        }
+        outputStream.close();
+        inputStream.close();
+    } catch (IOException e) {
+
+    }
+    return outputStream.toString();
+}
+
 
 }
