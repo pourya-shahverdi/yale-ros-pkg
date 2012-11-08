@@ -20,11 +20,15 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'osgi'
 apply plugin: 'application'
+apply plugin: 'eclipse'
 mainClassName = 'org.ros.RosRun'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.0-milestone-9'
+}
 
 repositories {
   mavenLocal()
@@ -33,11 +37,20 @@ repositories {
   }
 }
 
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      mavenLocal()
+    }
+  }
+}
+
 version = '0.0.0-SNAPSHOT'
 group = 'ros.dragonbot_driver'
 
 dependencies {
   compile 'ros.rosjava_core:rosjava:0.0.0-SNAPSHOT'
+  /*
   compile 'ros.rosjava_core:rosjava_messages:0.0.0-SNAPSHOT'
   compile 'ros.rosjava_core:rosjava_bootstrap:0.0.0-SNAPSHOT'
 
@@ -48,9 +61,10 @@ dependencies {
   compile 'dnsjava:dnsjava:2.1.1'
   compile 'org.apache.commons:com.springsource.org.apache.commons.logging:1.1.1'
   compile 'org.apache.commons:com.springsource.org.apache.commons.net:2.0.0'
+  
   testCompile 'junit:junit:4.8.2'
   testCompile 'org.mockito:mockito-all:1.8.5'
-
+  */
   compile files('lib/MCBMiniAll.jar')
   compile fileTree(dir: 'lib', include: '*.jar')
 }
