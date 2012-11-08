@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<port>/dev/ttyUSB0</port>
+	<MiniBoards>
+		<MiniBoard>
+			<id>1</id>
+			<fault_mode>DISABLE_AND_NOTIFY</fault_mode>
+			<Channels>
+				<Motor>
+					<channel>A</channel>
+					<pgain>20</pgain>
+					<dgain>150</dgain>
+					<igain>1</igain>
+					<deadband>0</deadband>
+					<maxstep>0</maxstep>
+					<output_divisor_pwr2>3</output_divisor_pwr2>
+					<slow_enable_const>10</slow_enable_const>
+					<direction>FLIPPED</direction>
+					<feedback_mode>ENCODER_MODE</feedback_mode>
+					<control_mode>POSITION_MODE</control_mode>
+				</Motor>
+				<Motor>
+					<channel>B</channel>
+					<pgain>20</pgain>
+					<dgain>150</dgain>
+					<igain>1</igain>
+					<deadband>0</deadband>
+					<maxstep>0</maxstep>
+					<output_divisor_pwr2>3</output_divisor_pwr2>
+					<slow_enable_const>10</slow_enable_const>
+					<direction>FLIPPED</direction>
+					<feedback_mode>ENCODER_MODE</feedback_mode>
+					<control_mode>POSITION_MODE</control_mode>
+				</Motor>
+			</Channels>
+		</MiniBoard>
+	</MiniBoards>
+</Root>
