@@ -1,0 +1,16 @@
+<package>
+  <description brief="dragonbot_android">
+
+     dragonbot_android
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_android</url>
+  <depend package="dragonbot_driver"/>
+  <depend package="rosjava"/>
+
+</package>
+
+
