@@ -1,0 +1,16 @@
+<package>
+  <description brief="dragonbot_ik">
+
+     dragonbot_ik
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_ik</url>
+  <depend package="sensor_msgs"/>
+  <depend package="rospy"/>
+
+</package>
+
+
