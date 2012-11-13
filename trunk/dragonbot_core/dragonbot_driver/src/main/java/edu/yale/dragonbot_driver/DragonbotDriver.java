@@ -67,15 +67,19 @@ import std_msgs.Int32;
  * @date Jul 18, 2012, ROS rewrites Aug 2nd, 2012
  */
 
+
+
 public class DragonbotDriver extends AbstractNodeMain {
   
+  // TODO: read from config param
+  private double GEAR_RATIO = 50;  
   private boolean mDebug;
   private String mConfigFileName;
 			
-    // TODO: modify to handle multiple boards
+  // DONE: modify to handle multiple boards
 
-      private MCBMiniServer server = null;
-			private MCBMiniBoard board;
+  private MCBMiniServer server = null;
+  private java.util.ArrayList<MCBMiniBoard> boards;
 
   private sensor_msgs.JointState mJointMsg;
   private sensor_msgs.JointState mJointCmd;
@@ -147,11 +151,18 @@ public class DragonbotDriver extends AbstractNodeMain {
       connectedNode.newPublisher("joint_state", sensor_msgs.JointState._TYPE);
 
     // initialize message to have proper names
-    // TODO: make work for multiple boards
+    // DONE: make work for multiple boards
+    boards = new java.util.ArrayList<MCBMiniBoard>(server.getBoards());
     java.util.ArrayList<java.lang.String> names = new java.util.ArrayList<java.lang.String>();
-    names.add("0_A");
-    names.add("0_B");
-    double[] zeros = new double[]{0,0};
+    double[] zeros = new double[boards.size()*2];
+    
+    for( int i = 0; i < boards.size(); i++ )
+    {
+      names.add(i+"_A");
+      names.add(i+"_B");
+      zeros[i*2] = 0;
+      zeros[i*2+1] = 0;
+    }
 
     mJointCmd = joint_pub.newMessage();
     mJointCmd.setPosition(zeros);
@@ -179,7 +190,8 @@ public class DragonbotDriver extends AbstractNodeMain {
             if( pnames.get(j).equals(cnames.get(i)) )
             {
               //copy val into motor array
-              cmd_vals[j] = motor_vals[i];
+              cmd_vals[j] = motor_vals[i] * GEAR_RATIO;
+              System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
               connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
             }
           }
@@ -203,17 +215,25 @@ public class DragonbotDriver extends AbstractNodeMain {
 		    /*
     		 * Enable the board
 		     * We could also change any other parameters if we wanted to
-         * TODO: handle mulitple boards
+         * DONE: handle mulitple boards
     		 */
-		    board = server.getBoards().get(0);
-    		board.setChannelAParameter(ChannelParameter.ENABLED, 1);
-    		board.setChannelBParameter(ChannelParameter.ENABLED, 1);
-  
+         
+        for( int i = 0; i < boards.size(); i++ )
+        {
+      		boards.get(i).setChannelAParameter(ChannelParameter.ENABLED, 0);
+      		boards.get(i).setChannelBParameter(ChannelParameter.ENABLED, 0);
+        }
         // TODO: modify to handle multiple boards
         java.util.ArrayList<java.lang.String> names = new java.util.ArrayList<java.lang.String>();
-        names.add("0_A");
-        names.add("0_B");
-        double[] zeros = new double[]{0,0};
+        double[] zeros = new double[boards.size()*2];
+    
+        for( int i = 0; i < boards.size(); i++ )
+        {
+          names.add(i+"_A");
+          names.add(i+"_B");
+          zeros[i*2] = 0;
+          zeros[i*2+1] = 0;
+        }
 
         mJointMsg = joint_pub.newMessage();
         mJointMsg.setPosition(zeros);
@@ -223,17 +243,20 @@ public class DragonbotDriver extends AbstractNodeMain {
        
 		    /*
     		 * Register a handler for disable events (boards can be disabled on timeouts or fault conditions like overheating)
-         * TODO: handle multiple boards
+         * DONE: handle multiple boards
 		     */
 
         Subscriber<std_msgs.Int32> disable_subscriber = connectedNode.newSubscriber("disable", std_msgs.Int32._TYPE);
         disable_subscriber.addMessageListener(new MessageListener<std_msgs.Int32>() {
           @Override
           public void onNewMessage(std_msgs.Int32 disable) {
-            // TODO: make work for all boards
+            // DONE: make work for all boards
             connectedNode.getLog().info( "setting motor disabled state: " + disable.getData() );
-            board.setChannelAParameter(ChannelParameter.ENABLED, 1-disable.getData());
-            board.setChannelBParameter(ChannelParameter.ENABLED, 1-disable.getData());
+            for( int i = 0; i < boards.size(); i++ )
+            {
+              boards.get(i).setChannelAParameter(ChannelParameter.ENABLED, 1-disable.getData());
+              boards.get(i).setChannelBParameter(ChannelParameter.ENABLED, 1-disable.getData());
+            }
 
           }
         });
@@ -259,42 +282,34 @@ public class DragonbotDriver extends AbstractNodeMain {
         double[] cmd_vals = mJointCmd.getPosition();
         for( int i = 0; i < cmd_names.size(); i++ )
         {
-          // TODO: make work for muiltiple boards
+          // DONE: make work for muiltiple boards
           char motor_id = cmd_names.get(i).charAt(2);
           int board_id = Integer.parseInt( cmd_names.get(i).substring(0,1) );
           connectedNode.getLog().debug( "setting: "+motor_id+","+board_id );
-          if( board_id == 0 )
+          if( board_id >= 0 && board_id < boards.size() )
           {
             if( motor_id == 'A' )
-              board.setChannelAParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
+              boards.get(board_id).setChannelAParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
             else if( motor_id == 'B' )
-              board.setChannelBParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
+              boards.get(board_id).setChannelBParameter(ChannelParameter.TARGET_TICK, (int) cmd_vals[i]);
           }
         }
 
 
   			// publish tick position for motor
-        // TODO: make work for multiple boards
+        // DONE: make work for multiple boards
         double[] motor_vals = mJointMsg.getPosition();
-        motor_vals[0] = board.getChannelAParameter(ChannelParameter.CURRENT_TICK);
-        motor_vals[1] = board.getChannelBParameter(ChannelParameter.CURRENT_TICK);
+        for( int i = 0; i < boards.size(); i++ )
+        {
+          motor_vals[2*i+0] = boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) / GEAR_RATIO;
+          motor_vals[2*i+1] = boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) / GEAR_RATIO;
+        }
         mJointMsg.setPosition(motor_vals);
         std_msgs.Header header = mJointMsg.getHeader();
         header.setStamp( connectedNode.getCurrentTime() );
         mJointMsg.setHeader(header);
         joint_pub.publish(mJointMsg);        
 
-/*
-		  	// Every now and then make a request for a parameter just for fun
-			  if( sequenceNumber % 200 == 0 ){
-				  server.sendRequestForResponse(board, Channel.B, Command.MOTOR_CURRENT, new MCBMiniResponseHandler() {
-					  @Override
-  					public void handleResponse(MCBMiniBoard board, Channel channel, Command command, int value) {
-	  					connectedNode.getLog().debug("Received response to request: "+command+": "+value);
-		  			}
-			  	});
-  			} // if sequenceNUmber
-*/
 	  		/*
 		  	 * Every now and then we print out the update rates of the system (the 2nd one is more interesting, it is the response frequency of the boards
 			   * if it is ever very different from our internal one then we might have a comm problem)
