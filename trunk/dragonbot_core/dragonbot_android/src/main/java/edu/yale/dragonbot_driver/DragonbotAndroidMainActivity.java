@@ -42,6 +42,9 @@ import java.io.*;
 
 import android.util.Log;
 
+import mcbmini.utils.XMLUtils;
+import mcbmini.utils.XMLUtils.XMLResults;
+
 public class DragonbotAndroidMainActivity extends Activity {
 
   @Override
@@ -57,6 +60,13 @@ public class DragonbotAndroidMainActivity extends Activity {
     } catch (IOException e) {
       Log.e("xml", e.getMessage() );
     }
+    XMLResults results = null;
+    try {
+      results = AndroidXMLUtils.parseMCBMiniConfigStream(xmlFileStream);
+    } catch (Exception e) {
+      Log.e("xml", e.getMessage());
+    }
+/*
     String s = readTextFile(xmlFileStream);
     TextView tv = new TextView(this);
     tv.setText(s);
@@ -65,6 +75,7 @@ public class DragonbotAndroidMainActivity extends Activity {
     ll.addView(tv);
     sv.addView(ll);
     setContentView(sv);
+    */
   }
 
   private String readTextFile(InputStream inputStream) {

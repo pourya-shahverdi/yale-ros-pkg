@@ -76,17 +76,7 @@ dependencies {
   compile 'ros.rosjava_core:rosjava_bootstrap:0.0.0-SNAPSHOT'
   compile 'ros.dragonbot_driver:dragonbot_driver:0.0.0-SNAPSHOT'
 
-/*
-  compile 'ros.rosjava_core:apache_xmlrpc_common'
-  compile 'ros.rosjava_core:apache_xmlrpc_server'
-  compile 'ros.rosjava_core:apache_xmlrpc_client'
-  compile 'dnsjava:dnsjava:2.1.1'
-  compile 'org.apache.commons:com.springsource.org.apache.commons.logging:1.1.1'
-  compile 'org.apache.commons:com.springsource.org.apache.commons.net:2.0.0'
-  testCompile 'junit:junit:4.8.2'
-  testCompile 'org.mockito:mockito-all:1.8.5'
-*/
-  //compile files('../dragonbot_driver/lib/MCBMiniAll.jar')
+  compile files('../dragonbot_driver/lib/MCBMiniAll.jar')
   compile fileTree(dir: 'lib', include: '*.jar')
 
 }
