@@ -72,8 +72,9 @@ import std_msgs.Int32;
 public class DragonbotDriver extends AbstractNodeMain {
   
   // TODO: read from config param
-  private double GEAR_RATIO = 50;  
+  //private double GEAR_RATIO = 50;  
   private boolean mDebug;
+  private boolean mAndroid;
   private String mConfigFileName;
 			
   // DONE: modify to handle multiple boards
@@ -96,6 +97,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
     mConfigFileName = params.getString("/dragonbot/config_file", "");
     mDebug = params.getBoolean("/dragonbot/debug");
+    mAndroid = params.getBoolean("/dragonbot/android");
 
 		/*
 		 * Read the xml (currently as a hard-coded default file, change to filename passed in as a param)
@@ -113,11 +115,14 @@ public class DragonbotDriver extends AbstractNodeMain {
      * Initialize the server with the board list and serial port name from the xml file
  		 */
 
+    int ioio_rx_pin = 12;
+    int ioio_tx_pin = 11;
+
  		try {
      	// This allows us to not have a connected stack, for debugging purposes
   		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
-	  	else server = new MCBMiniServer(results.port_name, results.boards);
-       //			server = new AndroidIOIOMCBMiniServer(boards, ioio_rx_pin, ioio_tx_pin)
+      else if( mAndroid ) server = new AndroidIOIOMCBMiniServer(results.boards, ioio_rx_pin, ioio_tx_pin);
+	  	else server = new MCBMiniServer("/dev/ttyUSB0", results.boards);
 	  } catch (IOException e) {
       // TODO Auto-generated catch block
 		  connectedNode.getLog().error( "error opening MCBMini server: ", e );
@@ -190,7 +195,7 @@ public class DragonbotDriver extends AbstractNodeMain {
             if( pnames.get(j).equals(cnames.get(i)) )
             {
               //copy val into motor array
-              cmd_vals[j] = motor_vals[i] * GEAR_RATIO;
+              cmd_vals[j] = motor_vals[i] /* * GEAR_RATIO */;
               System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
               connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
             }
@@ -301,8 +306,8 @@ public class DragonbotDriver extends AbstractNodeMain {
         double[] motor_vals = mJointMsg.getPosition();
         for( int i = 0; i < boards.size(); i++ )
         {
-          motor_vals[2*i+0] = boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) / GEAR_RATIO;
-          motor_vals[2*i+1] = boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) / GEAR_RATIO;
+          motor_vals[2*i+0] = boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) /* / GEAR_RATIO */;
+          motor_vals[2*i+1] = boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) /* / GEAR_RATIO */;
         }
         mJointMsg.setPosition(motor_vals);
         std_msgs.Header header = mJointMsg.getHeader();
