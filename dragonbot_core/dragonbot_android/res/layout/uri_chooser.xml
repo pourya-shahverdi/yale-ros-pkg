@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+     <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "50dp" 
+        android:src="@drawable/ros_android" 
+        android:layout_gravity="top|center"/>
+   
+
     <EditText
         android:id="@+id/master_chooser_uri"
         android:layout_width="match_parent"
