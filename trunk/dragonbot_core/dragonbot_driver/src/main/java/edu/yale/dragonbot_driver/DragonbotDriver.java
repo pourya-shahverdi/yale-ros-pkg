@@ -31,6 +31,7 @@
 package edu.yale.dragonbot_driver;
 
 import java.io.IOException;
+import java.util.List;
 
 import mcbmini.AndroidIOIOMCBMiniServer;
 import mcbmini.DebugMCBMiniServer;
@@ -111,6 +112,8 @@ public class DragonbotDriver extends AbstractNodeMain {
   		System.exit(0);
 	  }
 
+    System.out.println( "Hello world" );
+
  		/*
      * Initialize the server with the board list and serial port name from the xml file
  		 */
@@ -121,7 +124,7 @@ public class DragonbotDriver extends AbstractNodeMain {
  		try {
      	// This allows us to not have a connected stack, for debugging purposes
   		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
-      else if( mAndroid ) server = new AndroidIOIOMCBMiniServer(results.boards, ioio_rx_pin, ioio_tx_pin);
+      //else if( mAndroid ) server = new AndroidIOIOMCBMiniServer(results.boards, ioio_rx_pin, ioio_tx_pin);
 	  	else server = new MCBMiniServer("/dev/ttyUSB0", results.boards);
 	  } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -130,22 +133,43 @@ public class DragonbotDriver extends AbstractNodeMain {
       // TODO: double-check to make sure correct behavior
       System.exit(0);
     }
-      
+    
+    // initialize boards data structure from server parse of config file
+    boards = new java.util.ArrayList<MCBMiniBoard>(server.getBoards());
 
     /*
      * Server update and identify default values for PID gains
      * Set dynamic reconfigure params for PID gains 
      */
 
-      // TODO
+    // TODO
 
-    params.addParameterListener("/0_A_pgain", new ParameterListener() {
-      @Override
-      public void onNewValue(Object value) {
-        int chg_val = Integer.parseInt(value.toString());
-        System.out.println( "param changed: " + chg_val );
+    //Example listener string /0_A_pgain
+    for (int i=0;i<boards.size();i++){
+      final int i_f = i;
+      final char [] boardLetters = {'A','B'};
+      for (int j = 0; j<boardLetters.length;j++){
+        final int j_f = j;
+        //The following two arrays must be of the same length
+        final String [] parameterStrings = {"pgain","igain","dgain"};
+        final mcbmini.MCBMiniConstants.ChannelParameter[] parameterConstants = {ChannelParameter.P_GAIN, ChannelParameter.I_GAIN, ChannelParameter.D_GAIN};
+        for (int k=0; k<parameterStrings.length; k++){
+          final int k_f = k;
+          String listenerString = "/"+i_f+"_"+boardLetters[j_f]+"_"+parameterStrings[k];
+          params.addParameterListener(listenerString, new ParameterListener() {
+            @Override
+            public void onNewValue(Object value) {
+              int chg_val = Integer.parseInt(value.toString());
+              System.out.println( "param changed: " + chg_val );
+              if (boardLetters[j_f]=='A')
+                boards.get(i_f).setChannelAParameter(parameterConstants[k_f], chg_val);
+              if (boardLetters[j_f]=='B')
+                boards.get(i_f).setChannelBParameter(parameterConstants[k_f], chg_val);
+            }
+          });
+        }
       }
-    });
+    }
 
     /*
      * ROS Node publisher and subscriber declarations
@@ -157,7 +181,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
     // initialize message to have proper names
     // DONE: make work for multiple boards
-    boards = new java.util.ArrayList<MCBMiniBoard>(server.getBoards());
+
     java.util.ArrayList<java.lang.String> names = new java.util.ArrayList<java.lang.String>();
     double[] zeros = new double[boards.size()*2];
     
@@ -169,35 +193,37 @@ public class DragonbotDriver extends AbstractNodeMain {
       zeros[i*2+1] = 0;
     }
 
-    mJointCmd = joint_pub.newMessage();
+    mJointCmd=joint_pub.newMessage();
     mJointCmd.setPosition(zeros);
     mJointCmd.setEffort(zeros);
     mJointCmd.setVelocity(zeros);
     mJointCmd.setName(names);
+    
 
     // declare subscriber for motor pos
     Subscriber<sensor_msgs.JointState> subscriber = connectedNode.newSubscriber("cmd_pos", sensor_msgs.JointState._TYPE);
     // handler that is run whenever a joint state command is received
     subscriber.addMessageListener(new MessageListener<sensor_msgs.JointState>() {
+      //T0D0:Make work for multiple boards
       @Override
       public void onNewMessage(sensor_msgs.JointState cmd) {
         // copy data from cmd into mJointCmd
         java.util.ArrayList<java.lang.String> cnames = new java.util.ArrayList<java.lang.String>( cmd.getName() );
         double[] motor_vals = cmd.getPosition();
 
-        java.util.ArrayList<java.lang.String> pnames = new java.util.ArrayList<java.lang.String>( mJointCmd.getName() );
-        double[] cmd_vals = mJointCmd.getPosition();
+        //look through each board
+        for (int b = 0; b < boards.size(); b++){
+          java.util.ArrayList<java.lang.String> pnames = new java.util.ArrayList<java.lang.String>( mJointCmd.getName() );
+          double[] cmd_vals = mJointCmd.getPosition();
 
-        for( int i = 0; i < cnames.size(); i++ )
-        {
-          for( int j = 0; j < pnames.size(); j++ )
-          {
-            if( pnames.get(j).equals(cnames.get(i)) )
-            {
-              //copy val into motor array
-              cmd_vals[j] = motor_vals[i] /* * GEAR_RATIO */;
-              System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
-              connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
+          for( int i = 0; i < cnames.size(); i++ ) {
+            for( int j = 0; j < pnames.size(); j++ ) {
+              if( pnames.get(j).equals(cnames.get(i)) ) {
+                //copy val into motor array
+                cmd_vals[j] = motor_vals[i] /* * GEAR_RATIO */;
+                System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
+                connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
+              }
             }
           }
         }
@@ -240,12 +266,13 @@ public class DragonbotDriver extends AbstractNodeMain {
           zeros[i*2+1] = 0;
         }
 
-        mJointMsg = joint_pub.newMessage();
+        mJointMsg=joint_pub.newMessage();
         mJointMsg.setPosition(zeros);
         mJointMsg.setEffort(zeros);
         mJointMsg.setVelocity(zeros);
         mJointMsg.setName(names);
-       
+        
+
 		    /*
     		 * Register a handler for disable events (boards can be disabled on timeouts or fault conditions like overheating)
          * DONE: handle multiple boards
@@ -278,6 +305,26 @@ public class DragonbotDriver extends AbstractNodeMain {
       @Override
       protected void loop() throws InterruptedException {
 
+        //DEBUG: Print PID values
+        for (int i=0;i<boards.size();i++){
+          final char [] boardLetters = {'A','B'};
+          for (int j = 0; j<boardLetters.length;j++){
+            //The following two arrays must be of the same length
+            final String [] parameterStrings = {"pgain","igain","dgain"};
+            final mcbmini.MCBMiniConstants.ChannelParameter[] parameterConstants = {ChannelParameter.P_GAIN, ChannelParameter.I_GAIN, ChannelParameter.D_GAIN};
+            for (int k=0; k<parameterStrings.length; k++){
+                  System.out.print(i+"_"+boardLetters[j]+"_"+parameterStrings[k]+":");
+                  int val = 0;
+                  if (boardLetters[j]=='A')
+                    val = boards.get(i).getChannelAParameter(parameterConstants[k]);
+                  if (boardLetters[j]=='B')
+                    val = boards.get(i).getChannelBParameter(parameterConstants[k]);
+                  System.out.println(val);
+            }
+          }
+        }
+        System.out.println("--------");
+
         sequenceNumber++;
 		  	// Update the server, this is important and has to be done in an update loop of the application main thread
         server.update();
@@ -301,6 +348,7 @@ public class DragonbotDriver extends AbstractNodeMain {
         }
 
 
+        // T0D0: make work for muiltiple boards
   			// publish tick position for motor
         // DONE: make work for multiple boards
         double[] motor_vals = mJointMsg.getPosition();
