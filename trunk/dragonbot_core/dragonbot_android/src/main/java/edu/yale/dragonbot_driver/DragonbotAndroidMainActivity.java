@@ -56,10 +56,13 @@ import mcbmini.utils.XMLUtils;
 import mcbmini.utils.XMLUtils.XMLResults;
 
 import org.ros.node.NodeConfiguration;
+import org.ros.node.NodeMainExecutor;
+import org.ros.address.InetAddressFactory;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
+import java.net.*;
+import java.util.*;
+
+
 
 public class DragonbotAndroidMainActivity extends Activity {
 
@@ -84,23 +87,6 @@ public class DragonbotAndroidMainActivity extends Activity {
             NodeConfiguration.DEFAULT_MASTER_URI.toString());
     uriText.setText(masterUri);
 
-/*
-    // Load XML for parsing.
-    AssetManager assetManager = getAssets();
-
-    InputStream xmlFileStream = null;
-    try {
-      xmlFileStream = assetManager.open("example_motor_config.xml");
-    } catch (IOException e) {
-      Log.e("xml", e.getMessage() );
-    }
-    XMLResults results = null;
-    try {
-      results = AndroidXMLUtils.parseMCBMiniConfigStream(xmlFileStream);
-    } catch (Exception e) {
-      Log.e("xml", e.getMessage());
-    }
-*/
   }
 
   @Override
@@ -143,6 +129,26 @@ public class DragonbotAndroidMainActivity extends Activity {
     Intent intent = new Intent();
     intent.putExtra("ROS_MASTER_URI", masterUri);
     setResult(RESULT_OK, intent);
+
+
+
+    URI uri = null;
+    try {
+      uri = new URI(masterUri);
+    } catch (URISyntaxException e) {
+      Log.e("dragonbot_android", "error parsing URI: " + e.toString() );
+    }
+
+    // start node
+    DragonbotAndroidApplication.getInstance().setDragonbotNode(DragonbotAndroidDriver.getInstance());
+    InetAddress inaddr = InetAddressFactory.newNonLoopback();
+    DragonbotAndroidApplication.getInstance().setMasterURI(uri);
+    NodeConfiguration nodeConfiguration =
+      NodeConfiguration.newPublic(inaddr.getHostAddress(), uri);
+    Log.i( "dragonbot_android", "URI entered: " + masterUri + "/" + inaddr.getHostAddress());
+    NodeMainExecutor nodeMainExecutor = DragonbotAndroidApplication.getInstance().getNodeMainExecutor();
+    nodeMainExecutor.execute(DragonbotAndroidApplication.getInstance().getDragonbotNode(), nodeConfiguration);
+
     finish();
   }
 
