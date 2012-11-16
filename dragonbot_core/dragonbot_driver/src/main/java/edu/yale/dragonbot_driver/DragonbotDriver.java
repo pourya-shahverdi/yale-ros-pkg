@@ -75,16 +75,47 @@ public class DragonbotDriver extends AbstractNodeMain {
   // TODO: read from config param
   //private double GEAR_RATIO = 50;  
   private boolean mDebug;
-  private boolean mAndroid;
-  private String mConfigFileName;
+  protected String mConfigFileName;
 			
   // DONE: modify to handle multiple boards
 
-  private MCBMiniServer server = null;
+  // needs to be protected to be inhereted from AndroidDriver class
+  protected MCBMiniServer server = null;
   private java.util.ArrayList<MCBMiniBoard> boards;
 
   private sensor_msgs.JointState mJointMsg;
   private sensor_msgs.JointState mJointCmd;
+
+  protected XMLResults results = null;
+
+  // uses regular file system, override for android
+  protected int parseConfigFile( String filename )
+  {
+ 		try {
+    	results = XMLUtils.parseMCBMiniConfigFile( filename );
+ 		} catch (Exception e1) {
+     	System.err.println("Can't parse input file: " + e1.toString());
+  		System.exit(0);
+	  }
+    return 0;
+  }
+
+  // uses tty Serial, override for Android
+  protected int initServer()
+  {
+ 		try {
+     	// This allows us to not have a connected stack, for debugging purposes
+  		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
+	  	else server = new MCBMiniServer("/dev/ttyUSB0", results.boards);
+	  } catch (IOException e) {
+      // TODO Auto-generated catch block
+		  System.err.println( "error opening MCBMini server: " + e.toString() );
+
+      // TODO: double-check to make sure correct behavior
+      System.exit(0);
+    }
+    return 0;
+  }
 
   @Override
   public GraphName getDefaultNodeName() {
@@ -98,45 +129,29 @@ public class DragonbotDriver extends AbstractNodeMain {
 
     mConfigFileName = params.getString("/dragonbot/config_file", "");
     mDebug = params.getBoolean("/dragonbot/debug");
-    mAndroid = params.getBoolean("/dragonbot/android");
 
 		/*
 		 * Read the xml (currently as a hard-coded default file, change to filename passed in as a param)
 		 */
-
-    XMLResults results = null;
- 		try {
-    	results = XMLUtils.parseMCBMiniConfigFile( mConfigFileName );
- 		} catch (Exception e1) {
-     	connectedNode.getLog().error("Can't parse input file: ", e1);
-  		System.exit(0);
-	  }
+    if( parseConfigFile(mConfigFileName) != 0 )
+    {
+      System.out.println( "uh-oh" );
+      System.exit(0);
+    }
 
     System.out.println( "Hello world" );
 
  		/*
      * Initialize the server with the board list and serial port name from the xml file
  		 */
-
-    int ioio_rx_pin = 12;
-    int ioio_tx_pin = 11;
-
- 		try {
-     	// This allows us to not have a connected stack, for debugging purposes
-  		if( mDebug ) server = new DebugMCBMiniServer(results.boards);
-      //else if( mAndroid ) server = new AndroidIOIOMCBMiniServer(results.boards, ioio_rx_pin, ioio_tx_pin);
-	  	else server = new MCBMiniServer("/dev/ttyUSB0", results.boards);
-	  } catch (IOException e) {
-      // TODO Auto-generated catch block
-		  connectedNode.getLog().error( "error opening MCBMini server: ", e );
-
-      // TODO: double-check to make sure correct behavior
+    if( initServer() != 0 )
+    {
+      System.out.println( "uh-oh" );
       System.exit(0);
     }
     
     // initialize boards data structure from server parse of config file
     boards = new java.util.ArrayList<MCBMiniBoard>(server.getBoards());
-
     /*
      * Server update and identify default values for PID gains
      * Set dynamic reconfigure params for PID gains 
