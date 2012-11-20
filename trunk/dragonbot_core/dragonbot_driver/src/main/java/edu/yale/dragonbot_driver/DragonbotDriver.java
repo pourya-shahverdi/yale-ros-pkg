@@ -76,7 +76,9 @@ public class DragonbotDriver extends AbstractNodeMain {
   //private double GEAR_RATIO = 50;  
   private boolean mDebug;
   protected String mConfigFileName;
-			
+
+  private int mMotorState = 0;
+
   // DONE: modify to handle multiple boards
 
   // needs to be protected to be inhereted from AndroidDriver class
@@ -139,7 +141,7 @@ public class DragonbotDriver extends AbstractNodeMain {
       System.exit(0);
     }
 
-    System.out.println( "Hello world" );
+    System.out.println( "motor config file read successfully" );
 
  		/*
      * Initialize the server with the board list and serial port name from the xml file
@@ -149,6 +151,8 @@ public class DragonbotDriver extends AbstractNodeMain {
       System.out.println( "uh-oh" );
       System.exit(0);
     }
+    
+    System.out.println( "MCBMini board(s) initialized successfully" );
     
     // initialize boards data structure from server parse of config file
     boards = new java.util.ArrayList<MCBMiniBoard>(server.getBoards());
@@ -193,6 +197,10 @@ public class DragonbotDriver extends AbstractNodeMain {
     // declare publisher for motor pos
     final Publisher<sensor_msgs.JointState> joint_pub = 
       connectedNode.newPublisher("joint_state", sensor_msgs.JointState._TYPE);
+
+    // declare publisher for motor state
+    final Publisher<std_msgs.Int32> motor_state_pub = 
+      connectedNode.newPublisher("motor_state", std_msgs.Int32._TYPE);
 
     // initialize message to have proper names
     // DONE: make work for multiple boards
@@ -293,16 +301,17 @@ public class DragonbotDriver extends AbstractNodeMain {
          * DONE: handle multiple boards
 		     */
 
-        Subscriber<std_msgs.Int32> disable_subscriber = connectedNode.newSubscriber("disable", std_msgs.Int32._TYPE);
-        disable_subscriber.addMessageListener(new MessageListener<std_msgs.Int32>() {
+        Subscriber<std_msgs.Int32> cmd_motor_state_subscriber = connectedNode.newSubscriber("cmd_motor_state", std_msgs.Int32._TYPE);
+        cmd_motor_state_subscriber.addMessageListener(new MessageListener<std_msgs.Int32>() {
           @Override
-          public void onNewMessage(std_msgs.Int32 disable) {
+          public void onNewMessage(std_msgs.Int32 cmd_state) {
             // DONE: make work for all boards
-            connectedNode.getLog().info( "setting motor disabled state: " + disable.getData() );
+            connectedNode.getLog().info( "setting cmd_motor_state: " + cmd_state.getData() );
             for( int i = 0; i < boards.size(); i++ )
             {
-              boards.get(i).setChannelAParameter(ChannelParameter.ENABLED, 1-disable.getData());
-              boards.get(i).setChannelBParameter(ChannelParameter.ENABLED, 1-disable.getData());
+              mMotorState = cmd_state.getData();
+              boards.get(i).setChannelAParameter(ChannelParameter.ENABLED, mMotorState);
+              boards.get(i).setChannelBParameter(ChannelParameter.ENABLED, mMotorState);
             }
 
           }
@@ -328,17 +337,17 @@ public class DragonbotDriver extends AbstractNodeMain {
             final String [] parameterStrings = {"pgain","igain","dgain"};
             final mcbmini.MCBMiniConstants.ChannelParameter[] parameterConstants = {ChannelParameter.P_GAIN, ChannelParameter.I_GAIN, ChannelParameter.D_GAIN};
             for (int k=0; k<parameterStrings.length; k++){
-                  System.out.print(i+"_"+boardLetters[j]+"_"+parameterStrings[k]+":");
+                  //System.out.print(i+"_"+boardLetters[j]+"_"+parameterStrings[k]+":");
                   int val = 0;
                   if (boardLetters[j]=='A')
                     val = boards.get(i).getChannelAParameter(parameterConstants[k]);
                   if (boardLetters[j]=='B')
                     val = boards.get(i).getChannelBParameter(parameterConstants[k]);
-                  System.out.println(val);
+                  //System.out.println(val);
             }
           }
         }
-        System.out.println("--------");
+        //System.out.println("--------");
 
         sequenceNumber++;
 		  	// Update the server, this is important and has to be done in an update loop of the application main thread
@@ -377,6 +386,10 @@ public class DragonbotDriver extends AbstractNodeMain {
         header.setStamp( connectedNode.getCurrentTime() );
         mJointMsg.setHeader(header);
         joint_pub.publish(mJointMsg);        
+
+        std_msgs.Int32 motor_state_msg = motor_state_pub.newMessage();
+        motor_state_msg.setData(mMotorState);
+        motor_state_pub.publish(motor_state_msg);
 
 	  		/*
 		  	 * Every now and then we print out the update rates of the system (the 2nd one is more interesting, it is the response frequency of the boards
