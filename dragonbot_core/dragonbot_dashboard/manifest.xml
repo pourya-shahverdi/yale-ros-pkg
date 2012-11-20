@@ -1,0 +1,23 @@
+<package>
+  <description brief="dragonbot_dashboard">
+
+     dragonbot_dashboard
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_dashboard</url>
+  <depend package="rxtools"/>
+  <depend package="robot_monitor"/>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
+  <depend package="std_srvs"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <rosdep name="wxwidgets"/>
+  <rosdep name="wxpython"/>
+
+</package>
+
+
