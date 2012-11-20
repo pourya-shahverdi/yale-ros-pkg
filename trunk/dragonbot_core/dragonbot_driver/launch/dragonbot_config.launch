@@ -1,5 +1,7 @@
 <launch>
   <param name="/dragonbot/android" type="bool" value="0"/>
   <param name="/dragonbot/debug" type="bool" value="0"/>
-  <param name="/dragonbot/config_file" type="str" value="$(find dragonbot_driver)/config/example_motor_config.xml"/>
+  <param name="/dragonbot/config_file" type="str" value="$(find dragonbot_driver)/config/dragonbot_config.xml"/>
+
+  <node pkg="dragonbot_dashboard" type="dragonbot_dashboard" name="dragonbot_dashboard"/>
 </launch>
