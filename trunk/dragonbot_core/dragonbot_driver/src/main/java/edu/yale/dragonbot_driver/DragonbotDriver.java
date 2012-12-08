@@ -32,6 +32,8 @@ package edu.yale.dragonbot_driver;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import mcbmini.AndroidIOIOMCBMiniServer;
 import mcbmini.DebugMCBMiniServer;
@@ -56,6 +58,16 @@ import org.ros.node.topic.*;
 import org.apache.commons.logging.Log;
 import org.ros.message.MessageListener;
 
+//for second XML parsing pass
+import java.io.File;
+import org.w3c.dom.Document;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException; 
+
 import sensor_msgs.JointState;
 import std_msgs.Int32;
 
@@ -67,8 +79,6 @@ import std_msgs.Int32;
  * @author siggi, ROS rewrites from David Feil-Seifer <david.feil-seifer@yale.edu>
  * @date Jul 18, 2012, ROS rewrites Aug 2nd, 2012
  */
-
-
 
 public class DragonbotDriver extends AbstractNodeMain {
   
@@ -85,6 +95,11 @@ public class DragonbotDriver extends AbstractNodeMain {
   protected MCBMiniServer server = null;
   private java.util.ArrayList<MCBMiniBoard> boards;
 
+  private Map<String, Float> extraParams;
+  private final String MIN_TICKS = "_MIN_TICKS";
+  private final String MAX_TICKS = "_MAX_TICKS";
+  private final String TICKS_PER_UNIT = "_TICKS_PER_UNIT";
+
   private sensor_msgs.JointState mJointMsg;
   private sensor_msgs.JointState mJointCmd;
 
@@ -99,8 +114,74 @@ public class DragonbotDriver extends AbstractNodeMain {
      	System.err.println("Can't parse input file: " + e1.toString());
   		System.exit(0);
 	  }
+
+    // parse for extraParams
+    parseForExtraParams( filename );
+
     return 0;
   }
+
+  protected int parseForExtraParams (String filename)
+  {
+    try {
+      extraParams = new HashMap<String, Float>();
+ 
+      File fXmlFile = new File(filename);
+      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.parse(fXmlFile);
+      doc.getDocumentElement().normalize();
+   
+      System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+      NodeList nList = doc.getElementsByTagName("MiniBoard");
+      System.out.println("-----------------------");
+   
+      for (int temp = 0; temp < nList.getLength(); temp++) {
+   
+         Node nNode = nList.item(temp);
+         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) nNode;
+            String id = getTagValue("id", eElement);
+            System.out.println("id : " + getTagValue("id", eElement));
+            NodeList nList2 = eElement.getElementsByTagName("Motor");
+
+            for (int temp2 = 0; temp2 < nList2.getLength(); temp2++) {
+               Node nNode2 = nList2.item(temp2);
+               if (nNode2.getNodeType() == Node.ELEMENT_NODE) {
+                  Element eElement2 = (Element) nNode2;
+                  String channel = getTagValue("channel",eElement2);
+                  String min_ticks = getTagValue("min_ticks",eElement2);
+                  String max_ticks = getTagValue("max_ticks",eElement2);
+                  String ticks_per_unit = getTagValue("ticks_per_unit",eElement2);
+
+                  extraParams.put("abc",new Float("1.0"));
+                  extraParams.put(new String(id+channel+MIN_TICKS),new Float(min_ticks));
+                  extraParams.put(new String(id+channel+MAX_TICKS),new Float(max_ticks));
+                  extraParams.put(new String(id+channel+TICKS_PER_UNIT),new Float(ticks_per_unit));
+          
+                  /*
+                  System.out.println("channel : " + getTagValue("channel", eElement2));
+                  System.out.println("max_ticks : " + getTagValue("max_ticks", eElement2));
+                  System.out.println("min_ticks : " + getTagValue("min_ticks", eElement2));
+                  System.out.println("ticks_per_unit : " + getTagValue("ticks_per_unit", eElement2));
+                  */
+               }
+            }
+         }
+      }
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+
+    return -1;
+  }
+  
+  private static String getTagValue(String sTag, Element eElement) {
+    NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
+    Node nValue = (Node) nlList.item(0);
+    return nValue.getNodeValue();
+  }
+
 
   // uses tty Serial, override for Android
   protected int initServer()
@@ -122,6 +203,35 @@ public class DragonbotDriver extends AbstractNodeMain {
   @Override
   public GraphName getDefaultNodeName() {
     return GraphName.of("dragonbot_driver");
+  }
+
+  private double radiansToTicks (String id, String channel, double radians)
+  {
+
+      if (!extraParams.containsKey(id+channel+TICKS_PER_UNIT))
+      {
+          System.err.println("Could not access TICKS_PER_UNIT");
+          System.exit(0);
+      }
+      
+      double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      double ticks = radians*coefficient;
+      System.out.println("Radians:"+radians+"-> Ticks:"+ticks);
+      return ticks;
+  }
+
+  private double ticksToRadians (String id, String channel, double ticks)
+  {
+      if (!extraParams.containsKey(id+channel+TICKS_PER_UNIT))
+      {
+          System.err.println("Could not access TICKS_PER_UNIT");
+          System.exit(0);
+      }
+
+      double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      double radians = ticks/coefficient;
+      System.out.println("Ticks:"+ticks+"-> Radians:"+radians);
+      return radians;
   }
 
   @Override
@@ -160,8 +270,6 @@ public class DragonbotDriver extends AbstractNodeMain {
      * Server update and identify default values for PID gains
      * Set dynamic reconfigure params for PID gains 
      */
-
-    // TODO
 
     //Example listener string /0_A_pgain
     for (int i=0;i<boards.size();i++){
@@ -227,7 +335,6 @@ public class DragonbotDriver extends AbstractNodeMain {
     Subscriber<sensor_msgs.JointState> subscriber = connectedNode.newSubscriber("cmd_pos", sensor_msgs.JointState._TYPE);
     // handler that is run whenever a joint state command is received
     subscriber.addMessageListener(new MessageListener<sensor_msgs.JointState>() {
-      //T0D0:Make work for multiple boards
       @Override
       public void onNewMessage(sensor_msgs.JointState cmd) {
         // copy data from cmd into mJointCmd
@@ -243,7 +350,18 @@ public class DragonbotDriver extends AbstractNodeMain {
             for( int j = 0; j < pnames.size(); j++ ) {
               if( pnames.get(j).equals(cnames.get(i)) ) {
                 //copy val into motor array
-                cmd_vals[j] = motor_vals[i] /* * GEAR_RATIO */;
+                String id = ""+cnames.get(i).charAt(0);
+                String channel = ""+cnames.get(i).charAt(2);
+
+                double ticks = radiansToTicks(id, channel, motor_vals[i]);
+               
+                double min = extraParams.get(id+channel+MIN_TICKS).floatValue();
+                double max = extraParams.get(id+channel+MAX_TICKS).floatValue();
+
+                if (ticks<min) ticks=min;
+                if (ticks>max) ticks=max;
+
+                cmd_vals[j] = ticks /* * GEAR_RATIO */;
                 System.out.println( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
                 connectedNode.getLog().info( "setting motor: " + cnames.get(i) + " to: " + cmd_vals[j] );
               }
@@ -372,7 +490,6 @@ public class DragonbotDriver extends AbstractNodeMain {
         }
 
 
-        // T0D0: make work for muiltiple boards
   			// publish tick position for motor
         // DONE: make work for multiple boards
         double[] motor_vals = mJointMsg.getPosition();
