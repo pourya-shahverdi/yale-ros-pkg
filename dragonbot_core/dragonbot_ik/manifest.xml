@@ -1,15 +1,18 @@
 <package>
-  <description brief="dragonbot_ik">
+  <description brief="inverse_kinematics2">
 
-     dragonbot_ik
+     inverse_kinematics2
 
   </description>
-  <author>David Feil-Seifer</author>
+  <author>Corina Grigore</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/dragonbot_ik</url>
+  <url>http://ros.org/wiki/inverse_kinematics2</url>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="rospy"/>
+  <depend package="roscpp"/>
 
 </package>
 
