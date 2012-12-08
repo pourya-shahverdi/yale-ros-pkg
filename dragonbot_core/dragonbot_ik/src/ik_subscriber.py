@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import roslib; roslib.load_manifest('inverse_kinematics2')
+import roslib; roslib.load_manifest('dragonbot_ik')
 import rospy
 import geometry_msgs.msg
 import sensor_msgs.msg
@@ -64,7 +64,7 @@ def callback(transform):
 
     if counter == 4:
         # publish the 4 motor positions in radians
-	motors = ("0_A","0_B","1_A","1_B")
+	motors = ("1_A","1_B","2_A","2_B")
 	for i,j in enumerate(J):
 		pub = rospy.Publisher('cmd_pos',JointState)
 		header = Header(0,rospy.get_rostime(),"")

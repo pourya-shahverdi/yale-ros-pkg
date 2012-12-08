@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from collections import namedtuple
-import roslib; roslib.load_manifest('inverse_kinematics2')
+import roslib; roslib.load_manifest('dragonbot_ik')
 import rospy
 import geometry_msgs.msg
 import sensor_msgs.msg
