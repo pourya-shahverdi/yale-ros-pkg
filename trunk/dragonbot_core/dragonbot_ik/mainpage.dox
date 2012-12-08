@@ -2,7 +2,7 @@
 \mainpage
 \htmlinclude manifest.html
 
-\b dragonbot_ik 
+\b inverse_kinematics2 
 
 <!-- 
 Provide an overview of your package.
