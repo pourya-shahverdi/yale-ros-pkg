@@ -44,25 +44,23 @@ DragonBotComm comm;
 
   public ExpressionMotionSimpleActionServerCallbacks(DragonBotComm establishedComm)
   {
-    /*
-      comm = establishedComm;
-      int count =1 ;
-      comm.sendNetworkDebug(count);
-      while(Float.isNaN(comm.getFaceDisplayFPS()))
+    
+    comm = establishedComm;
+    int count =1 ;
+    comm.sendNetworkDebug(count);
+    while(Float.isNaN(comm.getFaceDisplayFPS()))
   	{
-	      //System.out.println("constructor loop");
-	      comm.update();
-        try{
+	    //System.out.println("constructor loop");
+	    comm.update();
+      try{
         Thread.sleep(33);
-        }
-        catch (Exception e) {}
-	      count++;
-  	    if(count%1000 ==0)
-          //break;
-	      	comm.sendNetworkDebug(count/10000);
-	
+      }
+      catch (Exception e) {}
+	    count++;
+  	  if(count%1000 ==0)
+        //break;
+	    	comm.sendNetworkDebug(count/10000);
   	}
-    */
   }
 
   public ExpressionMotionResult newResultMessage()
@@ -72,59 +70,49 @@ DragonBotComm comm;
     return mf.newFromType(ExpressionMotionResult._TYPE);
   }
 
-   public ExpressionMotionFeedback newFeedbackMessage()
+  public ExpressionMotionFeedback newFeedbackMessage()
   {
     NodeConfiguration nc = NodeConfiguration.newPrivate();
     MessageFactory mf = nc.getTopicMessageFactory();
     return mf.newFromType(ExpressionMotionFeedback._TYPE);
   }
 
+  boolean checkUpdate( SimpleActionServer<ExpressionMotionActionFeedback, ExpressionMotionActionGoal, ExpressionMotionActionResult, ExpressionMotionFeedback, ExpressionMotionGoal, ExpressionMotionResult> actionServer )
+  {
+    comm.update();
+    System.out.println( comm.getExpressionCurrent() );
+    if( preempted )
+    {
+      System.out.println( "preempt requested" );
+      actionServer.setPreempted();
+      preempted = false;
+      return false;
+    }
+    return true;
+  }
+
+
  @Override
   public void blockingGoalCallback(ExpressionMotionGoal goal, SimpleActionServer<ExpressionMotionActionFeedback, ExpressionMotionActionGoal, ExpressionMotionActionResult, ExpressionMotionFeedback, ExpressionMotionGoal, ExpressionMotionResult> actionServer) 
-{
-        System.out.println("BLOCKING GOAL CALLBACK");
-        int count =1 ;
-        for( int i = 0; i < 100; i++ )
-        {
-          try{
-            Thread.sleep(100);
-          } catch (Exception e) {}
-          System.out.print("."); 
-          if( preempted )
-          {
-            System.out.println( "preempt requested" );
-            actionServer.setPreempted();
-            preempted = false;
-            return;
-          }
-          
-        }
-	      publishFeedback("Motion Completed", actionServer);
-	      ExpressionMotionResult result = newResultMessage();
-    	  result.setResult("The motion completed successfully");
-    	  actionServer.setSucceeded(result, "");
-        /*
-   int count =1 ;
-	  publishFeedback("Expression sent - waiting for execution", actionServer);
-    try{
-      Thread.sleep(10 * 1000);
-    } catch (Exception e) {}
-	  publishFeedback("Expression Completed", actionServer);
-    ExpressionMotionResult result = newResultMessage();
-  	    result.setResult("The motion completed successfully");
-   	    actionServer.setSucceeded(result, "");*/
-   /*
+  {
+    System.out.println("BLOCKING GOAL CALLBACK");
+
+    int count =1;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
+	  {
 	    comm.update();
 	    count++;
 	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
+		  comm.sendNetworkDebug(count/10000);
+      if( !checkUpdate(actionServer) )
+      {
+        return;
+      }
+	  }
+
     if(goal.getType().equalsIgnoreCase("expression"))
-	{
+	  {
 	    if(goal.getConstant().equalsIgnoreCase("angry"))
 	    	comm.sendExpression(EXPRESSION.EXPRESSION_ANGRY);
 	    else if(goal.getConstant().equalsIgnoreCase("disgusted"))
@@ -157,25 +145,32 @@ DragonBotComm comm;
 	    comm.update();
 
 	    while(comm.getExpressionCurrent().equals("IDLE"))
-		{
+		  {
+        if( !checkUpdate(actionServer) )
+        {
+          return;
+        }
+		  }
 
-		    comm.update();
-		}
 	    String cur = comm.getExpressionCurrent();
 	    publishFeedback("Expression in progress", actionServer);
 	 
 	    while(comm.getExpressionCurrent().equals(cur))
-		{
-		    comm.update();
-		}
-	   publishFeedback("Expression Completed", actionServer);
-	   ExpressionMotionResult result = newResultMessage();
-    	   result.setResult("The expression completed successfully");
-    	   actionServer.setSucceeded(result, "");
-	}
+		  {
+        if( !checkUpdate(actionServer) )
+        {
+          return;
+        } 
+		  }
+
+	    publishFeedback("Expression Completed", actionServer);
+	    ExpressionMotionResult result = newResultMessage();
+      result.setResult("The expression completed successfully");
+    	actionServer.setSucceeded(result, "");
+	  }
 
     else if(goal.getType().equalsIgnoreCase("motion"))
-	{
+	  {
 	    if(goal.getConstant().equalsIgnoreCase("afraid"))
 	    	comm.sendMotion(MOTION.MOTION_AFRAID);
 	    else if(goal.getConstant().equalsIgnoreCase("blech"))
@@ -243,26 +238,27 @@ DragonBotComm comm;
 
  	    while(comm.getMotionCurrent().equals("IDLE"))
 		  {
-		    comm.update();
+        if( !checkUpdate(actionServer) )
+        {
+          return;
+        } 
 		  }
 	    String cur = comm.getMotionCurrent();
 	    publishFeedback("Motion in progress", actionServer);
 	 
 	    while(comm.getMotionCurrent().equals(cur))
 		  {
-		    comm.update();
+        if( !checkUpdate(actionServer) )
+        {
+          return;
+        } 
 		  }
 	    System.out.println("Motion Completed");
 	    publishFeedback("Motion Completed", actionServer);
 	    ExpressionMotionResult result = newResultMessage();
-    	    result.setResult("The motion completed successfully");
-    	    actionServer.setSucceeded(result, "");
-	}
-*/
-}
-  boolean checkUpdate()
-  {
-    return true;
+    	result.setResult("The motion completed successfully");
+    	actionServer.setSucceeded(result, "");
+	  }
   }
 
 
