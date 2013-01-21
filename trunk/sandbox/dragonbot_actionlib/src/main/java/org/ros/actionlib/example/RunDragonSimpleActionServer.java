@@ -19,8 +19,8 @@ public class RunDragonSimpleActionServer {
   }
 
   public static void main() {
-    //DragonBotComm comm = new DragonBotComm();
-    DragonBotComm comm = null;
+    DragonBotComm comm = new DragonBotComm();
+    //DragonBotComm comm = null;
     try {
       // user code implementing the SimpleActionServerCallbacks interface
       ExpressionMotionSimpleActionServerCallbacks impl = new ExpressionMotionSimpleActionServerCallbacks(comm);
