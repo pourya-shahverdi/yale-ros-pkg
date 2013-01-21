@@ -1,0 +1,16 @@
+<package>
+  <description brief="dragon_msgs">
+
+     dragon_msgs
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragon_msgs</url>
+  <depend package="actionlib_msgs"/>
+  <depend package="std_msgs"/>
+
+</package>
+
+

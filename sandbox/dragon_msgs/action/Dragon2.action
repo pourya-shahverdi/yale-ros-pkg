@@ -1,0 +1,14 @@
+#goal definition
+string type
+string constant
+int32 x
+int32 y
+int32 z
+int32 theta
+int32 neck
+---
+#result definition
+string result
+---
+#feedback
+string status

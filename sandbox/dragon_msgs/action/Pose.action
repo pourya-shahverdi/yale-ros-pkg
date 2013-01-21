@@ -1,0 +1,12 @@
+#goal definition
+string state
+float64 x
+float64 y
+float64 z
+float64 theta
+---
+#result definition
+string result
+---
+#feedback
+string status
