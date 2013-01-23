@@ -31,7 +31,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import roslib
-roslib.load_manifest('pr2_dashboard')
+roslib.load_manifest('dragonbot_dashboard')
 
 import rospy
 from diagnostic_msgs.msg import DiagnosticStatus
