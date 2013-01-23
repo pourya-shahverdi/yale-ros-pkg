@@ -6,12 +6,15 @@ import geometry_msgs.msg
 import sensor_msgs.msg
 import std_msgs.msg
 from geometry_msgs.msg import Transform
-
+from tf.transformations import quaternion_from_euler
+from tf.transformations import euler_from_quaternion
 
 def ik_publisher(tx,ty,tz,rx,ry,rz,rw):
     pub = rospy.Publisher('ik_topic', Transform)
     rospy.init_node('ik_publisher')
     #pub.publish(Transform((1,1,1),(0,0,0,0)))
+    e = euler_from_quaternion([rx,ry,rz,rw])
+    print e
     while not rospy.is_shutdown():
 	translation = namedtuple("Rotation",["x","y","z"])
 	translation.x=tx
@@ -30,7 +33,8 @@ if __name__ == '__main__':
     try:
         # hard-coded values for x,y,z,theta
         # -1 values don't matter
-        ik_publisher(1,1,1,-1,-1,-1,3)
+
+        ik_publisher(0,0,-1,0,0,0,3.1415927)
     except rospy.ROSInterruptException: pass
 
 

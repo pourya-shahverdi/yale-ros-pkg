@@ -43,6 +43,8 @@ def callback(transform):
             yg = -Y+E1*(math.sin(Theta)-math.cos(Theta))+B2
             zg = Z
             
+        print "xg "+repr(xg)+" yg "+repr(yg)+" zg "+repr(zg)
+
         temp = math.pow((A-2*D)*(A-2*D)-yg*yg,0.5)
         aPrimeSquared = (temp+2*D)*(temp+2*D)
         c = math.pow((xg-RB)*(xg-RB)+zg*zg,0.5)
@@ -63,13 +65,21 @@ def callback(transform):
         print " " + repr(j) # publish sensor_msgs/JointState to cmd_pos topic
 
     if counter == 4:
-        # publish the 4 motor positions in radians
-	motors = ("1_A","1_B","2_A","2_B")
-	for i,j in enumerate(J):
-		pub = rospy.Publisher('cmd_pos',JointState)
-		header = Header(0,rospy.get_rostime(),"")
-		jointState = JointState(header=header,name=[motors[i]],position=[j],velocity=[0.0],effort=[0.0])
-		pub.publish(jointState)
+      # publish the 4 motor positions in radians
+      motors = ("1_A","1_B","2_A","2_B")
+      velocity = [0,0,0,0]
+      effort = [0,0,0,0]
+      pub = rospy.Publisher('cmd_pos',JointState)
+      header = Header(0,rospy.get_rostime(),"")
+      jointState = JointState(header=header,name=motors,position=J,velocity=velocity,effort=effort)
+      pub.publish(jointState)
+
+
+	#for i,j in enumerate(J):
+	#	pub = rospy.Publisher('cmd_pos',JointState)
+	#	header = Header(0,rospy.get_rostime(),"")
+	#	jointState = JointState(header=header,name=[motors[i]],position=[j],velocity=[0.0],effort=[0.0])
+	#	pub.publish(jointState)
     # else - what to publish?
 
 #def callback(data):
