@@ -159,12 +159,12 @@ public class DragonbotDriver extends AbstractNodeMain {
                   extraParams.put(new String(id+channel+MAX_TICKS),new Float(max_ticks));
                   extraParams.put(new String(id+channel+TICKS_PER_UNIT),new Float(ticks_per_unit));
           
-                  /*
+                  
                   System.out.println("channel : " + getTagValue("channel", eElement2));
                   System.out.println("max_ticks : " + getTagValue("max_ticks", eElement2));
                   System.out.println("min_ticks : " + getTagValue("min_ticks", eElement2));
                   System.out.println("ticks_per_unit : " + getTagValue("ticks_per_unit", eElement2));
-                  */
+                  
                }
             }
          }
@@ -216,7 +216,7 @@ public class DragonbotDriver extends AbstractNodeMain {
       
       double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
       double ticks = radians*coefficient;
-      System.out.println("Radians:"+radians+"-> Ticks:"+ticks);
+      //System.out.println("Radians:"+radians+"-> Ticks:"+ticks);
       return ticks;
   }
 
@@ -230,7 +230,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
       double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
       double radians = ticks/coefficient;
-      System.out.println("Ticks:"+ticks+"-> Radians:"+radians);
+      //System.out.println("Ticks:"+ticks+"-> Radians:"+radians);
       return radians;
   }
 
@@ -495,8 +495,8 @@ public class DragonbotDriver extends AbstractNodeMain {
         double[] motor_vals = mJointMsg.getPosition();
         for( int i = 0; i < boards.size(); i++ )
         {
-          motor_vals[2*i+0] = boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) /* / GEAR_RATIO */;
-          motor_vals[2*i+1] = boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) /* / GEAR_RATIO */;
+          motor_vals[2*i+0] = ticksToRadians(new String(""+(i+1)), "A", boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) );
+          motor_vals[2*i+1] = ticksToRadians(new String(""+(i+1)), "B", boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) );
         }
         mJointMsg.setPosition(motor_vals);
         std_msgs.Header header = mJointMsg.getHeader();
