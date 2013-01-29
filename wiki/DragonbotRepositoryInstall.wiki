@@ -5,7 +5,6 @@
 Currently code for this project is contained in two repositories:
 
   * http://code.google.com/r/davidfeilseifer-dragonbot-mod/
-
   * http://code.google.com/p/yale-ros-pkg/
 
 The checkout of the repositories can be automated. However, the installation of the code takes a little more doing. Apologies for the challenge.
@@ -14,22 +13,30 @@ The checkout of the repositories can be automated. However, the installation of 
 
   # install ROS fuerte: http://www.ros.org/wiki/fuerte/Installation/Ubuntu
   # install rosws: http://www.ros.org/doc/api/rosinstall/html/
-  # checkout the respositories into a workspace `<ws_name>`:
-    # `rosws init ~/<ws_name> /opt/ros/fuerte`
-    # `source ~/<ws_name>/setup.bash`
-    # `rosws merge http://robotics.usc.edu/~dfseifer/dragonbot_actionlib.rosinstall`
-    # `source ~/<ws_name>/setup.bash`
-    # `rosws update`
-  # rosmake dragon_msgs
+  # checkout the respositories into a workspace {{{<ws_name>}}}:
+{{{
+> rosws init ~/<ws_name> /opt/ros/fuerte
+> source ~/<ws_name>/setup.bash
+> rosws merge http://robotics.usc.edu/~dfseifer/dragonbot_actionlib.rosinstall
+> source ~/<ws_name>/setup.bash
+> rosws update
+}}}
+  # {{{> rosmake dragon_msgs}}}
   # install rosjava:
-    # roscd rosjava_core
-    # ./gradlew build install
+{{{
+> roscd rosjava_core
+> ./gradlew build install
+}}}
   # install support packages
-    # roscd dragonbot_jars
-    # ./gradlew build install
+{{{
+> roscd dragonbot_jars
+> ./gradlew build install
+}}}
   # install dragonbot_actionlib:
-    # roscd dragonbot_actionlib
-    # ./gradlew build install installApp
+{{{
+> roscd dragonbot_actionlib
+> ./gradlew build install installApp
+}}}
 
 Dragonbot can then be run with the following command:
 
