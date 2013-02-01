@@ -1,0 +1,16 @@
+<package>
+  <description brief="keyframer">
+
+     keyframer
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/keyframer</url>
+  <depend package="actionlib"/>
+  <depend package="dragon_msgs"/>
+
+</package>
+
+
