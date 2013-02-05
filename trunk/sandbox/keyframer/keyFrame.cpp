@@ -1,3 +1,33 @@
+/*
+ * keyFrame
+ * Copyright (c) 2013, Aditi Ramachandran
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of the yale-ros-pkgs nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
@@ -13,10 +43,15 @@
 #include <iostream>
 #include <sstream>
 
+#include <ros/ros.h>
+#include <geometry_msgs/Pose.h>
+
 using namespace std;
 
 Fl_Hor_Value_Slider* sliders[4];
 Fl_Select_Browser* output;
+
+ros::Publisher ik_publisher;
 
 void slider_cb(Fl_Widget* o, void*) {
     Fl_Hor_Value_Slider *slider = (Fl_Hor_Value_Slider*)o;
@@ -27,7 +62,11 @@ void slider_cb(Fl_Widget* o, void*) {
     double tVal = sliders[3]->value();
 
     printf("%0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal);
-    
+    geometry_msgs::Pose pose_msg;
+    pose_msg.position.x = xVal / 1000.;
+    pose_msg.position.y = yVal / 1000.;
+    pose_msg.position.z = zVal / 1000.;
+    ik_publisher.publish(pose_msg);
 }
 
 void button_cb(Fl_Widget* o, void*) {
@@ -80,8 +119,15 @@ void button3_cb(Fl_Widget* o, void*) {
 }
 
 int main(int argc, char **argv) {
+
+    ros::init(argc,argv,"keyframer");
+    ros::NodeHandle nh;
+    ik_publisher = nh.advertise<geometry_msgs::Pose>("ik",5);
+
     Fl_Window *window = new Fl_Window(340,600);
     //Fl_Box *box = new Fl_Box(20,40,100,40,"Hello, Aditi!");
+
+
 
     Fl_Hor_Value_Slider *xSlider = new Fl_Hor_Value_Slider(20,20,310,20, "x value");
     Fl_Hor_Value_Slider *ySlider = new Fl_Hor_Value_Slider(20,60,310,20, "y value");
@@ -127,5 +173,12 @@ int main(int argc, char **argv) {
     button->type(FL_NORMAL_BUTTON);
     window->end();
     window->show(argc, argv);
-    return Fl::run();
+
+    ros::Rate loop_rate(100);
+
+    while( ros::ok() && Fl::check() )
+    {
+      ros::spinOnce();
+      loop_rate.sleep();
+    }
 }
