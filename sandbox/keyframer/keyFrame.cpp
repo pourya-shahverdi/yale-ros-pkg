@@ -37,11 +37,13 @@
 #include <FL/Fl_Text_Editor.H>
 #include <Fl/Fl_Text_Buffer.H>
 #include <Fl/Fl_Select_Browser.H>
+#include <Fl/Fl_Input.H>
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 #include <ros/ros.h>
 #include <geometry_msgs/Pose.h>
@@ -50,6 +52,9 @@ using namespace std;
 
 Fl_Hor_Value_Slider* sliders[4];
 Fl_Select_Browser* output;
+Fl_Input* textBox;
+ofstream outputFile;
+bool firstFrame = true;
 
 ros::Publisher ik_publisher;
 
@@ -67,6 +72,7 @@ void slider_cb(Fl_Widget* o, void*) {
     pose_msg.position.y = yVal / 1000.;
     pose_msg.position.z = zVal / 1000.;
     ik_publisher.publish(pose_msg);
+
 }
 
 void button_cb(Fl_Widget* o, void*) {
@@ -86,20 +92,18 @@ void button_cb(Fl_Widget* o, void*) {
     stringstream convertT;
     convertT << tVal;
     
-    //string s = convert.str() + ", \n";
-    string s = convertX.str() + ", " + convertY.str() + ", " + convertZ.str() + ", " + convertT.str() + "\n"; 
-    //string s; 
-    //s = "hello\n";
-    //cout << "string s is: " << s << endl;
-    //int position = output->insert_position();
-    //cout << "insert position is: " << position << endl;
+    string s = convertX.str() + "," + convertY.str() + "," + convertZ.str() + "," + convertT.str(); 
     output->add(s.c_str());
      
-    //**CHANGE TO print a line to the console every time one of the four
-    //sliders are changed and write to the textbox when the frame button
-    //is pressed. items in the textbox should be in a list that you can
-    //select (cause eventually we will want to be able to delete them
     printf("%0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal);
+
+    if (firstFrame){
+	string name = textBox->value();
+	outputFile << "- name: \"" << name << "\"" << endl;
+	outputFile << "  frames:" << endl;
+	firstFrame = false;
+    }
+    outputFile << "\t- [" << s << "]" << endl;
 
 }
 
@@ -124,10 +128,10 @@ int main(int argc, char **argv) {
     ros::NodeHandle nh;
     ik_publisher = nh.advertise<geometry_msgs::Pose>("ik",5);
 
+    //outputFile.open(argv[1]);
+    outputFile.open("savedFrames.yaml");
+
     Fl_Window *window = new Fl_Window(340,600);
-    //Fl_Box *box = new Fl_Box(20,40,100,40,"Hello, Aditi!");
-
-
 
     Fl_Hor_Value_Slider *xSlider = new Fl_Hor_Value_Slider(20,20,310,20, "x value");
     Fl_Hor_Value_Slider *ySlider = new Fl_Hor_Value_Slider(20,60,310,20, "y value");
@@ -144,36 +148,35 @@ int main(int argc, char **argv) {
     sliders[2] = zSlider;
     sliders[3] = tSlider;
 
-    Fl_Button *button = new Fl_Button(110, 180, 100, 30, "FRAME");
+    int frame_yPos = 180;
 
+    Fl_Button *button = new Fl_Button(110, frame_yPos, 100, 30, "FRAME");
 
-    output = new Fl_Select_Browser(20, 230, 310, 200, "recorded frames" );
+    textBox = new Fl_Input(100, frame_yPos+40, 200, 30, "name:");
+
+    output = new Fl_Select_Browser(20, frame_yPos+80, 310, 200, "recorded frames" );
 
     xSlider->callback(slider_cb);
     ySlider->callback(slider_cb);
     zSlider->callback(slider_cb);
     tSlider->callback(slider_cb);
     button->callback(button_cb);
-    //output = new Fl_Text_Editor(20, 230, 310, 200, "recorded values" );
 
-    Fl_Button *delButton = new Fl_Button(50, 480, 100, 30, "delete frame");
+    Fl_Button *delButton = new Fl_Button(50, frame_yPos+330, 100, 30, "delete frame");
     delButton->callback(button2_cb);
 
-    Fl_Button *clearButton = new Fl_Button(50, 530, 100, 30, "clear all frames");
+    Fl_Button *clearButton = new Fl_Button(50, frame_yPos+380, 100, 30, "clear all frames");
     clearButton->callback(button3_cb);
 
-    Fl_Button *saveButton = new Fl_Button(180, 480, 100, 30, "save frames");
+    Fl_Button *saveButton = new Fl_Button(180, frame_yPos+330, 100, 30, "save frames");
 
-    Fl_Button *playButton = new Fl_Button(180, 530, 100, 30, "play all");
+    Fl_Button *playButton = new Fl_Button(180, frame_yPos+380, 100, 30, "play all");
 
-    //box->box(FL_UP_BOX);
-    //box->labelfont(FL_BOLD+FL_ITALIC);
-    //box->labelsize(36);
-    //box->labeltype(FL_SHADOW_LABEL);
     button->type(FL_NORMAL_BUTTON);
     window->end();
     window->show(argc, argv);
 
+    //return Fl::run();
     ros::Rate loop_rate(100);
 
     while( ros::ok() && Fl::check() )
@@ -181,4 +184,5 @@ int main(int argc, char **argv) {
       ros::spinOnce();
       loop_rate.sleep();
     }
+
 }
