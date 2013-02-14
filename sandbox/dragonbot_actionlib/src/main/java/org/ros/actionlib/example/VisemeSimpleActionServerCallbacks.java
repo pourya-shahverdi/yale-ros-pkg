@@ -38,25 +38,28 @@ public class VisemeSimpleActionServerCallbacks
     implements
     SimpleActionServerCallbacks<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> {
 
-DragonBotComm comm;
+  DragonBotComm comm;
+  boolean preempted = false;
 
-public VisemeSimpleActionServerCallbacks(DragonBotComm establishedComm)
-{
+  public VisemeSimpleActionServerCallbacks(DragonBotComm establishedComm)
+  {
     comm = establishedComm;
     int count =1 ;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
+	  {
 	    //System.out.println("constructor loop");
 	    comm.update();
+      try {
+        Thread.sleep(33);
+      }
+      catch(Exception e) {}
 	    count++;
 	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
-
-}
-
+		    comm.sendNetworkDebug(count/10000);
+  	
+	  }
+  }
 
   public VisemeResult newResultMessage()
   {
@@ -72,9 +75,23 @@ public VisemeSimpleActionServerCallbacks(DragonBotComm establishedComm)
     return mf.newFromType(VisemeFeedback._TYPE);
   }
 
+  boolean checkUpdate( SimpleActionServer<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> actionServer )
+  {
+    comm.update();
+    if( preempted )
+    {
+      System.out.println( "preempt requested" );
+      actionServer.setPreempted();
+      preempted = false;
+      return false;
+    }
+    return true;
+  }
+
+
   @Override
   public void blockingGoalCallback(VisemeGoal goal, SimpleActionServer<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> actionServer) 
-{
+  {
 	/* Viseme Ids
 	 * IDLE = 36
 	 * AA_AH = 0
@@ -87,65 +104,74 @@ public VisemeSimpleActionServerCallbacks(DragonBotComm establishedComm)
 	 * N_NG_D_Z = 8
 	 * R_ER = 11
 	*/
+    System.out.println( "VISEME BLOCKING CALLBACK" );
     int count =1 ;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
+	  {
 	    comm.update();
 	    count++;
 	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
+	  	comm.sendNetworkDebug(count/10000);
+	  }
 
     if(goal.getConstant().equalsIgnoreCase("off"))
-	{
-		comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
-	}
+	  {
+  		comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
+	  }
     else
-	{
-		comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
-		while(true)
-		   {
-			if(goal.getConstant().equalsIgnoreCase("IDLE"))
-				comm.sendViseme(VISEME.IDLE);
-			else if(goal.getConstant().equalsIgnoreCase("AA_AH"))
-				comm.sendViseme(VISEME.VISEME_AA_AH);
-			else if(goal.getConstant().equalsIgnoreCase("AO_AW"))
-				comm.sendViseme(VISEME.VISEME_AO_AW);
-			else if(goal.getConstant().equalsIgnoreCase("CH_SH_ZH"))
-				comm.sendViseme(VISEME.VISEME_CH_SH_ZH);
-			else if(goal.getConstant().equalsIgnoreCase("EH_AE_AY"))
-				comm.sendViseme(VISEME.VISEME_EH_AE_AY);
-			else if(goal.getConstant().equalsIgnoreCase("EY"))
-				comm.sendViseme(VISEME.VISEME_EY);
-			else if(goal.getConstant().equalsIgnoreCase("L"))
-				comm.sendViseme(VISEME.VISEME_L);
-			else if(goal.getConstant().equalsIgnoreCase("M_B_P"))
-				comm.sendViseme(VISEME.VISEME_M_B_P);
-			else if(goal.getConstant().equalsIgnoreCase("N_NG_D_Z"))
-				comm.sendViseme(VISEME.VISEME_N_NG_D_Z);
-			else if(goal.getConstant().equalsIgnoreCase("R_ER"))
-				comm.sendViseme(VISEME.VISEME_R_ER);
-		   }
-
-	}
-
-
-}
+	  {
+		  comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
+  		while(checkUpdate(actionServer))
+		  {
+			  //This makes everything run smoothly... but it seems like it should allow preempting and doesn't
+  			if(actionServer.isNewGoalAvailable())
+        {
+				  try
+  				{
+	  				goal = actionServer.acceptNewGoal();
+		  		}
+			  	catch (RosException e){}
+			  }
+	  	  if(goal.getConstant().equalsIgnoreCase("IDLE"))
+				  comm.sendViseme(VISEME.IDLE);
+  			else if(goal.getConstant().equalsIgnoreCase("AA_AH"))
+	  			comm.sendViseme(VISEME.VISEME_AA_AH);
+		  	else if(goal.getConstant().equalsIgnoreCase("AO_AW"))
+			  	comm.sendViseme(VISEME.VISEME_AO_AW);
+  			else if(goal.getConstant().equalsIgnoreCase("CH_SH_ZH"))
+	  			comm.sendViseme(VISEME.VISEME_CH_SH_ZH);
+		  	else if(goal.getConstant().equalsIgnoreCase("EH_AE_AY"))
+			  	comm.sendViseme(VISEME.VISEME_EH_AE_AY);
+  			else if(goal.getConstant().equalsIgnoreCase("EY"))
+	  			comm.sendViseme(VISEME.VISEME_EY);
+		  	else if(goal.getConstant().equalsIgnoreCase("L"))
+			  	comm.sendViseme(VISEME.VISEME_L);
+  			else if(goal.getConstant().equalsIgnoreCase("M_B_P"))
+	  			comm.sendViseme(VISEME.VISEME_M_B_P);
+		  	else if(goal.getConstant().equalsIgnoreCase("N_NG_D_Z"))
+			  	comm.sendViseme(VISEME.VISEME_N_NG_D_Z);
+  			else if(goal.getConstant().equalsIgnoreCase("R_ER"))
+	  			comm.sendViseme(VISEME.VISEME_R_ER);
+	      comm.update();
+        try {
+          Thread.sleep(33);
+        }
+        catch(Exception e) {}
+	    }
+	  }
+  }
 
   @Override
-  public
-      void
-      goalCallback(
+  public void goalCallback(
           SimpleActionServer<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> actionServer) 
-{
-VisemeGoal goal = null;
-try
-{
-	goal = actionServer.acceptNewGoal();
-}
-catch (RosException e){}
+  {
+    VisemeGoal goal = null;
+    try
+    {
+    	goal = actionServer.acceptNewGoal();
+    }
+    catch (RosException e){}
 	/* Viseme Ids
 	 * IDLE = 36
 	 * AA_AH = 0
@@ -161,70 +187,71 @@ catch (RosException e){}
     int count =1;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
+	  {
 	    comm.update();
 	    count++;
 	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
+		    comm.sendNetworkDebug(count/10000);
+	  }
 
     if(goal.getConstant().equalsIgnoreCase("off"))
-	{
-		comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
-	}
+  	{
+	  	comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
+	  }
     else
-	{
-		comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
-		while(true)
-		   {
-			//This makes everything run smoothly... but it seems like it should allow preempting and doesn't
-			if(actionServer.isNewGoalAvailable())
-			   {
-				try
-				{
-					goal = actionServer.acceptNewGoal();
-				}
-				catch (RosException e){}
-			   }
-			if(count>=100000)
-			   {
-				if(goal.getConstant().equalsIgnoreCase("IDLE"))
-					comm.sendViseme(VISEME.IDLE);
-				else if(goal.getConstant().equalsIgnoreCase("AA_AH"))
-					comm.sendViseme(VISEME.VISEME_AA_AH);
-				else if(goal.getConstant().equalsIgnoreCase("AO_AW"))
-					comm.sendViseme(VISEME.VISEME_AO_AW);
-				else if(goal.getConstant().equalsIgnoreCase("CH_SH_ZH"))
-					comm.sendViseme(VISEME.VISEME_CH_SH_ZH);
-				else if(goal.getConstant().equalsIgnoreCase("EH_AE_AY"))
-					comm.sendViseme(VISEME.VISEME_EH_AE_AY);
-				else if(goal.getConstant().equalsIgnoreCase("EY"))
-					comm.sendViseme(VISEME.VISEME_EY);
-				else if(goal.getConstant().equalsIgnoreCase("L"))
-					comm.sendViseme(VISEME.VISEME_L);
-				else if(goal.getConstant().equalsIgnoreCase("M_B_P"))
-					comm.sendViseme(VISEME.VISEME_M_B_P);
-				else if(goal.getConstant().equalsIgnoreCase("N_NG_D_Z"))
-					comm.sendViseme(VISEME.VISEME_N_NG_D_Z);
-				else if(goal.getConstant().equalsIgnoreCase("R_ER"))
-					comm.sendViseme(VISEME.VISEME_R_ER);
-				count = 0;
-			   }
-			comm.update();
-			count++;
-		   }
-
-	}
-
-}
+  	{
+	  	comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
+		  while(checkUpdate(actionServer))
+		  {
+			  //This makes everything run smoothly... but it seems like it should allow preempting and doesn't
+  			if(actionServer.isNewGoalAvailable())
+        {
+				  try
+  				{
+	  				goal = actionServer.acceptNewGoal();
+		  		}
+			  	catch (RosException e){}
+			  }
+  			if(count==1)
+	      {
+          System.out.println( "sending viseme" );
+				  if(goal.getConstant().equalsIgnoreCase("IDLE"))
+					  comm.sendViseme(VISEME.IDLE);
+  				else if(goal.getConstant().equalsIgnoreCase("AA_AH"))
+	  				comm.sendViseme(VISEME.VISEME_AA_AH);
+		  		else if(goal.getConstant().equalsIgnoreCase("AO_AW"))
+			  		comm.sendViseme(VISEME.VISEME_AO_AW);
+				  else if(goal.getConstant().equalsIgnoreCase("CH_SH_ZH"))
+					  comm.sendViseme(VISEME.VISEME_CH_SH_ZH);
+  				else if(goal.getConstant().equalsIgnoreCase("EH_AE_AY"))
+	  				comm.sendViseme(VISEME.VISEME_EH_AE_AY);
+		  		else if(goal.getConstant().equalsIgnoreCase("EY"))
+			  		comm.sendViseme(VISEME.VISEME_EY);
+				  else if(goal.getConstant().equalsIgnoreCase("L"))
+					  comm.sendViseme(VISEME.VISEME_L);
+  				else if(goal.getConstant().equalsIgnoreCase("M_B_P"))
+	  				comm.sendViseme(VISEME.VISEME_M_B_P);
+		  		else if(goal.getConstant().equalsIgnoreCase("N_NG_D_Z"))
+			  		comm.sendViseme(VISEME.VISEME_N_NG_D_Z);
+				  else if(goal.getConstant().equalsIgnoreCase("R_ER"))
+					  comm.sendViseme(VISEME.VISEME_R_ER);
+  				count = 10000;
+			  }
+			  comm.update();
+			  count--;
+        try {
+          Thread.sleep(33);
+        }
+        catch(Exception e) {}
+		  }
+	  }
+  }
 
   @Override
-  public
-      void
-      preemptCallback(
+  public void preemptCallback(
           SimpleActionServer<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> actionServer) {
     System.out.println("PREEMPT CALLBACK");
+    preempted = true;
   }
 
   private void snore() {
@@ -244,9 +271,7 @@ catch (RosException e){}
    * @param actionServer
    *          The action server publishing information.
    */
-  private
-      void
-      publishFeedback(
+  private void publishFeedback(
           String status,
           SimpleActionServer<VisemeActionFeedback, VisemeActionGoal, VisemeActionResult, VisemeFeedback, VisemeGoal, VisemeResult> actionServer) {
     VisemeFeedback feedback = newFeedbackMessage();

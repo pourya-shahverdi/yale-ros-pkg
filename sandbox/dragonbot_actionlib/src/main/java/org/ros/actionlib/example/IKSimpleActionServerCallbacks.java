@@ -113,34 +113,32 @@ public IKSimpleActionServerCallbacks(DragonBotComm establishedComm)
 }
 
   @Override
-  public
-      void
-      goalCallback(
+  public void goalCallback(
           SimpleActionServer<IKActionFeedback, IKActionGoal, IKActionResult, IKFeedback, IKGoal, IKResult> actionServer) 
-{
-System.out.println("GOAL CALLBACK");
-IKGoal goal = null;
-try
-{
-	goal = actionServer.acceptNewGoal();
-}
-catch (RosException e){}
-	int count =1;
+  {
+    System.out.println("GOAL CALLBACK");
+    IKGoal goal = null;
+    try
+    {
+    	goal = actionServer.acceptNewGoal();
+    }
+    catch (RosException e){}
+    int count =1;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
+	  {
 	    comm.update();
 	    count++;
 	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
+		  comm.sendNetworkDebug(count/10000);
+	  }
 
-	    if(goal.getState().equalsIgnoreCase("off"))
+    if(goal.getState().equalsIgnoreCase("off"))
 		{
 			comm.sendOnOffControl(IK_CTRL.TURN_OFF);
 		}
-	    else
+
+    else
 		{
 			comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());	
 			comm.sendOnOffControl(IK_CTRL.TURN_ON);
@@ -171,11 +169,8 @@ catch (RosException e){}
 				comm.update();
 				actualIK = comm.getIKCurrent();
 			}
-
 		}
-
-
-}
+  }
 
   @Override
   public
