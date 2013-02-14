@@ -24,12 +24,12 @@ public class RunDragonSimpleActionServer {
     try {
       // user code implementing the SimpleActionServerCallbacks interface
       ExpressionMotionSimpleActionServerCallbacks impl = new ExpressionMotionSimpleActionServerCallbacks(comm);
-      //VisemeSimpleActionServerCallbacks impl2 = new VisemeSimpleActionServerCallbacks(comm);
+      VisemeSimpleActionServerCallbacks impl2 = new VisemeSimpleActionServerCallbacks(comm);
       //LookatSimpleActionServerCallbacks impl3 = new LookatSimpleActionServerCallbacks(comm);
       //IKSimpleActionServerCallbacks impl4 = new IKSimpleActionServerCallbacks(comm);
 
       ExpressionMotionActionSpec emSpec = new ExpressionMotionActionSpec();
-      //VisemeActionSpec vSpec = new VisemeActionSpec();
+      VisemeActionSpec vSpec = new VisemeActionSpec();
       //LookatActionSpec lSpec = new LookatActionSpec();
       //IKActionSpec ikSpec = new IKActionSpec();
 
@@ -39,10 +39,10 @@ public class RunDragonSimpleActionServer {
       final String nodeName4 = "IK_Server";
       final ExpressionMotionSimpleActionServer emas =
           emSpec.buildSimpleActionServer(nodeName1, impl, true);
-/*
-      final VisemeSimpleActionServer vas =
-          vSpec.buildSimpleActionServer(nodeName2, impl2, false);
 
+      final VisemeSimpleActionServer vas =
+          vSpec.buildSimpleActionServer(nodeName2, impl2, true);
+/*
       final LookatSimpleActionServer las =
           lSpec.buildSimpleActionServer(nodeName3, impl3, false);
 
@@ -77,7 +77,7 @@ public class RunDragonSimpleActionServer {
           return GraphName.of(nodeName1);
         }
       }, configuration);
-    /*
+    
       runner.execute(new NodeMain() {
 
         @Override
@@ -102,7 +102,7 @@ public class RunDragonSimpleActionServer {
           return GraphName.of(nodeName2);
         }
       }, configuration);
-    */
+    
       /*runner.execute(new NodeMain() {
 
         @Override

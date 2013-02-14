@@ -80,7 +80,7 @@ DragonBotComm comm;
   boolean checkUpdate( SimpleActionServer<ExpressionMotionActionFeedback, ExpressionMotionActionGoal, ExpressionMotionActionResult, ExpressionMotionFeedback, ExpressionMotionGoal, ExpressionMotionResult> actionServer )
   {
     comm.update();
-    System.out.println( comm.getExpressionCurrent() );
+    //System.out.println( comm.getExpressionCurrent() );
     if( preempted )
     {
       System.out.println( "preempt requested" );
