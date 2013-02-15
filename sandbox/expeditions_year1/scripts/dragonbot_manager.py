@@ -17,7 +17,7 @@ class Tracker():
     def __init__(self):
         self.on = False
         self.t = Thread(target=self.tracking_thread)
-
+        
     def tracking_thread(self, target):
         while self.on:
             print "tracking frame: " + target
@@ -69,6 +69,58 @@ class DragonbotManager():
         rospy.loginfo("Action servers connected")"""
 
 
+        self.expressions = ["angry",
+                            "disgusted",
+                            "frustrated",
+                            "mischievous",
+                            "shy",
+                            "bored",
+                            "bored_unimpressed",
+                            "ecstatic",
+                            "happy",
+                            "puppy",
+                            "surprised",
+                            "confused",
+                            "frightened",
+                            "lovestruck",
+                            "sad"]
+
+        self.motions = ["afraid",
+                        "blech",
+                        "farted",
+                        "idunno",
+                        "interest",
+                        "mmhmmm",
+                        "no",
+                        "shy",
+                        "think",
+                        "whoah",
+                        "yes",
+                        "anticipation",
+                        "cheer",
+                        "heh",
+                        "ilikeit",
+                        "i_like_it",
+                        "laugh",
+                        "mph",
+                        "question",
+                        "sneeze",
+                        "wakeup",
+                        "yay",
+                        "yummm",
+                        "bite",
+                        "crazy_laugh",
+                        "hungry",
+                        "iwantit",
+                        "i_want_it",
+                        "meh",
+                        "nah_nah",
+                        "nahnah",
+                        "sad",
+                        "surprise",
+                        "weee",
+                        "yawn"]
+
 
     def track_frame(self, frame_name):
         self.tracking_frame = frame_name
@@ -93,6 +145,7 @@ class DragonbotManager():
             v = visemes[name]
             while (rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(v["start"])):
                 True
+            #TODO: if past the end time, don't bother playing the viseme
             goal = dragon_msgs.msg.VisemeGoal(constant=v['type'])
             self.viseme_client.send_goal(goal)
             #print v['type']
@@ -154,8 +207,16 @@ class DragonbotManager():
 
 
     def express(self, expression_id):
-        goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=expression_id)
+        if expression_id in self.expressions:
+            goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=expression_id)
+        else: 
+            if expression_id in self.motions:
+                goal = dragon_msgs.msg.ExpressionMotionGoal(type='motion',constant=expression_id)
+            else:
+                rospy.logwarn("expression not recognized")
+                return
         self.express_client.send_goal(goal)
+        
         
     def pose(self, x, y, z, theta):
         #TODO: move dragonbot to a pose
@@ -171,6 +232,68 @@ def main():
     dm.load_phrases("phrases.yaml")
     dm.express("happy")
     #dm.say("teaching")
+
+    expressions = ["angry",
+                            "disgusted",
+                            "frustrated",
+                            "mischievous",
+                            "shy",
+                            "bored",
+                            "bored_unimpressed",
+                            "ecstatic",
+                            "happy",
+                            "puppy",
+                            "surprised",
+                            "confused",
+                            "frightened",
+                            "lovestruck",
+                            "sad"]
+    
+    motions = ["afraid",
+               "blech",
+               "farted",
+               "idunno",
+               "interest",
+               "mmhmmm",
+               "no",
+               "shy",
+               "think",
+               "whoah",
+               "yes",
+               "anticipation",
+               "cheer",
+               "heh",
+               "ilikeit",
+               "i_like_it",
+               "laugh",
+               "mph",
+               "question",
+               "sneeze",
+               "wakeup",
+               "yay",
+               "yummm",
+               "bite",
+               "crazy_laugh",
+               "hungry",
+               "iwantit",
+               "i_want_it",
+               "meh",
+               "nah_nah",
+               "nahnah",
+               "sad",
+               "surprise",
+               "weee",
+               "yawn"]
+
+
+    '''for item in expressions:
+        dm.express(item)
+        rospy.sleep(3.0)'''
+        
+    #for item in motions:
+    dm.express("bite")
+    rospy.sleep(5.0)
+
     
     '''
     client = actionlib.SimpleActionClient('Viseme_Server', dragon_msgs.msg.VisemeAction)
