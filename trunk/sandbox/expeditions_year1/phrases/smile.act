@@ -1,0 +1,9 @@
+#yaml file with actions for a single phrase
+act0:
+    type: smile
+    start: 0.0
+    end: 0.5
+act1:
+    type: fart
+    start: 1.1
+    end: 2

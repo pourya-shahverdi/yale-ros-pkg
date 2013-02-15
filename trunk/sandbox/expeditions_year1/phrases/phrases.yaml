@@ -1,0 +1,46 @@
+# Auto-generated phrase file for the dragonbot
+# Generated from file: list.txt
+
+teaching:
+  actions:
+    act0:
+      end: 0.5
+      start: 0.0
+      type: smile
+    act1:
+      end: 2
+      start: 1.1
+      type: fart
+  file: teaching.wav
+  text: 'This is an old guy berating a kid about chemistry.
+
+    '
+  visemes:
+    viseme0:
+      end: 0.025
+      start: 0.005
+      type: x
+    viseme1:
+      end: 0.125
+      start: 0.025
+      type: v
+    viseme2:
+      end: 0.185
+      start: 0.125
+      type: EY
+    viseme3:
+      end: 0.225
+      start: 0.185
+      type: h
+    viseme4:
+      end: 0.315
+      start: 0.225
+      type: AW
+    viseme5:
+      end: 0.405
+      start: 0.315
+      type: h
+    viseme6:
+      end: 0.625
+      start: 0.405
+      type: EH
