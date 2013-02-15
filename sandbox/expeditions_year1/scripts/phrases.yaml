@@ -1,0 +1,1042 @@
+# Auto-generated phrase file for the dragonbot
+# Generated from file: list.txt
+
+teaching:
+  actions:
+    act0:
+      end: 0.5
+      start: 0.0
+      type: smile
+    act1:
+      end: 2
+      start: 1.1
+      type: fart
+  file: /home/eshort/fuerte_workspace/usc_internal/sandbox/expeditions_year1/phrases/teaching.wav
+  text: 'This is an old guy berating a kid about chemistry.
+
+    '
+  visemes:
+    viseme0:
+      end: 0.025
+      start: 0.005
+      type: IDLE
+    viseme1:
+      end: 0.125
+      start: 0.025
+      type: M_B_P
+    viseme10:
+      end: 0.925
+      start: 0.885
+      type: N_NG_D_Z
+    viseme100:
+      end: 10.505
+      start: 10.475
+      type: M_B_P
+    viseme101:
+      end: 10.545
+      start: 10.505
+      type: CH_SH_ZH
+    viseme102:
+      end: 10.585
+      start: 10.545
+      type: AA_AH
+    viseme103:
+      end: 10.625
+      start: 10.585
+      type: AA_AH
+    viseme104:
+      end: 10.715
+      start: 10.625
+      type: EH_AE_AY
+    viseme105:
+      end: 10.775
+      start: 10.715
+      type: N_NG_D_Z
+    viseme106:
+      end: 10.875
+      start: 10.775
+      type: EY
+    viseme107:
+      end: 10.925
+      start: 10.875
+      type: AA_AH
+    viseme108:
+      end: 10.985
+      start: 10.925
+      type: EH_AE_AY
+    viseme109:
+      end: 11.095
+      start: 10.985
+      type: M_B_P
+    viseme11:
+      end: 1.095
+      start: 0.925
+      type: EH_AE_AY
+    viseme110:
+      end: 11.205
+      start: 11.095
+      type: EY
+    viseme111:
+      end: 11.285
+      start: 11.205
+      type: AA_AH
+    viseme112:
+      end: 11.315
+      start: 11.285
+      type: EH_AE_AY
+    viseme113:
+      end: 11.555
+      start: 11.315
+      type: N_NG_D_Z
+    viseme114:
+      end: 11.695
+      start: 11.555
+      type: AA_AH
+    viseme115:
+      end: 11.815
+      start: 11.695
+      type: EH_AE_AY
+    viseme116:
+      end: 11.975
+      start: 11.815
+      type: AO_AW
+    viseme117:
+      end: 12.005
+      start: 11.975
+      type: N_NG_D_Z
+    viseme118:
+      end: 12.055
+      start: 12.005
+      type: EY
+    viseme119:
+      end: 12.235
+      start: 12.055
+      type: AO_AW
+    viseme12:
+      end: 1.195
+      start: 1.095
+      type: CH_SH_ZH
+    viseme120:
+      end: 12.375
+      start: 12.235
+      type: N_NG_D_Z
+    viseme121:
+      end: 12.595
+      start: 12.375
+      type: EH_AE_AY
+    viseme122:
+      end: 12.695
+      start: 12.595
+      type: M_B_P
+    viseme123:
+      end: 12.815
+      start: 12.695
+      type: CH_SH_ZH
+    viseme124:
+      end: 12.885
+      start: 12.815
+      type: EH_AE_AY
+    viseme125:
+      end: 12.925
+      start: 12.885
+      type: M_B_P
+    viseme126:
+      end: 12.955
+      start: 12.925
+      type: N_NG_D_Z
+    viseme127:
+      end: 13.025
+      start: 12.955
+      type: AO_AW
+    viseme128:
+      end: 13.165
+      start: 13.025
+      type: AA_AH
+    viseme129:
+      end: 13.235
+      start: 13.165
+      type: AA_AH
+    viseme13:
+      end: 1.245
+      start: 1.195
+      type: EY
+    viseme130:
+      end: 13.485
+      start: 13.235
+      type: EH_AE_AY
+    viseme131:
+      end: 13.545
+      start: 13.485
+      type: M_B_P
+    viseme132:
+      end: 13.655
+      start: 13.545
+      type: EH_AE_AY
+    viseme133:
+      end: 13.705
+      start: 13.655
+      type: N_NG_D_Z
+    viseme134:
+      end: 13.805
+      start: 13.705
+      type: AA_AH
+    viseme135:
+      end: 13.835
+      start: 13.805
+      type: N_NG_D_Z
+    viseme136:
+      end: 13.995
+      start: 13.835
+      type: AA_AH
+    viseme137:
+      end: 14.045
+      start: 13.995
+      type: N_NG_D_Z
+    viseme138:
+      end: 14.085
+      start: 14.045
+      type: EH_AE_AY
+    viseme139:
+      end: 14.115
+      start: 14.085
+      type: M_B_P
+    viseme14:
+      end: 1.285
+      start: 1.245
+      type: CH_SH_ZH
+    viseme140:
+      end: 14.165
+      start: 14.115
+      type: AA_AH
+    viseme141:
+      end: 14.225
+      start: 14.165
+      type: AA_AH
+    viseme142:
+      end: 14.265
+      start: 14.225
+      type: N_NG_D_Z
+    viseme143:
+      end: 14.415
+      start: 14.265
+      type: AA_AH
+    viseme144:
+      end: 14.445
+      start: 14.415
+      type: L
+    viseme145:
+      end: 14.545
+      start: 14.445
+      type: EH_AE_AY
+    viseme146:
+      end: 14.795
+      start: 14.545
+      type: AO_AW
+    viseme147:
+      end: 14.825
+      start: 14.795
+      type: N_NG_D_Z
+    viseme148:
+      end: 14.995
+      start: 14.825
+      type: EH_AE_AY
+    viseme149:
+      end: 15.045
+      start: 14.995
+      type: L
+    viseme15:
+      end: 1.415
+      start: 1.285
+      type: EH_AE_AY
+    viseme150:
+      end: 15.095
+      start: 15.045
+      type: EH_AE_AY
+    viseme151:
+      end: 15.145
+      start: 15.095
+      type: M_B_P
+    viseme152:
+      end: 15.195
+      start: 15.145
+      type: N_NG_D_Z
+    viseme153:
+      end: 15.255
+      start: 15.195
+      type: EY
+    viseme154:
+      end: 15.405
+      start: 15.255
+      type: EH_AE_AY
+    viseme155:
+      end: 15.485
+      start: 15.405
+      type: EY
+    viseme156:
+      end: 15.845
+      start: 15.485
+      type: AO_AW
+    viseme157:
+      end: 15.895
+      start: 15.845
+      type: N_NG_D_Z
+    viseme158:
+      end: 15.975
+      start: 15.895
+      type: EH_AE_AY
+    viseme159:
+      end: 16.015
+      start: 15.975
+      type: N_NG_D_Z
+    viseme16:
+      end: 1.515
+      start: 1.415
+      type: N_NG_D_Z
+    viseme160:
+      end: 16.105
+      start: 16.015
+      type: EY
+    viseme161:
+      end: 16.155
+      start: 16.105
+      type: N_NG_D_Z
+    viseme162:
+      end: 16.375
+      start: 16.155
+      type: EH_AE_AY
+    viseme163:
+      end: 16.425
+      start: 16.375
+      type: N_NG_D_Z
+    viseme164:
+      end: 16.505
+      start: 16.425
+      type: EH_AE_AY
+    viseme165:
+      end: 16.555
+      start: 16.505
+      type: N_NG_D_Z
+    viseme166:
+      end: 16.595
+      start: 16.555
+      type: EY
+    viseme167:
+      end: 16.665
+      start: 16.595
+      type: EH_AE_AY
+    viseme168:
+      end: 16.725
+      start: 16.665
+      type: M_B_P
+    viseme169:
+      end: 16.765
+      start: 16.725
+      type: N_NG_D_Z
+    viseme17:
+      end: 1.605
+      start: 1.515
+      type: EH_AE_AY
+    viseme170:
+      end: 16.845
+      start: 16.765
+      type: EY
+    viseme171:
+      end: 16.875
+      start: 16.845
+      type: M_B_P
+    viseme172:
+      end: 16.945
+      start: 16.875
+      type: CH_SH_ZH
+    viseme173:
+      end: 17.025
+      start: 16.945
+      type: EY
+    viseme174:
+      end: 17.105
+      start: 17.025
+      type: CH_SH_ZH
+    viseme175:
+      end: 17.215
+      start: 17.105
+      type: EY
+    viseme176:
+      end: 17.255
+      start: 17.215
+      type: L
+    viseme177:
+      end: 17.445
+      start: 17.255
+      type: EY
+    viseme178:
+      end: 17.555
+      start: 17.445
+      type: N_NG_D_Z
+    viseme179:
+      end: 17.595
+      start: 17.555
+      type: EH_AE_AY
+    viseme18:
+      end: 1.705
+      start: 1.605
+      type: M_B_P
+    viseme180:
+      end: 17.635
+      start: 17.595
+      type: N_NG_D_Z
+    viseme181:
+      end: 17.675
+      start: 17.635
+      type: EH_AE_AY
+    viseme182:
+      end: 17.745
+      start: 17.675
+      type: M_B_P
+    viseme183:
+      end: 17.815
+      start: 17.745
+      type: EY
+    viseme184:
+      end: 17.865
+      start: 17.815
+      type: M_B_P
+    viseme185:
+      end: 17.935
+      start: 17.865
+      type: CH_SH_ZH
+    viseme186:
+      end: 18.015
+      start: 17.935
+      type: EY
+    viseme187:
+      end: 18.105
+      start: 18.015
+      type: CH_SH_ZH
+    viseme188:
+      end: 18.165
+      start: 18.105
+      type: EY
+    viseme189:
+      end: 18.265
+      start: 18.165
+      type: L
+    viseme19:
+      end: 1.775
+      start: 1.705
+      type: CH_SH_ZH
+    viseme190:
+      end: 18.435
+      start: 18.265
+      type: EH_AE_AY
+    viseme191:
+      end: 18.545
+      start: 18.435
+      type: L
+    viseme192:
+      end: 18.585
+      start: 18.545
+      type: M_B_P
+    viseme193:
+      end: 18.945
+      start: 18.585
+      type: AA_AH
+    viseme194:
+      end: 18.995
+      start: 18.945
+      type: AA_AH
+    viseme195:
+      end: 19.045
+      start: 18.995
+      type: N_NG_D_Z
+    viseme196:
+      end: 19.095
+      start: 19.045
+      type: N_NG_D_Z
+    viseme197:
+      end: 19.165
+      start: 19.095
+      type: EH_AE_AY
+    viseme198:
+      end: 19.225
+      start: 19.165
+      type: N_NG_D_Z
+    viseme199:
+      end: 19.295
+      start: 19.225
+      type: CH_SH_ZH
+    viseme2:
+      end: 0.185
+      start: 0.125
+      type: EY
+    viseme20:
+      end: 1.855
+      start: 1.775
+      type: EH_AE_AY
+    viseme200:
+      end: 19.375
+      start: 19.295
+      type: EH_AE_AY
+    viseme201:
+      end: 19.455
+      start: 19.375
+      type: L
+    viseme202:
+      end: 19.535
+      start: 19.455
+      type: EH_AE_AY
+    viseme203:
+      end: 19.585
+      start: 19.535
+      type: N_NG_D_Z
+    viseme204:
+      end: 19.655
+      start: 19.585
+      type: CH_SH_ZH
+    viseme205:
+      end: 19.735
+      start: 19.655
+      type: EY
+    viseme206:
+      end: 19.815
+      start: 19.735
+      type: CH_SH_ZH
+    viseme207:
+      end: 19.895
+      start: 19.815
+      type: EY
+    viseme208:
+      end: 19.965
+      start: 19.895
+      type: N_NG_D_Z
+    viseme209:
+      end: 20.045
+      start: 19.965
+      type: CH_SH_ZH
+    viseme21:
+      end: 1.965
+      start: 1.855
+      type: N_NG_D_Z
+    viseme210:
+      end: 20.175
+      start: 20.045
+      type: EY
+    viseme211:
+      end: 20.265
+      start: 20.175
+      type: CH_SH_ZH
+    viseme212:
+      end: 20.325
+      start: 20.265
+      type: EY
+    viseme213:
+      end: 20.415
+      start: 20.325
+      type: EY
+    viseme214:
+      end: 20.465
+      start: 20.415
+      type: N_NG_D_Z
+    viseme215:
+      end: 20.535
+      start: 20.465
+      type: N_NG_D_Z
+    viseme216:
+      end: 20.595
+      start: 20.535
+      type: EH_AE_AY
+    viseme217:
+      end: 20.665
+      start: 20.595
+      type: N_NG_D_Z
+    viseme218:
+      end: 20.755
+      start: 20.665
+      type: EH_AE_AY
+    viseme219:
+      end: 20.785
+      start: 20.755
+      type: M_B_P
+    viseme22:
+      end: 2.065
+      start: 1.965
+      type: R_ER
+    viseme220:
+      end: 20.825
+      start: 20.785
+      type: L
+    viseme221:
+      end: 20.925
+      start: 20.825
+      type: CH_SH_ZH
+    viseme222:
+      end: 21.005
+      start: 20.925
+      type: AO_AW
+    viseme223:
+      end: 21.115
+      start: 21.005
+      type: N_NG_D_Z
+    viseme224:
+      end: 21.255
+      start: 21.115
+      type: AO_AW
+    viseme225:
+      end: 21.385
+      start: 21.255
+      type: R_ER
+    viseme226:
+      end: 21.605
+      start: 21.385
+      type: AO_AW
+    viseme227:
+      end: 21.635
+      start: 21.605
+      type: M_B_P
+    viseme228:
+      end: 21.705
+      start: 21.635
+      type: CH_SH_ZH
+    viseme229:
+      end: 22.465
+      start: 21.705
+      type: AA_AH
+    viseme23:
+      end: 2.235
+      start: 2.065
+      type: EY
+    viseme230:
+      end: 22.515
+      start: 22.465
+      type: EY
+    viseme231:
+      end: 22.555
+      start: 22.515
+      type: AO_AW
+    viseme232:
+      end: 22.635
+      start: 22.555
+      type: AA_AH
+    viseme233:
+      end: 22.685
+      start: 22.635
+      type: M_B_P
+    viseme234:
+      end: 22.785
+      start: 22.685
+      type: EH_AE_AY
+    viseme235:
+      end: 22.845
+      start: 22.785
+      type: M_B_P
+    viseme236:
+      end: 22.955
+      start: 22.845
+      type: AA_AH
+    viseme237:
+      end: 23.025
+      start: 22.955
+      type: N_NG_D_Z
+    viseme238:
+      end: 23.065
+      start: 23.025
+      type: N_NG_D_Z
+    viseme239:
+      end: 23.115
+      start: 23.065
+      type: AO_AW
+    viseme24:
+      end: 2.295
+      start: 2.235
+      type: N_NG_D_Z
+    viseme240:
+      end: 23.165
+      start: 23.115
+      type: AA_AH
+    viseme241:
+      end: 23.205
+      start: 23.165
+      type: AO_AW
+    viseme242:
+      end: 23.315
+      start: 23.205
+      type: N_NG_D_Z
+    viseme243:
+      end: 23.405
+      start: 23.315
+      type: EY
+    viseme244:
+      end: 23.675
+      start: 23.405
+      type: AA_AH
+    viseme245:
+      end: 23.765
+      start: 23.675
+      type: EH_AE_AY
+    viseme246:
+      end: 23.945
+      start: 23.765
+      type: N_NG_D_Z
+    viseme247:
+      end: 24.075
+      start: 23.945
+      type: EH_AE_AY
+    viseme248:
+      end: 24.325
+      start: 24.075
+      type: AA_AH
+    viseme249:
+      end: 24.405
+      start: 24.325
+      type: EH_AE_AY
+    viseme25:
+      end: 2.335
+      start: 2.295
+      type: AA_AH
+    viseme250:
+      end: 24.475
+      start: 24.405
+      type: AA_AH
+    viseme251:
+      end: 24.825
+      start: 24.475
+      type: EH_AE_AY
+    viseme252:
+      end: 24.905
+      start: 24.825
+      type: AA_AH
+    viseme253:
+      end: 24.965
+      start: 24.905
+      type: EY
+    viseme254:
+      end: 25.005
+      start: 24.965
+      type: EH_AE_AY
+    viseme255:
+      end: 25.115
+      start: 25.005
+      type: M_B_P
+    viseme26:
+      end: 2.475
+      start: 2.335
+      type: EH_AE_AY
+    viseme27:
+      end: 2.515
+      start: 2.475
+      type: M_B_P
+    viseme28:
+      end: 2.575
+      start: 2.515
+      type: EH_AE_AY
+    viseme29:
+      end: 2.845
+      start: 2.575
+      type: N_NG_D_Z
+    viseme3:
+      end: 0.225
+      start: 0.185
+      type: AA_AH
+    viseme30:
+      end: 2.895
+      start: 2.845
+      type: AA_AH
+    viseme31:
+      end: 2.975
+      start: 2.895
+      type: EH_AE_AY
+    viseme32:
+      end: 3.055
+      start: 2.975
+      type: N_NG_D_Z
+    viseme33:
+      end: 3.115
+      start: 3.055
+      type: AO_AW
+    viseme34:
+      end: 3.245
+      start: 3.115
+      type: L
+    viseme35:
+      end: 3.295
+      start: 3.245
+      type: EH_AE_AY
+    viseme36:
+      end: 3.335
+      start: 3.295
+      type: N_NG_D_Z
+    viseme37:
+      end: 3.505
+      start: 3.335
+      type: CH_SH_ZH
+    viseme38:
+      end: 3.615
+      start: 3.505
+      type: R_ER
+    viseme39:
+      end: 3.695
+      start: 3.615
+      type: M_B_P
+    viseme4:
+      end: 0.315
+      start: 0.225
+      type: AO_AW
+    viseme40:
+      end: 3.885
+      start: 3.695
+      type: EH_AE_AY
+    viseme41:
+      end: 4.065
+      start: 3.885
+      type: EH_AE_AY
+    viseme42:
+      end: 4.115
+      start: 4.065
+      type: R_ER
+    viseme43:
+      end: 4.235
+      start: 4.115
+      type: AO_AW
+    viseme44:
+      end: 4.395
+      start: 4.235
+      type: M_B_P
+    viseme45:
+      end: 4.505
+      start: 4.395
+      type: AA_AH
+    viseme46:
+      end: 4.705
+      start: 4.505
+      type: EH_AE_AY
+    viseme47:
+      end: 4.765
+      start: 4.705
+      type: IDLE
+    viseme48:
+      end: 4.825
+      start: 4.765
+      type: N_NG_D_Z
+    viseme49:
+      end: 4.865
+      start: 4.825
+      type: EH_AE_AY
+    viseme5:
+      end: 0.405
+      start: 0.315
+      type: AA_AH
+    viseme50:
+      end: 4.905
+      start: 4.865
+      type: N_NG_D_Z
+    viseme51:
+      end: 5.035
+      start: 4.905
+      type: EH_AE_AY
+    viseme52:
+      end: 5.075
+      start: 5.035
+      type: L
+    viseme53:
+      end: 5.305
+      start: 5.075
+      type: EH_AE_AY
+    viseme54:
+      end: 5.445
+      start: 5.305
+      type: N_NG_D_Z
+    viseme55:
+      end: 5.635
+      start: 5.445
+      type: AA_AH
+    viseme56:
+      end: 5.715
+      start: 5.635
+      type: L
+    viseme57:
+      end: 5.835
+      start: 5.715
+      type: AA_AH
+    viseme58:
+      end: 5.915
+      start: 5.835
+      type: L
+    viseme59:
+      end: 6.105
+      start: 5.915
+      type: EY
+    viseme6:
+      end: 0.625
+      start: 0.405
+      type: EH_AE_AY
+    viseme60:
+      end: 6.155
+      start: 6.105
+      type: CH_SH_ZH
+    viseme61:
+      end: 6.205
+      start: 6.155
+      type: EH_AE_AY
+    viseme62:
+      end: 6.235
+      start: 6.205
+      type: L
+    viseme63:
+      end: 6.305
+      start: 6.235
+      type: AA_AH
+    viseme64:
+      end: 6.485
+      start: 6.305
+      type: N_NG_D_Z
+    viseme65:
+      end: 6.545
+      start: 6.485
+      type: AA_AH
+    viseme66:
+      end: 6.635
+      start: 6.545
+      type: AO_AW
+    viseme67:
+      end: 6.925
+      start: 6.635
+      type: AA_AH
+    viseme68:
+      end: 7.105
+      start: 6.925
+      type: EH_AE_AY
+    viseme69:
+      end: 7.165
+      start: 7.105
+      type: N_NG_D_Z
+    viseme7:
+      end: 0.655
+      start: 0.625
+      type: L
+    viseme70:
+      end: 7.195
+      start: 7.165
+      type: EY
+    viseme71:
+      end: 7.255
+      start: 7.195
+      type: AO_AW
+    viseme72:
+      end: 7.435
+      start: 7.255
+      type: AA_AH
+    viseme73:
+      end: 7.795
+      start: 7.435
+      type: AA_AH
+    viseme74:
+      end: 7.835
+      start: 7.795
+      type: AA_AH
+    viseme75:
+      end: 7.915
+      start: 7.835
+      type: N_NG_D_Z
+    viseme76:
+      end: 8.015
+      start: 7.915
+      type: EY
+    viseme77:
+      end: 8.155
+      start: 8.015
+      type: N_NG_D_Z
+    viseme78:
+      end: 8.185
+      start: 8.155
+      type: EH_AE_AY
+    viseme79:
+      end: 8.225
+      start: 8.185
+      type: AA_AH
+    viseme8:
+      end: 0.855
+      start: 0.655
+      type: AA_AH
+    viseme80:
+      end: 8.415
+      start: 8.225
+      type: EH_AE_AY
+    viseme81:
+      end: 8.475
+      start: 8.415
+      type: R_ER
+    viseme82:
+      end: 8.595
+      start: 8.475
+      type: EH_AE_AY
+    viseme83:
+      end: 8.665
+      start: 8.595
+      type: EH_AE_AY
+    viseme84:
+      end: 8.735
+      start: 8.665
+      type: M_B_P
+    viseme85:
+      end: 8.835
+      start: 8.735
+      type: EH_AE_AY
+    viseme86:
+      end: 8.975
+      start: 8.835
+      type: EH_AE_AY
+    viseme87:
+      end: 9.085
+      start: 8.975
+      type: L
+    viseme88:
+      end: 9.265
+      start: 9.085
+      type: EY
+    viseme89:
+      end: 9.355
+      start: 9.265
+      type: EH_AE_AY
+    viseme9:
+      end: 0.885
+      start: 0.855
+      type: EY
+    viseme90:
+      end: 9.395
+      start: 9.355
+      type: N_NG_D_Z
+    viseme91:
+      end: 9.505
+      start: 9.395
+      type: EH_AE_AY
+    viseme92:
+      end: 9.565
+      start: 9.505
+      type: M_B_P
+    viseme93:
+      end: 9.645
+      start: 9.565
+      type: EY
+    viseme94:
+      end: 9.865
+      start: 9.645
+      type: EH_AE_AY
+    viseme95:
+      end: 9.925
+      start: 9.865
+      type: AA_AH
+    viseme96:
+      end: 10.095
+      start: 9.925
+      type: AO_AW
+    viseme97:
+      end: 10.175
+      start: 10.095
+      type: AA_AH
+    viseme98:
+      end: 10.405
+      start: 10.175
+      type: AO_AW
+    viseme99:
+      end: 10.475
+      start: 10.405
+      type: AO_AW
