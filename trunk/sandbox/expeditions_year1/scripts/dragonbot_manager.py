@@ -184,6 +184,8 @@ class DragonbotManager():
         th2 = Thread(target=self.action_play, args=(phrase["actions"],))
         self.sound_client.stopAll()
         self.sound_client.playWave(phrase["file"])
+        th1.daemon = True
+        th2.daemon = True
         th1.start()
         th2.start()
         print phrase['text'] # TODO: say text
