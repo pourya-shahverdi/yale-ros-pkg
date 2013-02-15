@@ -25,7 +25,8 @@ The checkout of the repositories can be automated. However, the installation of 
   # install rosjava:
 {{{
 > roscd rosjava_core
-> ./gradlew build install
+> ./gradlew build
+> ./gradlew install
 }}}
   # install support packages
 {{{
