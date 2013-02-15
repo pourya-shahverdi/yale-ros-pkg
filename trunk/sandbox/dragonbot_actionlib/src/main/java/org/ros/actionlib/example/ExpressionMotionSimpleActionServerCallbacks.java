@@ -233,7 +233,7 @@ DragonBotComm comm;
 	    	comm.sendMotion(MOTION.MOTION_SURPRISE);
 	    else if(goal.getConstant().equalsIgnoreCase("weee"))
 	    	comm.sendMotion(MOTION.MOTION_WEEE);
-	    else if(goal.getConstant().equalsIgnoreCase("yawm"))
+	    else if(goal.getConstant().equalsIgnoreCase("yawn"))
 	    	comm.sendMotion(MOTION.MOTION_YAWN);
 
  	    while(comm.getMotionCurrent().equals("IDLE"))
