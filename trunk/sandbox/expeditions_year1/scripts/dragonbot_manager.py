@@ -57,12 +57,12 @@ class DragonbotManager():
         rospy.sleep(0.5)
         self.sound_client.stopAll()
      
-        """rospy.loginfo("Waiting for Dragonbot Action Servers")
+        rospy.loginfo("Waiting for Dragonbot Action Servers")
         rospy.loginfo(" --- Expression Motion")
         self.express_client.wait_for_server()
         rospy.loginfo(" --- Visemes")
         self.viseme_client.wait_for_server()
-        rospy.loginfo(" --- Pose")
+        """rospy.loginfo(" --- Pose")
         self.pose_client.wait_for_server()
         rospy.loginfo(" --- Lookat")
         self.lookat_client.wait_for_server()
@@ -143,9 +143,13 @@ class DragonbotManager():
                                  key=lambda viseme: visemes[viseme]["start"])
         for name in ordered_visemes:
             v = visemes[name]
-            while (rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(v["start"])):
+            while (rospy.Time.now()-time+timing_adjust < 
+                   rospy.Duration.from_sec(v["start"])):
                 True
             #TODO: if past the end time, don't bother playing the viseme
+            if(rospy.Time.now()-time+timing_adjust > 
+               rospy.Duration.from_sec(v["end"])):
+                continue
             goal = dragon_msgs.msg.VisemeGoal(constant=v['type'])
             self.viseme_client.send_goal(goal)
             #print v['type']
@@ -161,8 +165,13 @@ class DragonbotManager():
                                  key=lambda action: actions[action]["start"])
         for name in ordered_actions:
             a = actions[name]
-            while (rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(a["start"])):
+            while (rospy.Time.now()-time+timing_adjust 
+                   < rospy.Duration.from_sec(a["start"])):
                 True
+
+            if(rospy.Time.now()-time+timing_adjust > 
+               rospy.Duration.from_sec(a["end"])):
+                continue
             print a['type']
 
 
@@ -231,23 +240,23 @@ def main():
     dm = DragonbotManager()
     dm.load_phrases("phrases.yaml")
     dm.express("happy")
-    #dm.say("teaching")
+    dm.say("teaching")
 
     expressions = ["angry",
-                            "disgusted",
-                            "frustrated",
-                            "mischievous",
-                            "shy",
-                            "bored",
-                            "bored_unimpressed",
-                            "ecstatic",
-                            "happy",
-                            "puppy",
-                            "surprised",
-                            "confused",
-                            "frightened",
-                            "lovestruck",
-                            "sad"]
+                   "disgusted",
+                   "frustrated",
+                   "mischievous",
+                   "shy",
+                   "bored",
+                   "bored_unimpressed",
+                   "ecstatic",
+                   "happy",
+                   "puppy",
+                   "surprised",
+                   "confused",
+                   "frightened",
+                   "lovestruck",
+                   "sad"]
     
     motions = ["afraid",
                "blech",
