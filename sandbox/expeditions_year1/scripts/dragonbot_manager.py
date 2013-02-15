@@ -146,7 +146,6 @@ class DragonbotManager():
             while (rospy.Time.now()-time+timing_adjust < 
                    rospy.Duration.from_sec(v["start"])):
                 True
-            #TODO: if past the end time, don't bother playing the viseme
             if(rospy.Time.now()-time+timing_adjust > 
                rospy.Duration.from_sec(v["end"])):
                 continue
