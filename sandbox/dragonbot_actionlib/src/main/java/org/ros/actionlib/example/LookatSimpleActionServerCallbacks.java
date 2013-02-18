@@ -36,27 +36,28 @@ import org.ros.message.MessageFactory;
  * A {@link SimpleActionServerCallbacks} for the Dragon example.
  */
 public class LookatSimpleActionServerCallbacks
-    implements
-    SimpleActionServerCallbacks<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> {
+implements
+SimpleActionServerCallbacks<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> {
 
-DragonBotComm comm;
+  DragonBotComm comm;
+  boolean preempted = false;
 
-public LookatSimpleActionServerCallbacks(DragonBotComm establishedComm)
-{
+  public LookatSimpleActionServerCallbacks(DragonBotComm establishedComm)
+  {
     comm = establishedComm;
     int count =1 ;
     comm.sendNetworkDebug(count);
     while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
-	    //System.out.println("constructor loop");
-	    comm.update();
-	    count++;
-	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
+    {
+      //System.out.println("constructor loop");
+      comm.update();
+      count++;
+      if(count%10000 ==0)
+        comm.sendNetworkDebug(count/10000);
 
-}
+    }
+
+  }
 
   public LookatResult newResultMessage()
   {
@@ -65,7 +66,7 @@ public LookatSimpleActionServerCallbacks(DragonBotComm establishedComm)
     return mf.newFromType(LookatResult._TYPE);
   }
 
-   public LookatFeedback newFeedbackMessage()
+  public LookatFeedback newFeedbackMessage()
   {
     NodeConfiguration nc = NodeConfiguration.newPrivate();
     MessageFactory mf = nc.getTopicMessageFactory();
@@ -73,126 +74,150 @@ public LookatSimpleActionServerCallbacks(DragonBotComm establishedComm)
   }
 
 
-  @Override
-  public void blockingGoalCallback(LookatGoal goal, SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) 
-{
-	int count =1;
-    comm.sendNetworkDebug(count);
-    while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
-	    comm.update();
-	    count++;
-	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
-
-	    if(goal.getState().equalsIgnoreCase("off"))
-		{
-			comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-		}
-	    else if(goal.getState().equalsIgnoreCase("random"))
-		{
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
-		}
-	    else
-		{
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-			comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
-			float[] currentLookat = new float[3];
-			if(goal.getX() > LOOKAT_RANGE.MAX_X) goal.setX( LOOKAT_RANGE.MAX_X );
-			if(goal.getX() < LOOKAT_RANGE.MIN_X) goal.setX( LOOKAT_RANGE.MIN_X );
-
-			if(goal.getY() > LOOKAT_RANGE.MAX_Y) goal.setY( LOOKAT_RANGE.MAX_Y );
-			if(goal.getY() < LOOKAT_RANGE.MIN_Y) goal.setY( LOOKAT_RANGE.MIN_Y );
-
-			if(goal.getZ() > LOOKAT_RANGE.MAX_Z) goal.setZ( LOOKAT_RANGE.MAX_Z );
-			if(goal.getZ() < LOOKAT_RANGE.MIN_Z) goal.setZ( LOOKAT_RANGE.MIN_Z );
-			currentLookat[0] = (float)goal.getX();
-			currentLookat[1] = (float)goal.getY();
-			currentLookat[2] = (float)goal.getZ();
-			System.out.println(currentLookat[0]);
-			System.out.println(currentLookat[1]);
-			System.out.println(currentLookat[2]);
-			comm.sendLookat(currentLookat);
-			comm.update();
-			count++;
-			   
-
-		}
-
-}
-
-  @Override
-  public
-      void
-      goalCallback(
-          SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) 
-{
-System.out.println("GOAL CALLBACK");
-LookatGoal goal = null;
-try
-{
-	goal = actionServer.acceptNewGoal();
-}
-catch (RosException e){}
-	int count =1;
-    comm.sendNetworkDebug(count);
-    while(Float.isNaN(comm.getFaceDisplayFPS()))
-	{
-	    comm.update();
-	    count++;
-	    if(count%10000 ==0)
-		comm.sendNetworkDebug(count/10000);
-	
-	}
-
-	    if(goal.getState().equalsIgnoreCase("off"))
-		{
-			comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-		}
-	    else if(goal.getState().equalsIgnoreCase("random"))
-		{
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
-		}
-	    else
-		{
-			comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-			comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
-			float[] currentLookat = new float[3];
-			if(goal.getX() > LOOKAT_RANGE.MAX_X) goal.setX(LOOKAT_RANGE.MAX_X);
-			if(goal.getX() < LOOKAT_RANGE.MIN_X) goal.setX(LOOKAT_RANGE.MIN_X);
-
-			if(goal.getY() > LOOKAT_RANGE.MAX_Y) goal.setY( LOOKAT_RANGE.MAX_Y );
-			if(goal.getY() < LOOKAT_RANGE.MIN_Y) goal.setY( LOOKAT_RANGE.MIN_Y );
-
-			if(goal.getZ() > LOOKAT_RANGE.MAX_Z) goal.setZ( LOOKAT_RANGE.MAX_Z );
-			if(goal.getZ() < LOOKAT_RANGE.MIN_Z) goal.setZ( LOOKAT_RANGE.MIN_Z );
-			currentLookat[0] = (float)goal.getX();
-			currentLookat[1] = (float)goal.getY();
-			currentLookat[2] = (float)goal.getZ();
-			System.out.println(currentLookat[0]);
-			System.out.println(currentLookat[1]);
-			System.out.println(currentLookat[2]);
-			comm.sendLookat(currentLookat);
-			comm.update();
-			count++;
-			   
-
-		}
-
-
-}
-
-  @Override
-  public
-      void
-      preemptCallback(
-          SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) {
-    System.out.println("PREEMPT CALLBACK");
+  boolean checkUpdate( SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer )
+  {
+    comm.update();
+    //System.out.println( comm.getExpressionCurrent() );
+    if( preempted )
+    {
+      System.out.println( "preempt requested" );
+      actionServer.setPreempted();
+      preempted = false;
+      return false;
+    }
+    return true;
   }
+
+
+
+  @Override
+    public void blockingGoalCallback(LookatGoal goal, SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) 
+    {
+      int count =1;
+      comm.sendNetworkDebug(count);
+      while(Float.isNaN(comm.getFaceDisplayFPS()))
+      {
+        comm.update();
+        count++;
+        if(count%10000 ==0)
+          comm.sendNetworkDebug(count/10000);
+
+      }
+
+      if(goal.getState().equalsIgnoreCase("off"))
+      {
+        comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+      }
+      else if(goal.getState().equalsIgnoreCase("random"))
+      {
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
+      }
+      else
+      {
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+        comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
+        float[] currentLookat = new float[3];
+        if(goal.getX() > LOOKAT_RANGE.MAX_X) goal.setX( LOOKAT_RANGE.MAX_X );
+        if(goal.getX() < LOOKAT_RANGE.MIN_X) goal.setX( LOOKAT_RANGE.MIN_X );
+
+        if(goal.getY() > LOOKAT_RANGE.MAX_Y) goal.setY( LOOKAT_RANGE.MAX_Y );
+        if(goal.getY() < LOOKAT_RANGE.MIN_Y) goal.setY( LOOKAT_RANGE.MIN_Y );
+
+        if(goal.getZ() > LOOKAT_RANGE.MAX_Z) goal.setZ( LOOKAT_RANGE.MAX_Z );
+        if(goal.getZ() < LOOKAT_RANGE.MIN_Z) goal.setZ( LOOKAT_RANGE.MIN_Z );
+
+        System.out.println( "xrange [" + LOOKAT_RANGE.MIN_X + ":" + LOOKAT_RANGE.MAX_X + "]" );
+        System.out.println( "yrange [" + LOOKAT_RANGE.MIN_Y + ":" + LOOKAT_RANGE.MAX_Y + "]" );
+        System.out.println( "zrange [" + LOOKAT_RANGE.MIN_Z + ":" + LOOKAT_RANGE.MAX_Z + "]" );
+
+        currentLookat[0] = (float)goal.getX();
+        currentLookat[1] = (float)goal.getY();
+        currentLookat[2] = (float)goal.getZ();
+        System.out.println(currentLookat[0]);
+        System.out.println(currentLookat[1]);
+        System.out.println(currentLookat[2]);
+        comm.sendLookat(currentLookat);
+        comm.update();
+        count++;
+
+
+      }
+      LookatResult result = newResultMessage();
+      result.setResult( "The lookat was set successfully");
+      actionServer.setSucceeded(result, "");
+    }
+
+  @Override
+    public
+    void
+    goalCallback(
+        SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) 
+    {
+      System.out.println("GOAL CALLBACK");
+      LookatGoal goal = null;
+      try
+      {
+        goal = actionServer.acceptNewGoal();
+      }
+      catch (RosException e){}
+      int count =1;
+      comm.sendNetworkDebug(count);
+      while(Float.isNaN(comm.getFaceDisplayFPS()))
+      {
+        comm.update();
+        count++;
+        if(count%10000 ==0)
+          comm.sendNetworkDebug(count/10000);
+
+      }
+
+      if(goal.getState().equalsIgnoreCase("off"))
+      {
+        comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+      }
+      else if(goal.getState().equalsIgnoreCase("random"))
+      {
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
+      }
+      else
+      {
+        comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+        comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
+        float[] currentLookat = new float[3];
+        if(goal.getX() > LOOKAT_RANGE.MAX_X) goal.setX(LOOKAT_RANGE.MAX_X);
+        if(goal.getX() < LOOKAT_RANGE.MIN_X) goal.setX(LOOKAT_RANGE.MIN_X);
+
+        if(goal.getY() > LOOKAT_RANGE.MAX_Y) goal.setY( LOOKAT_RANGE.MAX_Y );
+        if(goal.getY() < LOOKAT_RANGE.MIN_Y) goal.setY( LOOKAT_RANGE.MIN_Y );
+
+        if(goal.getZ() > LOOKAT_RANGE.MAX_Z) goal.setZ( LOOKAT_RANGE.MAX_Z );
+        if(goal.getZ() < LOOKAT_RANGE.MIN_Z) goal.setZ( LOOKAT_RANGE.MIN_Z );
+        currentLookat[0] = (float)goal.getX();
+        currentLookat[1] = (float)goal.getY();
+        currentLookat[2] = (float)goal.getZ();
+        System.out.println(currentLookat[0]);
+        System.out.println(currentLookat[1]);
+        System.out.println(currentLookat[2]);
+        comm.sendLookat(currentLookat);
+        comm.update();
+        count++;
+
+
+      }
+
+
+    }
+
+  @Override
+    public
+    void
+    preemptCallback(
+        SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) {
+      System.out.println("PREEMPT CALLBACK");
+      preempted = true;
+    }
 
   private void snore() {
 
@@ -212,19 +237,19 @@ catch (RosException e){}
    *          The action server publishing information.
    */
   private
-      void
-      publishFeedback(
-          String status,
-          SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) {
-    LookatFeedback feedback = newFeedbackMessage();
-    feedback.setStatus(status);
-    actionServer.publishFeedback(feedback);
-    //for (int i = 0; i < feedback.sequence.length; i++) {
+    void
+    publishFeedback(
+        String status,
+        SimpleActionServer<LookatActionFeedback, LookatActionGoal, LookatActionResult, LookatFeedback, LookatGoal, LookatResult> actionServer) {
+      LookatFeedback feedback = newFeedbackMessage();
+      feedback.setStatus(status);
+      actionServer.publishFeedback(feedback);
+      //for (int i = 0; i < feedback.sequence.length; i++) {
       //if (feedback.sequence[i] == 0 && i != 0) {
-       // break;
+      // break;
       //}
       //System.out.print(" " + feedback.sequence[i]);
-    //}
-  }
+      //}
+    }
 
 }

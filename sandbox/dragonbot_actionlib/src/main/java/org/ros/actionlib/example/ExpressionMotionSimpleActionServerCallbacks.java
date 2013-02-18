@@ -38,8 +38,7 @@ public class ExpressionMotionSimpleActionServerCallbacks
     implements
     SimpleActionServerCallbacks<ExpressionMotionActionFeedback, ExpressionMotionActionGoal, ExpressionMotionActionResult, ExpressionMotionFeedback, ExpressionMotionGoal, ExpressionMotionResult> {
 
-DragonBotComm comm;
-
+  DragonBotComm comm;
   boolean preempted = false;
 
   public ExpressionMotionSimpleActionServerCallbacks(DragonBotComm establishedComm)
