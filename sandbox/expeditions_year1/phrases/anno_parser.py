@@ -9,6 +9,7 @@ import yaml
 def main():
     if not len(sys.argv) == 4:
         print "Usage: anno_parser.py [list file] [target file] [sound dir]"
+        sys.exit()
 
     data = {}
     sound_dir = sys.argv[3]
@@ -72,7 +73,8 @@ def main():
                             else:
                                 print "Warning: unknown viseme"
                                 continue
-                            visemes["viseme" + str(it)] = {"type":t,
+                            visemes["viseme" + str(it)] = {"type": "viseme",
+                                                           "id":t,
                                                            "start":float(viseme[1])/1000,
                                                            "end":float(viseme[2])/1000}
                             it = it + 1
@@ -81,10 +83,12 @@ def main():
                     with open(line.strip().split()[1], 'r') as actfile:
                         s = actfile.read()
                         actions = yaml.load(s)
+                behavs = {}
+                behavs.update(visemes)
+                behavs.update(actions)
                 data[name] = {"text": text,
                               "file": sound_dir + "/" + name + ".wav",
-                              "visemes": visemes,
-                              "actions": actions}
+                              "actions": behavs}
                 
                     
 
