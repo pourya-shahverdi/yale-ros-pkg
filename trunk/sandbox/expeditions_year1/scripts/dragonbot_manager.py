@@ -308,33 +308,14 @@ class DragonbotManager():
         self.viseme_client.cancel_all_goals()
         self.sound_client.stopAll()
 
-
-def kill_speech():
-    print "Shutting down dragonbot nicely."
-    express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
-    viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
-    '''self.pose_client = actionlib.SimpleActionClient('/',PoseAction)
-    self.lookat_client = actionlib.SimpleActionClient('/',LookatAction)'''
-    sound_client = SoundClient()
-
-    express_client.wait_for_server()
-    viseme_client.wait_for_server()
-
-    #goal = dragon_msgs.msg.VisemeGoal(constant='IDLE')
-    #viseme_client.send_goal(goal)
-    viseme_client.cancel_all_goals()
-    express_client.cancel_all_goals()
-    sound_client.stopAll()
-
 def main():
     rospy.init_node("dragonbot_manager_test")
 
     dm = DragonbotManager()
 
-    rospy.on_shutdown(kill_speech)
     dm.load_phrases("phrases.yaml")
     dm.say("teaching")
-    rospy.sleep(10)
+    rospy.sleep(30)
 
     expressions = ["angry",
                    "disgusted",
