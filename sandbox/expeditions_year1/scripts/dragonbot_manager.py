@@ -6,20 +6,22 @@
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
 from threading import Thread
-from threading import Lock
+from threading import Event
 import yaml
 from dragon_msgs.msg import *
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
 import actionlib
+import time
 
+#TODO: Use stoppable threads here
 class Tracker():
     def __init__(self):
-        self.on = False
+        self.stop = Event()
         self.t = Thread(target=self.tracking_thread)
         
     def tracking_thread(self, target):
-        while self.on:
+        while not self.stop.isSet():
             print "tracking frame: " + target
             #TODO: listener = tf.TransformListener()
             #try:
@@ -38,9 +40,90 @@ class Tracker():
             self.t.start()
 
     def stop(self):
-        self.on = False
+        self.stop.set()
         if self.t.is_alive():
             self.t.join()
+
+
+class StoppableThread(Thread):
+    """Thread class with a stop() method. The thread itself has to check
+    regularly for the stopped() condition."""
+
+    def __init__(self):
+        super(StoppableThread, self).__init__()
+        self._stop = Event()
+ 
+    def stop(self):
+        self._stop.set()
+
+    def stopped(self):
+        return self._stop.isSet()
+
+class VisemeThread(StoppableThread):
+    def __init__(self, visemes, client):
+        super(VisemeThread, self).__init__()
+        self.viseme_client = client
+        self.visemes = visemes
+
+    def run(self):
+        timing_adjust = rospy.Duration.from_sec(0.2)
+        time = rospy.Time.now()
+        ordered_visemes = sorted(self.visemes, 
+                                 key=lambda viseme: self.visemes[viseme]["start"])
+        
+        
+        for name in ordered_visemes:
+            v = self.visemes[name]
+            while (rospy.Time.now()-time+timing_adjust < 
+                   rospy.Duration.from_sec(v["start"])):
+                pass
+            if(rospy.Time.now()-time+timing_adjust > 
+               rospy.Duration.from_sec(v["end"])):
+                continue
+            if not self.stopped() and not rospy.is_shutdown():
+                print "Viseme: " + v['type']
+                goal = dragon_msgs.msg.VisemeGoal(constant=v['type'])
+                try:
+                    self.viseme_client.send_goal(goal)
+                except rospy.exceptions.ROSException:
+                    print "ROSException in Viseme Thread"
+                    next
+            else:
+                break
+        #rospy.sleep(0.5)
+        #goal = dragon_msgs.msg.VisemeGoal(constant='IDLE')
+        #self.viseme_client.send_goal(goal)
+        #self.viseme_client.cancel_all_goals()
+        
+class ActionThread(StoppableThread):
+    def __init__(self,actions,express_fun):
+        super(ActionThread, self).__init__()
+        self.actions = actions
+        self.express = express_fun
+
+    def run(self):
+        timing_adjust = rospy.Duration.from_sec(0.2)
+        time = rospy.Time.now()
+        ordered_actions = sorted(self.actions, 
+                                 key=lambda action: self.actions[action]["start"])
+        for name in ordered_actions:
+
+            a = self.actions[name]
+            while (rospy.Time.now()-time+timing_adjust 
+                   < rospy.Duration.from_sec(a["start"])):
+                True
+
+            if(rospy.Time.now()-time+timing_adjust > 
+               rospy.Duration.from_sec(a["end"])):
+                continue
+            if not self.stopped():
+                try:
+                    self.express(a["type"])
+                except rospy.exceptions.ROSException:
+                    sys.exit()
+            else:
+                break
+
 
 class DragonbotManager():
 
@@ -49,6 +132,8 @@ class DragonbotManager():
         self.tracker = Tracker()
         self.tracking_frame = ""
         self.phrases = {}
+
+        self.speech_client = actionlib.SimpleActionClient('/SpeechPlay_Server',SpeechPlayAction)
         self.express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
         self.viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
         '''self.pose_client = actionlib.SimpleActionClient('/',PoseAction)
@@ -136,64 +221,41 @@ class DragonbotManager():
             rospy.logwarn("Could not restart tracking; no frame was being tracked")
 
 
-    def viseme_play(self,visemes):
-        timing_adjust = rospy.Duration.from_sec(0.2)
-        time = rospy.Time.now()
-        ordered_visemes = sorted(visemes, 
-                                 key=lambda viseme: visemes[viseme]["start"])
-        for name in ordered_visemes:
-            v = visemes[name]
-            while (rospy.Time.now()-time+timing_adjust < 
-                   rospy.Duration.from_sec(v["start"])):
-                True
-            if(rospy.Time.now()-time+timing_adjust > 
-               rospy.Duration.from_sec(v["end"])):
-                continue
-            goal = dragon_msgs.msg.VisemeGoal(constant=v['type'])
-            self.viseme_client.send_goal(goal)
-            #print v['type']
-        rospy.sleep(0.5)
-        goal = dragon_msgs.msg.VisemeGoal(constant='IDLE')
-        self.viseme_client.cancel_all_goals()
-            
-
-    def action_play(self,actions):
-        timing_adjust = rospy.Duration.from_sec(0.0)
-        time = rospy.Time.now()
-        ordered_actions = sorted(actions, 
-                                 key=lambda action: actions[action]["start"])
-        for name in ordered_actions:
-            a = actions[name]
-            while (rospy.Time.now()-time+timing_adjust 
-                   < rospy.Duration.from_sec(a["start"])):
-                True
-
-            if(rospy.Time.now()-time+timing_adjust > 
-               rospy.Duration.from_sec(a["end"])):
-                continue
-            print a['type']
-
-
 
     def say(self, phrase_name):
+         goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name)
+         self.speech_client.send_goal(goal)
+
+
         #TODO: look up phrase in loaded phrase library
         #TODO: say phrase with appropriate visemes and actions
         #      note: perhaps use threads to time visemes and actions?
-        phrase = self.phrases[phrase_name]
-        th1 = Thread(target=self.viseme_play, args=(phrase["visemes"],))
-        th2 = Thread(target=self.action_play, args=(phrase["actions"],))
-        self.sound_client.stopAll()
-        self.sound_client.playWave(phrase["file"])
-        th1.daemon = True
-        th2.daemon = True
-        th1.start()
-        th2.start()
-        print phrase['text'] # TODO: say text
-        rospy.sleep(1.0)
-        th1.join()
-        th2.join()
-
-
+        #phrase = self.phrases[phrase_name]
+        #self.th1 = VisemeThread(phrase["visemes"], self.viseme_client)
+        #self.th2 = ActionThread(phrase["actions"], self.express)
+        #self.has_threads = True
+        #self.sound_client.stopAll()
+        #self.sound_client.playWave(phrase["file"])
+        #try:
+        #self.th1.start()
+        #self.th2.start()
+  
+        #print phrase['text'] 
+            #while (th1.is_alive() or th2.is_alive) and not rospy.is_shutdown():
+            #    th1.join(0.5)
+            #    th2.join(0.5)
+            #if rospy.is_shutdown():
+            #    th1.stop()
+            #    th2.stop()
+            #th1.join()
+            #th2.join()
+       # except Exception as e:
+            #th1.stop()
+            #th2.stop()
+            #th1.join()
+            #th2.join()
+            #rospy.sleep(1.0)
+            #raise
 
     #loads phrases from a yaml file
     # format:
@@ -211,11 +273,7 @@ class DragonbotManager():
         f = open(filename, 'r')
         s = f.read()
         self.phrases = yaml.load(s)
-        for phrase in self.phrases:
-            print "===" + phrase + "==="
-            print self.phrases[phrase]
-
-
+        
     def express(self, expression_id):
         if expression_id in self.expressions:
             goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=expression_id)
@@ -236,12 +294,47 @@ class DragonbotManager():
         #TODO: dragonbot looks at location
         True
 
+    def shutdown(self):
+        if self.has_threads():
+            if self.th1.is_alive():
+                self.th1.stop()
+            if self.th2.is_alive():
+                self.th2.stop()
+            self.th1.join()
+            self.th2.join()
+
+        goal = dragon_msgs.msg.VisemeGoal(constant='IDLE')
+        self.viseme_client.send_goal(goal)
+        self.viseme_client.cancel_all_goals()
+        self.sound_client.stopAll()
+
+
+def kill_speech():
+    print "Shutting down dragonbot nicely."
+    express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
+    viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
+    '''self.pose_client = actionlib.SimpleActionClient('/',PoseAction)
+    self.lookat_client = actionlib.SimpleActionClient('/',LookatAction)'''
+    sound_client = SoundClient()
+
+    express_client.wait_for_server()
+    viseme_client.wait_for_server()
+
+    #goal = dragon_msgs.msg.VisemeGoal(constant='IDLE')
+    #viseme_client.send_goal(goal)
+    viseme_client.cancel_all_goals()
+    express_client.cancel_all_goals()
+    sound_client.stopAll()
+
 def main():
     rospy.init_node("dragonbot_manager_test")
+
     dm = DragonbotManager()
+
+    rospy.on_shutdown(kill_speech)
     dm.load_phrases("phrases.yaml")
-    dm.express("happy")
     dm.say("teaching")
+    rospy.sleep(10)
 
     expressions = ["angry",
                    "disgusted",
@@ -296,40 +389,13 @@ def main():
                "yawn"]
 
 
-    '''for item in expressions:
-        dm.express(item)
-        rospy.sleep(3.0)'''
-        
-    #for item in motions:
-    dm.express("bite")
-    rospy.sleep(5.0)
+    '''for expression in expressions:
+        dm.express(expression)
+        rospy.sleep(3.0)
 
-    
-    '''
-    client = actionlib.SimpleActionClient('Viseme_Server', dragon_msgs.msg.VisemeAction)
+    for motion in motions:
+        dm.express(motion)
+        rospy.sleep(5.0)'''
 
-    print 'waiting for server... \n' 
-
-    # Waits until the action server has started up and started
-    # listening for goals.
-    client.wait_for_server()
-
-    print 'sending goal... \n'
-
-    # Creates a goal to send to the action server.
-    goal = dragon_msgs.msg.VisemeGoal(constant='AA_AH')
-
-
-
-    # Sends the goal to the action server.
-    client.send_goal(goal)
-
-    rospy.sleep(5.)
-    print "Sending new goal... \n"
-    goal = dragon_msgs.msg.VisemeGoal(constant='AO_AW')
-    client.send_goal(goal)
-    rospy.sleep(5.)
-    client.cancel_all_goals()'''
-    
 if __name__ == '__main__':
     main()
