@@ -110,4 +110,5 @@ class SpeechPlayServer():
 if __name__ == '__main__':
     rospy.init_node('dragonbot_speech')
     SpeechPlayServer('phrases.yaml')
-    rospy.spin
+    while not rospy.is_shutdown():
+        rospy.spin
