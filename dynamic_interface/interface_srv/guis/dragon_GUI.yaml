@@ -1,0 +1,34 @@
+- gui: Dragonbot Teleop
+  elements:
+    - type: button_group
+      label: Expressions
+      label_string: angry;disgusted;frustrated;mischievous;shy;bored;ecstatic
+      topic: dragon_GUI/expressions
+    - type: button_group
+      label: Expressions
+      label_string: happy;puppy;surprised;confused;frightened;lovestruck;sad
+      topic: dragon_GUI/expressions
+    - type: button_group
+      label: Motions
+      label_string: afraid;blech;farted;idunno;interest;mmhmmm;no
+      topic: dragon_GUI/motions
+    - type: button_group
+      label: Motions
+      label_string: shy;think;whoah;yes;anticipation;cheer;heh
+      topic: dragon_GUI/motions
+    - type: button_group
+      label: Motions
+      label_string: i_like_it;laugh;mph;question;sneeze;wakeup;yay
+      topic: dragon_GUI/motions
+    - type: button_group
+      label: Motions
+      label_string: yummm;bite;crazy_laugh;hungry;i_want_it;meh;nah_nah
+      topic: dragon_GUI/motions
+    - type: button_group
+      label: Motions
+      label_string: sad;surprise;weee;yawn;--;--;--
+      topic: dragon_GUI/motions
+    - type: button_group
+      label: Phrases
+      label_string: teaching;--;--;--;--;--;--
+      topic: dragon_GUI/phrases
