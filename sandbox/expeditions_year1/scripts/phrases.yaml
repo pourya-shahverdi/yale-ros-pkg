@@ -4,15 +4,25 @@
 teaching:
   actions:
     act0:
-      end: 2.0
-      id: happy
-      start: 1.0
+      end: 1.0
+      id: bored
+      start: 0.0
       type: expression
     act1:
-      end: 5.0
-      id: farted
-      start: 4.0
+      end: 7.0
+      id: mischievous
+      start: 6.0
+      type: expression
+    act2:
+      end: 12.0
+      id: question
+      start: 10.0
       type: motion
+    act3:
+      end: 13.0
+      id: disgusted
+      start: 12.0
+      type: expression
     viseme0:
       end: 0.025
       id: IDLE
