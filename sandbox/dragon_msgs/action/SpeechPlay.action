@@ -1,0 +1,9 @@
+#goal definition
+string phrase
+---
+#result definition
+string result
+---
+#feedback
+string viseme
+string action
