@@ -6,38 +6,76 @@
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
 import actionlib
+from dragon_msgs.msg import *
+import tf
 
+class TrackServer():
+    feedback = TrackFeedback()
+    result = TrackResult()
 
-
-
-
-#TODO: Use stoppable threads here
-class Tracker():
     def __init__(self):
-        self.stop = Event()
-        self.t = Thread(target=self.tracking_thread)
+        self.lookat_client = actionlib.SimpleActionClient('/Lookat_Server',LookatAction)
+        self.tf_listener = tf.TransformListener()
+        self.server = actionlib.SimpleActionServer('Track_Server', TrackAction, execute_cb=self.execute_cb)
+
+        rospy.loginfo("Waiting for Dragonbot Action Servers")
+        rospy.loginfo(" --- Lookat")
+        self.lookat_client.wait_for_server()
+        rospy.loginfo("Action servers connected")
+        rospy.loginfo("Starting server...")
+        self.server.start()
+
+    def lookat(self, x, y, z):
+        # range for x: -300,300
+        # range for y: -300,300
+        # range for z: 20,400
+        goal = dragon_msgs.msg.LookatGoal(x = x, y = y, z = z)
+        self.lookat_client.send_goal(goal)
+
+    def lookat_off(self):
+        goal = dragon_msgs.msg.LookatGoal(state = "off")
+        self.lookat_client.send_goal(goal)
+
+
+    def execute_cb(self, goal):
+        if not goal.on:
+            rospy.loginfo("Tracking off.")
+            self.lookat_off()
+            self.result.result = "OFF"
+            self.server.set_succeeded(self.result)
+            return
         
-    def tracking_thread(self, target):
-        while not self.stop.isSet():
-            print "tracking frame: " + target
-            #TODO: listener = tf.TransformListener()
-            #try:
-            #    (trans, rot) = listener.lookupTransform('/dragonbot',target, rospy.Time(0))
-            #except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-            #    continue
-            #dm.lookat(trans[0],trans[1],trans[2]) #assuming trans is x,y,z
-            rospy.sleep(1.0)
+        rospy.loginfo("Tracking frame: " + str(goal.target))
+        self.feedback.target = goal.target
+        warned = False
+        success = False
 
-    def start(self, target):
-        if len(target) == 0:
-            rospy.logwarn("No target set. Tracking not started.")
+        while not self.server.is_preempt_requested():
+            try:
+                (trans, rot) = self.tf_listener.lookupTransform('/dragonbot',goal.target, rospy.Time(0))
+            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                if not warned:
+                    rospy.logwarn("Error looking up transform.")
+                    continue
+                warned = True
+            else:
+                warned = False
+                self.lookat(x = trans[0]*100, y = trans[1]*100,z = trans[2]*100)
+                self.feedback.x = trans[0]*100
+                self.feedback.y = trans[1]*100
+                self.feedback.z = trans[2]*100
+                self.server.publish_feedback(self.feedback)
+                rospy.sleep(0.2)
+        if not success:
+            rospy.loginfo("Preempted")
+            self.server.set_preempted()
         else:
-            self.on = True
-            self.t = Thread(target=self.tracking_thread, args=(target,))
-            self.t.start()
+            self.result.result = "SUCCESS"
+            self.server.set_succeeded(self.result)
 
-    def stop(self):
-        self.stop.set()
-        if self.t.is_alive():
-            self.t.join()
 
+if __name__ == '__main__':
+    rospy.init_node('dragonbot_lookat')
+    TrackServer()
+    while not rospy.is_shutdown():
+        rospy.spin

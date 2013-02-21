@@ -15,6 +15,7 @@
   <depend package="smach_ros"/>
   <depend package="sound_play"/>
   <depend package="dragon_msgs"/>
+  <depend package="tf" />
 </package>
 
 

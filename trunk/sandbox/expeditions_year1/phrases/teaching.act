@@ -1,0 +1,21 @@
+#yaml file with actions for a single phrase
+act0:
+    type: expression
+    id: bored
+    start: 0.0
+    end: 1.0
+act1:
+    type: expression
+    id: mischievous
+    start: 6.0
+    end: 7.0
+act2:
+    type: motion
+    id: question
+    start: 10.0
+    end: 12.0
+act3:
+    type: expression
+    id: disgusted
+    start: 12.0
+    end: 13.0
