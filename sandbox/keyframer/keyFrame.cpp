@@ -73,9 +73,9 @@ void slider_cb(Fl_Widget* o, void*) {
   printf("%0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal);
   
   dragon_msgs::IKGoal goal;
-  goal.x = xVal / 100.;
-  goal.y = yVal / 100.;
-  goal.z = zVal / 100.;
+  goal.x = xVal;
+  goal.y = yVal;
+  goal.z = zVal;
   goal.theta = tVal;
   goal.neck = 0;
   goal.state = std::string("on");
