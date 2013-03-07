@@ -11,9 +11,9 @@ from std_msgs.msg import String
 class DragonTeleop():
     def __init__(self):
         self.dm = DragonbotManager()
-        self.exp_sub = rospy.Subscriber("/dragon_GUI/expressions", String, self.exp_callback)
-        self.mot_sub = rospy.Subscriber("/dragon_GUI/motions", String, self.mot_callback)
-        self.ph_sub = rospy.Subscriber("/dragon_GUI/phrases", String, self.ph_callback)
+        self.exp_sub = rospy.Subscriber("/dragon_teleop_GUI/expressions", String, self.exp_callback)
+        self.mot_sub = rospy.Subscriber("/dragon_teleop_GUI/motions", String, self.mot_callback)
+        self.ph_sub = rospy.Subscriber("/dragon_teleop_GUI/phrases", String, self.ph_callback)
         rospy.loginfo("Ready!")
 
     def exp_callback(self, data):

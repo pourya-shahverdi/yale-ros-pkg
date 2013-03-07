@@ -1,0 +1,58 @@
+drinks:
+    intro: drink_intro 
+    reminder: drink_reminder
+    no_choice: drink_no_choice
+    terminal: [milk,water]
+    none:
+        milk: none-milk
+        water: none-water
+        chocolate_milk: none-choco_milk
+        juice: none-juice
+        soda: none-soda
+    chocolate_milk:
+        chocolate_milk: dr_repeat
+        juice: choc-juice
+        soda: choc-soda
+        milk: choc-milk
+        water: choc-water
+    juice:
+        chocolate_milk: juice-choc
+        juice: dr_repeat
+        soda: juice-soda
+        milk: juice-milk
+        water: juice-water
+    soda:
+        chocolate_milk: soda-choc
+        juice: soda-juice
+        soda: dr_repeat
+        milk: soda-milk
+        water: soda-water
+whole_grains:
+    intro: bread_intro
+    reminder: bread_reminder
+    no_choice: bread_no_choice
+    terminal: [grain, whbagel]
+    none:
+        white: none-white
+        grain: none-grain
+        bagel: none-bagel
+        whbagel: none-whbagel
+        muffin: none-muffin
+    white:
+        white: grain_repeat
+        grain: white-grain
+        bagel: white-bagel
+        whbagel: white-whbagel
+        muffin: white-muffin
+    bagel:
+        white: bagel-white
+        grain: bagel-grain
+        bagel: grain_repeat
+        whbagel: bagel-whbagel
+        muffin: bagel-muffin
+    muffin:
+        white: muffin-white
+        grain: muffin-grain
+        bagel: muffin-bagel
+        whbagel: muffin-whbagel
+        muffin: grain_repeat

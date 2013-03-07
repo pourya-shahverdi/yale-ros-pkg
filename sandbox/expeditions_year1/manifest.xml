@@ -16,6 +16,7 @@
   <depend package="sound_play"/>
   <depend package="dragon_msgs"/>
   <depend package="tf" />
+  <depend package="interface_srv" />
 </package>
 
 

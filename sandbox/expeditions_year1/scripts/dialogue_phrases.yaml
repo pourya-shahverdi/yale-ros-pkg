@@ -1,0 +1,288 @@
+lunchbox:
+    intro:
+        intro_dialogue:
+            type: dialogue
+            items: [name, like_to_eat, hear_race, race_story, help_me]
+        name:
+            phrase_ids: [robot_name]
+            type: question
+            responses: [give_name, dont_understand, not_name, give_up]
+            terminal: [give_name, give_up]
+        give_name:
+            phrase_ids: [nice_meet]
+            type: statement
+        dont_understand:
+            phrase_ids: [sorry]
+            type: statement
+        not_name:
+            phrase_ids: [not_a_name]
+            type: statement
+        give_up:
+            phrase_ids: [give_up]
+            type: statement
+        like_to_eat: 
+            type: question
+            phrase_ids: [what_like_to_eat]
+            responses: [good_choice, non-human_choice, unknown_single, unknown_pl]
+            terminal: [good_choice, non-human_choice, unknown_single, unknown_pl]
+        good_choice:
+            type: statement
+            phrase_ids: [good_food_choice]
+        non-human_choice:
+            type: statement
+            phrase_ids: [weird_food_choice]
+        unknown_single:
+            type: statement
+            phrase_ids: [dunno]
+        unknown_pl:
+            type: statement
+            phrase_ids: [dunno_pl]
+        hear_race: 
+            type: question
+            phrase_ids: [race_question]
+            responses: [race_yes, race_no]
+            terminal: [race_yes,race_no]
+        race_yes:
+            type: statement
+            phrase_ids: [great]
+        race_no:
+            type: statement
+            phrase_ids: [you_didnt]
+        race_story:
+            type: statement
+            phrase_ids: [dragon_race]
+        help_me: 
+            type: question
+            phrase_ids: [will_help]
+            responses: ['help_yes', 'help_no', repeat_no]
+            terminal: ['help_yes']
+        help_yes:
+            type: statement
+            phrase_ids: [great]
+        help_no:
+            type: statement
+            phrase_ids: [please]
+        repeat_no:
+            type: statement
+            phrase_ids: [extended_please]
+    foods:
+        drink_intro:
+            type: statement
+            phrase_ids: [drink_intro]
+        drink_reminder:
+            type: statement
+            phrase_ids: [drink_reminder]
+        drink_no_choice:
+            type: statement
+            phrase_ids: [drink_no_choice]
+        none-milk:
+            type: statement
+            phrase_ids: [none_milk]
+        none-water:
+            type: statement
+            phrase_ids: [none_water]
+        none-choco_milk:
+            type: statement
+            phrase_ids: [none_choco_milk]
+        none-juice:
+            type: statement
+            phrase_ids: [none_juice]
+        none-soda:
+            type: statement
+            phrase_ids: [none_soda]
+        dr_repeat:
+            type: statement
+            phrase_ids: [dr_repeat]
+        choc-juice:
+            type: statement
+            phrase_ids: [choc_juice]
+        choc-soda:
+            type: statement
+            phrase_ids: [choc_soda]
+        choc-milk:
+            type: statement
+            phrase_ids: [choc_milk]
+        choc-water:
+            type: statement
+            phrase_ids: [choc_water]
+        juice-choc:
+            type: statement
+            phrase_ids: [juice_choc]
+        juice-soda:
+            type: statement
+            phrase_ids: [juice_soda]
+        juice-milk:
+            type: statement
+            phrase_ids: [juice_milk]
+        juice-water:
+            type: statement
+            phrase_ids: [juice_water]
+        soda-choc:
+            type: statement
+            phrase_ids: [soda_choc]
+        soda-juice:
+            type: statement
+            phrase_ids: [soda_juice]
+        soda-milk:
+            type: statement
+            phrase_ids: [soda_milk]
+        soda-water:
+            type: statement
+            phrase_ids: [soda_water]
+        bread_intro:
+            type: statement
+            phrase_ids: [bread_intro]
+        bread_reminder:
+            type: statement
+            phrase_ids: [bread_reminder]
+        bread_no_choice:
+            type: statement
+            phrase_ids: [bread_no_choice]
+        none-white:
+            type: statement
+            phrase_ids: [none_white]
+        none-grain:
+            type: statement
+            phrase_ids:  [none_grain]
+        none-bagel:
+            type: statement
+            phrase_ids:  [none_bagel]
+        none-whbagel:
+            type: statement
+            phrase_ids: [none_whbagel]
+        none-muffin:
+            type: statement
+            phrase_ids: [none_muffin]
+        grain_repeat:
+            type: statement
+            phrase_ids: [grain_repeat]
+        white-grain:
+            type: statement
+            phrase_ids:  [white_grain]
+        white-bagel:
+            type: statement
+            phrase_ids: [white_bagel]
+        white-whbagel:
+            type: statement
+            phrase_ids: [white_whbagel]
+        white-muffin:
+            type: statement
+            phrase_ids: [white_muffin]
+        bagel-white:
+            type: statement
+            phrase_ids: [bagel_white]
+        bagel-grain:
+            type: statement
+            phrase_ids: [bagel_grain]
+        bagel-whbagel:
+            type: statement
+            phrase_ids: [bagel_whbagel]
+        bagel-muffin:
+            type: statement
+            phrase_ids:  [bagel_muffin]
+        muffin-white:
+            type: statement
+            phrase_ids: [muffin_white]
+        muffin-grain:
+            type: statement
+            phrase_ids:  [muffin_grain]
+        muffin-bagel:
+            type: statement
+            phrase_ids:  [muffin_bagel]
+        muffin-whbagel:
+            type: statement
+            phrase_ids:  [muffin_whbagel]
+    workout:
+        intro_dialogue:
+            type: dialogue
+            items: [intro, music]
+        intro:
+            type: statement
+            phrase_ids: [workout_intro]
+        music:
+            type: statement
+            phrase_ids: [workout_music]
+        energized_comment:
+            type: statement
+            phrase_ids: [yay, good_job, nice_moves, keep_up, good_music, love_song]
+        stop_dancing:
+            type: dialogue
+            items: [encourage_dance, keep_going]      
+        encourage_dance:
+            type: statement
+            phrase_ids: [lets_continue, like_music, dance_reminder]
+        keep_going:
+            type: question
+            phrase_ids: [can_keep_going]
+            responses: [dance_more, no_more]
+            terminal: [dance_more, no_more]
+        dance_more:
+            type: statement
+            phrase_ids: [great]
+        no_more:
+            type: question
+            phrase_ids: [change_song]
+            responses: [yes_change, no_change, stop]
+            terminal: [yes_change, no_change, stop]
+        stop:
+            type: statement
+            phrase_ids: [okay]
+        yes_change:
+            type: statement
+            phrase_ids: [okay]
+        no_change:
+            type: question
+            phrase_ids: [want_break]
+            responses: [yes_break, no_break]
+            terminal: [yes_break, no_break]
+        yes_break:
+            type: statement
+            phrase_ids: [okay]
+        no_break:
+            type: statement
+            phrase_ids: [okay_lets_dance]
+        victory_dance:
+            type: question
+            phrase_ids: [wanna_see_victory]
+            responses: [yes_victory, no_victory]
+            terminal: [yes_victory, no_victory]
+        what_think:
+            type: statement
+            phrase_ids: [what_think]
+        yes_victory:
+            type: statement
+            phrase_ids: [great_here]
+        no_victory:
+            type: statement
+            phrase_ids: [but_i_must]
+        energized_intro:
+            type: statement
+            phrase_ids: [energized_ready]
+        tired_intro:
+            type: statement
+            phrase_ids: [tired_ready]
+        tired_to_energized:
+            type: statement
+            phrase_ids: [energized_now]
+        timeout:
+            type: statement
+            phrase_ids: [timeout]
+    outro:
+        outro_dialogue:
+            type: dialogue
+            items: [fun, wrap_up, nap]
+        fun:
+            type: statement
+            phrase_ids: [phew_fun]
+        wrap_up:
+            type: select
+            responses: [dance, no_dance]
+        dance:
+            type: statement
+            phrase_ids: [yay_dance]
+        no_dance:
+            type: statement
+            phrase_ids: [next_time_dance]
+        nap:
+            type: statement
+            phrase_ids: [time_for_nap]

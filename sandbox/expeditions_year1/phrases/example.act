@@ -40,3 +40,5 @@ act6:
     z: 0
     theta: 0
     neck: 0
+act7:
+    type lookat_frame

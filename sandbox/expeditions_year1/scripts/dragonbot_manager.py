@@ -78,14 +78,14 @@ class DragonbotManager():
                         "whoah",
                         "yes",
                         "anticipation",
-                        "cheer",
+                        #"cheer",
                         "heh",
                         "ilikeit",
                         "i_like_it",
                         "laugh",
                         "mph",
                         "question",
-                        "sneeze",
+                        #"sneeze",
                         "wakeup",
                         "yay",
                         "yummm",
@@ -99,7 +99,7 @@ class DragonbotManager():
                         "nahnah",
                         "sad",
                         "surprise",
-                        "weee",
+                        #"weee",
                         "yawn"]
 
     
@@ -129,24 +129,26 @@ class DragonbotManager():
     #   type (string)
     #   time (float)
     def load_phrases(self, filename):
-        f = open(filename, 'r')
-        s = f.read()
+        with open(filename, 'r') as f:
+            s = f.read()
         self.phrases = yaml.load(s)
         
-    def express(self, expression_id, expression_type):
-        if expression_type == "expression":
+    def express(self, expression_id, expression_type = None):
+        recognized = False
+        if expression_type == "expression" or expression_type == None:
             if expression_id in self.expressions:
                 goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=expression_id)
+                recognized = True
             else: 
                 rospy.logwarn("Expression not recognized")
-                return
-        if expression_type == "motion":
+        if expression_type == "motion" or expression_type == None:
             if expression_id in self.motions:
                 goal = dragon_msgs.msg.ExpressionMotionGoal(type='motion',constant=expression_id)
+                recognizsed = True
             else:
                 rospy.logwarn("Motion not recognized")
-                return
-        self.express_client.send_goal(goal)
+        if recognized:
+            self.express_client.send_goal(goal)
         
         
     def pose(self, vel, acc, x, y, z, theta, neck):
