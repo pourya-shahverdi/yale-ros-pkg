@@ -18,6 +18,11 @@
       label: test_button_group
       label_string: 1;2;3;4;5;6;7;8;9;10
       topic: GUI/Test_ButtonGroup
+    - type: slider
+      label: Test_Slider2
+      min: 5
+      max: 10
+      topic: GUI/Test_Slider2
 - gui: TestGUI2
   elements:
     - type: int_slider
