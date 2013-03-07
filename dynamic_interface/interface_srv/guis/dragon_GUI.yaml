@@ -3,32 +3,119 @@
     - type: button_group
       label: Expressions
       label_string: angry;disgusted;frustrated;mischievous;shy;bored;ecstatic
-      topic: dragon_GUI/expressions
+      topic: dragon_teleop_GUI/expressions
     - type: button_group
       label: Expressions
       label_string: happy;puppy;surprised;confused;frightened;lovestruck;sad
-      topic: dragon_GUI/expressions
+      topic: dragon_teleop_GUI/expressions
     - type: button_group
       label: Motions
       label_string: afraid;blech;farted;idunno;interest;mmhmmm;no
-      topic: dragon_GUI/motions
+      topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
       label_string: shy;think;whoah;yes;anticipation;cheer;heh
-      topic: dragon_GUI/motions
+      topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
       label_string: i_like_it;laugh;mph;question;sneeze;wakeup;yay
-      topic: dragon_GUI/motions
+      topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
       label_string: yummm;bite;crazy_laugh;hungry;i_want_it;meh;nah_nah
-      topic: dragon_GUI/motions
+      topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
       label_string: sad;surprise;weee;yawn;--;--;--
-      topic: dragon_GUI/motions
+      topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Phrases
       label_string: teaching;--;--;--;--;--;--
-      topic: dragon_GUI/phrases
+      topic: dragon_teleop_GUI/phrases
+- gui: sleep
+  elements:
+    - type: button
+      label: wakeup
+      topic: dragon_GUI/sleep
+- gui: continue
+  elements:
+    - type: button_group
+      label: Continue?
+      label_string: continue;next;panic
+      topic: dragon_GUI/continue
+- gui: stopped_dancing
+  elements:
+    - type: button_group
+      label: Child stopped dancing?
+      label_string: stopped; next; panic
+      topic: dragon_GUI/stopped_dancing
+
+
+
+
+- gui: lunchbox_outro_wrap_up
+  elements:
+  - type: button_group
+    label: outro wrap_up
+    label_string: dance;no_dance;next;panic
+    topic: dragon_GUI/lunchbox_outro_wrap_up
+- gui: lunchbox_intro_help_me
+  elements:
+  - type: button_group
+    label: intro help_me
+    label_string: help_yes;help_no;repeat_no;next;panic
+    topic: dragon_GUI/lunchbox_intro_help_me
+- gui: lunchbox_intro_name
+  elements:
+  - type: button_group
+    label: intro name
+    label_string: give_name;dont_understand;not_name;give_up;next;panic
+    topic: dragon_GUI/lunchbox_intro_name
+- gui: lunchbox_intro_hear_race
+  elements:
+  - type: button_group
+    label: intro hear_race
+    label_string: race_yes;race_no;next;panic
+    topic: dragon_GUI/lunchbox_intro_hear_race
+- gui: lunchbox_intro_like_to_eat
+  elements:
+  - type: button_group
+    label: intro like_to_eat
+    label_string: good_choice;non-human_choice;unknown_single;unknown_pl;next;panic
+    topic: dragon_GUI/lunchbox_intro_like_to_eat
+- gui: lunchbox_workout_no_change
+  elements:
+  - type: button_group
+    label: workout no_change
+    label_string: yes_break;no_break;next;panic
+    topic: dragon_GUI/lunchbox_workout_no_change
+- gui: lunchbox_workout_keep_going
+  elements:
+  - type: button_group
+    label: workout keep_going
+    label_string: dance_more;no_more;next;panic
+    topic: dragon_GUI/lunchbox_workout_keep_going
+- gui: lunchbox_workout_no_more
+  elements:
+  - type: button_group
+    label: workout no_more
+    label_string: yes_change;no_change;stop;next;panic
+    topic: dragon_GUI/lunchbox_workout_no_more
+- gui: lunchbox_workout_victory_dance
+  elements:
+  - type: button_group
+    label: workout victory_dance
+    label_string: yes_victory;no_victory;next;panic
+    topic: dragon_GUI/lunchbox_workout_victory_dance
+- gui: whole_grains
+  elements:
+  - type: button_group
+    label: whole_grains
+    label_string: bagel;muffin;white;grain;whbagel;reminder;no_choice;next;panic
+    topic: dragon_GUI/whole_grains
+- gui: drinks
+  elements:
+  - type: button_group
+    label: drinks
+    label_string: water;juice;milk;chocolate_milk;soda;reminder;no_choice;next;panic
+    topic: dragon_GUI/drinks
