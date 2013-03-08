@@ -1,6 +1,5 @@
 drinks:
     intro: drink_intro 
-    reminder: drink_reminder
     no_choice: drink_no_choice
     terminal: [milk,water]
     none:
@@ -29,7 +28,6 @@ drinks:
         water: soda-water
 whole_grains:
     intro: bread_intro
-    reminder: bread_reminder
     no_choice: bread_no_choice
     terminal: [grain, whbagel]
     none:
