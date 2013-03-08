@@ -54,7 +54,7 @@ class SpeechPlayServer():
 
 
     def execute_cb(self, goal):
-        rospy.loginfo("Phrase playing" + str(goal.phrase))
+        rospy.loginfo("Phrase playing: " + str(goal.phrase))
         preempted = False
 
         timing_adjust = rospy.Duration.from_sec(0.2)
@@ -66,7 +66,7 @@ class SpeechPlayServer():
         ordered_actions = sorted(actions, 
                                  key=lambda action: actions[action]["start"])
         
-        self.sound_client.stopAll()
+        #self.sound_client.stopAll()
         self.sound_client.playWave(self.phrases[goal.phrase]["file"])
         for name in ordered_actions:
             a = actions[name]

@@ -8,11 +8,11 @@ import yaml
 
 def main():
     if not len(sys.argv) == 4:
-        print "Usage: anno_parser.py [list file] [target file] [sound dir]"
+        print "Usage: anno_parser.py [list file] [target file] [data dir]"
         sys.exit()
 
     data = {}
-    sound_dir = sys.argv[3]
+    data_dir = sys.argv[3]
 
     vis_transl = {"AA":"AA_AH",
                   "AE":"EH_AE_AY",
@@ -60,10 +60,14 @@ def main():
     with open(sys.argv[1], 'r') as f_in:
             for line in f_in:
                 name =  line.strip().split()[0]
-                with open(name + ".txt") as textfile:
-                    text = textfile.read()
+                try:
+                    with open(data_dir + "/" + name + ".txt") as textfile:
+                        text = textfile.read()
+                except IOError:
+                    print "Error opening textfile"
+                    text = "<" + name + " missing text>"
                 visemes = {}
-                with open(name + ".anno") as annofile:
+                with open(data_dir +"/"+ name + ".anno") as annofile:
                     it = 0
                     for item in annofile:
                         viseme = item.strip().split()
@@ -87,7 +91,7 @@ def main():
                 behavs.update(visemes)
                 behavs.update(actions)
                 data[name] = {"text": text,
-                              "file": sound_dir + "/" + name + ".wav",
+                              "file": data_dir + "/" + name + ".wav",
                               "actions": behavs}
                 
                     

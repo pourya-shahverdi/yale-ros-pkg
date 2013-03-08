@@ -2,7 +2,7 @@ lunchbox:
     intro:
         intro_dialogue:
             type: dialogue
-            items: [name, like_to_eat, hear_race, race_story, help_me]
+            items: [name, like_to_eat, hear_race, help_me]
         name:
             phrase_ids: [robot_name]
             type: question
@@ -12,10 +12,10 @@ lunchbox:
             phrase_ids: [nice_meet]
             type: statement
         dont_understand:
-            phrase_ids: [sorry]
+            phrase_ids: [dont_understand]
             type: statement
         not_name:
-            phrase_ids: [not_a_name]
+            phrase_ids: [not_name]
             type: statement
         give_up:
             phrase_ids: [give_up]
@@ -33,10 +33,10 @@ lunchbox:
             phrase_ids: [weird_food_choice]
         unknown_single:
             type: statement
-            phrase_ids: [dunno]
+            phrase_ids: [unknown_single]
         unknown_pl:
             type: statement
-            phrase_ids: [dunno_pl]
+            phrase_ids: [unknown_pl]
         hear_race: 
             type: question
             phrase_ids: [race_question]
@@ -48,12 +48,9 @@ lunchbox:
         race_no:
             type: statement
             phrase_ids: [you_didnt]
-        race_story:
-            type: statement
-            phrase_ids: [dragon_race]
         help_me: 
             type: question
-            phrase_ids: [will_help]
+            phrase_ids: [dragon_race]
             responses: ['help_yes', 'help_no', repeat_no]
             terminal: ['help_yes']
         help_yes:
@@ -69,9 +66,6 @@ lunchbox:
         drink_intro:
             type: statement
             phrase_ids: [drink_intro]
-        drink_reminder:
-            type: statement
-            phrase_ids: [drink_reminder]
         drink_no_choice:
             type: statement
             phrase_ids: [drink_no_choice]
@@ -132,9 +126,6 @@ lunchbox:
         bread_intro:
             type: statement
             phrase_ids: [bread_intro]
-        bread_reminder:
-            type: statement
-            phrase_ids: [bread_reminder]
         bread_no_choice:
             type: statement
             phrase_ids: [bread_no_choice]
@@ -192,16 +183,40 @@ lunchbox:
         muffin-whbagel:
             type: statement
             phrase_ids:  [muffin_whbagel]
+        outro-bread-milk:
+            type: statement
+            phrase_ids: [outro-bread-milk]
+        outro-bread-water:
+            type: statement
+            phrase_ids: [outro-bread-water]
+        outro-bagel-milk:
+            type: statement
+            phrase_ids: [outro-bagel-milk]
+        outro-bagel-water:
+            type: statement
+            phrase_ids: [outro-bagel-water]
     workout:
         intro_dialogue:
             type: dialogue
-            items: [intro, music]
+            items: [intro, intro2, music, player, lets_go, energized_intro]
         intro:
             type: statement
-            phrase_ids: [workout_intro]
+            phrase_ids: ['workout_intro(2)']
+        intro2:
+            type: statement
+            phrase_ids: ['workout_intro']
+        energized_intro:
+            type: statement
+            phrase_ids: [energized_intro]
         music:
             type: statement
             phrase_ids: [workout_music]
+        player:
+            type: statement
+            phrase_ids: [music_player]
+        lets_go:
+            type: statement
+            phrase_ids: [lets_dance]
         energized_comment:
             type: statement
             phrase_ids: [yay, good_job, nice_moves, keep_up, good_music, love_song]
@@ -229,7 +244,7 @@ lunchbox:
             phrase_ids: [okay]
         yes_change:
             type: statement
-            phrase_ids: [okay]
+            phrase_ids: [here_we_go]
         no_change:
             type: question
             phrase_ids: [want_break]
@@ -237,7 +252,7 @@ lunchbox:
             terminal: [yes_break, no_break]
         yes_break:
             type: statement
-            phrase_ids: [okay]
+            phrase_ids: [okay_victory]
         no_break:
             type: statement
             phrase_ids: [okay_lets_dance]
@@ -246,9 +261,15 @@ lunchbox:
             phrase_ids: [wanna_see_victory]
             responses: [yes_victory, no_victory]
             terminal: [yes_victory, no_victory]
+        what_do_you_think:
+            type: dialogue
+            items: [what_think, faster_better]
         what_think:
             type: statement
             phrase_ids: [what_think]
+        faster_better:
+            type: statement
+            phrase_ids: [faster_better]
         yes_victory:
             type: statement
             phrase_ids: [great_here]

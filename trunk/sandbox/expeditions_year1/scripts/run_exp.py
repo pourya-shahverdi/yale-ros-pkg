@@ -12,8 +12,8 @@ import sys
 # class definitions for states are in the file experiment_states.py
 from experiment_states import *
 
-#from dragonbot_manager import DragonbotManager
-from dragonbot_simulator import DragonbotManager
+from dragonbot_manager import DragonbotManager
+#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 import yaml
 
@@ -21,7 +21,7 @@ def main():
     rospy.init_node('experiment_controller')
     sm = smach.StateMachine(outcomes=['end'])
 
-    lesson_list = {'lunchbox':("drinks", "whole_grains"),
+    lesson_list = {'lunchbox':("whole_grains", "drinks"),
                    'snacks':("snacks1", "snacks2"),
                    'breakfast':("cereal", "breakfast"),
                    'dinner':("sides1","sides2")}
@@ -77,7 +77,7 @@ def main():
         smach.StateMachine.add('F_CHOICE', FoodChoice(dm, tm, info, dialogue_info["foods"],food_info),
                                transitions={'panic':'SLEEP',
                                             'next_round':'F_CHOICE',
-                                            'done':'WORKOUT'})
+                                            'end':'WORKOUT'})
         smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
                                transitions={'panic':'SLEEP',
                                             'continue':'WORKOUT',

@@ -9,8 +9,8 @@ import actionlib
 
 from actionlib import *
 from actionlib.msg import *
-#from dragonbot_manager import DragonbotManager
-from dragonbot_simulator import DragonbotManager
+from dragonbot_manager import DragonbotManager
+#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
@@ -93,7 +93,7 @@ class Intro(smach.State):
 
 class FoodChoice(smach.State):
     def __init__(self, dm, tm, exp_info, dialogue_info, food_phrases):
-        smach.State.__init__(self, outcomes=['panic', 'next_round', 'done'])
+        smach.State.__init__(self, outcomes=['panic', 'next_round', 'end'])
         self.dm = dm
         self.tm = tm
         self.ntimes = 0
@@ -147,7 +147,7 @@ class FoodChoice(smach.State):
         self.ntimes = self.ntimes + 1
         if self.ntimes > len(self.lessons):
             self.ntimes = 0
-            return 'done'
+            return 'end'
         
         lesson_name = self.lessons[self.ntimes-1] #lessons 0-indexed
         current_lesson = self.fp[lesson_name] 
@@ -299,8 +299,9 @@ class Workout(smach.State):
                     continue
                 if "yes_break" in resp:
                     break
-                 
-            self.play_dialogue("energized_comment", False)
+            
+            if i % 10 == 0:
+                self.play_dialogue("energized_comment", False)
             move = i % len(routine)
             self.dm.pose(*self.poses[routine[move]])
             i = i + 1
@@ -313,6 +314,7 @@ class Workout(smach.State):
         else:
             self.play_dialogue("victory_dance")
             self.dm.express("victory_dance") # do the victory dance - not programmed (yet)
+            self.dm.express("what_do_you_think")
             return "end"
 
 class Outro(smach.State):
