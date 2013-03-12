@@ -133,7 +133,7 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
           System.out.println( "x: " + currentIK[0] + " y: " + currentIK[1] + " z: " + currentIK[2] + " theta: " + currentIK[3] + " neck: " + currentIK[4] );
           //if( count % 10000 == 0 )
           //{
-            //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
+            comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
             comm.sendIK(currentIK);
 
 
