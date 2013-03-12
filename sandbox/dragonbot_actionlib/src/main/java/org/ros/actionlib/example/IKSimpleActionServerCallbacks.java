@@ -113,9 +113,6 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
         comm.update();
         try { Thread.sleep(50); } catch (Exception e) {}
-        comm.sendOnOffControl(IK_CTRL.TURN_ON);
-        comm.update();
-        try { Thread.sleep(50); } catch (Exception e) {}
         float[] currentIK = comm.getIKCurrent();
         Float[] currentFilters = comm.getIKfilters();
         System.out.println( "vel: " + currentFilters[0] + " acc: " + currentFilters[1] );
@@ -124,7 +121,7 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         currentIK[2] = (float)goal.getZ();
         currentIK[3] = (float)goal.getTheta();
         currentIK[4] = (float)goal.getNeck();
-        comm.sendOnOffControl(IK_CTRL.TURN_ON);
+        //comm.sendOnOffControl(IK_CTRL.TURN_ON);
         count = 0;
         while(checkUpdate(actionServer))
         {
@@ -135,6 +132,9 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
           //{
             comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
             comm.sendIK(currentIK);
+        comm.sendOnOffControl(IK_CTRL.TURN_ON);
+        comm.update();
+        try { Thread.sleep(50); } catch (Exception e) {}
 
 
           //}
