@@ -110,10 +110,13 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
       }
       else
       {
+        //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
+        comm.update();
+        try { Thread.sleep(50); } catch (Exception e) {}
         comm.sendOnOffControl(IK_CTRL.TURN_ON);
+        comm.update();
+        try { Thread.sleep(50); } catch (Exception e) {}
         float[] currentIK = comm.getIKCurrent();
-
-
         Float[] currentFilters = comm.getIKfilters();
         System.out.println( "vel: " + currentFilters[0] + " acc: " + currentFilters[1] );
         currentIK[0] = (float)goal.getX();
@@ -128,13 +131,13 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
           float[] newIK = comm.getIKCurrent();
           System.out.println( "x: " + newIK[0] + " y: " + newIK[1] + " z: " + newIK[2] + " theta: " + newIK[3] + " neck: " + newIK[4] );
           System.out.println( "x: " + currentIK[0] + " y: " + currentIK[1] + " z: " + currentIK[2] + " theta: " + currentIK[3] + " neck: " + currentIK[4] );
-          if( count % 10000 == 0 )
-          {
+          //if( count % 10000 == 0 )
+          //{
             //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
             comm.sendIK(currentIK);
 
 
-          }
+          //}
           comm.update();
           try {
             Thread.sleep(33);
@@ -172,8 +175,12 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
 
       else
       {
-        comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());	
+        comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
+        comm.update();
+        try { Thread.sleep(50); } catch (Exception e) {}
         comm.sendOnOffControl(IK_CTRL.TURN_ON);
+        comm.update();
+        try { Thread.sleep(50); } catch (Exception e) {}
         float[] currentIK = new float[5];
         if(goal.getX() > IK_RANGE.MAX_X*10000) goal.setX( IK_RANGE.MAX_X*10000);
         if(goal.getX() < IK_RANGE.MIN_X*10000) goal.setX( IK_RANGE.MIN_X*10000);
