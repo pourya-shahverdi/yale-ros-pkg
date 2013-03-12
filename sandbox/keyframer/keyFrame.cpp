@@ -53,7 +53,7 @@
 
 using namespace std;
 
-Fl_Hor_Value_Slider* sliders[4];
+Fl_Hor_Value_Slider* sliders[5];
 Fl_Select_Browser* output;
 Fl_Input* textBox;
 ofstream outputFile;
@@ -69,15 +69,16 @@ void slider_cb(Fl_Widget* o, void*) {
   double yVal = sliders[1]->value();
   double zVal = sliders[2]->value();
   double tVal = sliders[3]->value();
+  double nVal = sliders[4]->value();
 
-  printf("%0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal);
+  printf("(%0.2f, %0.2f, %0.2f) : (%0.2f, %0.2f)\n", xVal, yVal, zVal, tVal, nVal);
   
   dragon_msgs::IKGoal goal;
   goal.x = xVal;
   goal.y = yVal;
   goal.z = zVal;
   goal.theta = tVal;
-  goal.neck = 0;
+  goal.neck = nVal;
   goal.state = std::string("on");
   ac->sendGoal(goal);
   
@@ -90,6 +91,7 @@ void button_cb(Fl_Widget* o, void*) {
   double yVal = sliders[1]->value();
   double zVal = sliders[2]->value();
   double tVal = sliders[3]->value();
+  double nVal = sliders[4]->value();
 
   stringstream convertX;
   convertX << xVal;
@@ -99,11 +101,13 @@ void button_cb(Fl_Widget* o, void*) {
   convertZ << zVal;
   stringstream convertT;
   convertT << tVal;
+  stringstream convertN;
+  convertN << nVal;
 
-  string s = convertX.str() + "," + convertY.str() + "," + convertZ.str() + "," + convertT.str(); 
+  string s = convertX.str() + "," + convertY.str() + "," + convertZ.str() + "," + convertT.str() + "," + convertN.str(); 
   output->add(s.c_str());
 
-  printf("%0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal);
+  printf("%0.2f, %0.2f, %0.2f, %0.2f, %0.2f\n", xVal, yVal, zVal, tVal, nVal);
 
   if (firstFrame){
     string name = textBox->value();
@@ -141,24 +145,27 @@ int main(int argc, char **argv) {
   //outputFile.open(argv[1]);
   outputFile.open("savedFrames.yaml");
 
-  Fl_Window *window = new Fl_Window(340,600);
+  Fl_Window *window = new Fl_Window(380,600);
 
   Fl_Hor_Value_Slider *xSlider = new Fl_Hor_Value_Slider(20,20,310,20, "x value");
   Fl_Hor_Value_Slider *ySlider = new Fl_Hor_Value_Slider(20,60,310,20, "y value");
   Fl_Hor_Value_Slider *zSlider = new Fl_Hor_Value_Slider(20,100,310,20, "z value");
   Fl_Hor_Value_Slider *tSlider = new Fl_Hor_Value_Slider(20,140,310,20, "theta value");
+  Fl_Hor_Value_Slider *nSlider = new Fl_Hor_Value_Slider(20,180,310,20, "neck value");
 
-  xSlider->bounds(-80, 80);
-  ySlider->bounds(-80, 80);
-  zSlider->bounds(69, 150);
-  tSlider->bounds(-60, 60);
+  xSlider->bounds(-7.6199, 7.3942);
+  ySlider->bounds(-2.4999, 4.8488);
+  zSlider->bounds(7.62, 7.62);
+  tSlider->bounds(-0.7853, 0.7621);
+  nSlider->bounds(-0.1745, 0.7621);
 
   sliders[0] = xSlider;
   sliders[1] = ySlider;
   sliders[2] = zSlider;
   sliders[3] = tSlider;
+  sliders[4] = nSlider;
 
-  int frame_yPos = 180;
+  int frame_yPos = 220;
 
   Fl_Button *button = new Fl_Button(110, frame_yPos, 100, 30, "FRAME");
 
@@ -170,6 +177,7 @@ int main(int argc, char **argv) {
   ySlider->callback(slider_cb);
   zSlider->callback(slider_cb);
   tSlider->callback(slider_cb);
+  nSlider->callback(slider_cb);
   button->callback(button_cb);
 
   Fl_Button *delButton = new Fl_Button(50, frame_yPos+330, 100, 30, "delete frame");
