@@ -12,6 +12,7 @@ The checkout of the repositories can be automated. However, the installation of 
 = To Download the Repositories =
 
   # install ROS fuerte: http://www.ros.org/wiki/fuerte/Installation/Ubuntu
+  # install java: sudo apt-get install openjava-7-jdk
   # install rosws: http://www.ros.org/doc/independent/api/rosinstall/html/
   # checkout the respositories into a workspace {{{<ws_name>}}}:
 {{{
