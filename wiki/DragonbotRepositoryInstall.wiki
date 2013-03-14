@@ -12,7 +12,7 @@ The checkout of the repositories can be automated. However, the installation of 
 = To Download the Repositories =
 
   # install ROS fuerte: http://www.ros.org/wiki/fuerte/Installation/Ubuntu
-  # install rosws: http://www.ros.org/doc/api/rosinstall/html/
+  # install rosws: http://www.ros.org/doc/independent/api/rosinstall/html/
   # checkout the respositories into a workspace {{{<ws_name>}}}:
 {{{
 > rosws init ~/<ws_name> /opt/ros/fuerte
