@@ -70,6 +70,7 @@
       topic: dragon_GUI/stopped_dancing
 
 
+
 - gui: lunchbox_outro_wrap_up
   elements:
   - type: button_group
@@ -128,11 +129,11 @@
   elements:
   - type: button_group
     label: whole_grains
-    label_string: bagel;muffin;white;grain;whbagel;reminder;no_choice;next;panic
+    label_string: bagel;muffin;white;grain;whbagel;no_choice;next;panic
     topic: dragon_GUI/whole_grains
 - gui: drinks
   elements:
   - type: button_group
     label: drinks
-    label_string: water;juice;milk;chocolate_milk;soda;reminder;no_choice;next;panic
+    label_string: water;juice;milk;chocolate_milk;soda;no_choice;next;panic
     topic: dragon_GUI/drinks
