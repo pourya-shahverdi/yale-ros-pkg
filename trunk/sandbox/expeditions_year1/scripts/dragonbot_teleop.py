@@ -7,26 +7,81 @@ import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
 from dragonbot_manager import DragonbotManager
 from std_msgs.msg import String
+from std_msgs.msg import Int32
 
 class DragonTeleop():
     def __init__(self):
         self.dm = DragonbotManager()
+        self.dm.pose_off()
         self.exp_sub = rospy.Subscriber("/dragon_teleop_GUI/expressions", String, self.exp_callback)
         self.mot_sub = rospy.Subscriber("/dragon_teleop_GUI/motions", String, self.mot_callback)
         self.ph_sub = rospy.Subscriber("/dragon_teleop_GUI/phrases", String, self.ph_callback)
+
+        self.pose_on_sub = rospy.Subscriber("/dragon_teleop_GUI/pose_on", String, self.pos_on_cb)
+        self.x_sub = rospy.Subscriber("/dragon_teleop_GUI/pose_x", Int32, self.x_pos_cb)
+        self.y_sub = rospy.Subscriber("/dragon_teleop_GUI/pose_y", Int32, self.y_pos_cb)
+        self.z_sub = rospy.Subscriber("/dragon_teleop_GUI/pose_z", Int32, self.z_pos_cb)
+
+
         rospy.loginfo("Ready!")
+        self.current_pose = [0,0,0]
+        self.pose_on = False
+
+        self.x_min = -2.3
+        self.x_max = 2.5
+        self.x_range = self.x_max - self.x_min
+        self.y_min = -2.49
+        self.y_max = 3.4
+        self.y_range = self.y_max - self.y_min
+        self.z_min = -2.0
+        self.z_max = 2.6
+        self.z_range = self.z_max - self.z_min
+
+        self.v = 1
+        self.a = .05
 
     def exp_callback(self, data):
         rospy.loginfo("Got expression: " + data.data)
-        self.dm.express(data.data, "expression")
+        self.dm.express(data.data)
 
     def mot_callback(self, data):
         rospy.loginfo("Got motion: " + data.data)
-        self.dm.express(data.data, "motion")
+        self.dm.express(data.data)
 
     def ph_callback(self, data):
         rospy.loginfo("Got phrase: " + data.data)
         self.dm.say(data.data)
+
+    def pos_on_cb(self, data):
+        rospy.loginfo("Setting pose to: " + data.data)
+        if data.data == "on":
+            self.current_pose = [0,0,0]
+            self.dm.pose(0,0,0)
+            self.pose_on = True
+        elif data.data == " off":
+            self.pose_on = False
+            self.dm.pose_off()
+
+    def x_pos_cb(self, data):
+        rospy.loginfo("Got x pose value: " + str(data.data))
+        if self.pose_on:
+            self.current_pose[0] = self.x_min + (float(data.data)/100) * self.x_range
+            rospy.loginfo("Setting pose to: " + str(self.current_pose))
+            self.dm.pose(self.current_pose[0], self.current_pose[1], self.current_pose[2], vel = self.v, acc = self.a)
+
+    def y_pos_cb(self, data):
+        rospy.loginfo("Got y pose value: " + str(data.data))
+        if self.pose_on:
+            self.current_pose[1] = self.y_min + (float(data.data)/100) * self.y_range
+            rospy.loginfo("Setting pose to: " + str(self.current_pose))
+            self.dm.pose(self.current_pose[0], self.current_pose[1], self.current_pose[2], vel = self.v, acc = self.a)
+
+    def z_pos_cb(self, data):
+        rospy.loginfo("Got z pose value: " + str(data.data))
+        if self.pose_on:
+            self.current_pose[2] = self.z_min + (float(data.data)/100) * self.z_range
+            rospy.loginfo("Setting pose to: " + str(self.current_pose))
+            self.dm.pose(self.current_pose[0], self.current_pose[1], self.current_pose[2], vel = self.v, acc = self.a)
 
 
 def main():
