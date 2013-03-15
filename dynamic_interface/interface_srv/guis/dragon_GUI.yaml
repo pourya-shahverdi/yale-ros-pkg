@@ -20,6 +20,25 @@
       max: 100
       topic: dragon_teleop_GUI/pose_z
     - type: button_group
+      label: Look At
+      label_string: on; off
+      topic: dragon_teleop_GUI/lookat_on
+    - type: int_slider
+      label: Lookat X
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/look_x
+    - type: int_slider
+      label: Lookat Y
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/look_y
+    - type: int_slider
+      label: Lookat Z
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/look_z
+    - type: button_group
       label: Expressions
       label_string: angry;disgusted;frustrated;mischievous;shy;bored;ecstatic
       topic: dragon_teleop_GUI/expressions
