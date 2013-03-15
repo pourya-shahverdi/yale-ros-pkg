@@ -1,6 +1,25 @@
 - gui: Dragonbot Teleop
   elements:
     - type: button_group
+      label: Pose
+      label_string: on; off
+      topic: dragon_teleop_GUI/pose_on
+    - type: int_slider
+      label: Pose X
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/pose_x
+    - type: int_slider
+      label: Pose Y
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/pose_y
+    - type: int_slider
+      label: Pose Z
+      min: 0
+      max: 100
+      topic: dragon_teleop_GUI/pose_z
+    - type: button_group
       label: Expressions
       label_string: angry;disgusted;frustrated;mischievous;shy;bored;ecstatic
       topic: dragon_teleop_GUI/expressions
