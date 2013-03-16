@@ -53,7 +53,7 @@ def main():
         print "  elements:"
         print "  - type: button_group"
         print "    label: " + lesson
-        print ("    label_string: " + ";".join(foods) + ";reminder;no_choice;next;panic") #.strip(;)
+        print ("    label_string: " + ";".join(foods) + ";no_choice;next;panic") #.strip(;)
         print "    topic: " + gui_prefix + lesson
 
 

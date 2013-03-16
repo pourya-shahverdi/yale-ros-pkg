@@ -51,7 +51,7 @@ lunchbox:
         help_me: 
             type: question
             phrase_ids: [dragon_race]
-            responses: ['help_yes', 'help_no', repeat_no]
+            responses: [help_yes, help_no, repeat_no]
             terminal: ['help_yes']
         help_yes:
             type: statement
@@ -86,31 +86,31 @@ lunchbox:
             phrase_ids: [none_soda]
         dr_repeat:
             type: statement
-            phrase_ids: [dr_repeat]
+            phrase_ids: [drink_reminder]
         choc-juice:
             type: statement
             phrase_ids: [choc_juice]
         choc-soda:
             type: statement
-            phrase_ids: [choc_soda]
+            phrase_ids: [none_soda]
         choc-milk:
             type: statement
-            phrase_ids: [choc_milk]
+            phrase_ids: [none_milk]
         choc-water:
             type: statement
-            phrase_ids: [choc_water]
+            phrase_ids: [none_water]
         juice-choc:
             type: statement
             phrase_ids: [juice_choc]
         juice-soda:
             type: statement
-            phrase_ids: [juice_soda]
+            phrase_ids: [none_soda]
         juice-milk:
             type: statement
-            phrase_ids: [juice_milk]
+            phrase_ids: [none_milk]
         juice-water:
             type: statement
-            phrase_ids: [juice_water]
+            phrase_ids: [none_water]
         soda-choc:
             type: statement
             phrase_ids: [soda_choc]
@@ -119,10 +119,10 @@ lunchbox:
             phrase_ids: [soda_juice]
         soda-milk:
             type: statement
-            phrase_ids: [soda_milk]
+            phrase_ids: [none_milk]
         soda-water:
             type: statement
-            phrase_ids: [soda_water]
+            phrase_ids: [none_water]
         bread_intro:
             type: statement
             phrase_ids: [bread_intro]
@@ -146,16 +146,16 @@ lunchbox:
             phrase_ids: [none_muffin]
         grain_repeat:
             type: statement
-            phrase_ids: [grain_repeat]
+            phrase_ids: [bread_reminder]
         white-grain:
             type: statement
-            phrase_ids:  [white_grain]
+            phrase_ids:  [none_grain]
         white-bagel:
             type: statement
-            phrase_ids: [white_bagel]
+            phrase_ids: [bagel_white]
         white-whbagel:
             type: statement
-            phrase_ids: [white_whbagel]
+            phrase_ids: [none_whbagel]
         white-muffin:
             type: statement
             phrase_ids: [white_muffin]
@@ -164,25 +164,25 @@ lunchbox:
             phrase_ids: [bagel_white]
         bagel-grain:
             type: statement
-            phrase_ids: [bagel_grain]
+            phrase_ids: [none_grain]
         bagel-whbagel:
             type: statement
-            phrase_ids: [bagel_whbagel]
+            phrase_ids: [none_whbagel]
         bagel-muffin:
             type: statement
-            phrase_ids:  [bagel_muffin]
+            phrase_ids:  [white_muffin]
         muffin-white:
             type: statement
             phrase_ids: [muffin_white]
         muffin-grain:
             type: statement
-            phrase_ids:  [muffin_grain]
+            phrase_ids:  [none_grain]
         muffin-bagel:
             type: statement
-            phrase_ids:  [muffin_bagel]
+            phrase_ids:  [muffin_white]
         muffin-whbagel:
             type: statement
-            phrase_ids:  [muffin_whbagel]
+            phrase_ids:  [none_whbagel]
         outro-bread-milk:
             type: statement
             phrase_ids: [outro-bread-milk]
@@ -198,7 +198,10 @@ lunchbox:
     workout:
         intro_dialogue:
             type: dialogue
-            items: [intro, intro2, music, player, lets_go, energized_intro]
+            items: [intro, intro2]
+        post_music:
+            type: dialogue
+            items: [music, lets_go]
         intro:
             type: statement
             phrase_ids: ['workout_intro(2)']
@@ -211,9 +214,6 @@ lunchbox:
         music:
             type: statement
             phrase_ids: [workout_music]
-        player:
-            type: statement
-            phrase_ids: [music_player]
         lets_go:
             type: statement
             phrase_ids: [lets_dance]
@@ -225,7 +225,7 @@ lunchbox:
             items: [encourage_dance, keep_going]      
         encourage_dance:
             type: statement
-            phrase_ids: [lets_continue, like_music, dance_reminder]
+            phrase_ids: [lets_continue, like_music]
         keep_going:
             type: question
             phrase_ids: [can_keep_going]
@@ -244,7 +244,7 @@ lunchbox:
             phrase_ids: [okay]
         yes_change:
             type: statement
-            phrase_ids: [here_we_go]
+            phrase_ids: [great_here]
         no_change:
             type: question
             phrase_ids: [want_break]

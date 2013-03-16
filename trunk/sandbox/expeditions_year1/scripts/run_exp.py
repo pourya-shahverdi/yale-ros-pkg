@@ -18,6 +18,10 @@ from tablet_manager import TabletManager
 import yaml
 
 def main():
+    if not len(sys.argv) == 2:
+        print "Usage: run_exp.py [day_id]"
+        sys.exit()
+
     rospy.init_node('experiment_controller')
     sm = smach.StateMachine(outcomes=['end'])
 
