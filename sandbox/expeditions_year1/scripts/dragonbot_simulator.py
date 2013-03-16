@@ -5,8 +5,6 @@
 
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
-from threading import Thread
-from threading import Event
 import yaml
 from dragon_msgs.msg import *
 from sound_play.msg import SoundRequest
@@ -145,7 +143,7 @@ def main():
 
     dm = DragonbotManager()
 
-    dm.load_phrases("phrases.yaml")
+    #dm.load_phrases("phrases.yaml")
 
     dm.say("teaching")
 

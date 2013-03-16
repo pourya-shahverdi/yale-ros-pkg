@@ -40,6 +40,9 @@ class DragonbotManager():
         self.lookat_client.wait_for_server()
         rospy.loginfo(" --- TF Tracking")
         self.track_client.wait_for_server()
+        rospy.loginfo(" --- Speech")
+        self.speech_client.wait_for_server()
+
         rospy.loginfo("Action servers connected")
 
         rospy.loginfo("Zeroing dragonbot")
@@ -49,6 +52,7 @@ class DragonbotManager():
         self.lookat_client.send_goal(goal)
         goal = dragon_msgs.msg.TrackGoal(on = False)
         self.track_client.send_goal(goal)
+        self.pose_off()
 
         self.expressions = ["angry",
                             "disgusted",
@@ -102,6 +106,17 @@ class DragonbotManager():
                         #"weee",
                         "yawn"]
 
+    def stop_speech(self):
+        rospy.loginfo("Zeroing dragonbot")
+        self.viseme_client.cancel_all_goals()
+        self.express_client.cancel_all_goals()
+        goal = dragon_msgs.msg.LookatGoal(state = "off")
+        self.lookat_client.send_goal(goal)
+        goal = dragon_msgs.msg.TrackGoal(on = False)
+        self.track_client.send_goal(goal)
+        self.speech_client.cancel_all_goals()
+        self.pose_off()
+
     
     def track_frame(self, frame_name):
         goal = dragon_msgs.msg.TrackGoal(target = frame_name, on = True)
@@ -111,9 +126,11 @@ class DragonbotManager():
         goal = dragon_msgs.msg.TrackGoal(on = False)
         self.track_client.send_goal(goal)
 
-    def say(self, phrase_name):
-         goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name)
+    def say(self, phrase_name,interrupt = True, wait = False):
+         goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name, interrupt=interrupt)
          self.speech_client.send_goal(goal)
+         if wait:
+             self.speech_client.wait_for_result()
 
 
     #loads phrases from a yaml file
@@ -144,21 +161,88 @@ class DragonbotManager():
         if expression_type == "motion" or expression_type == None:
             if expression_id in self.motions:
                 goal = dragon_msgs.msg.ExpressionMotionGoal(type='motion',constant=expression_id)
-                recognizsed = True
+                recognized = True
             else:
                 rospy.logwarn("Motion not recognized")
         if recognized:
             self.express_client.send_goal(goal)
+            self.express_client.wait_for_result()
         
+
+    def pose_off(self):
+        rospy.loginfo("Idling dragonbot")
+        goal = dragon_msgs.msg.IKGoal(state = "off", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
+        self.ik_client.send_goal(goal)
         
-    def pose(self, vel, acc, x, y, z, theta, neck):
-        goal = dragon_msgs.msg.IKGoal(vel = vel, acc = acc, x = x, y = y, z = z, theta = theta, neck = neck)
+
+        
+    def pose(self, x, y, z, theta = 0, neck = 0, vel=0.3, acc=0.001):
+        #range for x (back/forward): -2.3,2.5
+        #range for y (right/left): -2.49,3.4
+        #range for z (down/up): -2.0,2.6
+        # theta --> better not to use
+        # neck --> not currently working
+        state = "on"
+
+        if not theta == 0:
+            rospy.logwarn("For now, don't use theta")
+            theta = 0
+        if not neck == 0:
+            rospy.logwarn("Neck not working.")
+            neck = 0
+        if x > 2.5:
+            rospy.logwarn("Pose x value too large, setting to max value")
+            x = 2.5
+        if x < -2.3:
+            rospy.logwarn("Pose x value too small, setting to min value")
+            x = -2.3
+        if y > 3.4:
+            rospy.logwarn("Pose y value too large, setting to max value")
+            y = 3.4
+        if y < -2.49:
+            rospy.logwarn("Pose y value too small, setting to min value")
+            y = -2.49
+        if z > 2.6:
+            rospy.logwarn("Pose z value too large, setting to max value")
+            z = 2.6
+        if z < -2.0:
+            rospy.logwarn("Pose z value too small, setting to min value")
+            z = -2.0
+
+        goal = dragon_msgs.msg.IKGoal(state = state, vel = vel, acc = acc, x = x, y = y, z = z, theta = theta, neck = neck)
         self.ik_client.send_goal(goal)
 
     def lookat(self, x, y, z):
-        # range for x: -300,300
-        # range for y: -300,300
-        # range for z: 20,400
+        # range for x (right/left): -300,300
+        # range for y (down/up): -300,300
+        # range for z (near/far): 20,400
+        # note: state variable can have values: off, random, <anything else>
+        
+        if x > 300:
+            rospy.logwarn("Pose x value too large, setting to max value")
+            x = 300
+        if x < -300:
+            rospy.logwarn("Pose x value too small, setting to min value")
+            x = -300
+        if y > 300:
+            rospy.logwarn("Pose y value too large, setting to max value")
+            y = 300
+        if y < -300:
+            rospy.logwarn("Pose y value too small, setting to min value")
+            y = -300
+        if z > 400:
+            rospy.logwarn("Pose z value too large, setting to max value")
+            z = 400
+        if z < 20:
+            rospy.logwarn("Pose z value too small, setting to min value")
+            z = 20
+
+
+
+        if(float(x)/float(z) > 0.5):
+            rospy.logwarn("Invalid lookat, twist value too high, looking at max value")
+            x = int(float(z)/2.0)
+
         goal = dragon_msgs.msg.LookatGoal(x = x, y = y, z = z)
         self.lookat_client.send_goal(goal)
 
@@ -180,91 +264,28 @@ def main():
 
     dm = DragonbotManager()
 
-    dm.load_phrases("phrases.yaml")
-
-    '''dm.lookat(0, 0 ,400)
-    rospy.sleep(5.0)
-    dm.lookat_off()
-    dm.lookat(100,100,30)
-    rospy.sleep(5.0)
-    dm.lookat(0,0,400)
-    rospy.sleep(5.0)
-    #dm.lookat_frame("target")
-
-    rospy.sleep(5.0)
-
-    dm.track_frame("target")
-    rospy.sleep(5.0)
-    dm.track_off()'''
-
-
-    dm.say("teaching")
-    rospy.sleep(30)
-
-
-    expressions = ["angry",
-                   "disgusted",
-                   "frustrated",
-                   "mischievous",
-                   "shy",
-                   "bored",
-                   "bored_unimpressed",
-                   "ecstatic",
-                   "happy",
-                   "puppy",
-                   "surprised",
-                   "confused",
-                   "frightened",
-                   "lovestruck",
-                   "sad"]
+    #dm.load_phrases("phrases.yaml")
+    rospy.sleep(3)
+    print("POSING")
+    dm.pose(0,0,0, vel = 0.1)
+    rospy.sleep(5)
     
-    motions = ["afraid",
-               "blech",
-               "farted",
-               "idunno",
-               "interest",
-               "mmhmmm",
-               "no",
-               "shy",
-               "think",
-               "whoah",
-               "yes",
-               "anticipation",
-               "cheer",
-               "heh",
-               "ilikeit",
-               "i_like_it",
-               "laugh",
-               "mph",
-               "question",
-               "sneeze",
-               "wakeup",
-               "yay",
-               "yummm",
-               "bite",
-               "crazy_laugh",
-               "hungry",
-               "iwantit",
-               "i_want_it",
-               "meh",
-               "nah_nah",
-               "nahnah",
-               "sad",
-               "surprise",
-               "weee",
-               "yawn"]
-
-    '''for expression in motions:
-        dm.express(expression)
-        rospy.sleep(7)
-
-    for expression in expressions:
-        dm.express(expression)
-        rospy.sleep(3.0)
-
-    for motion in motions:
-        dm.express(motion)
-        rospy.sleep(5.0)'''
-
+    v = 1
+    a = 0.05
+    print "LEFT"
+    dm.pose(0,1.5,0, vel = v, acc = a)
+    rospy.sleep(2)
+    print "RIGHT"
+    dm.pose(0,-1.5,0, vel = v, acc = a)
+    rospy.sleep(2)
+    print "UP"
+    dm.pose(0,0,1, vel = v, acc = a)
+    rospy.sleep(2)
+    print "DOWN"
+    dm.pose(0,0,-1, vel = v, acc = a)
+    rospy.sleep(3)
+    print "ZERO"
+    dm.pose(0,0,0, vel = 0.1)
+    
 if __name__ == '__main__':
     main()
