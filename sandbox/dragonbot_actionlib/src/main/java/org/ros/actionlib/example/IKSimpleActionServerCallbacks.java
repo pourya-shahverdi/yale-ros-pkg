@@ -113,9 +113,11 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
         comm.update();
         try { Thread.sleep(50); } catch (Exception e) {}
+        checkUpdate(actionServer);
         comm.sendOnOffControl(IK_CTRL.TURN_ON);
         comm.update();
         try { Thread.sleep(50); } catch (Exception e) {}
+        checkUpdate(actionServer);
         float[] currentIK = comm.getIKCurrent();
         Float[] currentFilters = comm.getIKfilters();
         System.out.println( "vel: " + currentFilters[0] + " acc: " + currentFilters[1] );
@@ -137,7 +139,7 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
             comm.sendIK(currentIK);
 
           //}
-          comm.update();
+            comm.update();
           try {
             Thread.sleep(33);
           } catch (Exception e ) {}
