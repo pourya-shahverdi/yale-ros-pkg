@@ -170,6 +170,9 @@ class DragonbotManager():
         
 
     def pose_off(self):
+        print "Pose disabled"
+        return
+
         rospy.loginfo("Idling dragonbot")
         goal = dragon_msgs.msg.IKGoal(state = "off", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
         self.ik_client.send_goal(goal)
@@ -177,6 +180,9 @@ class DragonbotManager():
 
         
     def pose(self, x, y, z, theta = 0, neck = 0, vel=0.3, acc=0.001):
+        print "Pose disabled."
+        return
+
         #range for x (back/forward): -2.3,2.5
         #range for y (right/left): -2.49,3.4
         #range for z (down/up): -2.0,2.6
@@ -267,6 +273,8 @@ def main():
     #dm.load_phrases("phrases.yaml")
     rospy.sleep(3)
     print("POSING")
+    dm.pose_off()
+
     dm.pose(0,0,0, vel = 0.1)
     rospy.sleep(5)
     

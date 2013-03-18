@@ -343,10 +343,24 @@ class Workout(smach.State):
             self.dm.pose_off()
             return 'timeout'
         else:
-            self.dg.play_dialogue("victory_dance")
-            self.do_victory() # do the victory dance - not programmed (yet)
+            try:
+                self.dg.play_dialogue("victory_dance")
+            except PanicException:
+                self.sc.stopAll()
+                return 'panic'
+            except NextStateException:
+                self.sc.stopAll()
+                return 'end'
+            self.do_victory() 
             self.dm.pose_off()
-            self.dg.play_dialogue("what_do_you_think")
+            try:
+                self.dg.play_dialogue("what_do_you_think")
+            except PanicException:
+                self.sc.stopAll()
+                return 'panic'
+            except NextStateException:
+                self.sc.stopAll()
+                return 'end'
             return "end"
 
 
