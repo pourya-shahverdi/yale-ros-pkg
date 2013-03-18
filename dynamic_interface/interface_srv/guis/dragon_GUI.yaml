@@ -68,7 +68,7 @@
       topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Phrases
-      label_string: teaching;--;--;--;--;--;--
+      label_string: weird_food_choice;dragon_race;great;not_name;yay;workout_music;none_soda
       topic: dragon_teleop_GUI/phrases
 - gui: sleep
   elements:
