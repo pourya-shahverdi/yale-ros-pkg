@@ -27,6 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include <ros/ros.h>
+#include <actionlib/client/simple_action_client.h>
+#include <actionlib/client/terminal_state.h>
+#include <dragon_msgs/IKAction.h>
+#include <geometry_msgs/Pose.h>
+
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
@@ -44,12 +50,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
-#include <ros/ros.h>
-#include <actionlib/client/simple_action_client.h>
-#include <actionlib/client/terminal_state.h>
-#include <dragon_msgs/IKAction.h>
-#include <geometry_msgs/Pose.h>
 
 using namespace std;
 
@@ -155,7 +155,7 @@ int main(int argc, char **argv) {
 
   xSlider->bounds(-7.6199, 7.3942);
   ySlider->bounds(-2.4999, 4.8488);
-  zSlider->bounds(7.62, 7.62);
+  zSlider->bounds(-7.62, 7.62);
   tSlider->bounds(-0.7853, 0.7621);
   nSlider->bounds(-0.1745, 0.7621);
 
