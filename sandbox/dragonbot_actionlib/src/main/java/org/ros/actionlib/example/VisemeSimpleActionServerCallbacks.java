@@ -118,6 +118,9 @@ public class VisemeSimpleActionServerCallbacks
     if(goal.getConstant().equalsIgnoreCase("off"))
 	  {
   		comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
+      VisemeResult result = newResultMessage();
+      result.setResult("Viseme CTRL set to off" );
+      actionServer.setSucceeded(result,"");
 	  }
     else
 	  {

@@ -107,16 +107,23 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
       if(goal.getState().equalsIgnoreCase("off"))
       {
         comm.sendOnOffControl(IK_CTRL.TURN_OFF);
+        IKResult result = newResultMessage();
+        result.setResult( "IK_CTRL set to off" );
+        actionServer.setSucceeded(result, "");
       }
       else
       {
         //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
         comm.update();
-        try { Thread.sleep(50); } catch (Exception e) {}
+        try { Thread.sleep(50); } catch (Exception e) {
+          System.err.println( "Exception: " + e.toString() );  
+        }
         checkUpdate(actionServer);
         comm.sendOnOffControl(IK_CTRL.TURN_ON);
         comm.update();
-        try { Thread.sleep(50); } catch (Exception e) {}
+        try { Thread.sleep(50); } catch (Exception e) {
+          System.err.println( "Exception: " + e.toString() );
+        }
         checkUpdate(actionServer);
         float[] currentIK = comm.getIKCurrent();
         Float[] currentFilters = comm.getIKfilters();
@@ -142,7 +149,9 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
             comm.update();
           try {
             Thread.sleep(33);
-          } catch (Exception e ) {}
+          } catch (Exception e ) {
+            System.err.println( "Exception: " + e.toString() );  
+          }
           count++;
         }
       }
