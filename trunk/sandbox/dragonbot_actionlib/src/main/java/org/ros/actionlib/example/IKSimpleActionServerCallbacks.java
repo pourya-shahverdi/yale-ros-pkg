@@ -137,6 +137,7 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         //comm.sendOnOffControl(IK_CTRL.TURN_ON);
         count = 0;
         //while(checkUpdate(actionServer))
+	for( int i = 0; i < 10 && checkUpdate(actionServer); i++ )
         {
           float[] newIK = comm.getIKCurrent();
           System.out.println( "newIK x: " + newIK[0] + " y: " + newIK[1] + " z: " + newIK[2] + " theta: " + newIK[3] + " neck: " + newIK[4] );
@@ -148,16 +149,17 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
 
           //}
             comm.update();
-          /*try {
-            Thread.sleep(1000);
+          try {
+            Thread.sleep(50);
           } catch (Exception e ) {
             System.err.println( "Exception: " + e.toString() );  
-          }*/
+          }
+            comm.update();
           count++;
-	  IKResult result = newResultMessage();
-	  result.setResult("IK position set" );
-	  actionServer.setSucceeded(result,"");
         }
+	IKResult result = newResultMessage();
+	result.setResult("IK position set" );
+	actionServer.setSucceeded(result,"");
       }
     }
 
