@@ -128,6 +128,7 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         float[] currentIK = comm.getIKCurrent();
         Float[] currentFilters = comm.getIKfilters();
         System.out.println( "vel: " + currentFilters[0] + " acc: " + currentFilters[1] );
+	System.out.println( "goal: " + goal.getX() + "," + goal.getY() + "," + goal.getZ() );
         currentIK[0] = (float)goal.getX();
         currentIK[1] = (float)goal.getY();
         currentIK[2] = (float)goal.getZ();
@@ -135,24 +136,27 @@ SimpleActionServerCallbacks<IKActionFeedback, IKActionGoal, IKActionResult, IKFe
         currentIK[4] = (float)goal.getNeck();
         //comm.sendOnOffControl(IK_CTRL.TURN_ON);
         count = 0;
-        while(checkUpdate(actionServer))
+        //while(checkUpdate(actionServer))
         {
           float[] newIK = comm.getIKCurrent();
-          System.out.println( "x: " + newIK[0] + " y: " + newIK[1] + " z: " + newIK[2] + " theta: " + newIK[3] + " neck: " + newIK[4] );
-          System.out.println( "x: " + currentIK[0] + " y: " + currentIK[1] + " z: " + currentIK[2] + " theta: " + currentIK[3] + " neck: " + currentIK[4] );
+          System.out.println( "newIK x: " + newIK[0] + " y: " + newIK[1] + " z: " + newIK[2] + " theta: " + newIK[3] + " neck: " + newIK[4] );
+          System.out.println( "oldIK x: " + currentIK[0] + " y: " + currentIK[1] + " z: " + currentIK[2] + " theta: " + currentIK[3] + " neck: " + currentIK[4] );
           //if( count % 10000 == 0 )
           //{
-            comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
+            //comm.setIKfilters((float)goal.getVel(), (float)goal.getAcc());
             comm.sendIK(currentIK);
 
           //}
             comm.update();
-          try {
-            Thread.sleep(33);
+          /*try {
+            Thread.sleep(1000);
           } catch (Exception e ) {
             System.err.println( "Exception: " + e.toString() );  
-          }
+          }*/
           count++;
+	  IKResult result = newResultMessage();
+	  result.setResult("IK position set" );
+	  actionServer.setSucceeded(result,"");
         }
       }
     }
