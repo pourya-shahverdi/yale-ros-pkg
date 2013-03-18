@@ -108,10 +108,16 @@ SimpleActionServerCallbacks<LookatActionFeedback, LookatActionGoal, LookatAction
       {
         comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
         comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+        LookatResult result = newResultMessage();
+        result.setResult("Lookat CTRL set to off" );
+        actionServer.setSucceeded(result,"");
       }
       else if(goal.getState().equalsIgnoreCase("random"))
       {
         comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
+        LookatResult result = newResultMessage();
+        result.setResult("Lookat CTRL set to random" );
+        actionServer.setSucceeded(result,"");
       }
       else
       {
@@ -140,8 +146,6 @@ SimpleActionServerCallbacks<LookatActionFeedback, LookatActionGoal, LookatAction
         comm.sendLookat(currentLookat);
         comm.update();
         count++;
-
-
       }
       LookatResult result = newResultMessage();
       result.setResult( "The lookat was set successfully");
