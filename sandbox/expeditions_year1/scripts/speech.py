@@ -68,8 +68,10 @@ class SpeechPlayServer():
             
         timing_adjust = rospy.Duration.from_sec(0.2)
 
-        actions = self.phrases[goal.phrase]["actions"]
-
+        try:
+            actions = self.phrases[goal.phrase]["actions"]
+        except KeyError:
+            rospy.logerr("Key %s not recognized"%goal.phrase)
 
         time = rospy.Time.now()
         ordered_actions = sorted(actions, 
@@ -92,7 +94,7 @@ class SpeechPlayServer():
                 continue
 
             if a["type"] == "viseme":
-                print "Viseme: " + a["id"]
+                #print "Viseme: " + a["id"]
                 vgoal = dragon_msgs.msg.VisemeGoal(constant=a["id"])
                 self.viseme_client.send_goal(vgoal)
                 self.feedback.viseme = a["id"]
