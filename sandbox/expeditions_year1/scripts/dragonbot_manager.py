@@ -130,6 +130,7 @@ class DragonbotManager():
          goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name, interrupt=interrupt)
          self.speech_client.send_goal(goal)
          if wait:
+             rospy.loginfo("Waiting for speech server result")
              self.speech_client.wait_for_result()
 
 
@@ -156,18 +157,16 @@ class DragonbotManager():
             if expression_id in self.expressions:
                 goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=expression_id)
                 recognized = True
-            else: 
-                rospy.logwarn("Expression not recognized")
         if expression_type == "motion" or expression_type == None:
             if expression_id in self.motions:
                 goal = dragon_msgs.msg.ExpressionMotionGoal(type='motion',constant=expression_id)
                 recognized = True
-            else:
-                rospy.logwarn("Motion not recognized")
         if recognized:
             self.express_client.send_goal(goal)
+            rospy.loginfo("Waiting for expression server result")
             self.express_client.wait_for_result()
-        
+        else:
+            rospy.logwarn("Expression/Motion not recognized")
 
     def pose_off(self):
         print "Pose disabled"
