@@ -234,7 +234,8 @@ public class ExpressionMotionSimpleActionServerCallbacks
 	    	comm.sendMotion(MOTION.MOTION_WEEE);
 	    else if(goal.getConstant().equalsIgnoreCase("yawn"))
 	    	comm.sendMotion(MOTION.MOTION_YAWN);
-
+	    
+      publishFeedback("Waiting for motion to start", actionServer);
  	    while(comm.getMotionCurrent().equals("IDLE"))
 		  {
         if( !checkUpdate(actionServer) )
