@@ -54,6 +54,12 @@ After the installation, when you want to connect to the phone, you need to chang
  Dragonbot can then be run with the following command:
 
 {{{
+> roslaunch dragonbot_relay dragonbot_relay.launch
+}}}
+
+and in a different terminal
+
+{{{
 > roscd dragonbot_pubsub
 > build/install/dragonbot_pubsub/bin/dragonbot_pubsub edu.yale.dragonbot.DragonbotNode
 }}}
