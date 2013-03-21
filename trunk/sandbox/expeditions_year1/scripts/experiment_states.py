@@ -234,6 +234,7 @@ class Workout(smach.State):
                       'mario_yoshi.wav':104}
         self.current_song = ""
         self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.vol = 0.1
 
 
     def do_victory(self):
@@ -274,6 +275,7 @@ class Workout(smach.State):
         #play workout routine
         start = rospy.Time.now()
         self.sc.playWave(self.music_folder + self.current_song)
+        self.sc.waveVol(self.music_folder + self.current_song, self.vol)
         try:
             self.dg.play_dialogue("post_music", wait_for_continue = False, interrupt=False)
         except PanicException:
@@ -284,12 +286,40 @@ class Workout(smach.State):
             return 'end'
         self.tm.change("stopped_dancing")
         rospy.sleep(delay_adjust)
-        while rospy.Time.now()-start < self.duration:
+        while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
             p = self.tm.last_press(self.gui_prefix + "stopped_dancing")
             if p == "next":
                 return "end"
             elif p == "panic":
                 return "panic"
+            elif p == "dancing":
+                self.vol = self.vol + 0.1
+                if self.vol > 1.0:
+                    rospy.loginfo("At max volume")
+                    self.vol = 1.0
+                self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                self.tm.change("stopped_dancing")
+                continue
+            elif p == "not_dancing":
+                self.vol = self.vol - 0.1
+                if self.vol < 0.0:
+                    rospy.loginfo("At min volume")
+                    self.vol = 0.0
+                self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                self.tm.change("stopped_dancing")
+                continue
+            elif p == "music_stopped":
+                song, bpm = random.choice(self.songs.items())
+                while song == self.current_song:
+                        #note that this will break if there's only one song
+                    song, bpm = random.choice(self.songs.items())
+                self.current_song = song
+                bpm = bpm/4
+                move_sleep = rospy.Duration(60/bpm)
+                self.sc.playWave(self.music_folder + self.current_song)
+                self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                self.tm.change("stopped_dancing")
+                continue
             elif p == "stopped":
                 self.sc.stopAll()
                 try:
@@ -313,7 +343,15 @@ class Workout(smach.State):
                     bpm = bpm/4
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
-                    #TODO: Play "okay, here we go"
+                    self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                    try:
+                        self.dg.play_dialogue("here_we_go", interrupt = True, wait_for_continue = False)
+                    except PanicException:
+                        self.sc.stopAll()
+                        return 'panic'
+                    except NextStateException:
+                        self.sc.stopAll()
+                        return 'end'
                     self.tm.change("stopped_dancing")
                     continue
                 if "yes_break" in resp:
