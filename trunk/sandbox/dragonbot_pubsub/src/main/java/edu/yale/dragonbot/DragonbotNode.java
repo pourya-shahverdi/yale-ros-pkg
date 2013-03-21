@@ -43,6 +43,7 @@ public class DragonbotNode extends AbstractNodeMain {
       count++;
       if(count%10000 ==0)
       comm.sendNetworkDebug(count/10000);
+      try { Thread.sleep(50); } catch( Exception e) {}
     }
 
     final Log log = connectedNode.getLog();
