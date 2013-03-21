@@ -239,7 +239,7 @@ lunchbox:
             phrase_ids: [change_song]
             responses: [yes_change, no_change, stop]
             terminal: [yes_change, no_change, stop]
-        stop:
+        here_we_go:
             type: statement
             phrase_ids: [okay]
         yes_change:
