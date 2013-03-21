@@ -1,0 +1,17 @@
+<package>
+  <description brief="dragonbot_relay">
+
+     dragonbot_relay
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_relay</url>
+  <depend package="rospy"/>
+  <depend package="actionlib"/>
+  <depend package="dragon_msgs"/>
+
+</package>
+
+
