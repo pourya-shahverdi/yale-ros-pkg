@@ -1,3 +1,6 @@
 <launch>
   <node name="Viseme_Server" type="viseme_actionlib_relay.py" pkg="dragonbot_relay"/>
+  <node name="Lookat_Server" type="lookat_actionlib_relay.py" pkg="dragonbot_relay"/>
+  <node name="IK_Server" type="ik_actionlib_relay.py" pkg="dragonbot_relay"/>
+  <node name="ExpressionMotion_Server" type="expression_actionlib_relay.py" pkg="dragonbot_relay"/>
 </launch>
