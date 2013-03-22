@@ -8,6 +8,7 @@ import org.ros.namespace.GraphName;
 import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
 import org.ros.node.NodeMain;
+import org.ros.node.topic.Publisher;
 import org.ros.node.topic.Subscriber;
 import org.ros.concurrent.CancellableLoop;
 
@@ -21,11 +22,19 @@ public class DragonbotNode extends AbstractNodeMain {
 
   VISEME visemeTarget = VISEME.IDLE;
   EXPRESSION expressionTarget;
+  MOTION motionTarget;
+
+  private String expressionString;
+  private String motionString;
+
+  private boolean viseme_set = true;
+  private boolean expression_set = true;
+  private boolean motion_set = true;
+
   void set_viseme( String goal )
   {
     if(goal.equalsIgnoreCase("off"))
     {
-
       visemeTarget = VISEME.IDLE;
     }
     else
@@ -52,10 +61,115 @@ public class DragonbotNode extends AbstractNodeMain {
       else if(goal.equalsIgnoreCase("R_ER"))
         visemeTarget=(VISEME.VISEME_R_ER);
     }
+
+    viseme_set = false;
   }
 
-  void set_expression( String expressionTarget )
+  void set_expression( String constant, String type )
   {
+    System.out.println( "type: " + type + " constant: " + constant );
+    if(type.equalsIgnoreCase("expression")) 
+    { 
+      if(constant.equalsIgnoreCase("angry"))
+        expressionTarget = (EXPRESSION.EXPRESSION_ANGRY); 
+      else if(constant.equalsIgnoreCase("disgusted")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_DISGUSTED); 
+      else if(constant.equalsIgnoreCase("frustrated")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_FRUSTRATED); 
+      else if(constant.equalsIgnoreCase("mischievous")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_MISCHIEVOUS); 
+      else if(constant.equalsIgnoreCase("shy")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_SHY); 
+      else if(constant.equalsIgnoreCase("bored")||constant.equalsIgnoreCase("bored_unimpressed")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_BORED_UNIMPRESSED); 
+      else if(constant.equalsIgnoreCase("ecstatic")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_ECSTATIC); 
+      else if(constant.equalsIgnoreCase("happy")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_HAPPY); 
+      else if(constant.equalsIgnoreCase("puppy")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_PUPPY); 
+      else if(constant.equalsIgnoreCase("surprised")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_SURPRISED); 
+      else if(constant.equalsIgnoreCase("confused")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_CONFUSED); 
+      else if(constant.equalsIgnoreCase("frightened")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_FRIGHTENED); 
+      else if(constant.equalsIgnoreCase("lovestruck")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_LOVESTRUCK); 
+      else if(constant.equalsIgnoreCase("sad")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_SAD);
+      expressionString = constant;
+      expression_set = false;
+    }
+    else if( type.equalsIgnoreCase("motion") )
+    {
+      if(constant.equalsIgnoreCase("afraid"))
+        motionTarget = (MOTION.MOTION_AFRAID);
+      else if(constant.equalsIgnoreCase("blech"))
+        motionTarget = (MOTION.MOTION_BLECH);
+      else if(constant.equalsIgnoreCase("farted"))
+        motionTarget = (MOTION.MOTION_FARTED);
+      else if(constant.equalsIgnoreCase("idunno"))
+        motionTarget = (MOTION.MOTION_IDUNNO);
+      else if(constant.equalsIgnoreCase("interest"))
+        motionTarget = (MOTION.MOTION_INTEREST);
+      else if(constant.equalsIgnoreCase("mmhmmm"))
+        motionTarget = (MOTION.MOTION_MMHMMM);
+      else if(constant.equalsIgnoreCase("no"))
+        motionTarget = (MOTION.MOTION_NO);
+      else if(constant.equalsIgnoreCase("shy"))
+        motionTarget = (MOTION.MOTION_SHY);
+      else if(constant.equalsIgnoreCase("think"))
+        motionTarget = (MOTION.MOTION_THINK);
+      else if(constant.equalsIgnoreCase("woah"))
+        motionTarget = (MOTION.MOTION_WOAH);
+      else if(constant.equalsIgnoreCase("yes"))
+        motionTarget = (MOTION.MOTION_YES);
+      else if(constant.equalsIgnoreCase("anticipation"))
+        motionTarget = (MOTION.MOTION_ANTICIPATION);
+      else if(constant.equalsIgnoreCase("cheer"))
+        motionTarget = (MOTION.MOTION_CHEER);
+      else if(constant.equalsIgnoreCase("heh"))
+        motionTarget = (MOTION.MOTION_HEH);
+      else if(constant.equalsIgnoreCase("ilikeit") || constant.equalsIgnoreCase("i_like_it"))
+        motionTarget = (MOTION.MOTION_I_LIKE_IT);
+      else if(constant.equalsIgnoreCase("laugh") ||constant.equalsIgnoreCase("laugh1"))
+        motionTarget = (MOTION.MOTION_LAUGH1);
+      else if(constant.equalsIgnoreCase("mph"))
+        motionTarget = (MOTION.MOTION_MPH);
+      else if(constant.equalsIgnoreCase("question"))
+        motionTarget = (MOTION.MOTION_QUESTION);
+      else if(constant.equalsIgnoreCase("sneeze"))
+        motionTarget = (MOTION.MOTION_SNEEZE);
+      else if(constant.equalsIgnoreCase("wakeup"))
+        motionTarget = (MOTION.MOTION_WAKEUP);
+      else if(constant.equalsIgnoreCase("yay"))
+        motionTarget = (MOTION.MOTION_YAY);
+      else if(constant.equalsIgnoreCase("yummm"))
+        motionTarget = (MOTION.MOTION_YUMMM);
+      else if(constant.equalsIgnoreCase("bite"))
+        motionTarget = (MOTION.MOTION_BITE);
+      else if(constant.equalsIgnoreCase("crazy_laugh"))
+        motionTarget = (MOTION.MOTION_CRAZY_LAUGH);
+      else if(constant.equalsIgnoreCase("hungry"))
+        motionTarget = (MOTION.MOTION_HUNGRY);
+      else if(constant.equalsIgnoreCase("iwantit") ||constant.equalsIgnoreCase("i_want_it"))
+        motionTarget = (MOTION.MOTION_I_WANT_IT);
+      else if(constant.equalsIgnoreCase("meh"))
+        motionTarget = (MOTION.MOTION_MEH);
+      else if(constant.equalsIgnoreCase("nah_nah") || constant.equalsIgnoreCase("nahnah"))
+        motionTarget = (MOTION.MOTION_NAH_NAH);
+      else if(constant.equalsIgnoreCase("sad"))
+        motionTarget = (MOTION.MOTION_SAD);
+      else if(constant.equalsIgnoreCase("surprise"))
+        motionTarget = (MOTION.MOTION_SURPRISE);
+      else if(constant.equalsIgnoreCase("weee"))
+        motionTarget = (MOTION.MOTION_WEEE);
+      else if(constant.equalsIgnoreCase("yawn"))
+        motionTarget = (MOTION.MOTION_YAWN);
+      motionString = constant;
+      motion_set = false;
+    }
 
   }
 
@@ -70,6 +184,9 @@ public class DragonbotNode extends AbstractNodeMain {
 
     int count =1 ;
     final Log log = connectedNode.getLog();
+
+    final Publisher<dragon_msgs.DragonbotStatus> publisher = 
+      connectedNode.newPublisher("dragon_status", dragon_msgs.DragonbotStatus._TYPE);
 
     /******** Viseme Server ********/
 
@@ -89,7 +206,7 @@ public class DragonbotNode extends AbstractNodeMain {
       @Override
       public void onNewMessage(dragon_msgs.ExpressionMotionGoal goal) {
         if( goal.getType().equalsIgnoreCase("expression") )
-          set_expression(goal.getConstant());
+          set_expression(goal.getConstant(), goal.getType());
       }
     });
     /******** IK Server ******** /
@@ -114,8 +231,6 @@ public class DragonbotNode extends AbstractNodeMain {
     connectedNode.executeCancellableLoop( new CancellableLoop() {
       private int sequenceNumber;
       private DragonBotComm comm = null;
-      private boolean viseme_set = true;
-      private boolean expression_set = true;
       @Override
       protected void setup() {
         comm = new DragonBotComm();
@@ -125,6 +240,8 @@ public class DragonbotNode extends AbstractNodeMain {
       @Override
       protected void loop() throws InterruptedException {
         try {
+          dragon_msgs.DragonbotStatus status = publisher.newMessage();
+
         Thread.sleep(33);
         comm.update();
         if(sequenceNumber%100 ==0) comm.sendNetworkDebug(sequenceNumber/100);
@@ -136,34 +253,44 @@ public class DragonbotNode extends AbstractNodeMain {
         else
           System.out.print("+");
         
-
-        if( visemeTarget == VISEME.IDLE  && !viseme_set ) {
+        if( visemeTarget != VISEME.IDLE  && !viseme_set ) {
           comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
           comm.sendViseme(visemeTarget);
           viseme_set = true;
         }
-        else {
+        else if ( visemeTarget == VISEME.IDLE && !viseme_set )        
+        {
           comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
-          viseme_set = false;
+          viseme_set = true;
         }
           
-          
-        if( expression_set )
+        if( !expression_set && expressionTarget != null ) {
           comm.sendExpression(expressionTarget);
+          System.out.println( expressionString + "/" + comm.getExpressionCurrent() );
+          if( !comm.getExpressionCurrent().equalsIgnoreCase( "IDLE" ) )
+            expression_set = true;
+        }
 
+        if( !motion_set && motionTarget != null ) {
+          comm.sendMotion(motionTarget);
+          if( !comm.getMotionCurrent().equalsIgnoreCase( "IDLE" ) )
+            motion_set = true;
+        }
 
-        comm.getMotionCurrent();
-        comm.getExpressionCurrent();
+        status.setMotion( comm.getMotionCurrent() );
+        status.setExpression( comm.getExpressionCurrent() );
         comm.getIKCurrent();
         comm.getLookatTargetCurrent();
-        comm.getVisemeTargetCurrent();
-
+        status.setViseme( comm.getVisemeTargetCurrent() );
+        
+        publisher.publish(status);
         comm.getPoseTargetCurrent();
 
 
         }
         catch (Exception e) {
           System.out.println( "Exception: " + e.toString() );
+          e.printStackTrace();
         }
 
       }
