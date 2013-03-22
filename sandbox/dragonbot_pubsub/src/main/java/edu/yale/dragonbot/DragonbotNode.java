@@ -28,13 +28,15 @@ public class DragonbotNode extends AbstractNodeMain {
   private String motionString;
   private String lookatString;
   private float[] lookatTarget;
+  
+  private String ikString;
+  private float[] ikTarget;
 
   private boolean viseme_set = true;
   private boolean expression_set = true;
   private boolean motion_set = true;
   private boolean lookat_set = true;
-
-
+  private boolean ik_set = true;
 
   void set_lookat( String s, float X, float Y, float Z )
   {
@@ -55,6 +57,35 @@ public class DragonbotNode extends AbstractNodeMain {
     lookatTarget[2] = Z;
 
     lookat_set = false;
+  }
+
+  void set_ik( String s, float X, float Y, float Z, float T, float N )
+  {
+    ikString = s;
+    ikTarget = new float[5];
+    /*
+    if(X > IK_RANGE.MAX_X*10000) X = IK_RANGE.MAX_X*10000;
+    if(X < IK_RANGE.MIN_X*10000) X = IK_RANGE.MIN_X*10000;
+
+    if(Y > IK_RANGE.MAX_Y*10000) Y = IK_RANGE.MAX_Y*10000;
+    if(Y < IK_RANGE.MIN_Y*10000) Y = IK_RANGE.MIN_Y*10000;
+
+    if(Z > IK_RANGE.MAX_Z*10000) Z = IK_RANGE.MAX_Z*10000;
+    if(Z < IK_RANGE.MIN_Z*10000) Z = IK_RANGE.MIN_Z*10000;
+
+    if(T > IK_RANGE.MAX_THETA*10000) T = IK_RANGE.MAX_THETA*10000;
+    if(T < IK_RANGE.MIN_THETA*10000) T = IK_RANGE.MIN_THETA*10000;
+
+    if(N > IK_RANGE.MAX_NECK*10000) N = IK_RANGE.MAX_NECK*10000;
+    if(N < IK_RANGE.MIN_NECK*10000) N = IK_RANGE.MIN_NECK*10000;
+    */
+    ikTarget[0] = X;
+    ikTarget[1] = Y;
+    ikTarget[2] = Z;
+    ikTarget[3] = T;
+    ikTarget[4] = N;
+
+    ik_set = false;
   }
 
   void set_viseme( String goal )
@@ -234,15 +265,16 @@ public class DragonbotNode extends AbstractNodeMain {
         set_expression(goal.getConstant(), goal.getType());
       }
     });
-    /******** IK Server ******** /
+    /******** IK Server ********/
     Subscriber<dragon_msgs.IKGoal> ik_subscriber = connectedNode.newSubscriber("dragonbot_ik", dragon_msgs.IKGoal._TYPE);
     ik_subscriber.addMessageListener(new MessageListener<dragon_msgs.IKGoal>() {
       @Override
       public void onNewMessage(dragon_msgs.IKGoal goal) {
+        set_ik(goal.getState(), (float) goal.getX(), (float) goal.getY(), (float) goal.getZ(), (float) goal.getTheta(), (float) goal.getNeck() );
       }
     });
 
-    */
+    
    /******** LookAt Server ********/
     Subscriber<dragon_msgs.LookatGoal> lookat_subscriber = connectedNode.newSubscriber("dragonbot_lookat", dragon_msgs.LookatGoal._TYPE);
     lookat_subscriber.addMessageListener(new MessageListener<dragon_msgs.LookatGoal>() {
@@ -321,6 +353,18 @@ public class DragonbotNode extends AbstractNodeMain {
           comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
           comm.sendLookat(lookatTarget);
           lookat_set = true;
+        }
+
+        if( !ik_set && ikString.equalsIgnoreCase("off") )
+        {
+          comm.sendOnOffControl(IK_CTRL.TURN_OFF);
+          ik_set = true;
+        }
+        else if( !ik_set )
+        {
+          comm.sendOnOffControl(IK_CTRL.TURN_ON);
+          comm.sendIK(ikTarget);
+          ik_set = true;
         }
 
         status.setMotion( comm.getMotionCurrent() );
