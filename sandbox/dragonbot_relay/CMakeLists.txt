@@ -20,6 +20,15 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_genmsg()
 #uncomment if you have defined services
 #rosbuild_gensrv()
+rosbuild_add_boost_directories()
+rosbuild_add_executable(viseme_relay src/viseme_relay.cc)
+rosbuild_link_boost(viseme_relay thread)
+rosbuild_add_executable(expression_relay src/expression_relay.cc)
+rosbuild_link_boost(expression_relay thread)
+rosbuild_add_executable(ik_relay src/ik_relay.cc)
+rosbuild_link_boost(ik_relay thread)
+rosbuild_add_executable(lookat_relay src/lookat_relay.cc)
+rosbuild_link_boost(lookat_relay thread)
 
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
