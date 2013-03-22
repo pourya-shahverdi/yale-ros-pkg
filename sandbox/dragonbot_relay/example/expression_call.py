@@ -23,15 +23,15 @@ def dragon_client():
 
 
     # Creates a goal to send to the action server.
-    goal = dragon_msgs.msg.ExpressionMotionGoal(type='expression', constant='happy')
+    goal = dragon_msgs.msg.ExpressionMotionGoal(type='motion', constant='wakeup')
 
     # Sends the goal to the action server.
     client.send_goal(goal)
     print 'waiting for result... \n'
-    client.cancel_all_goals()
+    #client.cancel_all_goals()
 
     # Waits for the server to finish performing the action.
-    #client.wait_for_result()
+    client.wait_for_result()
 
     print 'returning result... \n'
 

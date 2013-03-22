@@ -44,7 +44,8 @@ class ExpressionActionServer
       goal_pub_.publish(goal);
       ros::spinOnce();
 
-      ROS_INFO( "waiting for expression/motion to start" );
+
+      ROS_INFO( "motion: %s", motion_.c_str() );
       while( (goal->type == "expression" && expression_ == "IDLE") || (goal->type == "motion" && motion_ == "IDLE" ) )
       {
         // check for preempts
@@ -63,7 +64,6 @@ class ExpressionActionServer
       if( goal->type == "expression" ) cur = expression_;
       else if( goal->type == "motion" ) cur = motion_;
 
-      ROS_INFO( "waiting for expression/motion to finish" );
       while( (goal->type == "expression" && expression_ == cur) || (goal->type == "motion" && motion_ == cur ) )
       {
         // check for preempts
