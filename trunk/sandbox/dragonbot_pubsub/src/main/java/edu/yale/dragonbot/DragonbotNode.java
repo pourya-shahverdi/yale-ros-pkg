@@ -231,8 +231,7 @@ public class DragonbotNode extends AbstractNodeMain {
     expression_subscriber.addMessageListener(new MessageListener<dragon_msgs.ExpressionMotionGoal>() {
       @Override
       public void onNewMessage(dragon_msgs.ExpressionMotionGoal goal) {
-        if( goal.getType().equalsIgnoreCase("expression") )
-          set_expression(goal.getConstant(), goal.getType());
+        set_expression(goal.getConstant(), goal.getType());
       }
     });
     /******** IK Server ******** /
