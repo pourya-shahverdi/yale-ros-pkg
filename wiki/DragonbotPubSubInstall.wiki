@@ -22,7 +22,7 @@ The checkout of the repositories can be automated. However, the installation of 
 > source ~/<ws_name>/setup.bash
 > rosws update
 }}}
-  # {{{> rosmake dragon_msgs dragonbot_relay}}}
+  # {{{> rosmake dragonbot_relay}}}
   # install rosjava:
 {{{
 > roscd rosjava_core
