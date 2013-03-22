@@ -26,10 +26,36 @@ public class DragonbotNode extends AbstractNodeMain {
 
   private String expressionString;
   private String motionString;
+  private String lookatString;
+  private float[] lookatTarget;
 
   private boolean viseme_set = true;
   private boolean expression_set = true;
   private boolean motion_set = true;
+  private boolean lookat_set = true;
+
+
+
+  void set_lookat( String s, float X, float Y, float Z )
+  {
+    System.out.println( s + "/" + X + "/" + Y + "/" + Z );
+    lookatString = s;
+    lookatTarget = new float[3];
+    if(X > LOOKAT_RANGE.MAX_X) X = LOOKAT_RANGE.MAX_X;
+    if(X < LOOKAT_RANGE.MIN_X) X = LOOKAT_RANGE.MIN_X;
+
+    if(Y > LOOKAT_RANGE.MAX_Y) Y = LOOKAT_RANGE.MAX_Y;
+    if(Y < LOOKAT_RANGE.MIN_Y) Y = LOOKAT_RANGE.MIN_Y;
+
+    if(Z > LOOKAT_RANGE.MAX_Z) Z = LOOKAT_RANGE.MAX_Z;
+    if(Z < LOOKAT_RANGE.MIN_Z) Z = LOOKAT_RANGE.MIN_Z;
+
+    lookatTarget[0] = X;
+    lookatTarget[1] = Y;
+    lookatTarget[2] = Z;
+
+    lookat_set = false;
+  }
 
   void set_viseme( String goal )
   {
@@ -216,14 +242,16 @@ public class DragonbotNode extends AbstractNodeMain {
       public void onNewMessage(dragon_msgs.IKGoal goal) {
       }
     });
-   /******** LookAt Server ******** /
+
+    */
+   /******** LookAt Server ********/
     Subscriber<dragon_msgs.LookatGoal> lookat_subscriber = connectedNode.newSubscriber("dragonbot_lookat", dragon_msgs.LookatGoal._TYPE);
     lookat_subscriber.addMessageListener(new MessageListener<dragon_msgs.LookatGoal>() {
       @Override
       public void onNewMessage(dragon_msgs.LookatGoal goal) {
+        set_lookat(goal.getState(), goal.getX(), goal.getY(), goal.getZ() );
       }
     });
-
 
     /******************************/
       // runloop
@@ -275,6 +303,25 @@ public class DragonbotNode extends AbstractNodeMain {
           comm.sendMotion(motionTarget);
           if( !comm.getMotionCurrent().equalsIgnoreCase( "IDLE" ) )
             motion_set = true;
+        }
+
+        if( !lookat_set && lookatString.equalsIgnoreCase("off") )
+        {
+          comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
+          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+          lookat_set = true;
+        }
+        else if( !lookat_set && lookatString.equalsIgnoreCase("random") )
+        {
+          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
+          lookat_set = true;
+        }
+        else if( !lookat_set )
+        {
+          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+          comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
+          comm.sendLookat(lookatTarget);
+          lookat_set = true;
         }
 
         status.setMotion( comm.getMotionCurrent() );
