@@ -63,6 +63,7 @@ public class DragonbotNode extends AbstractNodeMain {
   {
     ikString = s;
     ikTarget = new float[5];
+    System.out.println( s + "/" + X + "/" + Y + "/" + Z );
     /*
     if(X > IK_RANGE.MAX_X*10000) X = IK_RANGE.MAX_X*10000;
     if(X < IK_RANGE.MIN_X*10000) X = IK_RANGE.MIN_X*10000;
@@ -300,81 +301,87 @@ public class DragonbotNode extends AbstractNodeMain {
       protected void loop() throws InterruptedException {
         try {
           dragon_msgs.DragonbotStatus status = publisher.newMessage();
+          Thread.sleep(33);
+          comm.update();
+          if(sequenceNumber%100 ==0) comm.sendNetworkDebug(sequenceNumber/100);
+          if( Float.isNaN( comm.getFaceDisplayFPS() ) ) {
+            System.out.print("-");
+            sequenceNumber++;
+            return;
+          }
 
-        Thread.sleep(33);
-        comm.update();
-        if(sequenceNumber%100 ==0) comm.sendNetworkDebug(sequenceNumber/100);
-        if( Float.isNaN( comm.getFaceDisplayFPS() ) ) {
-          System.out.print("-");
-          sequenceNumber++;
-          return;
-        }
-        else
           System.out.print("+");
         
-        if( visemeTarget != VISEME.IDLE  && !viseme_set ) {
-          comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
-          comm.sendViseme(visemeTarget);
-          viseme_set = true;
-        }
-        else if ( visemeTarget == VISEME.IDLE && !viseme_set )        
-        {
-          comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
-          viseme_set = true;
-        }
+          if( visemeTarget != VISEME.IDLE  && !viseme_set ) {
+            comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
+            comm.sendViseme(visemeTarget);
+            viseme_set = true;
+          }
+          else if ( visemeTarget == VISEME.IDLE && !viseme_set )        
+          {
+            comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
+            viseme_set = true;
+          }
           
-        if( !expression_set && expressionTarget != null ) {
-          comm.sendExpression(expressionTarget);
-          System.out.println( expressionString + "/" + comm.getExpressionCurrent() );
-          if( !comm.getExpressionCurrent().equalsIgnoreCase( "IDLE" ) )
-            expression_set = true;
-        }
+          if( !expression_set && expressionTarget != null ) {
+            comm.sendExpression(expressionTarget);
+            System.out.println( expressionString + "/" + comm.getExpressionCurrent() );
+            if( !comm.getExpressionCurrent().equalsIgnoreCase( "IDLE" ) )
+              expression_set = true;
+          }
 
-        if( !motion_set && motionTarget != null ) {
-          comm.sendMotion(motionTarget);
-          if( !comm.getMotionCurrent().equalsIgnoreCase( "IDLE" ) )
-            motion_set = true;
-        }
+          if( !motion_set && motionTarget != null ) {
+            comm.sendMotion(motionTarget);
+            if( !comm.getMotionCurrent().equalsIgnoreCase( "IDLE" ) )
+              motion_set = true;
+          }
 
-        if( !lookat_set && lookatString.equalsIgnoreCase("off") )
-        {
-          comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
-          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-          lookat_set = true;
-        }
-        else if( !lookat_set && lookatString.equalsIgnoreCase("random") )
-        {
-          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
-          lookat_set = true;
-        }
-        else if( !lookat_set )
-        {
-          comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
-          comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
-          comm.sendLookat(lookatTarget);
-          lookat_set = true;
-        }
+          if( !lookat_set && lookatString.equalsIgnoreCase("off") )
+          {
+            comm.sendOnOffControl(LOOKAT_CTRL.TURN_OFF);
+            comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+            lookat_set = true;
+          }
+          else if( !lookat_set && lookatString.equalsIgnoreCase("random") )
+          {
+            comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_ON);
+            lookat_set = true;
+          }
+          else if( !lookat_set )
+          {
+            comm.sendOnOffControl(RAND_LOOKAT_CTRL.TURN_OFF);
+            comm.sendOnOffControl(LOOKAT_CTRL.TURN_ON);
+            comm.sendLookat(lookatTarget);
+            lookat_set = true;
+          }
+  
+          if( !ik_set && ikString.equalsIgnoreCase("off") )
+          {
+            comm.sendOnOffControl(IK_CTRL.TURN_OFF);
 
-        if( !ik_set && ikString.equalsIgnoreCase("off") )
-        {
-          comm.sendOnOffControl(IK_CTRL.TURN_OFF);
-          ik_set = true;
-        }
-        else if( !ik_set )
-        {
-          comm.sendOnOffControl(IK_CTRL.TURN_ON);
-          comm.sendIK(ikTarget);
-          ik_set = true;
-        }
+            ik_set = true;
+          }
+          else if( !ik_set )
+          {
+            if( !comm.isActivated(IK_CTRL.QUERY) )
+            {
+              comm.sendOnOffControl(IK_CTRL.TURN_ON);            
+            }
+            System.out.println( ikTarget[0] + "/" + ikTarget[1] + "/" + ikTarget[2] );
+            comm.sendIK(ikTarget);
+            float[] ikCurr = comm.getIKCurrent();
+            System.out.println( ikCurr[0] + "/" + ikCurr[1] + "/" + ikCurr[2] );
+            ik_set = true;
+          }
 
-        status.setMotion( comm.getMotionCurrent() );
-        status.setExpression( comm.getExpressionCurrent() );
-        comm.getIKCurrent();
-        comm.getLookatTargetCurrent();
-        status.setViseme( comm.getVisemeTargetCurrent() );
+          status.setMotion( comm.getMotionCurrent() );
+          status.setExpression( comm.getExpressionCurrent() );
+
+          comm.getLookatTargetCurrent();
+          status.setViseme( comm.getVisemeTargetCurrent() );
         
-        publisher.publish(status);
-        comm.getPoseTargetCurrent();
+          publisher.publish(status);
+          comm.getPoseTargetCurrent();
 
 
         }
@@ -382,7 +389,6 @@ public class DragonbotNode extends AbstractNodeMain {
           System.out.println( "Exception: " + e.toString() );
           e.printStackTrace();
         }
-
       }
     });
 
