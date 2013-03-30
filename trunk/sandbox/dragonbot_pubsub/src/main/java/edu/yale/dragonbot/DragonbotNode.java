@@ -31,12 +31,14 @@ public class DragonbotNode extends AbstractNodeMain {
   
   private String ikString;
   private float[] ikTarget;
+  private float[] ikAcc;
 
   private boolean viseme_set = true;
   private boolean expression_set = true;
   private boolean motion_set = true;
   private boolean lookat_set = true;
   private boolean ik_set = true;
+  private boolean ik_param_set = true;
 
   void set_lookat( String s, float X, float Y, float Z )
   {
@@ -59,7 +61,7 @@ public class DragonbotNode extends AbstractNodeMain {
     lookat_set = false;
   }
 
-  void set_ik( String s, float X, float Y, float Z, float T, float N )
+  void set_ik( String s, float X, float Y, float Z, float T, float N, float v, float a )
   {
     ikString = s;
     ikTarget = new float[5];
@@ -87,6 +89,15 @@ public class DragonbotNode extends AbstractNodeMain {
     ikTarget[4] = N;
 
     ik_set = false;
+
+    if( v > 0.01 && a > 0.01 )
+    {
+      ikAcc[0] = v;
+      ikAcc[1] = a;
+      ik_param_set = false;
+    }
+
+
   }
 
   void set_viseme( String goal )
@@ -271,7 +282,7 @@ public class DragonbotNode extends AbstractNodeMain {
     ik_subscriber.addMessageListener(new MessageListener<dragon_msgs.IKGoal>() {
       @Override
       public void onNewMessage(dragon_msgs.IKGoal goal) {
-        set_ik(goal.getState(), (float) goal.getX(), (float) goal.getY(), (float) goal.getZ(), (float) goal.getTheta(), (float) goal.getNeck() );
+        set_ik(goal.getState(), (float) goal.getX(), (float) goal.getY(), (float) goal.getZ(), (float) goal.getTheta(), (float) goal.getNeck(), (float) goal.getVel(), (float) goal.getAcc());
       }
     });
 
@@ -369,6 +380,7 @@ public class DragonbotNode extends AbstractNodeMain {
               comm.sendOnOffControl(IK_CTRL.TURN_ON);            
             }
             System.out.println( ikTarget[0] + "/" + ikTarget[1] + "/" + ikTarget[2] );
+            comm.setIKfilters( ikAcc[0], ikAcc[1] );
             comm.sendIK(ikTarget);
             float[] ikCurr = comm.getIKCurrent();
             System.out.println( ikCurr[0] + "/" + ikCurr[1] + "/" + ikCurr[2] );
