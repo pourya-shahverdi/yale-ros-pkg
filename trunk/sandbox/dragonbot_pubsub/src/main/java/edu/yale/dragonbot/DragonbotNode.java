@@ -291,6 +291,8 @@ public class DragonbotNode extends AbstractNodeMain {
     connectedNode.executeCancellableLoop( new CancellableLoop() {
       private int sequenceNumber;
       private DragonBotComm comm = null;
+      private boolean connected = false;
+
       @Override
       protected void setup() {
         comm = new DragonBotComm();
@@ -304,14 +306,14 @@ public class DragonbotNode extends AbstractNodeMain {
           Thread.sleep(33);
           comm.update();
           if(sequenceNumber%100 ==0) comm.sendNetworkDebug(sequenceNumber/100);
-          if( Float.isNaN( comm.getFaceDisplayFPS() ) ) {
+          if( !connected && Float.isNaN( comm.getFaceDisplayFPS() ) ) {
             System.out.print("-");
             sequenceNumber++;
             return;
           }
-
+          connected = true;
           System.out.print("+");
-        
+
           if( visemeTarget != VISEME.IDLE  && !viseme_set ) {
             comm.sendOnOffControl(VISEME_CTRL.TURN_ON);
             comm.sendViseme(visemeTarget);
@@ -358,7 +360,6 @@ public class DragonbotNode extends AbstractNodeMain {
           if( !ik_set && ikString.equalsIgnoreCase("off") )
           {
             comm.sendOnOffControl(IK_CTRL.TURN_OFF);
-
             ik_set = true;
           }
           else if( !ik_set )
@@ -371,7 +372,12 @@ public class DragonbotNode extends AbstractNodeMain {
             comm.sendIK(ikTarget);
             float[] ikCurr = comm.getIKCurrent();
             System.out.println( ikCurr[0] + "/" + ikCurr[1] + "/" + ikCurr[2] );
+
             ik_set = true;
+            for( int i = 0; i < 5; i++ )
+            {
+              if( Double.compare( ikTarget[i], ikCurr[i] ) != 0 ) ik_set = false;
+            }
           }
 
           status.setMotion( comm.getMotionCurrent() );
