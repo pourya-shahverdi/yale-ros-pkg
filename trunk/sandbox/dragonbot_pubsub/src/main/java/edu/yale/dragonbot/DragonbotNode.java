@@ -65,6 +65,7 @@ public class DragonbotNode extends AbstractNodeMain {
   {
     ikString = s;
     ikTarget = new float[5];
+    ikAcc = new float[2];
     System.out.println( s + "/" + X + "/" + Y + "/" + Z );
     /*
     if(X > IK_RANGE.MAX_X*10000) X = IK_RANGE.MAX_X*10000;
