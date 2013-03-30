@@ -160,6 +160,7 @@ class FoodChoice(smach.State):
         print "+                FOOD DIALOGUE                +"
         print "-----------------------------------------------"
  
+        self.dm.express("hungry", wait = False)
         try:
             self.dg.play_dialogue(current_lesson["intro"], wait_for_continue = False)
         except PanicException:
@@ -193,6 +194,10 @@ class FoodChoice(smach.State):
                 else:
                     prev = self.choices[lesson_name][-1]
                 self.choices[lesson_name].append(resp)
+                if resp in current_lesson["terminal"]:
+                    self.dm.express("yummm", wait = False)
+                else:
+                    self.dm.express("blech", wait = False)
                 try:
                     self.dg.play_dialogue(current_lesson[prev][resp], wait_for_continue = False)
                 except PanicException:
@@ -204,6 +209,28 @@ class FoodChoice(smach.State):
             else:
                 self.tm.change(lesson_name)
                 resp = self.tm.wait_for_press(self.gui_prefix + lesson_name)
+        return 'next_round'
+
+
+class MultiChoice(smach.State):
+    def __init__(self, dm, tm, exp_info, dialogue_info, food_phrases):
+        smach.State.__init__(self, outcomes=['panic', 'next_round', 'end'])
+        self.dm = dm
+        self.tm = tm
+        self.ntimes = 0
+        self.day, self.lessons = exp_info
+        self.fp = {i:j for i, j in food_phrases.items() if i in self.lessons}
+        self.dialogue = dialogue_info
+        self.gui_prefix = "dragon_GUI/"
+        self.choices = {}
+        self.segment = "foods"
+        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+
+    def execute(self, userdata):
+        # Intro
+        # Choose a few foods
+        # get feedback
+
         return 'next_round'
 
 class Workout(smach.State):
@@ -224,14 +251,20 @@ class Workout(smach.State):
         self.music_folder = '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/'
     
         #pose is: x, y, z, (theta, neck, vel, acc [optional])
-        self.poses = {'right': (0, 1.5, 0),
-                      'left': (0, -1.5, 0),
-                      'up': (0, 0, 1),
-                      'down': (0, 0, -1)}
+        self.poses = {'right': (0, 2.4, 0),
+                      'left': (0, -2.4, 0),
+                      'up': (0, 0, 2),
+                      'down': (0, 0, -2)}
         # song and bpm
         self.songs = {#'thought_of_you.wav': 108,
-                      'try.wav': 83,
-                      'mario_yoshi.wav':104}
+                      #'try.wav': 83,
+                      'mario_yoshi.wav':104,
+                      'Donkey_Kong_Country_Jungle_Stomp_OC_ReMix.wav':84,
+                      'Legend_of_Zelda_A_Link_to_the_Past_Kakariko_Rave_Party_OC_ReMix.wav':160,
+                      'Legend_of_Zelda_Ocarina_of_Time_This_Valley_Rocks_OC_ReMix.wav':96,
+                      'Super_Mario_World_2_Yoshi\'s_Island_Dino_Band_Rehearsal_OC_ReMix.wav':112,
+                      'Super_Mario_World_Swanky_Vegas_OC_ReMix.wav':120}
+
         self.current_song = ""
         self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
         self.vol = 0.1
@@ -239,7 +272,7 @@ class Workout(smach.State):
 
     def do_victory(self):
         v = 1
-        a = .05
+        a = .08
         routine = ['up','down','up','down','up']
         for move in routine:
             m = self.poses[move]
@@ -252,6 +285,7 @@ class Workout(smach.State):
         print "+                WORKOUT GAME                 +"
         print "-----------------------------------------------"
  
+        self.dm.express("anticipation", wait = False)
         try:
             self.dg.play_dialogue("intro_dialogue", wait_for_continue = False)
         except PanicException:
@@ -266,8 +300,8 @@ class Workout(smach.State):
         v = 1
         a = 0.05
 
-        time_adjust = rospy.Duration(0.0)
-        delay_adjust = rospy.Duration(5.0)
+        time_adjust = rospy.Duration(-0.9)
+        delay_adjust = rospy.Duration(0.0)
         move_sleep = rospy.Duration(60/bpm)
         
         self.dm.pose(0,0,0)
@@ -279,9 +313,11 @@ class Workout(smach.State):
         try:
             self.dg.play_dialogue("post_music", wait_for_continue = False, interrupt=False)
         except PanicException:
+            self.dm.pose_off()
             self.sc.stopAll()
             return 'panic'
         except NextStateException:
+            self.dm.pose_off()
             self.sc.stopAll()
             return 'end'
         self.tm.change("stopped_dancing")
@@ -289,8 +325,12 @@ class Workout(smach.State):
         while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
             p = self.tm.last_press(self.gui_prefix + "stopped_dancing")
             if p == "next":
+                self.dm.pose_off()
+                self.sc.stopAll()
                 return "end"
             elif p == "panic":
+                self.dm.pose_off()
+                self.sc.stopAll()
                 return "panic"
             elif p == "dancing":
                 self.vol = self.vol + 0.1
@@ -325,9 +365,11 @@ class Workout(smach.State):
                 try:
                     resp = self.dg.play_dialogue("stop_dancing", interrupt = True, wait_for_continue = False)
                 except PanicException:
+                    self.dm.pose_off()
                     self.sc.stopAll()
                     return 'panic'
                 except NextStateException:
+                    self.dm.pose_off()
                     self.sc.stopAll()
                     return 'end'
                 if "dance_more" in resp:
@@ -347,9 +389,11 @@ class Workout(smach.State):
                     try:
                         self.dg.play_dialogue("here_we_go", interrupt = True, wait_for_continue = False)
                     except PanicException:
+                        self.dm.pose_off()
                         self.sc.stopAll()
                         return 'panic'
                     except NextStateException:
+                        self.dm.pose_off()
                         self.sc.stopAll()
                         return 'end'
                     self.tm.change("stopped_dancing")
@@ -363,7 +407,16 @@ class Workout(smach.State):
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             i = i + 1
             if i % 10 == 0:
-                self.dg.play_dialogue("energized_comment", interrupt = False, wait_for_continue = False)
+                try:
+                    self.dg.play_dialogue("energized_comment", interrupt = False, wait_for_continue = False)
+                except PanicException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'panic'
+                except NextStateException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'end'
             rospy.sleep(move_sleep-time_adjust)
             
 
@@ -372,9 +425,11 @@ class Workout(smach.State):
             try:
                 self.dg.play_dialogue("timeout")
             except PanicException:
+                self.dm.pose_off()
                 self.sc.stopAll()
                 return 'panic'
             except NextStateException:
+                self.dm.pose_off()
                 self.sc.stopAll()
                 return 'end'
             self.sc.stopAll()
@@ -384,9 +439,11 @@ class Workout(smach.State):
             try:
                 self.dg.play_dialogue("victory_dance", wait_for_continue = False)
             except PanicException:
+                self.dm.pose_off()
                 self.sc.stopAll()
                 return 'panic'
             except NextStateException:
+                self.dm.pose_off()
                 self.sc.stopAll()
                 return 'end'
             self.do_victory() 

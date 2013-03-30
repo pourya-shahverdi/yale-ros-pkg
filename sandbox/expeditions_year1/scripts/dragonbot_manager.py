@@ -151,7 +151,7 @@ class DragonbotManager():
             s = f.read()
         self.phrases = yaml.load(s)
         
-    def express(self, expression_id, expression_type = None):
+    def express(self, expression_id, expression_type = None, wait = True):
         recognized = False
         if expression_type == "expression" or expression_type == None:
             if expression_id in self.expressions:
@@ -164,13 +164,14 @@ class DragonbotManager():
         if recognized:
             self.express_client.send_goal(goal)
             rospy.loginfo("Waiting for expression server result")
-            self.express_client.wait_for_result()
+            if wait:
+                self.express_client.wait_for_result()
         else:
             rospy.logwarn("Expression/Motion not recognized")
 
     def pose_off(self):
-        print "Pose disabled"
-        return
+        #rospy.loginfo("Pose disabled")
+        #return
 
         rospy.loginfo("Idling dragonbot")
         goal = dragon_msgs.msg.IKGoal(state = "off", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
@@ -179,8 +180,8 @@ class DragonbotManager():
 
         
     def pose(self, x, y, z, theta = 0, neck = 0, vel=0.3, acc=0.001):
-        print "Pose disabled."
-        return
+        #rospy.loginfo("Pose disabled")
+        #return
 
         #range for x (back/forward): -2.3,2.5
         #range for y (right/left): -2.49,3.4
@@ -281,18 +282,22 @@ def main():
     a = 0.05
     print "LEFT"
     dm.pose(0,1.5,0, vel = v, acc = a)
-    rospy.sleep(2)
+    rospy.sleep(3)
     print "RIGHT"
     dm.pose(0,-1.5,0, vel = v, acc = a)
-    rospy.sleep(2)
+    rospy.sleep(3)
     print "UP"
     dm.pose(0,0,1, vel = v, acc = a)
-    rospy.sleep(2)
+    rospy.sleep(3)
     print "DOWN"
     dm.pose(0,0,-1, vel = v, acc = a)
     rospy.sleep(3)
     print "ZERO"
     dm.pose(0,0,0, vel = 0.1)
+    rospy.sleep(3)
+    print "OFF"
+    dm.pose_off()
+
     
 if __name__ == '__main__':
     main()
