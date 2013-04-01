@@ -85,7 +85,7 @@
   elements:
     - type: button_group
       label: Child stopped dancing?
-      label_string: stopped; music_stopped; next; panic
+      label_string: dancing;not_dancing;stopped;music_stopped;next;panic
       topic: dragon_GUI/stopped_dancing
 
 
