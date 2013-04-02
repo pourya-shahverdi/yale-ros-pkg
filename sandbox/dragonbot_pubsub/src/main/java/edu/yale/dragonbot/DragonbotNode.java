@@ -144,18 +144,18 @@ public class DragonbotNode extends AbstractNodeMain {
         expressionTarget = (EXPRESSION.EXPRESSION_ANGRY); 
       else if(constant.equalsIgnoreCase("disgusted")) 
         expressionTarget = (EXPRESSION.EXPRESSION_DISGUSTED); 
-      else if(constant.equalsIgnoreCase("frustrated")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_FRUSTRATED); 
+      //else if(constant.equalsIgnoreCase("frustrated")) 
+      //  expressionTarget = (EXPRESSION.EXPRESSION_FRUSTRATED); 
       else if(constant.equalsIgnoreCase("mischievous")) 
         expressionTarget = (EXPRESSION.EXPRESSION_MISCHIEVOUS); 
-      else if(constant.equalsIgnoreCase("shy")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_SHY); 
-      else if(constant.equalsIgnoreCase("bored")||constant.equalsIgnoreCase("bored_unimpressed")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_BORED_UNIMPRESSED); 
-      else if(constant.equalsIgnoreCase("ecstatic")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_ECSTATIC); 
-      else if(constant.equalsIgnoreCase("happy")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_HAPPY); 
+      //else if(constant.equalsIgnoreCase("shy")) 
+      //  expressionTarget = (EXPRESSION.EXPRESSION_SHY); 
+      //else if(constant.equalsIgnoreCase("bored")||constant.equalsIgnoreCase("bored_unimpressed")) 
+      //  expressionTarget = (EXPRESSION.EXPRESSION_BORED_UNIMPRESSED); 
+      //else if(constant.equalsIgnoreCase("ecstatic")) 
+      //  expressionTarget = (EXPRESSION.EXPRESSION_ECSTATIC); 
+      //else if(constant.equalsIgnoreCase("happy")) 
+      //  expressionTarget = (EXPRESSION.EXPRESSION_HAPPY); 
       else if(constant.equalsIgnoreCase("puppy")) 
         expressionTarget = (EXPRESSION.EXPRESSION_PUPPY); 
       else if(constant.equalsIgnoreCase("surprised")) 
@@ -165,7 +165,11 @@ public class DragonbotNode extends AbstractNodeMain {
       else if(constant.equalsIgnoreCase("frightened")) 
         expressionTarget = (EXPRESSION.EXPRESSION_FRIGHTENED); 
       else if(constant.equalsIgnoreCase("lovestruck")) 
-        expressionTarget = (EXPRESSION.EXPRESSION_LOVESTRUCK); 
+        expressionTarget = (EXPRESSION.EXPRESSION_LOVESTRUCK);
+      else if(constant.equalsIgnoreCase("tasting")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_TASTING);
+      else if(constant.equalsIgnoreCase("sipping")) 
+        expressionTarget = (EXPRESSION.EXPRESSION_SIPPING); 
       else if(constant.equalsIgnoreCase("sad")) 
         expressionTarget = (EXPRESSION.EXPRESSION_SAD);
       expressionString = constant;
@@ -187,20 +191,20 @@ public class DragonbotNode extends AbstractNodeMain {
         motionTarget = (MOTION.MOTION_MMHMMM);
       else if(constant.equalsIgnoreCase("no"))
         motionTarget = (MOTION.MOTION_NO);
-      else if(constant.equalsIgnoreCase("shy"))
-        motionTarget = (MOTION.MOTION_SHY);
+      //else if(constant.equalsIgnoreCase("shy"))
+      //  motionTarget = (MOTION.MOTION_SHY);
       else if(constant.equalsIgnoreCase("think"))
         motionTarget = (MOTION.MOTION_THINK);
-      else if(constant.equalsIgnoreCase("woah"))
-        motionTarget = (MOTION.MOTION_WOAH);
+      //else if(constant.equalsIgnoreCase("woah"))
+      //  motionTarget = (MOTION.MOTION_WOAH);
       else if(constant.equalsIgnoreCase("yes"))
         motionTarget = (MOTION.MOTION_YES);
       else if(constant.equalsIgnoreCase("anticipation"))
         motionTarget = (MOTION.MOTION_ANTICIPATION);
-      else if(constant.equalsIgnoreCase("cheer"))
-        motionTarget = (MOTION.MOTION_CHEER);
-      else if(constant.equalsIgnoreCase("heh"))
-        motionTarget = (MOTION.MOTION_HEH);
+      //else if(constant.equalsIgnoreCase("cheer"))
+      //  motionTarget = (MOTION.MOTION_CHEER);
+      //else if(constant.equalsIgnoreCase("heh"))
+      //  motionTarget = (MOTION.MOTION_HEH);
       else if(constant.equalsIgnoreCase("ilikeit") || constant.equalsIgnoreCase("i_like_it"))
         motionTarget = (MOTION.MOTION_I_LIKE_IT);
       else if(constant.equalsIgnoreCase("laugh") ||constant.equalsIgnoreCase("laugh1"))
@@ -209,8 +213,8 @@ public class DragonbotNode extends AbstractNodeMain {
         motionTarget = (MOTION.MOTION_MPH);
       else if(constant.equalsIgnoreCase("question"))
         motionTarget = (MOTION.MOTION_QUESTION);
-      else if(constant.equalsIgnoreCase("sneeze"))
-        motionTarget = (MOTION.MOTION_SNEEZE);
+      //else if(constant.equalsIgnoreCase("sneeze"))
+      //  motionTarget = (MOTION.MOTION_SNEEZE);
       else if(constant.equalsIgnoreCase("wakeup"))
         motionTarget = (MOTION.MOTION_WAKEUP);
       else if(constant.equalsIgnoreCase("yay"))
@@ -219,22 +223,22 @@ public class DragonbotNode extends AbstractNodeMain {
         motionTarget = (MOTION.MOTION_YUMMM);
       else if(constant.equalsIgnoreCase("bite"))
         motionTarget = (MOTION.MOTION_BITE);
-      else if(constant.equalsIgnoreCase("crazy_laugh"))
-        motionTarget = (MOTION.MOTION_CRAZY_LAUGH);
+      //else if(constant.equalsIgnoreCase("crazy_laugh"))
+      //  motionTarget = (MOTION.MOTION_CRAZY_LAUGH);
       else if(constant.equalsIgnoreCase("hungry"))
         motionTarget = (MOTION.MOTION_HUNGRY);
       else if(constant.equalsIgnoreCase("iwantit") ||constant.equalsIgnoreCase("i_want_it"))
         motionTarget = (MOTION.MOTION_I_WANT_IT);
       else if(constant.equalsIgnoreCase("meh"))
         motionTarget = (MOTION.MOTION_MEH);
-      else if(constant.equalsIgnoreCase("nah_nah") || constant.equalsIgnoreCase("nahnah"))
-        motionTarget = (MOTION.MOTION_NAH_NAH);
-      else if(constant.equalsIgnoreCase("sad"))
-        motionTarget = (MOTION.MOTION_SAD);
+      //else if(constant.equalsIgnoreCase("nah_nah") || constant.equalsIgnoreCase("nahnah"))
+      //  motionTarget = (MOTION.MOTION_NAH_NAH);
+      //else if(constant.equalsIgnoreCase("sad"))
+      //  motionTarget = (MOTION.MOTION_SAD);
       else if(constant.equalsIgnoreCase("surprise"))
         motionTarget = (MOTION.MOTION_SURPRISE);
-      else if(constant.equalsIgnoreCase("weee"))
-        motionTarget = (MOTION.MOTION_WEEE);
+      //else if(constant.equalsIgnoreCase("weee"))
+      //  motionTarget = (MOTION.MOTION_WEEE);
       else if(constant.equalsIgnoreCase("yawn"))
         motionTarget = (MOTION.MOTION_YAWN);
       motionString = constant;
