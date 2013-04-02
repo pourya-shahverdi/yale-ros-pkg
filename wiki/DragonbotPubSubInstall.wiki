@@ -23,7 +23,7 @@ The checkout of the repositories can be automated. However, the installation of 
 > rosws update
 }}}
   # {{{> rosmake dragonbot_relay}}}
-  # install rosjava _(Note that "org.ros.time.NtpTimeProviderTest" might fail on the build step.  This is fine and you can proceed to the next step)_:
+  # install rosjava _(Note that *org.ros.time.NtpTimeProviderTest* might fail on the build step.  This is fine and you can proceed to the next step)_:
 {{{
 > roscd rosjava_core
 > ./gradlew build
