@@ -1,6 +1,10 @@
 - gui: Dragonbot Teleop
   elements:
     - type: button_group
+      label: Blink
+      label_string: once;hold;hold_off
+      topic: dragon_teleop_GUI/blink
+    - type: button_group
       label: Pose
       label_string: on; off
       topic: dragon_teleop_GUI/pose_on
@@ -40,31 +44,27 @@
       topic: dragon_teleop_GUI/look_z
     - type: button_group
       label: Expressions
-      label_string: angry;disgusted;frustrated;mischievous;shy;bored;ecstatic
+      label_string: angry;frightened;puppy;sipping;confused;lovestruck;sad
       topic: dragon_teleop_GUI/expressions
     - type: button_group
       label: Expressions
-      label_string: happy;puppy;surprised;confused;frightened;lovestruck;sad
+      label_string: tasting;disgusted;mischievous;surprised;--;--;--
       topic: dragon_teleop_GUI/expressions
     - type: button_group
       label: Motions
-      label_string: afraid;blech;farted;idunno;interest;mmhmmm;no
+      label_string: afraid;blech;idunno;interest;mmhmmm;question;wakeup
       topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
-      label_string: shy;think;whoah;yes;anticipation;cheer;heh
+      label_string: yes;anticipation;farted;i_like_it;laugh1;mph;surprise
       topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
-      label_string: i_like_it;laugh;mph;question;sneeze;wakeup;yay
+      label_string: yay;yummm;bite;hungry;i_want_it;meh;no
       topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Motions
-      label_string: yummm;bite;crazy_laugh;hungry;i_want_it;meh;nah_nah
-      topic: dragon_teleop_GUI/motions
-    - type: button_group
-      label: Motions
-      label_string: sad;surprise;weee;yawn;--;--;--
+      label_string: think;yawn;--;--;--;--;--
       topic: dragon_teleop_GUI/motions
     - type: button_group
       label: Phrases
