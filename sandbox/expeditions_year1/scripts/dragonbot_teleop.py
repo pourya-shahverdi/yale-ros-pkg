@@ -26,6 +26,7 @@ class DragonTeleop():
         self.xl_sub = rospy.Subscriber("/dragon_teleop_GUI/look_x", Int32, self.x_look_cb)
         self.yl_sub = rospy.Subscriber("/dragon_teleop_GUI/look_y", Int32, self.y_look_cb)
         self.zl_sub = rospy.Subscriber("/dragon_teleop_GUI/look_z", Int32, self.z_look_cb)
+        self.blink_sub = rospy.Subscriber("/dragon_teleop_GUI/blink", String, self.blink_cb)
 
         rospy.loginfo("Ready!")
         self.current_pose = [0,0,0]
@@ -68,6 +69,15 @@ class DragonTeleop():
     def ph_callback(self, data):
         rospy.loginfo("Got phrase: " + data.data)
         self.dm.say(data.data)
+
+    def blink_cb(self, data):
+        rospy.loginfo("Got blink command: " + data.data)
+        if data.data == "once":
+            self.dm.blink()
+        elif data.data == "hold":
+            self.dm.eye_close()
+        elif data.data == "hold_off":
+            self.dm.eye_open()
 
     def pos_on_cb(self, data):
         rospy.loginfo("Setting pose to: " + data.data)

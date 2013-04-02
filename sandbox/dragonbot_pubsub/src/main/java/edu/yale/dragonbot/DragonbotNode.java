@@ -23,6 +23,7 @@ public class DragonbotNode extends AbstractNodeMain {
   VISEME visemeTarget = VISEME.IDLE;
   EXPRESSION expressionTarget;
   MOTION motionTarget;
+  EYES blinkTarget = EYES.BLINK_HOLD_STOP;
 
   private String expressionString;
   private String motionString;
@@ -39,6 +40,7 @@ public class DragonbotNode extends AbstractNodeMain {
   private boolean lookat_set = true;
   private boolean ik_set = true;
   private boolean ik_param_set = true;
+  private boolean blink_set = true;
 
   void set_lookat( String s, float X, float Y, float Z )
   {
@@ -133,6 +135,27 @@ public class DragonbotNode extends AbstractNodeMain {
     }
 
     viseme_set = false;
+  }
+
+
+  void set_blink( String goal )
+  {
+    if(goal.equalsIgnoreCase("off"))
+    {
+      blinkTarget = EYES.BLINK_HOLD_STOP;
+    }
+    else
+    {
+
+      if(goal.equalsIgnoreCase("ONCE"))
+        blinkTarget=(EYES.BLINK);
+      else if(goal.equalsIgnoreCase("START"))
+        blinkTarget=(EYES.BLINK_HOLD_START);
+      else if(goal.equalsIgnoreCase("STOP"))
+        blinkTarget=(EYES.BLINK_HOLD_STOP);
+    }
+
+    blink_set = false;
   }
 
   void set_expression( String constant, String type )
@@ -273,6 +296,17 @@ public class DragonbotNode extends AbstractNodeMain {
       }
     });
 
+    /******** Blink Server ********/
+
+    Subscriber<dragon_msgs.BlinkGoal> blink_subscriber = connectedNode.newSubscriber("dragonbot_blink", dragon_msgs.BlinkGoal._TYPE);
+    blink_subscriber.addMessageListener(new MessageListener<dragon_msgs.BlinkGoal>() {
+      @Override
+      public void onNewMessage(dragon_msgs.BlinkGoal goal) {
+        System.out.println( "setting blink: " + goal.getConstant() );
+        set_blink(goal.getConstant());
+      }
+    });
+
     /******** Expression/Motion Server ********/
 
     Subscriber<dragon_msgs.ExpressionMotionGoal> expression_subscriber = connectedNode.newSubscriber("dragonbot_expression", dragon_msgs.ExpressionMotionGoal._TYPE);
@@ -340,6 +374,11 @@ public class DragonbotNode extends AbstractNodeMain {
             comm.sendOnOffControl(VISEME_CTRL.TURN_OFF);
             viseme_set = true;
           }
+
+          if( blinkTarget != null  && !blink_set ) {
+            comm.sendBlink(blinkTarget);
+            blink_set = true;
+          }
           
           if( !expression_set && expressionTarget != null ) {
             comm.sendExpression(expressionTarget);
@@ -402,6 +441,8 @@ public class DragonbotNode extends AbstractNodeMain {
 
           comm.getLookatTargetCurrent();
           status.setViseme( comm.getVisemeTargetCurrent() );
+
+          status.setBlink( comm.getBlinkCurrent() );
         
           publisher.publish(status);
           comm.getPoseTargetCurrent();

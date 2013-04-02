@@ -3,4 +3,5 @@
   <node name="Lookat_Server" type="lookat_relay" pkg="dragonbot_relay"/>
   <node name="IK_Server" type="ik_relay" pkg="dragonbot_relay"/>
   <node name="ExpressionMotion_Server" type="expression_relay" pkg="dragonbot_relay"/>
+  <node name="Blink_Server" type="blink_relay" pkg="dragonbot_relay" output="screen"/>
 </launch>
