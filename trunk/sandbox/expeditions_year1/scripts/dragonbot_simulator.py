@@ -121,6 +121,18 @@ class DragonbotManager():
 
     def lookat_frame(self, frame):
         print "Looking at frame: " + frame
+
+    def eye_close(self):
+        print "Eyes closed"
+
+    def eye_open(self):
+        print "Eyes open"
+
+    def blink(self):
+        print "Blink"
+
+
+
         
 
 def main():

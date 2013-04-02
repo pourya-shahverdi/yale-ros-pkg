@@ -29,6 +29,8 @@ rosbuild_add_executable(ik_relay src/ik_relay.cc)
 rosbuild_link_boost(ik_relay thread)
 rosbuild_add_executable(lookat_relay src/lookat_relay.cc)
 rosbuild_link_boost(lookat_relay thread)
+rosbuild_add_executable(blink_relay src/blink_relay.cc)
+rosbuild_link_boost(blink_relay thread)
 
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)

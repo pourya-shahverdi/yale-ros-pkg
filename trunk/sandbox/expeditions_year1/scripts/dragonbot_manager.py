@@ -23,6 +23,7 @@ class DragonbotManager():
         self.speech_client = actionlib.SimpleActionClient('/SpeechPlay_Server',SpeechPlayAction)
         self.express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
         self.viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
+        self.blink_client = actionlib.SimpleActionClient('/Blink_Server',BlinkAction)
         self.ik_client = actionlib.SimpleActionClient('/IK_Server',IKAction)
         self.lookat_client = actionlib.SimpleActionClient('/Lookat_Server',LookatAction)
         self.track_client = actionlib.SimpleActionClient('/Track_Server',TrackAction)
@@ -34,6 +35,8 @@ class DragonbotManager():
         self.express_client.wait_for_server()
         rospy.loginfo(" --- Visemes")
         self.viseme_client.wait_for_server()
+        rospy.loginfo(" --- Blinking")
+        self.blink_client.wait_for_server()
         rospy.loginfo(" --- IK")
         self.ik_client.wait_for_server()
         rospy.loginfo(" --- Lookat")
@@ -249,6 +252,19 @@ class DragonbotManager():
             rospy.logwarn("Error looking up transform.")
         else:
             self.lookat(trans[0]*100,trans[1]*100,trans[2]*100) #m to cm
+
+    def eye_close(self):
+        goal = dragon_msgs.msg.BlinkGoal(constant="START")
+        self.blink_client.send_goal(goal)
+
+    def eye_open(self):
+        goal = dragon_msgs.msg.BlinkGoal(constant="STOP")
+        self.blink_client.send_goal(goal)
+
+    def blink(self):
+        goal = dragon_msgs.msg.BlinkGoal(constant="ONCE")
+        self.blink_client.send_goal(goal)
+
         
 
 def main():
@@ -258,31 +274,10 @@ def main():
 
     #dm.load_phrases("phrases.yaml")
     rospy.sleep(3)
-    print("POSING")
-    dm.pose_off()
-
-    dm.pose(0,0,0, vel = 0.1)
-    rospy.sleep(5)
-    
-    v = 1
-    a = 0.05
-    print "LEFT"
-    dm.pose(0,1.5,0, vel = v, acc = a)
+    print("SLEEP")
+    dm.eye_close()
     rospy.sleep(3)
-    print "RIGHT"
-    dm.pose(0,-1.5,0, vel = v, acc = a)
-    rospy.sleep(3)
-    print "UP"
-    dm.pose(0,0,1, vel = v, acc = a)
-    rospy.sleep(3)
-    print "DOWN"
-    dm.pose(0,0,-1, vel = v, acc = a)
-    rospy.sleep(3)
-    print "ZERO"
-    dm.pose(0,0,0, vel = 0.1)
-    rospy.sleep(3)
-    print "OFF"
-    dm.pose_off()
+    dm.eye_open()
 
     
 if __name__ == '__main__':

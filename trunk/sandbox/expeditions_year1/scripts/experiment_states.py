@@ -9,8 +9,8 @@ import actionlib
 
 from actionlib import *
 from actionlib.msg import *
-#from dragonbot_manager import DragonbotManager
-from dragonbot_simulator import DragonbotManager
+from dragonbot_manager import DragonbotManager
+#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
@@ -100,8 +100,11 @@ class Sleep(smach.State):
         print "==============================================="
         print "+                   SLEEPING                  +"
         print "-----------------------------------------------"
+        self.dm.eye_close()
         self.tm.change("sleep")
-        self.tm.wait_for_press("/dragon_GUI/sleep")
+        self.tm.wait_for_press("/dragon_GUI/sleep")   
+        self.dm.express("wakeup")
+        self.dm.eye_open()
         return 'wakeup'
 
 class Intro(smach.State):
@@ -120,8 +123,7 @@ class Intro(smach.State):
         print "+              INTRO DIALOGUE                 +"
         print "-----------------------------------------------"
 
-        self.dm.express("wakeup")
-        rospy.sleep(3.0)
+        
         try:
             self.dg.play_dialogue("intro_dialogue", wait_for_continue = False)
         except PanicException:
@@ -477,6 +479,7 @@ class Outro(smach.State):
          print "+                   OUTRO                     +"
          print "-----------------------------------------------"
          
+         self.dm.express("yawn")
          try:
              self.dg.play_dialogue("outro_dialogue", wait_for_continue = False)
          except PanicException:
