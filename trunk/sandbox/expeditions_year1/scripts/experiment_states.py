@@ -105,6 +105,7 @@ class DialogueManager():
             if len(dialogue_item["phrase_ids"]) > 0:
                 self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt, wait = wait_for_finish)
             self.seen.append(dialogue_item)
+        print str(responses)
         return responses
 
                 
@@ -453,7 +454,7 @@ class Workout(smach.State):
                         self.sc.stopAll()
                         return 'end'
                     except NextPhraseException:
-                        pass
+                        break
 
                     print resp
 
