@@ -26,7 +26,7 @@ class DialogueManager():
 
         self.seen = []
 
-    def play_dialogue(self, item_id, wait_for_continue = True, interrupt = True):
+    def play_dialogue(self, item_id, interrupt = True, wait_for_finish = True):
         responses = []
 
         #print "Item id: " + item_id
@@ -34,59 +34,77 @@ class DialogueManager():
         if item_id == 'panic':
             self.dm.stop_speech()
             raise PanicException
-        if item_id == 'next':
+        if item_id == 'next_segment':
             self.dm.stop_speech()
             raise NextStateException
-
+        if item_id == 'next_phrase':
+            self.dm.stop_speech()
+            raise NextPhraseException
+        
         dialogue_item = self.dialogue[item_id]
-        if dialogue_item["type"] == "dialogue":
+        if dialogue_item["type"] == 'redirect':
+            responses.append(item_id)
+            responses = responses + self.play_dialogue(dialogue_item["goal"])
+        elif dialogue_item["type"] == "wait":
+            responses.append(item_id)
+            self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt)
+            self.seen.append(dialogue_item)
+            self.tm.change("continue")
+            self.tm.wait_for_press(self.gui_prefix + "continue")
+
+        elif dialogue_item["type"] == "dialogue":
             for item in dialogue_item["items"]:
-                responses = responses + self.play_dialogue(item, wait_for_continue, interrupt)
+                try:
+                    responses = responses + self.play_dialogue(item, interrupt, wait_for_finish)
+                except NextPhraseException:
+                    continue
+
+        elif dialogue_item["type"] == "backstory":
+            try:
+                if not dialogue_item in self.seen:
+                    self.seen.append(dialogue_item)
+                    return self.play_dialogue(dialogue_item["items"][0], interrupt, wait_for_finish)
+                else:
+                    start = 0
+                    if len(dialogue_item["items"]) > 1:
+                        start = 1
+                        self.seen.append(dialogue_item)
+                        return self.play_dialogue(random.choice(dialogue_item["items"][start:len(dialogue_item["items"])]), interrupt, wait_for_finish)
+            except NextPhraseException:
+                return []
+
         elif dialogue_item["type"] == "question":
             gui_name = self.day + "_" + self.segment + "_" + item_id
             self.tm.change(gui_name)
-            if not dialogue_item in self.seen:
-                self.dm.say(dialogue_item["phrase_ids"][0], interrupt)
-            else:
-                start = 0
-                if len(dialogue_item["phrase_ids"]) > 1:
-                    start = 1
-                self.dm.say(random.choice(dialogue_item["phrase_ids"][start:len(dialogue_item["phrase_ids"])]), interrupt)
-            self.seen.append(dialogue_item)
+            self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt = True)
             resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
-            responses = responses + self.play_dialogue(resp, wait_for_continue, interrupt)
+            try:
+                responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
+            except NextPhraseException:
+                    return responses
             while resp not in dialogue_item["terminal"]:
                 self.tm.change(gui_name)
-                if not dialogue_item in self.seen:
-                    self.dm.say(dialogue_item["phrase_ids"][0], interrupt)
-                else:
-                    start = 0
-                    if len(dialogue_item["phrase_ids"]) > 1:
-                        start = 1
-                    self.dm.say(random.choice(dialogue_item["phrase_ids"][start:len(dialogue_item["phrase_ids"])]), interrupt)
                 self.seen.append(dialogue_item)
                 resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
-                responses = responses + self.play_dialogue(resp, wait_for_continue, interrupt)
+                try:
+                    responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
+                except NextPhraseException:
+                    return responses
+
         elif dialogue_item["type"] == "choice":
             gui_name = self.day + "_" + self.segment + "_" + item_id
             self.tm.change(gui_name)
-            self.tm.wait_for_press(self.gui_prefix + self.gui_name)
-            responses = responses + self.play_dialogue(resp, wait_for_continue, interrupt)
+            resp = self.tm.wait_for_press(self.gui_prefix + self.gui_name)
+            try:
+                responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
+            except NextPhraseException:
+                return responses
+
         elif dialogue_item["type"] == "statement":
             responses.append(item_id)
-            if not dialogue_item in self.seen:
-                self.dm.say(dialogue_item["phrase_ids"][0], interrupt, wait = (not wait_for_continue))
-            else:
-                start = 0
-                if len(dialogue_item["phrase_ids"]) > 1:
-                    start = 1
-                self.dm.say(random.choice(dialogue_item["phrase_ids"][start:len(dialogue_item["phrase_ids"])]), interrupt, wait = (not wait_for_continue))
+            if len(dialogue_item["phrase_ids"]) > 0:
+                self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt, wait = wait_for_finish)
             self.seen.append(dialogue_item)
-            if wait_for_continue:
-                self.tm.change("continue")
-                self.tm.wait_for_press(self.gui_prefix + "continue")
-        
-        
         return responses
 
                 
@@ -123,13 +141,14 @@ class Intro(smach.State):
         print "+              INTRO DIALOGUE                 +"
         print "-----------------------------------------------"
 
-        
         try:
-            self.dg.play_dialogue("intro_dialogue", wait_for_continue = False)
+            self.dg.play_dialogue("intro_dialogue")
         except PanicException:
             return 'panic'
         except NextStateException:
             return 'end'
+        except NextPhraseException:
+            pass
         return 'end'
 
 
@@ -164,11 +183,13 @@ class FoodChoice(smach.State):
  
         self.dm.express("hungry", wait = False)
         try:
-            self.dg.play_dialogue(current_lesson["intro"], wait_for_continue = False)
+            self.dg.play_dialogue(current_lesson["intro"])
         except PanicException:
             return 'panic'
         except NextStateException:
             return 'end'
+        except NextPhraseException:
+            pass
         self.tm.change(lesson_name)
         resp =  self.tm.wait_for_press(self.gui_prefix + lesson_name)
         done = False
@@ -181,11 +202,13 @@ class FoodChoice(smach.State):
                 return 'end'
             elif resp == "no_choice":
                 try:
-                    self.dg.play_dialogue(current_lesson["no_choice"], wait_for_continue = False)
+                    self.dg.play_dialogue(current_lesson["no_choice"])
                 except PanicException:
                     return 'panic'
                 except NextStateException:
                     return 'end'
+                except NextPhraseException:
+                    pass
             else:
                 print "-----------------------------------------------"
                 prev = ""
@@ -196,44 +219,34 @@ class FoodChoice(smach.State):
                 else:
                     prev = self.choices[lesson_name][-1]
                 self.choices[lesson_name].append(resp)
+                if not prev==resp:
+                    self.dg.play_dialogue("why_choose")
+                    self.dm.express("tasting", wait = True)
                 if resp in current_lesson["terminal"]:
                     self.dm.express("yummm", wait = False)
                 else:
                     self.dm.express("blech", wait = False)
                 try:
-                    self.dg.play_dialogue(current_lesson[prev][resp], wait_for_continue = False)
+                    self.dg.play_dialogue(current_lesson[prev][resp])
                 except PanicException:
                     return 'panic'
                 except NextStateException:
                     return 'end'
+                except NextPhraseException:
+                    pass
             if resp in current_lesson["terminal"]:
                 done = True
             else:
                 self.tm.change(lesson_name)
                 resp = self.tm.wait_for_press(self.gui_prefix + lesson_name)
+        if lesson_name == "drinks":
+            self.dm.express("sipping", wait = True)
+        else:
+            self.dm.express("bite", wait = True)
+        print str(self.choices)
         return 'next_round'
 
 
-class MultiChoice(smach.State):
-    def __init__(self, dm, tm, exp_info, dialogue_info, food_phrases):
-        smach.State.__init__(self, outcomes=['panic', 'next_round', 'end'])
-        self.dm = dm
-        self.tm = tm
-        self.ntimes = 0
-        self.day, self.lessons = exp_info
-        self.fp = {i:j for i, j in food_phrases.items() if i in self.lessons}
-        self.dialogue = dialogue_info
-        self.gui_prefix = "dragon_GUI/"
-        self.choices = {}
-        self.segment = "foods"
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
-
-    def execute(self, userdata):
-        # Intro
-        # Choose a few foods
-        # get feedback
-
-        return 'next_round'
 
 class Workout(smach.State):
     def __init__(self, dm, tm, info, dialogue_info):
@@ -258,9 +271,7 @@ class Workout(smach.State):
                       'up': (0, 0, 2),
                       'down': (0, 0, -2)}
         # song and bpm
-        self.songs = {#'thought_of_you.wav': 108,
-                      #'try.wav': 83,
-                      'mario_yoshi.wav':104,
+        self.songs = {'mario_yoshi.wav':104,
                       'Donkey_Kong_Country_Jungle_Stomp_OC_ReMix.wav':84,
                       'Legend_of_Zelda_A_Link_to_the_Past_Kakariko_Rave_Party_OC_ReMix.wav':160,
                       'Legend_of_Zelda_Ocarina_of_Time_This_Valley_Rocks_OC_ReMix.wav':96,
@@ -289,11 +300,15 @@ class Workout(smach.State):
  
         self.dm.express("anticipation", wait = False)
         try:
-            self.dg.play_dialogue("intro_dialogue", wait_for_continue = False)
+            #TODO: play correct outro statement
+            self.dg.play_dialogue("training_backstory")
+            self.dg.play_dialogue("intro_dialogue")
         except PanicException:
             return 'panic'
         except NextStateException:
             return 'end'
+        except NextPhraseException:
+            pass
         routine = ['left','right','left','right','up','down']
 
         self.current_song, bpm = random.choice(self.songs.items())
@@ -313,7 +328,7 @@ class Workout(smach.State):
         self.sc.playWave(self.music_folder + self.current_song)
         self.sc.waveVol(self.music_folder + self.current_song, self.vol)
         try:
-            self.dg.play_dialogue("post_music", wait_for_continue = False, interrupt=False)
+            self.dg.play_dialogue("post_music", interrupt=False)
         except PanicException:
             self.dm.pose_off()
             self.sc.stopAll()
@@ -322,6 +337,8 @@ class Workout(smach.State):
             self.dm.pose_off()
             self.sc.stopAll()
             return 'end'
+        except NextPhraseException:
+            pass
         self.tm.change("stopped_dancing")
         rospy.sleep(delay_adjust)
         while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
@@ -365,7 +382,7 @@ class Workout(smach.State):
             elif p == "stopped":
                 self.sc.stopAll()
                 try:
-                    resp = self.dg.play_dialogue("stop_dancing", interrupt = True, wait_for_continue = False)
+                    resp = self.dg.play_dialogue("stop_dancing", interrupt = True)
                 except PanicException:
                     self.dm.pose_off()
                     self.sc.stopAll()
@@ -374,6 +391,8 @@ class Workout(smach.State):
                     self.dm.pose_off()
                     self.sc.stopAll()
                     return 'end'
+                except NextPhraseException:
+                    pass
                 if "dance_more" in resp:
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.tm.change("stopped_dancing")
@@ -388,19 +407,9 @@ class Workout(smach.State):
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.sc.waveVol(self.music_folder + self.current_song, self.vol)
-                    try:
-                        self.dg.play_dialogue("here_we_go", interrupt = True, wait_for_continue = False)
-                    except PanicException:
-                        self.dm.pose_off()
-                        self.sc.stopAll()
-                        return 'panic'
-                    except NextStateException:
-                        self.dm.pose_off()
-                        self.sc.stopAll()
-                        return 'end'
                     self.tm.change("stopped_dancing")
                     continue
-                if "yes_break" in resp:
+                if "no_change" in resp:
                     break
             
             
@@ -410,7 +419,7 @@ class Workout(smach.State):
             i = i + 1
             if i % 10 == 0:
                 try:
-                    self.dg.play_dialogue("energized_comment", interrupt = False, wait_for_continue = False)
+                    self.dg.play_dialogue("energized_comment", interrupt = False)
                 except PanicException:
                     self.dm.pose_off()
                     self.sc.stopAll()
@@ -419,6 +428,8 @@ class Workout(smach.State):
                     self.dm.pose_off()
                     self.sc.stopAll()
                     return 'end'
+                except NextPhraseException:
+                    pass
             rospy.sleep(move_sleep-time_adjust)
             
 
@@ -434,12 +445,14 @@ class Workout(smach.State):
                 self.dm.pose_off()
                 self.sc.stopAll()
                 return 'end'
+            except NextPhraseException:
+                pass
             self.sc.stopAll()
             self.dm.pose_off()
             return 'timeout'
         else:
             try:
-                self.dg.play_dialogue("victory_dance", wait_for_continue = False)
+                self.dg.play_dialogue("victory_dance")
             except PanicException:
                 self.dm.pose_off()
                 self.sc.stopAll()
@@ -448,16 +461,20 @@ class Workout(smach.State):
                 self.dm.pose_off()
                 self.sc.stopAll()
                 return 'end'
+            except NextPhraseException:
+                pass
             self.do_victory() 
             self.dm.pose_off()
             try:
-                self.dg.play_dialogue("what_do_you_think", wait_for_continue = False)
+                self.dg.play_dialogue("what_do_you_think")
             except PanicException:
                 self.sc.stopAll()
                 return 'panic'
             except NextStateException:
                 self.sc.stopAll()
                 return 'end'
+            except NextPhraseException:
+                pass
             return "end"
 
 
@@ -481,13 +498,16 @@ class Outro(smach.State):
          
          self.dm.express("yawn")
          try:
-             self.dg.play_dialogue("outro_dialogue", wait_for_continue = False)
+             self.dg.play_dialogue("outro_dialogue")
          except PanicException:
              return 'panic'
          except NextStateException:
              return 'end'
+         except NextPhraseException:
+             pass
          return 'end'
 
 
 class PanicException(Exception): pass
 class NextStateException(Exception): pass
+class NextPhraseException(Exception): pass

@@ -78,8 +78,8 @@
 - gui: continue
   elements:
     - type: button_group
-      label: Continue?
-      label_string: continue;next;panic
+      label: Press next_phrase when child done speaking
+      label_string: next_phrase;next_segment;panic
       topic: dragon_GUI/continue
 - gui: stopped_dancing
   elements:
@@ -94,56 +94,74 @@
   elements:
   - type: button_group
     label: outro wrap_up
-    label_string: dance;no_dance;next;panic
+    label_string: dance;no_dance;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox_outro_wrap_up
-- gui: lunchbox_intro_help_me
-  elements:
-  - type: button_group
-    label: intro help_me
-    label_string: help_yes;help_no;repeat_no;next;panic
-    topic: dragon_GUI/lunchbox_intro_help_me
 - gui: lunchbox_intro_name
   elements:
   - type: button_group
     label: intro name
-    label_string: give_name;dont_understand;not_name;give_up;next;panic
+    label_string: give_name;cant_hear;not_name;give_up;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox_intro_name
-- gui: lunchbox_intro_hear_race
+- gui: lunchbox_intro_help_me
   elements:
   - type: button_group
-    label: intro hear_race
-    label_string: race_yes;race_no;next;panic
-    topic: dragon_GUI/lunchbox_intro_hear_race
+    label: intro help_me
+    label_string: help_yes;help_no;repeat_no;repeat_no2;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_intro_help_me
 - gui: lunchbox_intro_like_to_eat
   elements:
   - type: button_group
     label: intro like_to_eat
-    label_string: good_choice;non-human_choice;unknown_single;unknown_pl;next;panic
+    label_string: good_choice;non-human_choice;unknown_single;unknown_pl;favorite;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox_intro_like_to_eat
-- gui: lunchbox_workout_no_change
+- gui: lunchbox_workout_finished_dancing
   elements:
   - type: button_group
-    label: workout no_change
-    label_string: yes_break;no_break;next;panic
-    topic: dragon_GUI/lunchbox_workout_no_change
+    label: workout finished_dancing
+    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_finished_dancing
+- gui: lunchbox_workout_break1
+  elements:
+  - type: button_group
+    label: workout break1
+    label_string: yes_break1;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_break1
 - gui: lunchbox_workout_keep_going
   elements:
   - type: button_group
     label: workout keep_going
-    label_string: dance_more;no_more;next;panic
+    label_string: dance_more;no_more;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox_workout_keep_going
+- gui: lunchbox_workout_break2
+  elements:
+  - type: button_group
+    label: workout break2
+    label_string: yes_break2;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_break2
+- gui: lunchbox_workout_intro
+  elements:
+  - type: button_group
+    label: workout intro
+    label_string: like_dance;no_like_dance;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_intro
+- gui: lunchbox_workout_victory_again
+  elements:
+  - type: button_group
+    label: workout victory_again
+    label_string: yes_victory;vic_again_no;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_victory_again
 - gui: lunchbox_workout_victory_dance
   elements:
   - type: button_group
     label: workout victory_dance
-    label_string: yes_victory;no_victory;next;panic
+    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox_workout_victory_dance
-- gui: lunchbox_workout_no_more
+- gui: lunchbox_workout_new_song
   elements:
   - type: button_group
-    label: workout no_more
-    label_string: yes_change;no_change;stop;next;panic
-    topic: dragon_GUI/lunchbox_workout_no_more
+    label: workout new_song
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox_workout_new_song
 - gui: whole_grains
   elements:
   - type: button_group
@@ -156,3 +174,4 @@
     label: drinks
     label_string: water;juice;milk;chocolate_milk;soda;no_choice;next;panic
     topic: dragon_GUI/drinks
+

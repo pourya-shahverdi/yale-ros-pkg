@@ -16,7 +16,6 @@ import time
 import tf
 
 class DragonbotManager():
-
     def __init__(self):
         self.phrases = {}
 
