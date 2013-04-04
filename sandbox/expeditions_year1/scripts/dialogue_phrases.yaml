@@ -310,7 +310,7 @@ lunchbox:
             phrase_ids: [14-p4-okay_go]
         no_change:
             type: statement
-            phrase_ids: [14-p4-okay_go]
+            phrase_ids: [20-p2-okay]
         break1:
             type: question
             phrase_ids: [14-p5-break]
