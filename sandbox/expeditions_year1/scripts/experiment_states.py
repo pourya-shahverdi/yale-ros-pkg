@@ -370,8 +370,12 @@ class Workout(smach.State):
                 except NextPhraseException:
                     pass
 
-                if "yes_finished" in resp:
+                if not "no_finished" in resp:
                     break
+
+                self.sc.playWave(self.music_folder + self.current_song)
+                self.tm.change("stopped_dancing")
+                continue
                 
             p = self.tm.last_press(self.gui_prefix + "stopped_dancing")
             if p == "next":
@@ -458,7 +462,7 @@ class Workout(smach.State):
 
                     print resp
 
-                    if "yes_finished" in resp:
+                    if not "no_finished" in resp:
                         break
                     else:
                         self.sc.playWave(self.music_folder + self.current_song)
