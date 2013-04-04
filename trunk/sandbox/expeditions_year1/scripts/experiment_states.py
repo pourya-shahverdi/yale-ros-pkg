@@ -183,7 +183,7 @@ class FoodChoice(smach.State):
  
         self.dm.express("hungry", wait = False)
         try:
-            self.dg.play_dialogue(current_lesson["intro"])
+            self.dg.play_dialogue(current_lesson["intro"], wait_for_finish = False)
         except PanicException:
             return 'panic'
         except NextStateException:
@@ -256,7 +256,8 @@ class Workout(smach.State):
         self.dm = dm
         self.tm = tm
         self.exp_start_time = rospy.Time.now()
-        self.duration = rospy.Duration(300)
+        self.duration = rospy.Duration(450)
+        self.break_time = rospy.Duration(120)
         self.dialogue = dialogue_info
         #self.workout_phrases = workout_info
         self.day, self.lesson = info
@@ -341,7 +342,36 @@ class Workout(smach.State):
             pass
         self.tm.change("stopped_dancing")
         rospy.sleep(delay_adjust)
+        nbreaks = 1
         while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
+            if rospy.Time.now()-start > self.break_time * nbreaks:
+                '''if nbreaks = 1:
+                    break_phrase = "break1"
+                elif nbreaks = 2:
+                    break_phrase = "break2"
+                else:
+                    break_phrase = "finished_dancing"'''
+
+                break_phrase = "finished_dancing"
+                nbreaks = nbreaks + 1
+
+                self.sc.stopAll()
+                try:
+                    resp = self.dg.play_dialogue(break_phrase, interrupt = True)
+                except PanicException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'panic'
+                except NextStateException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'end'
+                except NextPhraseException:
+                    pass
+
+                if "yes_finished" in resp:
+                    break
+                
             p = self.tm.last_press(self.gui_prefix + "stopped_dancing")
             if p == "next":
                 self.dm.pose_off()
@@ -410,8 +440,29 @@ class Workout(smach.State):
                     self.tm.change("stopped_dancing")
                     continue
                 if "no_change" in resp:
-                    break
-            
+                    break_phrase = "finished_dancing"
+                    self.sc.stopAll()
+                    try:
+                        resp = self.dg.play_dialogue(break_phrase, interrupt = True)
+                    except PanicException:
+                        self.dm.pose_off()
+                        self.sc.stopAll()
+                        return 'panic'
+                    except NextStateException:
+                        self.dm.pose_off()
+                        self.sc.stopAll()
+                        return 'end'
+                    except NextPhraseException:
+                        pass
+
+                    print resp
+
+                    if "yes_finished" in resp:
+                        break
+                    else:
+                        self.sc.playWave(self.music_folder + self.current_song)
+                        self.tm.change("stopped_dancing")
+                        continue
             
             move = i % len(routine)
             m = self.poses[routine[move]]
