@@ -60,12 +60,9 @@ def main():
         s = f.read()
 
     # file format is:
-    # section_name:
-    #   prompt_phrase_id:
-    #    order: <1, 2, 3, etc.>
-    #    responses: [resp1_id, resp2_id, <...>]
-    # nb: if phrase with no response, just leave responses blank
+
     dialogue_info = yaml.load(s)[day]
+    dm.load_phrases("phrases.yaml")
  
     with sm:
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),

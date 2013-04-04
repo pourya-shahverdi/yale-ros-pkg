@@ -44,7 +44,7 @@ def main():
                 print "  - type: button_group"
                 print "    label: " + item + " " + prompt
                 print "    label_string: " + \
-                    (";".join(phrase["responses"]) + ";next;panic") #.strip(";")
+                    (";".join(phrase["responses"]) + ";next_phrase;next_segment;panic") #.strip(";")
                 print "    topic: " + gui_prefix + name
 
     for lesson in food_info:

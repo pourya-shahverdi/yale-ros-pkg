@@ -16,6 +16,10 @@ import tf
 class DragonbotManager():
 
     def __init__(self):
+        self.sound_client = SoundClient()
+        rospy.sleep(0.5)
+        self.sound_client.stopAll()
+
         self.phrases = {}
         self.expressions = ["angry",
                             "frightened",
@@ -62,12 +66,18 @@ class DragonbotManager():
     def track_off(self):
         print "Tracking off."
 
-    def say(self, phrase_name):
+    def say(self, phrase_name, interrupt=True, wait = False):
+        if interrupt:
+            self.sound_client.stopAll()
         if phrase_name in self.phrases:
             print "Saying phrase: " + phrase_name
             print "====================================="
+            self.sound_client.playWave(self.phrases[phrase_name]["file"])
             print self.phrases[phrase_name]["text"]
             print "-------------------------------------"
+            if wait:
+                print "PRESS ENTER KEY WHEN SPEECH DONE"
+                raw_input()
         else:
             print "Saying (unloaded) phrase: " + phrase_name
 
@@ -89,7 +99,7 @@ class DragonbotManager():
         self.phrases = yaml.load(s)
         
 
-    def express(self, expression_id, expression_type = None):
+    def express(self, expression_id, expression_type = None, wait = True):
         recognized = False
         if expression_type == "expression" or expression_type == None:
             if expression_id in self.expressions:
@@ -131,6 +141,8 @@ class DragonbotManager():
     def blink(self):
         print "Blink"
 
+    def stop_speech(self):
+        self.sound_client.stopAll()
 
 
         
