@@ -12,8 +12,8 @@ import sys
 # class definitions for states are in the file experiment_states.py
 from experiment_states import *
 
-from dragonbot_manager import DragonbotManager
-#from dragonbot_simulator import DragonbotManager
+#from dragonbot_manager import DragonbotManager
+from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 import yaml
 

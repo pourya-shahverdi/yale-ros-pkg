@@ -9,8 +9,8 @@ import actionlib
 
 from actionlib import *
 from actionlib.msg import *
-from dragonbot_manager import DragonbotManager
-#from dragonbot_simulator import DragonbotManager
+#from dragonbot_manager import DragonbotManager
+from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient

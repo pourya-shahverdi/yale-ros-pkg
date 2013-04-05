@@ -6,23 +6,17 @@ from dragonbot_simulator import DragonbotManager
 from std_msgs.msg import String
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
+from interface_srv.srv import *
 
 def main():
     rospy.init_node('test_node')
-    sc = SoundClient()
-    rospy.sleep(1.0)
-    sc.stopAll()
-    sc.playWave('/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/thought_of_you.wav')
-    rospy.sleep(5.0)
-    sc.waveVol('/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/thought_of_you.wav', .5)
-    rospy.sleep(5.0)
-    sc.waveVol('/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/thought_of_you.wav', 1)
-    rospy.sleep(5.0)
-    sc.waveVol('/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/thought_of_you.wav', .5)
-    rospy.sleep(5.0)
-    sc.playWave('/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/phrases/data/okay.wav')
-    rospy.sleep(5)
-    sc.stopAll()
+    rospy.wait_for_service('gui_srv')
+    try:
+        get_gui = rospy.ServiceProxy('gui_srv', GUIList)
+        resp = get_gui()
+        print resp.guis[0]
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
 
 if __name__ == '__main__':
     main()
