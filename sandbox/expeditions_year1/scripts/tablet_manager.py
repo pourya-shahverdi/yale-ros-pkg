@@ -25,8 +25,14 @@ class TabletManager():
             sys.exit()
         self.guis = guis.guis
         self.subs = {}
-        self.change("sleep")
-        rospy.sleep(1.0)
+        gui_name = "sleep"
+        if not gui_name in map(lambda g: g.guiname, self.guis):
+            rospy.logwarn("Invalid GUI name.")
+            return
+        rospy.loginfo("Changing to GUI: " + gui_name)
+        self.current_gui_name = gui_name
+        self.pub.publish(self.current_gui_name)
+        rospy.sleep(0.5)
 
     def get_gui(self):
         r = filter(lambda g: g.guiname == self.current_gui_name, self.guis)
@@ -64,7 +70,7 @@ class TabletManager():
             self.subs[name.strip('/')] = {"type_id":kind,
                                    "pressed":False,
                                    "last_press": ""}
-            
+ 
     def last_press(self, topic):
         topic = topic.strip('/')
         return self.subs[topic]["last_press"]
@@ -136,14 +142,31 @@ def main():
     rospy.init_node('test_tablet')
     print str(GUIElement.BUTTON_ID)
     tm = TabletManager()
-    tm.change("TestGUI1")
-    tm.change("TestGUI1")
-    print "Topics: " + str(tm.get_topics())
-    #tm.wait_for_press("dragon_GUI/sleep")
-    #print "You pressed the button!"
-    while not rospy.is_shutdown():
-        rospy.spin()
+    selected_foods = []
+    gui_name = "lunchbox_" + "_".join(selected_foods)
+    tm.change(gui_name)
+    panicked = False
+    while not rospy.is_shutdown() and not panicked:
+        resp = tm.wait_for_press("dragon_GUI/food_select")
 
+        if resp == "panic":
+            panicked = True
+            continue
+        elif resp == "GO":
+            print "GO GO GO GO GO"
+        elif resp == "reminder":
+            print "I'm reminding you!"
+        elif resp == "next":
+            print "Go to the next thing"
+        elif resp == "--":
+            continue
+        elif resp in selected_foods:
+            selected_foods.remove(resp)
+        else:
+            selected_foods.append(resp)
+            selected_foods.sort()
+        gui_name = "lunchbox_" + "_".join(selected_foods)
+        tm.change(gui_name)
 
 if __name__ == '__main__':
     main()

@@ -9,8 +9,8 @@ import actionlib
 
 from actionlib import *
 from actionlib.msg import *
-#from dragonbot_manager import DragonbotManager
-from dragonbot_simulator import DragonbotManager
+from dragonbot_manager import DragonbotManager
+#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
@@ -153,7 +153,7 @@ class Intro(smach.State):
         return 'end'
 
 
-class FoodChoice(smach.State):
+class FoodChoiceDay1(smach.State):
     def __init__(self, dm, tm, exp_info, dialogue_info, food_phrases):
         smach.State.__init__(self, outcomes=['panic', 'next_round', 'end'])
         self.dm = dm
@@ -247,6 +247,65 @@ class FoodChoice(smach.State):
         print str(self.choices)
         return 'next_round'
 
+class FoodChoiceDay2(smach.State):
+    def __init__(self, dm, tm, exp_info, dialogue_info, food_phrases):
+        smach.State.__init__(self, outcomes=['panic', 'next_round', 'end'])
+        self.dm = dm
+        self.tm = tm
+        self.ntimes = 0
+        self.day, self.lessons = exp_info
+        self.fp = food_phrases[self.day]
+        self.all_foods = self.fp["bad"] + self.fp["good"] + self.fp["sometimes"]
+        self.dialogue = dialogue_info
+        self.segment = "foods"
+        self.gui_prefix = "dragon_GUI/"
+        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.selected_foods = []
+        self.feedback_level = {i:0 for i in self.all_foods}
+        
+
+    def execute(self, userdata):
+        print "==============================================="
+        print "+                FOOD DIALOGUE                +"
+        print "-----------------------------------------------"
+        gui_name = self.day + "_" + "_".join(self.selected_foods)
+        self.tm.change(gui_name)
+        panicked = False
+        while not rospy.is_shutdown():
+            resp = self.tm.wait_for_press("dragon_GUI/food_select")
+            if resp == "panic":
+                return 'panic'
+            elif resp == "GO":
+                break
+            elif resp == "reminder":
+                print "I'm reminding you!"
+            elif resp == "next":
+                print "Go to the next thing"
+            elif resp == "--":
+                continue
+            elif resp in self.selected_foods:
+                self.selected_foods.remove(resp)
+            else:
+                self.selected_foods.append(resp)
+                self.selected_foods.sort()
+            gui_name = self.day + "_" + "_".join(self.selected_foods)
+            self.tm.change(gui_name)
+        # have a bunch of choices in self.selected_foods
+        bad_foods = []
+        good_foods = []
+        sometimes_foods = []
+        for food in self.selected_foods:
+            if food in self.fp["bad"]:
+                bad_foods.append(food)
+            elif food in self.fp["good"]:
+                good_foods.append(food)
+            elif food in self.fp["sometimes"]:
+                sometimes_foods.append(food)
+        rospy.loginfo("Selected foods:")
+        rospy.loginfo("  Good foods: " + ",".join(good_foods))
+        rospy.loginfo("  Bad foods: " + ",".join(bad_foods))
+        rospy.loginfo("  Sometimes foods: " + ",".join(sometimes_foods))
+        return 'next_round'
 
 
 class Workout(smach.State):

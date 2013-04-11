@@ -12,14 +12,14 @@ import sys
 # class definitions for states are in the file experiment_states.py
 from experiment_states import *
 
-#from dragonbot_manager import DragonbotManager
-from dragonbot_simulator import DragonbotManager
+from dragonbot_manager import DragonbotManager
+#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 import yaml
 
 def main():
-    if not len(sys.argv) == 2:
-        print "Usage: run_exp.py [day_id]"
+    if not len(sys.argv) == 3:
+        print "Usage: run_exp.py [week_id] [day_number]"
         sys.exit()
 
     rospy.init_node('experiment_controller')
@@ -40,9 +40,22 @@ def main():
     lessons = lesson_list[day]
     info = (day,lessons)
     
+    try:
+        day_num = int(sys.argv[2])
+    except:
+        print "Usage: day number must be an integer"
+        sys.exit()
 
-    with open("food_phrases.yaml", 'r') as f:
-        s = f.read()
+    rospy.loginfo("Reading food phrases file.")
+    if day_num == 1:
+        with open("day1_food_phrases.yaml", 'r') as f:
+            s = f.read()
+    elif day_num == 2:
+        with open("day2_food_phrases.yaml", 'r') as f:
+            s = f.read()
+    else:
+        print "Usage: day number must be 1 or 2"
+        sys.exit()
 
     # file format is:
     # lesson:
@@ -55,27 +68,40 @@ def main():
     # nb: food_info["lesson"]["none"].keys() will give all foods (and "none")
     food_info = yaml.load(s)
 
-
-    with open("dialogue_phrases.yaml", 'r') as f:
-        s = f.read()
+    rospy.loginfo("Reading other dialogue phrases file.")
+    if day_num == 1:
+        with open("dialogue_phrases_day1.yaml", 'r') as f:
+            s = f.read()
+    else:
+        with open("dialogue_phrases_day2.yaml", 'r') as f:
+            s = f.read()
 
     # file format is:
-
+            
     dialogue_info = yaml.load(s)[day]
+
+    rospy.loginfo("Loading phrase information file.")
     dm.load_phrases("phrases.yaml")
+    rospy.loginfo("Done loading files.")
+
+    if day_num == 1:
+        food_state = FoodChoiceDay1(dm, tm, info, dialogue_info["foods"],food_info)
+    elif day_num == 2:
+        food_state = FoodChoiceDay2(dm, tm, info, dialogue_info["foods"],food_info)
  
     with sm:
-        smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
+        smach.StateMachine.add('F_CHOICE', food_state,
+                               transitions={'panic':'end',
+                                            'next_round':'F_CHOICE',
+                                            'end':'end'})
+
+        '''smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
                                             'done':'end'})
         smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info["intro"]),
                                transitions={'panic':'SLEEP',
                                             'end':'F_CHOICE'})
-        '''smach.StateMachine.add('F_INTRO', FoodIntro(dm, tm, info),
-                              transitions={'panic':'SLEEP',
-                                           'next_round':'F_CHOICE',
-                                           'done':'WORKOUT'})'''
-        smach.StateMachine.add('F_CHOICE', FoodChoice(dm, tm, info, dialogue_info["foods"],food_info),
+        smach.StateMachine.add('F_CHOICE', food_state,
                                transitions={'panic':'SLEEP',
                                             'next_round':'F_CHOICE',
                                             'end':'WORKOUT'})
@@ -86,7 +112,7 @@ def main():
                                             'timeout':'OUTRO'})
         smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info["outro"]),
                                transitions={'end':'SLEEP',
-                                            'panic':'SLEEP'})
+                                            'panic':'SLEEP'})'''
 
     outcome = sm.execute()
 
