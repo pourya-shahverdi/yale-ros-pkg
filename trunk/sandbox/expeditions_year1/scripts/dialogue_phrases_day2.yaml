@@ -1,0 +1,333 @@
+lunchbox:
+    intro:
+        intro_dialogue:
+            type: dialogue
+            items: [name, like_to_eat, hear_race]
+        name:
+            phrase_ids: [01-intro]
+            type: question
+            responses: [give_name, cant_hear, not_name, give_up]
+            terminal: [give_name, give_up]
+        give_name:
+            phrase_ids: [01a-nice_meet]
+            type: statement
+        cant_hear:
+            phrase_ids: [01b-cant_hear]
+            type: statement
+        not_name:
+            phrase_ids: [01c-not_name]
+            type: statement
+        give_up:
+            phrase_ids: [01d-move_on]
+            type: statement
+        like_to_eat: 
+            type: question
+            phrase_ids: [02-what_eat]
+            responses: [good_choice, non-human_choice, unknown_single, unknown_pl, favorite]
+            terminal: [good_choice, non-human_choice, unknown_single, unknown_pl, favorite]
+        favorite:
+            type: statement
+            phrase_ids: [02e_favorite]
+        good_choice:
+            type: statement
+            phrase_ids: [02a-yum_tasty]
+        non-human_choice:
+            type: statement
+            phrase_ids: [02b-weird_choice]
+        unknown_single:
+            type: statement
+            phrase_ids: [02c-huh_is]
+        unknown_pl:
+            type: statement
+            phrase_ids: [02d-huh_are]
+        hear_race: 
+            type: dialogue
+            items: [did_hear, help_me]
+        did_hear: 
+            type: wait
+            phrase_ids: [03-p1-hear_race]
+        help_me: 
+            type: question
+            phrase_ids: [03-p2-tell_about]
+            responses: [help_yes, help_no, repeat_no, repeat_no2]
+            terminal: [help_yes]
+        help_yes:
+            type: statement
+            phrase_ids: [03a-yes_great]
+        help_no:
+            type: statement
+            phrase_ids: [03b-no_once]
+        repeat_no:
+            type: statement
+            phrase_ids: [03c-no_twice]
+        repeat_no2:
+            type: statement
+            phrase_ids: [03d-no_thrice]
+    foods:
+        rem1:
+            type: statement
+            phrase_ids: []
+        rem2:
+            type: statement
+            phrase_ids: []
+        rem3:
+            type: statement
+            phrase_ids: []
+        chocmilk_l1:
+            type: statement
+            phrase_ids: []
+        chocmilk_l2:
+            type: statement
+            phrase_ids: []
+        chocmilk_l3:
+            type: statement
+            phrase_ids: []
+        soda_l1:
+            type: statement
+            phrase_ids: []
+        soda_l2:
+            type: statement
+            phrase_ids: []
+        soda_l3:
+            type: statement
+            phrase_ids: []
+        whitebread_l1:
+            type: statement
+            phrase_ids: []
+        whitebread_l2:
+            type: statement
+            phrase_ids: []
+        whitebread_l3:
+            type: statement
+            phrase_ids: []
+        muffin_l1:
+            type: statement
+            phrase_ids: []
+        muffin_l2:
+            type: statement
+            phrase_ids: []
+        muffin_l3:
+            type: statement
+            phrase_ids: []
+        bagel_l1:
+            type: statement
+            phrase_ids: []
+        bagel_l2:
+            type: statement
+            phrase_ids: []
+        bagel_l3:
+            type: statement
+            phrase_ids: []
+        juice_comment:
+            type: statement
+            phrase_ids: []
+        milk_l1:
+            type: statement
+            phrase_ids: []
+        milk_l2:
+            type: statement
+            phrase_ids: []
+        milk_l3:
+            type: statement
+            phrase_ids: []
+        water_l1:
+            type: statement
+            phrase_ids: []
+        water_l2:
+            type: statement
+            phrase_ids: []
+        water_l3:
+            type: statement
+            phrase_ids: []
+        whbread_l1:
+            type: statement
+            phrase_ids: []
+        whbread_l2:
+            type: statement
+            phrase_ids: []
+        whbread_l3:
+            type: statement
+            phrase_ids: []
+        whbagel_l1:
+            type: statement
+            phrase_ids: []
+        wbagel_l2:
+            type: statement
+            phrase_ids: []
+        wbagel_l3:
+            type: statement
+            phrase_ids: []
+        bread_l1:
+            type: statement
+            phrase_ids: []
+        bread_l2:
+            type: statement
+            phrase_ids: []
+        drinks_l1:
+            type: statement
+            phrase_ids: []
+        drinks_l2:
+            type: statement
+            phrase_ids: []
+    workout:
+        outro-bread-milk:
+            type: statement
+            phrase_ids: [12-p1-1-whole_grain_bread_and_milk]
+        outro-bread-water:
+            type: statement
+            phrase_ids: [12-p1-3-whole_grain_bread_and_water]
+        outro-bagel-milk:
+            type: statement
+            phrase_ids: [12-p1-2-whole_wheat_bagel_and_milk]
+        outro-bagel-water:
+            type: statement
+            phrase_ids: [12-p1-4-whole_wheat_bagel_and_water]
+        training_backstory:
+            type: backstory
+            items: [training]
+        training:
+            type: statement
+            phrase_ids: [12-p1-training_is]
+        intro_dialogue:
+            type: dialogue
+            items: [intro]
+        post_music:
+            type: dialogue
+            items: [music, lets_go]
+        intro:
+            phrase_ids: [12-p2-speak_of_training]
+            type: question
+            responses: [like_dance, no_like_dance]
+            terminal: [like_dance, no_like_dance]
+        like_dance:
+            type: statement
+            phrase_ids: [20-p2-okay]
+        no_like_dance:
+            type: dialogue
+            items: [what_do_like, do_that]
+        what_do_like:
+            type: wait
+            phrase_ids: [20-p5-ask_alternate_move_around]
+        do_that:
+            type: statement
+            phrase_ids: [20-p6-do_alternate_move_around]
+        music:
+            type: statement
+            phrase_ids: [12-p2-magical_music_player]
+        lets_go:
+            type: statement
+            phrase_ids: [12-p3-both_dance]
+        energized_comment:
+            type: statement
+            phrase_ids: [13a-great_dancer,13b-dynamite,13c-show_best_move,13d-even_more_moves,13e-cant_stop]
+        stop_dancing:
+            type: dialogue
+            items: [keep_going]
+        keep_going:
+            type: question
+            phrase_ids: [14-p1-dance_more]
+            responses: [dance_more, no_more]
+            terminal: [dance_more, no_more]
+        no_more:
+            type: redirect
+            goal: new_song
+        dance_more:
+            type: statement
+            phrase_ids: [14-p2-yippee]
+        new_song:
+            type: question
+            phrase_ids: [14-p3-different_song]
+            responses: [yes_change, no_change]
+            terminal: [yes_change, no_change]
+        yes_change:
+            type: statement
+            phrase_ids: [14-p4-okay_go]
+        no_change:
+            type: statement
+            phrase_ids: [20-p2-okay]
+        break1:
+            type: question
+            phrase_ids: [14-p5-break]
+            responses: [yes_break1, no_break]
+            terminal: [yes_break1, no_break]
+        break2:
+            type: question
+            phrase_ids: [14-p5-break]
+            responses: [yes_break2, no_break]
+            terminal: [yes_break2, no_break]
+        yes_break1:
+            type: statement
+            phrase_ids: [14-p6-victory_dance]
+        yes_break2:
+            type: redirect
+            goal: [victory_again]
+        no_break:
+            type: statement
+            phrase_ids: [14-p7-back_to_dancing]
+        victory_again:
+            type: question
+            phrase_ids: [20-p3-victory_dance_again]
+            responses: [yes_victory, vic_again_no]
+            terminal: [yes_victory, vic_again_no]
+        vic_again_no:
+            type: dialogue
+            items: [quick_break, hum]
+        quick_break:
+            type: statement
+            phrase_ids: [20-p4-quick_break]
+        hum:
+            type: statment
+            phrase_ids: [21-humming]
+        victory_dance:
+            type: question
+            phrase_ids: [15-victory_dance]
+            responses: [yes_victory, no_victory]
+            terminal: [yes_victory, no_victory]
+        what_do_you_think:
+            type: dialogue
+            items: [what_think, faster_better]
+        what_think:
+            type: wait
+            phrase_ids: [16-p1-what_think]
+        faster_better:
+            type: statement
+            phrase_ids: [16-p2-new_dance_next_time]
+        yes_victory:
+            type: statement
+            phrase_ids: [15a-if_yes]
+        no_victory:
+            type: statement
+            phrase_ids: [15b-if_no]
+        timeout:
+            type: statement
+            phrase_ids: [17-timeout]
+        finished_dancing:
+            type: question
+            phrase_ids: [20-p1-finished_with_dancing]
+            responses: [yes_finished, no_finished]
+            terminal: [yes_finished, no_finished]
+        yes_finished:
+            type: statment
+            phrase_ids: [20-p2-okay]
+        no_finished:
+            type: statement
+            phrase_ids: [20-p2-okay]
+    outro:
+        outro_dialogue:
+            type: dialogue
+            items: [fun, wrap_up, nap]
+        fun:
+            type: statement
+            phrase_ids: [18-p1-phew_fun]
+        wrap_up:
+            type: select
+            responses: [dance, no_dance]
+        dance:
+            type: statement
+            phrase_ids: []
+        no_dance:
+            type: statement
+            phrase_ids: [18-p2-user_didnt_dance]
+        nap:
+            type: statement
+            phrase_ids: [18-p3-naptime]

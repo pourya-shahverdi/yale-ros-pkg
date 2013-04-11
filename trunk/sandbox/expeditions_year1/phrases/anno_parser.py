@@ -84,7 +84,7 @@ def main():
                             it = it + 1
                 actions = {}
                 if len(line.strip().split()) > 1:
-                    with open(line.strip().split()[1], 'r') as actfile:
+                    with open(data_dir + "/" + line.strip().split()[1], 'r') as actfile:
                         s = actfile.read()
                         actions = yaml.load(s)
                 behavs = {}
