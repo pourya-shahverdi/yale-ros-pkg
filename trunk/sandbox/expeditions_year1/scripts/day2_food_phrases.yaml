@@ -1,0 +1,23 @@
+lunchbox:
+    bad: [choc_milk, soda, white_bread, muffin, bagel]
+    good: [milk, water, wheat_bread, wh_bagel]
+    sometimes: [juice]
+    groups: 
+        - name: breads
+          items: [white_bread, muffin, bagel, wheat_bread, wh_bagel]
+        - name: drinks
+          items: [choc_milk, soda, juice, milk, water]
+    phrases:
+        reminders: [rem1, rem2, rem3]
+        choc_milk: [chocmilk_l1, chocmilk_l2, chocmilk_l3]
+        soda: [soda_l1, soda_l2, soda_l3]
+        white_bread: [whitebread_l1, whitebread_l2, whitebread_l3]
+        muffin: [muffin_l1, muffin_l2, muffin_l3]
+        bagel: [bagel_l1, bagel_l2, bagel_l3]
+        juice: [juice_comment]
+        milk: [milk_l1, milk_l2, milk_l3]
+        water: [water_l1, water_l2, water_l3]
+        wheat_bread: [whbread_l1, whbread_l2, whbread_l3]
+        wh_bagel: [whbagel_l1, wbagel_l2, wbagel_l3]
+        breads: [bread_l1, bread_l2]
+        drinks: [drinks_l1, drinks_l2]
