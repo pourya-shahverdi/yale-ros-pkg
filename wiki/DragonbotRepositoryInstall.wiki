@@ -1,5 +1,7 @@
 #summary Installation instructions for the Dragonbot-Actionlib Repository
 
+= DEPRECATED, DO NOT USE! =
+
 = Introduction =
 
 Currently code for this project is contained in two repositories:
