@@ -30,7 +30,7 @@ def main():
                    'breakfast':("cereal", "breakfast"),
                    'dinner':("sides1","sides2")}
 
-
+    rospy.set_param("music_folder", '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/')
 
     dm = DragonbotManager()
     tm = TabletManager()
@@ -90,12 +90,13 @@ def main():
         food_state = FoodChoiceDay2(dm, tm, info, dialogue_info["foods"],food_info)
  
     with sm:
-        smach.StateMachine.add('F_CHOICE', food_state,
+        '''smach.StateMachine.add('F_CHOICE', food_state,
                                transitions={'panic':'end',
                                             'next_round':'F_CHOICE',
-                                            'end':'end'})
+                                            'end':'end',
+                                            'timeout':'OUTRO'})'''
 
-        '''smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
+        smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
                                             'done':'end'})
         smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info["intro"]),
@@ -104,7 +105,8 @@ def main():
         smach.StateMachine.add('F_CHOICE', food_state,
                                transitions={'panic':'SLEEP',
                                             'next_round':'F_CHOICE',
-                                            'end':'WORKOUT'})
+                                            'end':'WORKOUT',
+                                            'timeout':'OUTRO'})
         smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
                                transitions={'panic':'SLEEP',
                                             'continue':'WORKOUT',
@@ -112,7 +114,7 @@ def main():
                                             'timeout':'OUTRO'})
         smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info["outro"]),
                                transitions={'end':'SLEEP',
-                                            'panic':'SLEEP'})'''
+                                            'panic':'SLEEP'})
 
     outcome = sm.execute()
 
