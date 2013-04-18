@@ -31,6 +31,7 @@ def main():
                    'dinner':("sides1","sides2")}
 
     rospy.set_param("music_folder", '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/')
+    rospy.set_param("max_time", 600)
 
     dm = DragonbotManager()
     tm = TabletManager()
