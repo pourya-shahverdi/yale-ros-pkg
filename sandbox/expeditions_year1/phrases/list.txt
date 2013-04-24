@@ -15,12 +15,12 @@
 03d-no_thrice 03d-no_thrice.act
 03-p1-hear_race 03-p1-hear_race.act
 03-p2-tell_about 03-p2-tell_about.act
-04a-no_choice
-04b-white
-04c-whole_grain
-04d-bagel
-04e-whole_wheat_bagel
-04f-muffin
+04a-no_choice 04a-no_choice.act
+04b-white blech.act
+04c-whole_grain yummm.act
+04d-bagel blech.act
+04e-whole_wheat_bagel yummm.act
+04f-muffin 04f-muffin.act
 04-p1-hungry_now
 04-p2-1-what_made_choose
 04-p2-2-what_made_pick
