@@ -1,0 +1,13 @@
+#intro-03-introduction.wav
+- type: motion
+  id: i_like_it
+  start: 6.0
+- type: motion
+  id: think
+  start: 18.0
+- type: motion
+  id: surprise
+  start: 32.0
+- type: motion
+  id: yes
+  start: 38.0

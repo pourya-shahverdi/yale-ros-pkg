@@ -1,0 +1,10 @@
+#intro-02-hey_there.wav
+- type: eye_open
+  start: 0.0
+- type: motion
+  id: anticipation
+  start: 4.0
+- type: expression
+  id: angry
+  start: 11.0
+
