@@ -134,6 +134,11 @@ good_job
 good_music
 great_here
 great
+intro-01-snore_wake_up intro-01-snore_wake_up.act
+intro-02-hey_there intro-02-hey_there.act
+intro-03-introduction intro-03-introduction.act
+intro-04-back_to_nap intro-04-back_to_nap.act
+intro-05-snore_sleep intro-05-snore_sleep.act
 juice_choc
 keep_up
 lets_continue
