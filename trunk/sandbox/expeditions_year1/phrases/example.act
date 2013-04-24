@@ -33,3 +33,9 @@
 - type: lookat_frame
   start: 0.0
   target: target_tf
+- type: eye_open
+  start: 0.0
+- type: eye_closed
+  start: 0.0
+- type: blink
+  start: 0.0
