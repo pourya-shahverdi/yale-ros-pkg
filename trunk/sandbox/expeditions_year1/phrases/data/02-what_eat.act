@@ -1,0 +1,13 @@
+#02-what_eat.wav
+- type: motion
+  id: hungry
+  start: 0.0
+- type: expression
+  id: mischievous
+  start: 4.0
+- type: expression
+  id: confused
+  start: 9.0
+- type: motion
+  id: question
+  start: 16.0
