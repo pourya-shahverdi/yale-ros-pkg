@@ -1,44 +1,35 @@
 #yaml file with actions for a single phrase
-act0:
-    type: expression
-    id: happy
-    start: 1.0
-    end: 2.0
-act1:
-    type: motion
-    id: farted
-    start: 4.0
-    end: 5.0
-act3:
-    type: track
-    target: target
-    start: 3.0
-    end: 4.0
-act35:
-    type: track_off
-    start: 4.0
-    end: 100.0
-act4:
-    type: lookat
-    x: 300
-    y: 0
-    z: 0
-    start: 5.0
-    end: 6.0
-act5:
-    type: lookat_off
-    start: 6.0
-    end: 7.0
-act6:
-    type: pose
-    start: 7.1
-    end: 7.2
-    vel: 0
-    acc: 0
-    x: 0
-    y: 0
-    z: 0
-    theta: 0
-    neck: 0
-act7:
-    type lookat_frame
+- type: expression
+  id: happy
+  start: 1.0
+- act1:
+  type: motion
+  id: farted
+  start: 4.0
+- type: track
+  target: target_tf
+  start: 3.0
+- type: track_off
+  start: 4.0
+- type: lookat
+  x: 300
+  y: 0
+  z: 0
+  start: 5.0
+- type: lookat_off
+  start: 6.0
+  end: 7.0
+- type: pose
+  end: 7.2
+  vel: 0
+  acc: 0
+  x: 0
+  y: 0
+  z: 0
+  theta: 0
+  neck: 0
+- type: lookat_off:
+  start: 0.0
+- type: lookat_frame
+  start: 0.0
+  target: target_tf
