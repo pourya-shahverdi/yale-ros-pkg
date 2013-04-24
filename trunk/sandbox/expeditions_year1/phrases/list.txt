@@ -9,12 +9,12 @@
 02d-huh_are 02d-huh_are.act
 02e_favorite 02e_favorite.act
 02-what_eat 02-what_eat.act
-03a-yes_great
-03b-no_once
-03c-no_twice
-03d-no_thrice
-03-p1-hear_race
-03-p2-tell_about
+03a-yes_great 03a-yes_great.act
+03b-no_once 03b-no_once.act
+03c-no_twice 03c-no_twice.act
+03d-no_thrice 03d-no_thrice.act
+03-p1-hear_race 03-p1-hear_race.act
+03-p2-tell_about 03-p2-tell_about.act
 04a-no_choice
 04b-white
 04c-whole_grain
