@@ -47,10 +47,10 @@
 08f-p2-soda_post_fart blech.act
 08-pull_drink yay.act
 09a-repeated_choice
-09c-chocolate_milk_after_soda
-09d-chocolate_milk_after_juice
-09e-p1-juice_after_chocolate_milk
-09e-p2-juice_after_soda
+09c-chocolate_milk_after_soda idunno.act
+09d-chocolate_milk_after_juice no.act
+09e-p1-juice_after_chocolate_milk idunno.act
+09e-p2-juice_after_soda idunno.act
 10-p1-cavities_first
 10-p2-cavities_second
 11-p1-1-diabetes_first_part_one
