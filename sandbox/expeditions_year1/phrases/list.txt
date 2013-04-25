@@ -51,8 +51,8 @@
 09d-chocolate_milk_after_juice no.act
 09e-p1-juice_after_chocolate_milk idunno.act
 09e-p2-juice_after_soda idunno.act
-10-p1-cavities_first
-10-p2-cavities_second
+10-p1-cavities_first 10-p1-cavities_first.act
+10-p2-cavities_second 10-p2-cavities_second.act
 11-p1-1-diabetes_first_part_one
 11-p1-2-diabetes_first_part_two
 11-p2-diabetes_second
