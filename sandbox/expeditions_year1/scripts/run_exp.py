@@ -18,11 +18,20 @@ from tablet_manager import TabletManager
 import yaml
 
 def main():
-    if not len(sys.argv) == 3:
-        print "Usage: run_exp.py [week_id] [day_number]"
-        sys.exit()
-
     rospy.init_node('experiment_controller')
+
+    '''if not rospy.has_param("~lesson"):
+        rospy.set_param("~lesson", 'lunchbox')
+    if not rospy.has_param("~day"):
+        rospy.set_param("~day", 1)
+    if not rospy.has_param("~music_folder"):
+        rospy.set_param("~music_folder", '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/')'''
+    if not rospy.has_param("~max_time"):
+        rospy.set_param("~max_time", 600)
+
+    day = rospy.get_param("~lesson")
+    day_num = rospy.get_param("~day")
+    
     sm = smach.StateMachine(outcomes=['end'])
 
     lesson_list = {'lunchbox':("whole_grains", "drinks"),
@@ -30,23 +39,15 @@ def main():
                    'breakfast':("cereal", "breakfast"),
                    'dinner':("sides1","sides2")}
 
-    rospy.set_param("music_folder", '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/')
-    rospy.set_param("max_time", 600)
+   
 
     dm = DragonbotManager()
     tm = TabletManager()
 
     #info: day, lessons    
-    day = sys.argv[1].strip()
     lessons = lesson_list[day]
     info = (day,lessons)
     
-    try:
-        day_num = int(sys.argv[2])
-    except:
-        print "Usage: day number must be an integer"
-        sys.exit()
-
     rospy.loginfo("Reading food phrases file.")
     if day_num == 1:
         with open("day1_food_phrases.yaml", 'r') as f:
@@ -81,9 +82,9 @@ def main():
             
     dialogue_info = yaml.load(s)[day]
 
-    rospy.loginfo("Loading phrase information file.")
-    dm.load_phrases("phrases.yaml")
-    rospy.loginfo("Done loading files.")
+    #rospy.loginfo("Loading phrase information file.")
+    #dm.load_phrases("phrases.yaml")
+    #rospy.loginfo("Done loading files.")
 
     if day_num == 1:
         food_state = FoodChoiceDay1(dm, tm, info, dialogue_info["foods"],food_info)
@@ -95,7 +96,12 @@ def main():
                                transitions={'panic':'end',
                                             'next_round':'F_CHOICE',
                                             'end':'end',
-                                            'timeout':'OUTRO'})'''
+                                            'timeout':'OUTRO'})
+        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
+                               transitions={'panic':'end',
+                                            'continue':'WORKOUT',
+                                            'end':'end',
+                                            'timeout':'end'})'''
 
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
