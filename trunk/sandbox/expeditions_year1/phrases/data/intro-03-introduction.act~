@@ -9,5 +9,5 @@
   id: surprise
   start: 32.0
 - type: motion
-  id: "yes"
+  id: yes
   start: 38.0

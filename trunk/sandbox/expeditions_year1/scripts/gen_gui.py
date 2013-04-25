@@ -6,6 +6,9 @@ import yaml
 from itertools import combinations
 
 def main():
+    dialogue_files = ["dialogue_phrases_day1.yaml", 
+                      "dialogue_phrases_day2.yaml",
+                      "intro_dialogue.yaml"]
     
     print '''- gui: Dragonbot Teleop
   elements:
@@ -108,29 +111,20 @@ def main():
 
     gui_prefix = "dragon_GUI/"
 
-    with open("food_phrases.yaml", 'r') as f:
+    with open("day1_food_phrases.yaml", 'r') as f:
         s = f.read()
-        
-        # file format is:
-        # lesson:
-        #  intro: phrase_id
-        #  reminder: phrase_id
-        #  no_choice: phrase_id
-        #  foodname: (food chosen before)
-        #    foodname: phrase_id (food chosen after)
-        # index as food_info["lesson"]["choice1"]["choice2"]
-        # nb: food_info["lesson"]["none"].keys() will give all foods (and "none")
     food_info = yaml.load(s)
-    with open("dialogue_phrases.yaml", 'r') as f:
-        s = f.read()
 
-        # file format is:
-        # section_name:
-        #   prompt_phrase_id:
-        #    order: <1, 2, 3, etc.>
-        #    responses: [resp1_id, resp2_id, <...>]
-        # nb: if phrase with no response, just leave responses blank
-    dialogue_info = yaml.load(s)
+
+    dialogue_info = {}
+    for filename in dialogue_files:
+        with open(filename, 'r') as f:
+            s = f.read()
+        dialogue_items = yaml.load(s)
+        dialogue_info.update(dialogue_items)
+
+
+
 
     with open("day2_food_phrases.yaml", 'r') as f:
         s = f.read()

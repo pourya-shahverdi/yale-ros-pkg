@@ -277,7 +277,6 @@ def main():
     dm.eye_close()
     rospy.sleep(3)
     dm.eye_open()
-
     
 if __name__ == '__main__':
     main()

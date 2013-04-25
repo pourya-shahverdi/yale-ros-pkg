@@ -66,7 +66,7 @@ def main():
                 except IOError:
                     print "Error opening textfile"
                     text = "<" + name + " missing text>"
-                visemes = {}
+                visemes = []
                 with open(data_dir +"/"+ name + ".anno") as annofile:
                     it = 0
                     for item in annofile:
@@ -77,19 +77,18 @@ def main():
                             else:
                                 print "Warning: unknown viseme"
                                 continue
-                            visemes["viseme" + str(it)] = {"type": "viseme",
+                            visemes.append({"type": "viseme",
                                                            "id":t,
                                                            "start":float(viseme[1])/1000,
-                                                           "end":float(viseme[2])/1000}
+                                                           "end":float(viseme[2])/1000})
                             it = it + 1
-                actions = {}
+                actions = []
                 if len(line.strip().split()) > 1:
                     with open(data_dir + "/" + line.strip().split()[1], 'r') as actfile:
                         s = actfile.read()
                         actions = yaml.load(s)
-                behavs = {}
-                behavs.update(visemes)
-                behavs.update(actions)
+                behavs = []
+                behavs = actions + visemes
                 data[name] = {"text": text,
                               "file": data_dir + "/" + name + ".wav",
                               "actions": behavs}

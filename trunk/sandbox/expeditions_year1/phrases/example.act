@@ -1,6 +1,6 @@
 #yaml file with actions for a single phrase
 - type: expression
-  id: happy
+  id: puppy
   start: 1.0
 - act1:
   type: motion

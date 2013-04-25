@@ -14,100 +14,7 @@ from dragonbot_manager import DragonbotManager
 from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
-
-class DialogueManager():
-    def __init__(self, dm, tm, gui_prefix, segment, dialogue, day):
-        self.dm = dm
-        self.tm = tm
-        self.gui_prefix = gui_prefix
-        self.segment = segment
-        self.dialogue = dialogue
-        self.day = day
-
-        self.seen = []
-
-    def play_dialogue(self, item_id, interrupt = True, wait_for_finish = True):
-        responses = []
-
-        #print "Item id: " + item_id
-        #catch panic/move to next state
-        if item_id == 'panic':
-            self.dm.stop_speech()
-            raise PanicException
-        if item_id == 'next_segment':
-            self.dm.stop_speech()
-            raise NextStateException
-        if item_id == 'next_phrase':
-            self.dm.stop_speech()
-            raise NextPhraseException
-        
-        dialogue_item = self.dialogue[item_id]
-        if dialogue_item["type"] == 'redirect':
-            responses.append(item_id)
-            responses = responses + self.play_dialogue(dialogue_item["goal"])
-        elif dialogue_item["type"] == "wait":
-            responses.append(item_id)
-            self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt)
-            self.seen.append(dialogue_item)
-            self.tm.change("continue")
-            self.tm.wait_for_press(self.gui_prefix + "continue")
-
-        elif dialogue_item["type"] == "dialogue":
-            for item in dialogue_item["items"]:
-                try:
-                    responses = responses + self.play_dialogue(item, interrupt, wait_for_finish)
-                except NextPhraseException:
-                    continue
-
-        elif dialogue_item["type"] == "backstory":
-            try:
-                if not dialogue_item in self.seen:
-                    self.seen.append(dialogue_item)
-                    return self.play_dialogue(dialogue_item["items"][0], interrupt, wait_for_finish)
-                else:
-                    start = 0
-                    if len(dialogue_item["items"]) > 1:
-                        start = 1
-                        self.seen.append(dialogue_item)
-                        return self.play_dialogue(random.choice(dialogue_item["items"][start:len(dialogue_item["items"])]), interrupt, wait_for_finish)
-            except NextPhraseException:
-                return []
-
-        elif dialogue_item["type"] == "question":
-            gui_name = self.day + "_" + self.segment + "_" + item_id
-            self.tm.change(gui_name)
-            self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt = True)
-            resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
-            try:
-                responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
-            except NextPhraseException:
-                    return responses
-            while resp not in dialogue_item["terminal"]:
-                self.tm.change(gui_name)
-                self.seen.append(dialogue_item)
-                resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
-                try:
-                    responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
-                except NextPhraseException:
-                    return responses
-
-        elif dialogue_item["type"] == "choice":
-            gui_name = self.day + "_" + self.segment + "_" + item_id
-            self.tm.change(gui_name)
-            resp = self.tm.wait_for_press(self.gui_prefix + self.gui_name)
-            try:
-                responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
-            except NextPhraseException:
-                return responses
-
-        elif dialogue_item["type"] == "statement":
-            responses.append(item_id)
-            if len(dialogue_item["phrase_ids"]) > 0:
-                self.dm.say(random.choice(dialogue_item["phrase_ids"]), interrupt, wait = wait_for_finish)
-            self.seen.append(dialogue_item)
-        print str(responses)
-        return responses
-
+from dialogue_manager import *
                 
 class Sleep(smach.State):
     def __init__(self, dm, tm, exp_info):
@@ -262,7 +169,7 @@ class FoodChoiceDay2(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
         self.sc = SoundClient()
-        self.music_folder = rospy.get_param("music_folder")
+        self.music_folder = rospy.get_param("~music_folder")
 
         self.feedback_levels = {i:{"good":0,"bad":0} for i in self.fp["groups"]}
         self.feedback_levels["all"] = {"good":0, "bad":0}
@@ -273,7 +180,7 @@ class FoodChoiceDay2(smach.State):
         self.selected_foods = []
         
         self.exp_start_time = rospy.Time.now()
-        self.duration = rospy.Duration(rospy.get_param("max_time"))
+        self.duration = rospy.Duration(rospy.get_param("~max_time"))
 
     def execute(self, userdata):
         print "==============================================="
@@ -526,8 +433,8 @@ class Workout(smach.State):
         self.sc = SoundClient()
         self.dm = dm
         self.tm = tm
-        self.exp_start_time = rospy.Time.now()
-        self.duration = rospy.Duration(rospy.get_param("max_time"))
+        self.exp_start = rospy.Time.now()
+        self.duration = rospy.Duration(rospy.get_param("~max_time"))
         self.break_time = rospy.Duration(120)
         self.dialogue = dialogue_info
         #self.workout_phrases = workout_info
@@ -535,7 +442,7 @@ class Workout(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.segment = "workout"
 
-        self.music_folder = rospy.get_param("music_folder")
+        self.music_folder = rospy.get_param("~music_folder")
     
         #pose is: x, y, z, (theta, neck, vel, acc [optional])
         self.poses = {'right': (0, 2.4, 0),
@@ -585,18 +492,18 @@ class Workout(smach.State):
 
         self.current_song, bpm = random.choice(self.songs.items())
         i = 0
-        bpm = bpm/2
         v = 1
-        a = 0.05
+        a = 0.5
+        bpm = bpm/2
 
-        time_adjust = rospy.Duration(-0.9)
+        time_adjust = rospy.Duration(0.0)
         delay_adjust = rospy.Duration(0.0)
         move_sleep = rospy.Duration(60/bpm)
         
         self.dm.pose(0,0,0)
 
         #play workout routine
-        start = self.exp_start_time
+        start = self.exp_start
         self.sc.playWave(self.music_folder + self.current_song)
         self.sc.waveVol(self.music_folder + self.current_song, self.vol)
         try:
@@ -614,8 +521,10 @@ class Workout(smach.State):
         self.tm.change("stopped_dancing")
         rospy.sleep(delay_adjust)
         nbreaks = 1
+        dance_start = rospy.Time.now()
         while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
-            if rospy.Time.now()-start > self.break_time * nbreaks:
+            print "Time elapsed: " + str((rospy.Time.now()-dance_start).secs) + "." + str((rospy.Time.now()-dance_start).nsecs)
+            if rospy.Time.now()-dance_start > self.break_time * nbreaks:
                 '''if nbreaks = 1:
                     break_phrase = "break1"
                 elif nbreaks = 2:
@@ -678,7 +587,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                     song, bpm = random.choice(self.songs.items())
                 self.current_song = song
-                bpm = bpm/4
+                bpm = bpm/2
                 move_sleep = rospy.Duration(60/bpm)
                 self.sc.playWave(self.music_folder + self.current_song)
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
@@ -708,7 +617,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                         song, bpm = random.choice(self.songs.items())
                     self.current_song = song
-                    bpm = bpm/4
+                    bpm = bpm/2
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.sc.waveVol(self.music_folder + self.current_song, self.vol)
@@ -743,7 +652,7 @@ class Workout(smach.State):
             m = self.poses[routine[move]]
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             i = i + 1
-            if i % 10 == 0:
+            if i % 100 == 0:
                 try:
                     self.dg.play_dialogue("energized_comment", interrupt = False)
                 except PanicException:
@@ -756,8 +665,8 @@ class Workout(smach.State):
                     return 'end'
                 except NextPhraseException:
                     pass
+
             rospy.sleep(move_sleep-time_adjust)
-            
 
         if rospy.Time.now()-start >= self.duration:
             rospy.sleep(2.0)
@@ -834,6 +743,3 @@ class Outro(smach.State):
          return 'end'
 
 
-class PanicException(Exception): pass
-class NextStateException(Exception): pass
-class NextPhraseException(Exception): pass
