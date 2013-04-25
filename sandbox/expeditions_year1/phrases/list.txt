@@ -21,15 +21,15 @@
 04d-bagel blech.act
 04e-whole_wheat_bagel yummm.act
 04f-muffin 04f-muffin.act
-04-p1-hungry_now
-04-p2-1-what_made_choose
-04-p2-2-what_made_pick
-04-p2-3-why_pick
-04-p2-4-hm_decide
-04-p2-5-why_go
-04-p2-6-what_like
-04-p2-7-interesting_choice
-04-p2-8-why_eat
+04-p1-hungry_now 04-p1-hungry_now.act
+04-p2-1-what_made_choose question.act
+04-p2-2-what_made_pick question.act
+04-p2-3-why_pick question.act
+04-p2-4-hm_decide question.act
+04-p2-5-why_go question.act
+04-p2-6-what_like question.act
+04-p2-7-interesting_choice question.act
+04-p2-8-why_eat question.act
 05-p1-fiber_first
 05-p2-fiber_second
 06-p1-vitamins_first
