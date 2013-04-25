@@ -32,8 +32,8 @@
 04-p2-8-why_eat question.act
 05-p1-fiber_first 05-p1-fiber_first.act
 05-p2-fiber_second 05-p2-fiber_second.act
-06-p1-vitamins_first
-06-p2-vitamins_second
+06-p1-vitamins_first 06-p1-vitamins_first.act
+06-p2-vitamins_second 06-p2-vitamins_second.act
 07a-repeated_choice
 07b-muffin_after_white_or_bagel
 07c-bagel_after_white_or_vise_versa
