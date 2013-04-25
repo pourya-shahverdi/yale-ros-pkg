@@ -35,17 +35,17 @@
 06-p1-vitamins_first 06-p1-vitamins_first.act
 06-p2-vitamins_second 06-p2-vitamins_second.act
 07a-repeated_choice
-07b-muffin_after_white_or_bagel
-07c-bagel_after_white_or_vise_versa
-07d-white_or_bagel_after_muffin
-08a-no_choice
-08b-milk
-08c-water
-08d-chocolate_milk
-08e-juice
+07b-muffin_after_white_or_bagel 07b-muffin_after_white_or_bagel.act
+07c-bagel_after_white_or_vise_versa blech.act
+07d-white_or_bagel_after_muffin 07d-white_or_bagel_after_muffin.act
+08a-no_choice 08a-no_choice.act
+08b-milk yay.act
+08c-water ilikeit.act
+08d-chocolate_milk idunno.act
+08e-juice ilikeit.act
 08f-p1-soda_pre_fart
-08f-p2-soda_post_fart
-08-pull_drink
+08f-p2-soda_post_fart blech.act
+08-pull_drink yay.act
 09a-repeated_choice
 09c-chocolate_milk_after_soda
 09d-chocolate_milk_after_juice

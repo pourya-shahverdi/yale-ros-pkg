@@ -2,8 +2,7 @@
 - type: expression
   id: puppy
   start: 1.0
-- act1:
-  type: motion
+- type: motion
   id: farted
   start: 4.0
 - type: track
