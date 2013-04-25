@@ -30,8 +30,8 @@
 04-p2-6-what_like question.act
 04-p2-7-interesting_choice question.act
 04-p2-8-why_eat question.act
-05-p1-fiber_first
-05-p2-fiber_second
+05-p1-fiber_first 05-p1-fiber_first.act
+05-p2-fiber_second 05-p2-fiber_second.act
 06-p1-vitamins_first
 06-p2-vitamins_second
 07a-repeated_choice
