@@ -6,12 +6,12 @@ Before you can run the experiment scripts, you will need to install the reposito
 
 = Additional Setup =
 
-# Regenerate the phrase information file:
+  # Regenerate the phrase information file:
 {{{
 > roscd expeditions_year1/phrases
 > . regen_sounds.sh
 }}}
-# Use ifconfig to find the IP address of your computer, and update ROS_IP and ROS_HOSTNAME
+  # Use ifconfig to find the IP address of your computer, and update ROS_IP and ROS_HOSTNAME
 {{{
 > ifconfig
 > export ROS_IP=[your IP address here]
@@ -19,20 +19,20 @@ Before you can run the experiment scripts, you will need to install the reposito
 }}}
 
 = Running the Background Nodes =
-# In a new terminal window, start the dragonbot relay:
+  # In a new terminal window, start the dragonbot relay:
 {{{
 > roslaunch dragonbot_relay dragonbot_relay.launch
 }}}
-# In another terminal window, start the dragonbot pubsub:
+  # In another terminal window, start the dragonbot pubsub:
 {{{
 > roscd dragonbot_pubsub
 > build/install/dragonbot_pubsub/bin/dragonbot_pubsub edu.yale.dragonbot.DragonbotNode
 }}}
-# In a third terminal window, start the background nodes:
+  # In a third terminal window, start the background nodes:
 {{{
 > roslaunch expeditions_year1 background_nodes.launch
 }}}
-# Start the tablet and connect to your computer.  It should display a long list of GUIs.
+  # Start the tablet and connect to your computer.  It should display a long list of GUIs.
 
 = Running the Introduction =
 The introduction is a short (~1-2 minute) speech by the robot, starting from being asleep and ending with being asleep. The tablet is used to wake the robot up.
