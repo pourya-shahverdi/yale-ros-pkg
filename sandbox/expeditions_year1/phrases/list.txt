@@ -70,14 +70,14 @@
 12l-awesome_dancer yay.act
 12m-feel_strong
 12n-rock_and_roll yay.act
-12-p1-1-whole_grain_bread_and_milk
-12-p1-2-whole_wheat_bagel_and_milk
-12-p1-3-whole_grain_bread_and_water
-12-p1-4-whole_wheat_bagel_and_water
-12-p1-training_is
+12-p1-1-whole_grain_bread_and_milk yay.act
+12-p1-2-whole_wheat_bagel_and_milk yay.act
+12-p1-3-whole_grain_bread_and_water yay.act
+12-p1-4-whole_wheat_bagel_and_water yay.act
+12-p1-training_is 12-p1-training_is.act
 12-p2-magical_music_player
-12-p2-speak_of_training
-12-p3-both_dance
+12-p2-speak_of_training 12-p2-speak_of_training.act
+12-p3-both_dance ilikeit.act
 13a-great_dancer
 13b-dynamite
 13c-show_best_move
