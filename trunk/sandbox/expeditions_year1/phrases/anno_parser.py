@@ -64,7 +64,7 @@ def main():
                     with open(data_dir + "/" + name + ".txt") as textfile:
                         text = textfile.read()
                 except IOError:
-                    print "Error opening textfile"
+                    #print "Error opening textfile"
                     text = "<" + name + " missing text>"
                 visemes = []
                 with open(data_dir +"/"+ name + ".anno") as annofile:
