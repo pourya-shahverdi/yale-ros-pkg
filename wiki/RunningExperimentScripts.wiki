@@ -16,7 +16,7 @@ Before you can run the experiment scripts, you will need to install the reposito
 > ifconfig
 > export ROS_IP=[your IP address here]
 > export ROS_HOSTNAME=[your IP address here]
-
+}}}
 
 = Running the Background Nodes =
 # In a new terminal window, start the dragonbot relay:
@@ -36,4 +36,3 @@ Before you can run the experiment scripts, you will need to install the reposito
 
 = Running the Introduction =
 The introduction is a short (~1-2 minute) speech by the robot, starting from being asleep and ending with being asleep. The tablet is used to wake the robot up.
-
