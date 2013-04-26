@@ -52,6 +52,8 @@ The full experiment runs for 10 minutes by default, but this can be adjusted by 
 
 During the food game for day 1, the tablet can be used to select which food the child has chosen.  For day 2 interactions, the tablet can be used to select and deselect the foods that are on the plate, and "GO" is used to trigger the magic plate and the robot's feedback.
 
+As of rev 222 the only experiment day & lesson that will work this way is 1 and lunchbox, respectively.
+
   # Run all of the background nodes and setup as above.
   # Set the IP and run the experiment:
 {{{
