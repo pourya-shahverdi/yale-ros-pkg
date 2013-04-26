@@ -78,20 +78,20 @@
 12-p2-magical_music_player
 12-p2-speak_of_training 12-p2-speak_of_training.act
 12-p3-both_dance ilikeit.act
-13a-great_dancer
-13b-dynamite
-13c-show_best_move
-13d-even_more_moves
+13a-great_dancer yay.act
+13b-dynamite ilikeit.act
+13c-show_best_move ilikeit.act
+13d-even_more_moves yay.act
 13e-cant_stop
-14-p1-dance_more
-14-p2-yippee
-14-p3-different_song
+14-p1-dance_more question.act
+14-p2-yippee yay.act
+14-p3-different_song question.act
 14-p4-okay_go
-14-p5-break
-14-p6-victory_dance
+14-p5-break question.act
+14-p6-victory_dance ilikeit.act
 14-p7-back_to_dancing
-15a-if_yes
-15b-if_no
+15a-if_yes 15a-if_yes.act
+15b-if_no 15b-if_no.act
 15-victory_dance
 16-p1-what_think
 16-p2-new_dance_next_time
