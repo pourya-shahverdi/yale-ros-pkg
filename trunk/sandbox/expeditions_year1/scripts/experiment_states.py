@@ -442,7 +442,7 @@ class Workout(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.segment = "workout"
 
-        self.music_folder = rospy.get_param("~music_folder")
+        self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
     
         #pose is: x, y, z, (theta, neck, vel, acc [optional])
         self.poses = {'right': (0, 2.4, 0),
@@ -480,7 +480,6 @@ class Workout(smach.State):
         self.dm.express("anticipation", wait = False)
         try:
             #TODO: play correct outro statement
-            self.dg.play_dialogue("training_backstory")
             self.dg.play_dialogue("intro_dialogue")
         except PanicException:
             return 'panic'

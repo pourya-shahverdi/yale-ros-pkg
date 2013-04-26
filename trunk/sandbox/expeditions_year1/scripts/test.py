@@ -10,7 +10,7 @@ from interface_srv.srv import *
 
 def main():
     rospy.init_node('test_node')
-    print roslib.packages.find_node('expeditions_year1', 'intro.py')
+    print roslib.packages.get_pkg_dir("expeditions_year1")
     
 
 if __name__ == '__main__':

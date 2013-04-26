@@ -2,186 +2,146 @@ lunchbox:
     intro:
         intro_dialogue:
             type: dialogue
-            items: [name, like_to_eat, hear_race]
-        name:
-            phrase_ids: [01-intro]
+            items: [see_again, do_fun, know_fly, what_learned]
+        see_again:
+            type: statement
+            phrase_ids: [d2-01-see_again]
+        do_fun:
             type: question
-            responses: [give_name, cant_hear, not_name, give_up]
-            terminal: [give_name, give_up]
-        give_name:
-            phrase_ids: [01a-nice_meet]
+            phrase_ids: [d2-02-anything_fun]
+            responses: [good_resp, bad_resp]
+            terminal: []
+        good_resp:
             type: statement
-        cant_hear:
-            phrase_ids: [01b-cant_hear]
+            phrase_ids:[d2-02a-cool, d2-02b-awesome, d2-02d-all_right]
+        bad_resp:
             type: statement
-        not_name:
-            phrase_ids: [01c-not_name]
-            type: statement
-        give_up:
-            phrase_ids: [01d-move_on]
-            type: statement
-        like_to_eat: 
+            phrase_ids:[d2-02e-oh_well, d2-02f-aww_really, d2-02g-sorry_to_hear_that]
+        know_fly:
             type: question
-            phrase_ids: [02-what_eat]
-            responses: [good_choice, non-human_choice, unknown_single, unknown_pl, favorite]
-            terminal: [good_choice, non-human_choice, unknown_single, unknown_pl, favorite]
-        favorite:
+            phrase_ids: [d2-03-three_volcanoes]
+            responses: [yes_know, no_know]
+            terminal: [yes_know, no_know]
+        yes_know:
             type: statement
-            phrase_ids: [02e_favorite]
-        good_choice:
+            phrase_ids: [d2-03a-if_yes]
+        no_know:
             type: statement
-            phrase_ids: [02a-yum_tasty]
-        non-human_choice:
-            type: statement
-            phrase_ids: [02b-weird_choice]
-        unknown_single:
-            type: statement
-            phrase_ids: [02c-huh_is]
-        unknown_pl:
-            type: statement
-            phrase_ids: [02d-huh_are]
-        hear_race: 
-            type: dialogue
-            items: [did_hear, help_me]
-        did_hear: 
-            type: wait
-            phrase_ids: [03-p1-hear_race]
-        help_me: 
+            phrase_ids: [d2-03b-if_no]
+        what_learned:
             type: question
-            phrase_ids: [03-p2-tell_about]
-            responses: [help_yes, help_no, repeat_no, repeat_no2]
-            terminal: [help_yes]
-        help_yes:
+            responses: [correct_learned, wrong_learned]
+            terminal: [correct_learned, wrong_learned]
+            phrase_ids: [d2-04-hard_to_train]        
+        correct_learned:
             type: statement
-            phrase_ids: [03a-yes_great]
-        help_no:
+            phrase_ids: [d2-05a-if_correct]
+        wrong_learned:
             type: statement
-            phrase_ids: [03b-no_once]
-        repeat_no:
-            type: statement
-            phrase_ids: [03c-no_twice]
-        repeat_no2:
-            type: statement
-            phrase_ids: [03d-no_thrice]
+            phrase_ids: [d2-05b-if_incorrect]
     foods:
-        rem1:
+        intro:
+            type: dialogue
+            items: [magic_plate, rhyme, rhyme_exp, hungry]
+        magic_plate:
             type: statement
-            phrase_ids: []
-        rem2:
+            phrase_ids: [d2-06-p1-magic_plate]
+        rhyme:
             type: statement
-            phrase_ids: []
-        rem3:
+            phrase_ids: [d2-06-p2-1-roar_more]
+        plate_chant:
+            type: dialogue
+            items: [rhyme_intro, rhyme]
+        rhyme_intro:
             type: statement
-            phrase_ids: []
-        chocmilk_l1:
+            phrase_ids: [d2-07-p2-1-pick_things,d2-07-p2-2-try_things,d2-07-p2-3-favorite_things,d2-07-p2-4-wonder,d2-07-p3-1-great_words,d2-07-p3-2-now_we_say_words
+d2-07-p3-3-wonder_if_healthy_words,d2-07-p3-4-remember_words,d2-07-p3-5-cool_words]
+        rhyme_exp:
             type: statement
-            phrase_ids: []
-        chocmilk_l2:
+            phrase_ids: [d2-06-p3-rhyme_explanation]
+        all_good:
+            type: question
+            responses: [okay, bad_reason]
+            phrase_ids: [d2-08-p1-good_choices]
+        bad_reason:
             type: statement
-            phrase_ids: []
-        chocmilk_l3:
+            phrase_ids: [d2-08-p2-good_choices_bad_reason]
+        okay:
             type: statement
-            phrase_ids: []
-        soda_l1:
+            phrase_ids: [20-p2-okay]
+        hungry:
+            type: statment
+            phrase_ids: [d2-07-p1-hungry_again]
+        reminder:
             type: statement
-            phrase_ids: []
-        soda_l2:
+            phrase_ids: [d2-07-p2-1-pick_things,d2-07-p2-2-try_things,d2-07-p2-3-favorite_things,d2-07-p2-4-wonder]
+        want_food:
             type: statement
-            phrase_ids: []
-        soda_l3:
+            phrase_ids: [d2-11c-p1-no_bread_prompt_one]
+        pick_bread:
             type: statement
-            phrase_ids: []
-        whitebread_l1:
+            phrase_ids: [d2-11c-p2-no_bread_prompt_two]
+        thirsty:
             type: statement
-            phrase_ids: []
-        whitebread_l2:
+            phrase_ids: [d2-11d-p1-no_drink_prompt_one]
+        pick_drink:
             type: statement
-            phrase_ids: []
-        whitebread_l3:
+            phrase_ids: [d2-11d-p2-no_drink_prompt_two]
+        missing_good:
             type: statement
-            phrase_ids: []
-        muffin_l1:
+            phrase_ids: [d2-10-1-something_missing, d2-10-2-other_foods,d2-10-3-almost_all,d2-10-4-weird_noise]
+        pick_vitamins:
             type: statement
-            phrase_ids: []
-        muffin_l2:
+            phrase_ids: [d2-11e-p1-missing_good_bread_prompt_one]
+        pick_not_sweet:
             type: statement
-            phrase_ids: []
-        muffin_l3:
+            phrase_ids: [d2-11f-p1-missing_good_drink_prompt_one]
+        has_bad:
             type: statement
-            phrase_ids: []
-        bagel_l1:
+            phrase_ids: [d2-09-1-ahh_noise,d2-09-2-quick_off_plate,d2-09-3-yikes,d2-09-4-eesh,d2-09-5-whoops_tummy]
+        remember_fiber:
             type: statement
-            phrase_ids: []
-        bagel_l2:
+            phrase_ids: [d2-11a-p1-white_bread_prompt_one]
+        pick_wheat:
             type: statement
-            phrase_ids: []
-        bagel_l3:
+            phrase_ids: [d2-11a-p2-white_bread_prompt_two]
+        remember_sugar:
             type: statement
-            phrase_ids: []
-        juice_comment:
+            phrase_ids: [d2-11b-p1-sugary_drink_prompt_one]
+        pick_not_sugary:
             type: statement
-            phrase_ids: []
-        milk_l1:
+            phrase_ids: [d2-11b-p2-sugary_drink_prompt_two]
+        try_wheat:
             type: statement
-            phrase_ids: []
-        milk_l2:
+            phrase_ids: [d2-11e-p2-1-missing_good_bread_prompt_two_whole_grain_bread]
+        try_whbagel:
             type: statement
-            phrase_ids: []
-        milk_l3:
+            phrase_ids: [d2-11e-p2-2-missing_good_bread_prompt_two_whole_grain_bagel]
+        white_off:
             type: statement
-            phrase_ids: []
-        water_l1:
+            phrase_ids: [d2-11a-p3-1-white_bread_prompt_three_white_bread]
+        muffin_off:
             type: statement
-            phrase_ids: []
-        water_l2:
+            phrase_ids: [d2-11a-p3-2-white_bread_prompt_three_muffin]
+        bagel_off:
             type: statement
-            phrase_ids: []
-        water_l3:
+            phrase_ids: [d2-11a-p3-3-white_bread_prompt_three_bagel]
+        choc_off:
             type: statement
-            phrase_ids: []
-        whbread_l1:
+            phrase_ids: [d2-11b-p3-2-sugary_drink_prompt_three_chocolate_milk]
+        soda_off:
             type: statement
-            phrase_ids: []
-        whbread_l2:
+            phrase_ids: [d2-11b-p3-1-sugary_drink_prompt_three_soda]
+        pick_milk:
             type: statement
-            phrase_ids: []
-        whbread_l3:
+            phrase_ids: [d2-11f-p2-1-missing_good_drink_prompt_two_milk]
+        pick_water:
             type: statement
-            phrase_ids: []
-        whbagel_l1:
+            phrase_ids: [d2-11f-p2-2-missing_good_drink_prompt_two_water]
+        okay_but_juice:
             type: statement
-            phrase_ids: []
-        wbagel_l2:
-            type: statement
-            phrase_ids: []
-        wbagel_l3:
-            type: statement
-            phrase_ids: []
-        bread_l1:
-            type: statement
-            phrase_ids: []
-        bread_l2:
-            type: statement
-            phrase_ids: []
-        drinks_l1:
-            type: statement
-            phrase_ids: []
-        drinks_l2:
-            type: statement
-            phrase_ids: []
+            phrase_ids: [d2-11g-p1-sometimes_food_prompt_one]        
     workout:
-        outro-bread-milk:
-            type: statement
-            phrase_ids: [12-p1-1-whole_grain_bread_and_milk]
-        outro-bread-water:
-            type: statement
-            phrase_ids: [12-p1-3-whole_grain_bread_and_water]
-        outro-bagel-milk:
-            type: statement
-            phrase_ids: [12-p1-2-whole_wheat_bagel_and_milk]
-        outro-bagel-water:
-            type: statement
-            phrase_ids: [12-p1-4-whole_wheat_bagel_and_water]
         training_backstory:
             type: backstory
             items: [training]
@@ -190,7 +150,7 @@ lunchbox:
             phrase_ids: [12-p1-training_is]
         intro_dialogue:
             type: dialogue
-            items: [intro]
+            items: [training_backstory, intro]
         post_music:
             type: dialogue
             items: [music, lets_go]
