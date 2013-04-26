@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+Before you can run the experiment scripts, you will need to install the repository and all of the dragonbot code: [http://code.google.com/p/yale-ros-pkg/wiki/DragonbotPubSubInstall].
 
 
 = Details =
