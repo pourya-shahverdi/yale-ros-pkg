@@ -93,7 +93,7 @@
 15a-if_yes 15a-if_yes.act
 15b-if_no 15b-if_no.act
 15-victory_dance
-16-p1-what_think
+16-p1-what_think anticipation.act
 16-p2-new_dance_next_time
 17-timeout
 18-p1-phew_fun
