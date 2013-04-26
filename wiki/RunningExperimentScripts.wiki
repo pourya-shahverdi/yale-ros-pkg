@@ -6,7 +6,7 @@ Before you can run the experiment scripts, you will need to install the reposito
 
 = Additional Setup =
 
-  # Regenerate the phrase information file:
+  # Regenerate the phrase information file (this only needs to be done after a new install or after each time the files in the phrases/data directory change):
 {{{
 > roscd expeditions_year1
 > ./regen_phrases.sh
