@@ -7,7 +7,7 @@
 02b-weird_choice 02b-weird_choice.act
 02c-huh_is 02c-huh_is.act
 02d-huh_are 02d-huh_are.act
-02e_favorite 02e_favorite.act
+02e_favorite
 02-what_eat 02-what_eat.act
 03a-yes_great 03a-yes_great.act
 03b-no_once 03b-no_once.act
