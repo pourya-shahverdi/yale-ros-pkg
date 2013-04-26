@@ -44,3 +44,20 @@ The introduction is a short (~1-2 minute) speech by the robot, starting from bei
 > export ROS_HOSTNAME=[your IP address here]
 > rosrun expeditions_year1 intro.py
 }}}
+
+If all is well, the robot will start snoring and the tablet will display the "wakeup" button.
+
+= Running the Experiment =
+The full experiment runs for 10 minutes by default, but this can be adjusted by changing the `_`max`_`time parameter.  In each dialogue act/question, there are several options the experimenter can choose, to reflect the child's speech.  There is also a 'panic' button, which will put the robot back into the sleep state, a "next_phrase" option, which will skip to the next phrase`*` in the dialogue. and a "next_segment" button, which will skip to the next segment (the segments are: sleeping, the introduction (and relationship-building), the food game, the workout game, and the outro).
+
+During the food game for day 1, the tablet can be used to select which food the child has chosen.  For day 2 interactions, the tablet can be used to select and deselect the foods that are on the plate, and "GO" is used to trigger the magic plate and the robot's feedback.
+
+  # Run all of the background nodes and setup as above.
+  # Set the IP and run the experiment:
+{{{
+> export ROS_IP=[your IP address here]
+> export ROS_HOSTNAME=[your IP address here]
+> rosrun expeditions_year1 run_exp.py _day:=[1 or 2] _lesson:=[lunchbox, snacks, breakfast, or dinner] [_max_time:=[time in seconds]]
+}}}
+
+`*` Note that a phrase might be more than one sentence long; it loosely would represent one question or one block of text (which was recorded as one file).  See the page on [http://code.google.com/p/yale-ros-pkg/wiki/NewExperiments developing new experiments] for details.
