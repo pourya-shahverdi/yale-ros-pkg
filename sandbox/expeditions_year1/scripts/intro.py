@@ -24,7 +24,7 @@ def main():
     tm = TabletManager()
 
     rospy.loginfo("loading dialogue")
-    with open("intro_dialogue.yaml", 'r') as f:
+    with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/intro_dialogue.yaml", 'r') as f:
             s = f.read()
 
     dialogue_name = "intro"

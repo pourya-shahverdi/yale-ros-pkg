@@ -20,12 +20,6 @@ import yaml
 def main():
     rospy.init_node('experiment_controller')
 
-    '''if not rospy.has_param("~lesson"):
-        rospy.set_param("~lesson", 'lunchbox')
-    if not rospy.has_param("~day"):
-        rospy.set_param("~day", 1)
-    if not rospy.has_param("~music_folder"):
-        rospy.set_param("~music_folder", '/home/eshort/fuerte_workspace/yale-ros-pkg/sandbox/expeditions_year1/music/')'''
     if not rospy.has_param("~max_time"):
         rospy.set_param("~max_time", 600)
 
@@ -50,10 +44,10 @@ def main():
     
     rospy.loginfo("Reading food phrases file.")
     if day_num == 1:
-        with open("day1_food_phrases.yaml", 'r') as f:
+        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/day1_food_phrases.yaml", 'r') as f:
             s = f.read()
     elif day_num == 2:
-        with open("day2_food_phrases.yaml", 'r') as f:
+        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/day2_food_phrases.yaml", 'r') as f:
             s = f.read()
     else:
         print "Usage: day number must be 1 or 2"
@@ -72,10 +66,10 @@ def main():
 
     rospy.loginfo("Reading other dialogue phrases file.")
     if day_num == 1:
-        with open(roslib.packages.find_node("dialogue_phrases_day1.yaml", 'r') as f:
+        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/dialogue_phrases_day1.yaml", 'r') as f:
             s = f.read()
     else:
-        with open("dialogue_phrases_day2.yaml", 'r') as f:
+        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/dialogue_phrases_day2.yaml", 'r') as f:
             s = f.read()
 
     # file format is:

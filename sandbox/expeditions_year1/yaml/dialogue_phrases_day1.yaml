@@ -256,7 +256,7 @@ lunchbox:
             phrase_ids: [12-p1-training_is]
         intro_dialogue:
             type: dialogue
-            items: [intro]
+            items: [training_backstory, intro]
         post_music:
             type: dialogue
             items: [music, lets_go]
