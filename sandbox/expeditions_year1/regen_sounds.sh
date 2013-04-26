@@ -1,1 +1,0 @@
-./anno_parser.py list.txt $PWD/../scripts/phrases.yaml $PWD/data

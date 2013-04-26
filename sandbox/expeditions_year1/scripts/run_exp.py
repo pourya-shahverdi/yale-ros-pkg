@@ -72,7 +72,7 @@ def main():
 
     rospy.loginfo("Reading other dialogue phrases file.")
     if day_num == 1:
-        with open("dialogue_phrases_day1.yaml", 'r') as f:
+        with open(roslib.packages.find_node("dialogue_phrases_day1.yaml", 'r') as f:
             s = f.read()
     else:
         with open("dialogue_phrases_day2.yaml", 'r') as f:
