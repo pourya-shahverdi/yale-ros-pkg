@@ -53,23 +53,23 @@
 09e-p2-juice_after_soda idunno.act
 10-p1-cavities_first 10-p1-cavities_first.act
 10-p2-cavities_second 10-p2-cavities_second.act
-11-p1-1-diabetes_first_part_one
+11-p1-1-diabetes_first_part_one 11-p1-1-diabetes_first_part_one.act
 11-p1-2-diabetes_first_part_two
-11-p2-diabetes_second
-12a-much_fun
-12b-great_job
-12c-nice_moves
+11-p2-diabetes_second 11-p2-diabetes_second.act
+12a-much_fun yay.act
+12b-great_job yay.act
+12c-nice_moves yay.act
 12d-keep_it_up
-12e-music_cool
-12f-love_this_song
-12g-groovy
+12e-music_cool ilikeit.act
+12f-love_this_song ilikeit.act
+12g-groovy yay.act
 12h-break_it_down
-12i-favorite_part
-12j-oh_yeah
+12i-favorite_part ilikeit.act
+12j-oh_yeah yay.act
 12k-muscles_moving
-12l-awesome_dancer
+12l-awesome_dancer yay.act
 12m-feel_strong
-12n-rock_and_roll
+12n-rock_and_roll yay.act
 12-p1-1-whole_grain_bread_and_milk
 12-p1-2-whole_wheat_bagel_and_milk
 12-p1-3-whole_grain_bread_and_water
