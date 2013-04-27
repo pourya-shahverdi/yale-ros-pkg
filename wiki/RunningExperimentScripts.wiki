@@ -6,7 +6,7 @@ Before you can run the experiment scripts, you will need to install the reposito
 
 = Additional Setup =
 
-  # Regenerate the phrase information file (this only needs to be done after a new install or after each time the files in the phrases/data directory change):
+  # Regenerate the phrase information file (this only needs to be done after a new install or after each time the files in the phrases/data directory change).  If the speech node crashes with a message that it can't find "phrases.yaml" you need to re-run this file.
 {{{
 > roscd expeditions_year1
 > ./regen_phrases.sh
@@ -52,7 +52,9 @@ The full experiment runs for 10 minutes by default, but this can be adjusted by 
 
 During the food game for day 1, the tablet can be used to select which food the child has chosen.  For day 2 interactions, the tablet can be used to select and deselect the foods that are on the plate, and "GO" is used to trigger the magic plate and the robot's feedback.
 
-As of rev 222 the only experiment day & lesson that will work this way is 1 and lunchbox, respectively.
+As of rev. 251 the following lessons and days are working:
+  *lunchbox 1
+  *lunchbox 2
 
   # Run all of the background nodes and setup as above.
   # Set the IP and run the experiment:
