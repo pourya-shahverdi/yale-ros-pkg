@@ -95,12 +95,12 @@
 15-victory_dance
 16-p1-what_think anticipation.act
 16-p2-new_dance_next_time
-17-timeout 
+17-timeout
 18-p1-phew_fun
 18-p2-user_didnt_dance
 18-p3-naptime
 20-p1-finished_with_dancing question.act
-20-p2-okay 
+20-p2-okay
 20-p3-victory_dance_again
 20-p4-quick_break
 20-p5-ask_alternate_move_around

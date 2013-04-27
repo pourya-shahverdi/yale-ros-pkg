@@ -3,6 +3,7 @@
 #Elaine Short
 #Expeditions Year 1 Experiment
 import yaml
+import roslib
 from itertools import combinations
 
 def main():
@@ -111,14 +112,14 @@ def main():
 
     gui_prefix = "dragon_GUI/"
 
-    with open("day1_food_phrases.yaml", 'r') as f:
+    with open(roslib.packages.get_pkg_dir("expeditions_year1")+"/yaml/day1_food_phrases.yaml", 'r') as f:
         s = f.read()
     food_info = yaml.load(s)
 
 
     dialogue_info = {}
     for filename in dialogue_files:
-        with open(filename, 'r') as f:
+        with open(roslib.packages.get_pkg_dir("expeditions_year1")+"/yaml/" + filename, 'r') as f:
             s = f.read()
         dialogue_items = yaml.load(s)
         dialogue_info.update(dialogue_items)
@@ -126,7 +127,7 @@ def main():
 
 
 
-    with open("day2_food_phrases.yaml", 'r') as f:
+    with open(roslib.packages.get_pkg_dir("expeditions_year1")+"/yaml/day2_food_phrases.yaml", 'r') as f:
         s = f.read()
 
     food_info2 = yaml.load(s)
