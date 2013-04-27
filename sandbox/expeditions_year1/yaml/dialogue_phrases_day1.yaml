@@ -288,7 +288,10 @@ lunchbox:
             phrase_ids: [13a-great_dancer,13b-dynamite,13c-show_best_move,13d-even_more_moves,13e-cant_stop]
         stop_dancing:
             type: dialogue
-            items: [keep_going]
+            items: [encouragement, keep_going]
+        encouragement:
+            type: statement
+            phrase_ids: [d2-21a-great_dancer, d2-21b-dynamite, d2-21c-show_best_move, d2-21d-even_more_moves, d2-21e-cant_stop]
         keep_going:
             type: question
             phrase_ids: [14-p1-dance_more]
@@ -326,7 +329,7 @@ lunchbox:
             phrase_ids: [14-p6-victory_dance]
         yes_break2:
             type: redirect
-            goal: [victory_again]
+            goal: victory_again
         no_break:
             type: statement
             phrase_ids: [14-p7-back_to_dancing]
@@ -373,15 +376,15 @@ lunchbox:
             responses: [yes_finished, no_finished]
             terminal: [yes_finished, no_finished]
         yes_finished:
-            type: statment
-            phrase_ids: [20-p2-okay]
+            type: statement
+            phrase_ids: [d2-22-p3-done_now]
         no_finished:
             type: statement
             phrase_ids: [20-p2-okay]
     outro:
         outro_dialogue:
             type: dialogue
-            items: [fun, wrap_up, nap]
+            items: [fun, wrap_up, nap, bye]
         fun:
             type: statement
             phrase_ids: [18-p1-phew_fun]
@@ -397,3 +400,6 @@ lunchbox:
         nap:
             type: statement
             phrase_ids: [18-p3-naptime]
+        bye:
+            type: statement
+            phrase_ids: [d2-28-1-goodbye,d2-28-2-bye,d2-28-3-buh_bye,d2-28-4-see_you_next_time,d2-28-5-see_ya_later,d2-28-6-see_ya_soon,d2-28-7-catch_ya_later,d2-28-8-bye_for_now]

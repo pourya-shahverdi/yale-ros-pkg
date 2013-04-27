@@ -169,7 +169,7 @@ class FoodChoiceDay2(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
         self.sc = SoundClient()
-        self.music_folder = rospy.get_param("~music_folder")
+        self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
 
         self.feedback_levels = {i:{"good":0,"bad":0} for i in self.fp["groups"]}
         self.feedback_levels["all"] = {"good":0, "bad":0}
@@ -178,6 +178,7 @@ class FoodChoiceDay2(smach.State):
         self.target_group = "all"
         self.first_round = True
         self.selected_foods = []
+        self.first_time = True
         
         self.exp_start_time = rospy.Time.now()
         self.duration = rospy.Duration(rospy.get_param("~max_time"))
@@ -198,12 +199,26 @@ class FoodChoiceDay2(smach.State):
                 pass
             return 'timeout'
 
+        
+
 
         gui_name = self.day + "_" + "_".join(self.selected_foods)
         self.tm.change(gui_name)
         panicked = False
 
         phrases = self.fp["phrases"]
+        
+        if self.first_time:
+            try:
+                self.dg.play_dialogue(phrases["intro"])
+            except PanicException:
+                return 'panic'
+            except NextStateException:
+                return 'end'
+            except NextPhraseException:
+                pass
+            self.first_time = False
+
 
         while not rospy.is_shutdown():
             resp = self.tm.wait_for_press("dragon_GUI/food_select")
@@ -213,7 +228,16 @@ class FoodChoiceDay2(smach.State):
                 break
             elif resp == "reminder":
                 level = self.feedback_levels["reminders"]
-                self.play_dialogue(phrases["reminders"][level])
+                
+                try:
+                    self.dg.play_dialogue(phrases["reminders"][level])
+                except PanicException:
+                    return 'panic'
+                except NextStateException:
+                    return 'end'
+                except NextPhraseException:
+                    pass
+
                 if level < len(phrases["reminders"]) - 1:
                     self.feedback_levels["reminders"] += 1
             elif resp == "next":
@@ -247,8 +271,10 @@ class FoodChoiceDay2(smach.State):
         rospy.loginfo("  Bad foods: " + ",".join(bad_foods))
         rospy.loginfo("  Sometimes foods: " + ",".join(sometimes_foods))
         
-        added_items = filter(lambda f: f not in self.prev_items, self.selected_foods)
-        removed_items = filter(lambda f: f not in self.selected_foods, self.prev_items)            
+        prev_items = self.prev_items["bad"] + self.prev_items["good"] + self.prev_items["sometimes"]
+
+        added_items = filter(lambda f: f not in prev_items, self.selected_foods)
+        removed_items = filter(lambda f: f not in self.selected_foods, prev_items)            
         # escalate level only if failed to improve from last time
         # failure to improve: there were bad items before and we didn't
         # remove one of the ones from the group we were targeting for 
@@ -257,12 +283,14 @@ class FoodChoiceDay2(smach.State):
         had_bad = len(self.prev_items["bad"]) > 0 
         lacked_good = not set(self.prev_items["good"]) == set(self.fp["good"]) and not self.first_round
         
+
+        rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
         if self.target_group == "all":
             removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
             added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
         else:
             removed_target_bad = len(set(removed_items) & set(self.fp["bad"]) & set(self.fp["groups"][self.target_group])) > 0
-            added_target_good = len(set(removed_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
+            added_target_good = len(set(added_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
 
 
         #reset target group and feedback levels if we're switching from 
@@ -297,19 +325,30 @@ class FoodChoiceDay2(smach.State):
                         
         self.first_round = False
 
+        try:
+            self.dg.play_dialogue(phrases["plate_chant"])
+        except PanicException:
+            return 'panic'
+        except NextStateException:
+            return 'end'
+        except NextPhraseException:
+            pass
+
+
         rospy.loginfo("Current feedback levels: " + str(self.feedback_levels))
 
         if not len(bad_foods) == 0:
             rospy.loginfo("BZZZZT")
             self.sc.playWave(self.music_folder + "bzzt.wav")
-            try:
-                self.dg.play_dialogue("bad_sound")
+            rospy.sleep(2.0)
+            '''try:
+                self.dg.play_dialogue(phrases["bad_noise"])
             except PanicException:
                 return 'panic'
             except NextStateException:
                 return 'end'
             except NextPhraseException:
-                pass
+                pass'''
 
             # if the target group is specific and doesn't have any more bad items, switch targets
             if not self.target_group == "all" and len(set(bad_foods) & set(self.fp["groups"][self.target_group])) == 0:
@@ -335,7 +374,7 @@ class FoodChoiceDay2(smach.State):
                 else:
                     #give specific feedback
                     food_options = list(set(bad_foods) & set(self.fp["groups"][self.target_group]))
-                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)]
+                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)][0]
             else:
                 feedback_phrase = self.fp["phrases"]["has_bad"][self.target_group][self.feedback_levels[self.target_group]["bad"]]
             
@@ -353,15 +392,16 @@ class FoodChoiceDay2(smach.State):
         elif not set(good_foods) == set(self.fp["good"]):
             rospy.loginfo("ding")
             self.sc.playWave(self.music_folder + "ding.wav")
+            rospy.sleep(1.0)
             
-            try:
-                self.dg.play_dialogue("missing_good_sound")
+            '''try:
+                self.dg.play_dialogue(phrases["missing_noise"])
             except PanicException:
                 return 'panic'
             except NextStateException:
                 return 'end'
             except NextPhraseException:
-                pass
+                pass'''
 
             # if there's a specific target group
             if not self.target_group == "all":
@@ -392,7 +432,7 @@ class FoodChoiceDay2(smach.State):
                 else:
                     #give specific feedback
                     food_options = list((set(self.fp["groups"][self.target_group]) & set(self.fp["good"]))-set(good_foods))
-                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)]
+                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)][0]
             else:
                 feedback_phrase = self.fp["phrases"]["missing_good"][self.target_group][self.feedback_levels[self.target_group]["good"]]
             
@@ -409,8 +449,9 @@ class FoodChoiceDay2(smach.State):
         else:
             rospy.loginfo("FANFARE! YAY!")
             self.sc.playWave(self.music_folder + "fanfare.wav")
+            rospy.sleep(2.0)
             try:
-                self.dg.play_dialogue("all_done")
+                self.dg.play_dialogue(phrases["success"])
             except PanicException:
                 return 'panic'
             except NextStateException:
@@ -435,12 +476,13 @@ class Workout(smach.State):
         self.tm = tm
         self.exp_start = rospy.Time.now()
         self.duration = rospy.Duration(rospy.get_param("~max_time"))
-        self.break_time = rospy.Duration(120)
+        self.break_time = rospy.Duration(60)
         self.dialogue = dialogue_info
         #self.workout_phrases = workout_info
         self.day, self.lesson = info
         self.gui_prefix = "dragon_GUI/"
         self.segment = "workout"
+        self.seen_victory = False
 
         self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
     
@@ -459,20 +501,37 @@ class Workout(smach.State):
 
         self.current_song = ""
         self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
-        self.vol = 0.1
+        self.vol = 0.3
 
 
     def do_victory(self):
+        print "DOING VICTORY DANCE RAWR"
         v = 1
         a = .08
         routine = ['up','down','up','down','up']
+
+        if not self.seen_victory:
+            try:
+                self.dg.play_dialogue("victory_dance")
+            except NextPhraseException:
+                pass
+            
         for move in routine:
             m = self.poses[move]
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             rospy.sleep(1.0)
         
+        self.dm.pose_off()
+        try:
+            self.dg.play_dialogue("what_do_you_think")
+        except NextPhraseException:
+            pass
+        self.seen_victory = True
+        
 
     def execute(self, userdata):
+        self.seen_victory=False
+        
         print "==============================================="
         print "+                WORKOUT GAME                 +"
         print "-----------------------------------------------"
@@ -493,7 +552,7 @@ class Workout(smach.State):
         i = 0
         v = 1
         a = 0.5
-        bpm = bpm/2
+        bpm = bpm/4
 
         time_adjust = rospy.Duration(0.0)
         delay_adjust = rospy.Duration(0.0)
@@ -524,14 +583,15 @@ class Workout(smach.State):
         while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
             print "Time elapsed: " + str((rospy.Time.now()-dance_start).secs) + "." + str((rospy.Time.now()-dance_start).nsecs)
             if rospy.Time.now()-dance_start > self.break_time * nbreaks:
-                '''if nbreaks = 1:
+                if nbreaks == 1:
+                    break_phrase = "new_song"
+                elif nbreaks == 2:
                     break_phrase = "break1"
-                elif nbreaks = 2:
+                elif nbreaks == 3:
                     break_phrase = "break2"
                 else:
-                    break_phrase = "finished_dancing"'''
+                    break_phrase = "finished_dancing"
 
-                break_phrase = "finished_dancing"
                 nbreaks = nbreaks + 1
 
                 self.sc.stopAll()
@@ -548,7 +608,34 @@ class Workout(smach.State):
                 except NextPhraseException:
                     pass
 
-                if not "no_finished" in resp:
+                if "yes_change" in resp:
+                    song, bpm = random.choice(self.songs.items())
+                    while song == self.current_song:
+                        #note that this will break if there's only one song
+                        song, bpm = random.choice(self.songs.items())
+                    self.current_song = song
+                    bpm = bpm/4
+                    move_sleep = rospy.Duration(60/bpm)
+                    self.sc.playWave(self.music_folder + self.current_song)
+                    self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                    self.tm.change("stopped_dancing")
+                    continue
+
+                if "yes_break1" in resp or "yes_break2" in resp:
+                    try:
+                        self.do_victory()
+                    except PanicException:
+                        self.dm.pose_off()
+                        self.sc.stopAll()
+                        return 'panic'
+                    except NextStateException:
+                        self.dm.pose_off()
+                        self.sc.stopAll()
+                        return 'end'
+                    except NextPhraseException:
+                        pass
+
+                if break_phrase == "finished_dancing" and not "no_finished" in resp:
                     break
 
                 self.sc.playWave(self.music_folder + self.current_song)
@@ -586,7 +673,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                     song, bpm = random.choice(self.songs.items())
                 self.current_song = song
-                bpm = bpm/2
+                bpm = bpm/4
                 move_sleep = rospy.Duration(60/bpm)
                 self.sc.playWave(self.music_folder + self.current_song)
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
@@ -616,7 +703,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                         song, bpm = random.choice(self.songs.items())
                     self.current_song = song
-                    bpm = bpm/2
+                    bpm = bpm/4
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.sc.waveVol(self.music_folder + self.current_song, self.vol)
@@ -651,7 +738,7 @@ class Workout(smach.State):
             m = self.poses[routine[move]]
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             i = i + 1
-            if i % 100 == 0:
+            if i % 30 == 0:
                 try:
                     self.dg.play_dialogue("energized_comment", interrupt = False)
                 except PanicException:
@@ -666,8 +753,9 @@ class Workout(smach.State):
                     pass
 
             rospy.sleep(move_sleep-time_adjust)
-
+    
         if rospy.Time.now()-start >= self.duration:
+            print "TIMED OUT"
             rospy.sleep(2.0)
             try:
                 self.dg.play_dialogue("timeout")
@@ -681,34 +769,38 @@ class Workout(smach.State):
                 return 'end'
             except NextPhraseException:
                 pass
+            if not self.seen_victory:
+                try:
+                    self.do_victory()
+                except PanicException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'panic'
+                except NextStateException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'end'
+                except NextPhraseException:
+                    pass
+            self.dm.pose_off()
             self.sc.stopAll()
-            self.dm.pose_off()
             return 'timeout'
-        else:
-            try:
-                self.dg.play_dialogue("victory_dance")
-            except PanicException:
-                self.dm.pose_off()
-                self.sc.stopAll()
-                return 'panic'
-            except NextStateException:
-                self.dm.pose_off()
-                self.sc.stopAll()
-                return 'end'
-            except NextPhraseException:
-                pass
-            self.do_victory() 
+        else:       
+            if not self.seen_victory:
+                try:
+                    self.do_victory()
+                except PanicException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'panic'
+                except NextStateException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'end'
+                except NextPhraseException:
+                    pass
             self.dm.pose_off()
-            try:
-                self.dg.play_dialogue("what_do_you_think")
-            except PanicException:
-                self.sc.stopAll()
-                return 'panic'
-            except NextStateException:
-                self.sc.stopAll()
-                return 'end'
-            except NextPhraseException:
-                pass
+            self.sc.stopAll()
             return "end"
 
 
@@ -729,7 +821,6 @@ class Outro(smach.State):
          print "==============================================="
          print "+                   OUTRO                     +"
          print "-----------------------------------------------"
-         
          self.dm.express("yawn")
          try:
              self.dg.play_dialogue("outro_dialogue")

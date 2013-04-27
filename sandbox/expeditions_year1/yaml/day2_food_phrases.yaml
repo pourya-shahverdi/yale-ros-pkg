@@ -1,6 +1,4 @@
 lunchbox:
-    intro: intro
-    plate_chant: plate_chant
     bad: [choc_milk, soda, white_bread, muffin, bagel]
     good: [milk, water, wheat_bread, wh_bagel]
     sometimes: [juice]
@@ -8,7 +6,12 @@ lunchbox:
         breads: [white_bread, muffin, bagel, wheat_bread, wh_bagel]
         drinks: [choc_milk, soda, juice, milk, water]
     phrases:
-        reminders: [reminder1, reminder2, reminder3]
+        intro: intro
+        plate_chant: plate_chant
+        success: all_good
+        bad_noise: has_bad
+        missing_noise: missing_good
+        reminders: [reminder]
         missing_all:
             breads: [want_food, pick_bread]
             drinks: [thirsty, pick_drink]
