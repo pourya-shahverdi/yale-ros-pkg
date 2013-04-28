@@ -197,58 +197,58 @@ d2-02g-sorry_to_hear_that sad.act
 d2-03a-if_yes yay.act
 d2-03b-if_no anticipation.act
 d2-03-three_volcanoes d2-03-three_volcanoes.act
-d2-04-hard_to_train
-d2-05a-if_correct
-d2-05b-if_incorrect
-d2-05-learned_last_time
-d2-06-p1-magic_plate
-d2-06-p2-10-nom_plate_great
-d2-06-p2-1-roar_more
-d2-06-p2-2-healthy_great
-d2-06-p2-3-grow_no
-d2-06-p2-4-find_mind
-d2-06-p2-5-plate_race
-d2-06-p2-6-know_grow
-d2-06-p2-7-skoo_plate_great
-d2-06-p2-8-taste_race
-d2-06-p2-9-dum_tum
-d2-06-p3-rhyme_explanation
+d2-04-hard_to_train d2-04-hard_to_train.act
+d2-05a-if_correct yes.act
+d2-05b-if_incorrect sad.act
+d2-05-learned_last_time 
+d2-06-p1-magic_plate anticipation.act
+d2-06-p2-1-roar_more anticipation.act
+d2-06-p2-2-healthy_great anticipation.act
+d2-06-p2-3-grow_no anticipation.act
+d2-06-p2-4-find_mind anticipation.act
+d2-06-p2-5-plate_race anticipation.act
+d2-06-p2-6-know_grow anticipation.act
+d2-06-p2-7-skoo_plate_great anticipation.act
+d2-06-p2-8-taste_race anticipation.act
+d2-06-p2-9-dum_tum anticipation.act
+d2-06-p2-10-nom_plate_great anticipation.act
+d2-06-p3-rhyme_explanation d2-06-p3-rhyme_explanation.act
 d2-06-p4-trumpet_fanfare
 d2-06-p5-1-ding_ding
 d2-06-p5-2-bzzzzzzt
-d2-07-p1-hungry_again
+d2-07-p1-hungry_again hungry.act
 d2-07-p2-1-pick_things
 d2-07-p2-2-try_things
 d2-07-p2-3-favorite_things
-d2-07-p2-4-wonder
-d2-07-p3-1-great_words
+d2-07-p2-4-wonder anticipation.act
+d2-07-p3-1-great_words yay.act
 d2-07-p3-2-now_we_say_words
 d2-07-p3-3-wonder_if_healthy_words
-d2-07-p3-4-remember_words
-d2-07-p3-5-cool_words
-d2-08-p1-good_choices
+d2-07-p3-4-remember_words anticipation.act
+d2-07-p3-5-cool_words ilikeit.act
+d2-08-p1-good_choices yay.act
 d2-08-p2-good_choices_bad_reason
-d2-09-1-ahh_noise
-d2-09-2-quick_off_plate
-d2-09-3-yikes
-d2-09-4-eesh
-d2-09-5-whoops_tummy
+d2-09-1-ahh_noise blech.act
+d2-09-2-quick_off_plate sad.act
+d2-09-3-yikes anticipation.act
+d2-09-4-eesh anticipation.act
+d2-09-5-whoops_tummy anticipation.act
 d2-10-1-something_missing
-d2-10-2-other_foods
-d2-10-3-almost_all
-d2-10-4-weird_noise
-d2-11a-p1-white_bread_prompt_one
+d2-10-2-other_foods question.act
+d2-10-3-almost_all anticipation.act
+d2-10-4-weird_noise anticipation.act
+d2-11a-p1-white_bread_prompt_one mph.act
 d2-11a-p2-white_bread_prompt_two
 d2-11a-p3-1-white_bread_prompt_three_white_bread
 d2-11a-p3-2-white_bread_prompt_three_muffin
 d2-11a-p3-3-white_bread_prompt_three_bagel
-d2-11b-p1-sugary_drink_prompt_one
+d2-11b-p1-sugary_drink_prompt_one anticipation.act
 d2-11b-p2-sugary_drink_prompt_two
 d2-11b-p3-1-sugary_drink_prompt_three_soda
 d2-11b-p3-2-sugary_drink_prompt_three_chocolate_milk
-d2-11c-p1-no_bread_prompt_one
+d2-11c-p1-no_bread_prompt_one question.act
 d2-11c-p2-no_bread_prompt_two
-d2-11d-p1-no_drink_prompt_one
+d2-11d-p1-no_drink_prompt_one question.act
 d2-11d-p2-no_drink_prompt_two
 d2-11e-p1-missing_good_bread_prompt_one
 d2-11e-p2-1-missing_good_bread_prompt_two_whole_grain_bread
@@ -257,65 +257,65 @@ d2-11f-p1-missing_good_drink_prompt_one
 d2-11f-p2-1-missing_good_drink_prompt_two_milk
 d2-11f-p2-2-missing_good_drink_prompt_two_water
 d2-11g-p1-sometimes_food_prompt_one
-d2-12-p1-cavities_first
-d2-12-p2-cavities_second
+d2-12-p1-cavities_first d2-12-p1-cavities_first.act
+d2-12-p2-cavities_second sad.act
 d2-13-p1-diabetes_first
-d2-13-p2-diabetes_second
-d2-14-p1-fiber_first
-d2-14-p2-fiber_second
-d2-15-p1-vitamins_first
+d2-13-p2-diabetes_second sad.act
+d2-14-p1-fiber_first d2-14-p1-fiber_first.act
+d2-14-p2-fiber_second anticipation.act
+d2-15-p1-vitamins_first d2-15-p1-vitamins_first.act
 d2-15-p2-vitamins_second
-d2-16-great_choices
-d2-17a-yes
+d2-16-great_choices yay.act
+d2-17a-yes yay.act
 d2-17b-p1-no
-d2-17b-p2-1-dancing
-d2-17b-p2-2-different_exercise
+d2-17b-p2-1-dancing yay.act
+d2-17b-p2-2-different_exercise ilikeit.act
 d2-17b-p2-3-not_an_exercise
 d2-17-remember_exercise
-d2-18-new_dances
-d2-19-music_player
-d2-20a-hip_hop
-d2-20b-woohoo
+d2-18-new_dances yay.act
+d2-19-music_player anticipation.act
+d2-20a-hip_hop yay.act
+d2-20b-woohoo yay.act
 d2-20c-groovin
-d2-20d-la_da_dee
-d2-20e-yeah
-d2-20f-woot_woot
+d2-20d-la_da_dee ilikeit.act
+d2-20e-yeah yay.act
+d2-20f-woot_woot yay.act
 d2-20g-move_arms_feet
-d2-20h-rock_socks
+d2-20h-rock_socks 
 d2-20i-professional_dancer
 d2-20j-dont_forget_to_breathe
 d2-20k-different_from_dragon_dancing
-d2-20l-all_day_long
-d2-20m-feel_healthy
+d2-20l-all_day_long yay.act
+d2-20m-feel_healthy yay.act
 d2-20n-practicing_moves
-d2-21a-great_dancer
-d2-21b-dynamite
-d2-21c-show_best_move
-d2-21d-even_more_moves
-d2-21e-cant_stop
-d2-22-p10-victory_dance_again
-d2-22-p11-okay_victory_dance_again
-d2-22-p12-p1-quick_break
-d2-22-p12-p2-good_break
-d2-22-p13-finished_dancing
-d2-22-p14-great_job_dancing
-d2-22-p15-back_to_dancing
-d2-22-p1-dance_more
-d2-22-p2-yippee
+d2-21a-great_dancer ilikeit.act
+d2-21b-dynamite yay.act
+d2-21c-show_best_move yay.act
+d2-21d-even_more_moves ilikeit.act
+d2-21e-cant_stop sad.act
+d2-22-p1-dance_more anticipation.act
+d2-22-p2-yippee yay.act
 d2-22-p3-done_now
-d2-22-p4-different_song
+d2-22-p4-different_song question.act
 d2-22-p5-okay_go
-d2-22-p6-break
-d2-22-p7-victory_dance
-d2-22-p8-back_to_dancing
-d2-22-p9-another_break
-d2-23a-if_yes
-d2-23b-if_no
+d2-22-p6-break question.act
+d2-22-p7-victory_dance ilikeit.act
+d2-22-p8-back_to_dancing yay.act
+d2-22-p9-another_break question.act
+d2-22-p10-victory_dance_again anticipation.act
+d2-22-p11-okay_victory_dance_again
+d2-22-p12-p1-quick_break 
+d2-22-p12-p2-good_break yay.act
+d2-22-p13-finished_dancing question.act
+d2-22-p14-great_job_dancing
+d2-22-p15-back_to_dancing yay.act
+d2-23a-if_yes yay.act
+d2-23b-if_no sad.act
 d2-23-victory_dance
-d2-24-p1-what_think
+d2-24-p1-what_think anticipation.act
 d2-24-p2-new_dance_next_time
-d2-25-timeout
-d2-26-p1-phew_fun
+d2-25-timeout sad.act
+d2-26-p1-phew_fun yay.act
 d2-26-p2-user_didnt_dance
 d2-26-p3-naptime
 d2-27-1-reminder_level_one
