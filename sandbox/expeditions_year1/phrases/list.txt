@@ -185,18 +185,18 @@ workout_intro
 workout_music
 yay
 you_didnt
-d2-01-see_again
-d2-02a-cool
-d2-02-anything_fun
-d2-02b-awesome
-d2-02c-nice
-d2-02d-all_right
-d2-02e-oh_well
-d2-02f-aww_really
-d2-02g-sorry_to_hear_that
-d2-03a-if_yes
-d2-03b-if_no
-d2-03-three_volcanoes
+d2-01-see_again yay.act
+d2-02a-cool yay.act
+d2-02-anything_fun anticipation.act
+d2-02b-awesome yay.act
+d2-02c-nice ilikeit.act
+d2-02d-all_right yay.act
+d2-02e-oh_well meh.act
+d2-02f-aww_really sad.act
+d2-02g-sorry_to_hear_that sad.act
+d2-03a-if_yes yay.act
+d2-03b-if_no anticipation.act
+d2-03-three_volcanoes d2-03-three_volcanoes.act
 d2-04-hard_to_train
 d2-05a-if_correct
 d2-05b-if_incorrect
