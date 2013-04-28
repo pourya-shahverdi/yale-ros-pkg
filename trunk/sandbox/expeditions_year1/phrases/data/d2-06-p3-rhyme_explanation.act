@@ -1,0 +1,11 @@
+#d2-06-p3-rhyme_explanation.wav
+- type: expression
+  id: lovestruck
+  start: 0.0
+- type: expression
+  id: frightened
+  start: 4.0
+- type: expression
+  id: yay
+  start: 7.0
+
