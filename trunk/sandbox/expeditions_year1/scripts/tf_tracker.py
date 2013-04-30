@@ -29,6 +29,33 @@ class TrackServer():
         # range for x: -300,300
         # range for y: -300,300
         # range for z: 20,400
+        rospy.loginfo("Lookat: (" + str(x) + "," + str(y) + "," + str(z)+ ")")
+
+        if x > 300:
+            rospy.logwarn("Pose x value too large, setting to max value")
+            x = 300
+        if x < -300:
+            rospy.logwarn("Pose x value too small, setting to min value")
+            x = -300
+        if y > 300:
+            rospy.logwarn("Pose y value too large, setting to max value")
+            y = 300
+        if y < -300:
+            rospy.logwarn("Pose y value too small, setting to min value")
+            y = -300
+        if z > 400:
+            rospy.logwarn("Pose z value too large, setting to max value")
+            z = 400
+        if z < 20:
+            rospy.logwarn("Pose z value too small, setting to min value")
+            z = 20
+
+
+
+        if(float(x)/float(z) > 0.5):
+            rospy.logwarn("Invalid lookat, twist value too high, looking at max value")
+            x = int(float(z)/2.0)
+
         goal = dragon_msgs.msg.LookatGoal(x = x, y = y, z = z)
         self.lookat_client.send_goal(goal)
 
@@ -56,6 +83,7 @@ class TrackServer():
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 if not warned:
                     rospy.logwarn("Error looking up transform.")
+                    rospy.sleep(1.0)
                     continue
                 warned = True
             else:
@@ -65,7 +93,7 @@ class TrackServer():
                 self.feedback.y = trans[1]*100
                 self.feedback.z = trans[2]*100
                 self.server.publish_feedback(self.feedback)
-                rospy.sleep(0.2)
+                rospy.sleep(0.5)
         if not success:
             rospy.loginfo("Preempted")
             self.server.set_preempted()

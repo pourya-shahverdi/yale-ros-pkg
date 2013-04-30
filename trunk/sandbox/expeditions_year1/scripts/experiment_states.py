@@ -15,7 +15,7 @@ from tablet_manager import TabletManager
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
 from dialogue_manager import *
-                
+
 class Sleep(smach.State):
     def __init__(self, dm, tm, exp_info):
         smach.State.__init__(self, outcomes=['wakeup','done'])
@@ -30,6 +30,7 @@ class Sleep(smach.State):
         self.tm.change("sleep")
         self.tm.wait_for_press("/dragon_GUI/sleep")   
         self.dm.express("wakeup")
+        rospy.set_param("~start_time", rospy.Time.now().secs)
         self.dm.eye_open()
         return 'wakeup'
 
@@ -80,6 +81,8 @@ class FoodChoiceDay1(smach.State):
         if self.ntimes > len(self.lessons):
             self.ntimes = 0
             return 'end'
+        first = True
+        last = False
         
         lesson_name = self.lessons[self.ntimes-1] #lessons 0-indexed
         current_lesson = self.fp[lesson_name] 
@@ -129,7 +132,11 @@ class FoodChoiceDay1(smach.State):
                     prev = self.choices[lesson_name][-1]
                 self.choices[lesson_name].append(resp)
                 if not prev==resp:
-                    self.dg.play_dialogue("why_choose")
+                    if resp in current_lesson["terminal"]:
+                        last = True
+                    if first or last:
+                        self.dg.play_dialogue("why_choose")
+                        first = False
                     self.dm.express("tasting", wait = True)
                 if resp in current_lesson["terminal"]:
                     self.dm.express("yummm", wait = False)
@@ -474,8 +481,8 @@ class Workout(smach.State):
         self.sc = SoundClient()
         self.dm = dm
         self.tm = tm
-        self.exp_start = rospy.Time.now()
-        self.duration = rospy.Duration(rospy.get_param("~max_time"))
+        self.exp_start = rospy.get_param("~start_time")
+        self.duration = rospy.get_param("~max_time")
         self.break_time = rospy.Duration(60)
         self.dialogue = dialogue_info
         #self.workout_phrases = workout_info
@@ -531,7 +538,6 @@ class Workout(smach.State):
 
     def execute(self, userdata):
         self.seen_victory=False
-        
         print "==============================================="
         print "+                WORKOUT GAME                 +"
         print "-----------------------------------------------"
@@ -561,7 +567,7 @@ class Workout(smach.State):
         self.dm.pose(0,0,0)
 
         #play workout routine
-        start = self.exp_start
+        start = rospy.get_param("~start_time")
         self.sc.playWave(self.music_folder + self.current_song)
         self.sc.waveVol(self.music_folder + self.current_song, self.vol)
         try:
@@ -580,8 +586,12 @@ class Workout(smach.State):
         rospy.sleep(delay_adjust)
         nbreaks = 1
         dance_start = rospy.Time.now()
-        while rospy.Time.now()-start < self.duration and not rospy.is_shutdown():
-            print "Time elapsed: " + str((rospy.Time.now()-dance_start).secs) + "." + str((rospy.Time.now()-dance_start).nsecs)
+        print "Time elapsed (game): " + str((rospy.Time.now()-dance_start).secs)
+        print "Time elapsed (experiment): " + str(rospy.Time.now().secs-start)
+
+        while rospy.Time.now().secs-start < self.duration and not rospy.is_shutdown():
+            print "Time elapsed (game): " + str((rospy.Time.now()-dance_start).secs)
+            print "Time elapsed (experiment): " + str(rospy.Time.now().secs-start)
             if rospy.Time.now()-dance_start > self.break_time * nbreaks:
                 if nbreaks == 1:
                     break_phrase = "new_song"
@@ -668,6 +678,7 @@ class Workout(smach.State):
                 self.tm.change("stopped_dancing")
                 continue
             elif p == "music_stopped":
+                self.sc.stopAll()
                 song, bpm = random.choice(self.songs.items())
                 while song == self.current_song:
                         #note that this will break if there's only one song
@@ -754,7 +765,7 @@ class Workout(smach.State):
 
             rospy.sleep(move_sleep-time_adjust)
     
-        if rospy.Time.now()-start >= self.duration:
+        if rospy.Time.now().secs-start >= self.duration:
             print "TIMED OUT"
             rospy.sleep(2.0)
             try:
