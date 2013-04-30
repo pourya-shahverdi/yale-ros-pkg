@@ -8,7 +8,7 @@ from itertools import combinations
 
 def main():
     dialogue_files = ["dialogue_phrases_day1.yaml", 
-                      "dialogue_phrases_day2.yaml",
+                      #"dialogue_phrases_day2.yaml",
                       "intro_dialogue.yaml"]
     
     print '''- gui: Dragonbot Teleop
@@ -117,12 +117,12 @@ def main():
     food_info = yaml.load(s)
 
 
-    dialogue_info = {}
+    dialogue_info = []
     for filename in dialogue_files:
         with open(roslib.packages.get_pkg_dir("expeditions_year1")+"/yaml/" + filename, 'r') as f:
             s = f.read()
         dialogue_items = yaml.load(s)
-        dialogue_info.update(dialogue_items)
+        dialogue_info.append(dialogue_items)
 
 
 
@@ -132,20 +132,21 @@ def main():
 
     food_info2 = yaml.load(s)
 
-    for day in dialogue_info:
-        for item in dialogue_info[day]:
-            for prompt in dialogue_info[day][item]:
-                phrase = dialogue_info[day][item][prompt]
-                if not (phrase["type"] == "question" or phrase["type"] == "select"):
-                    continue
-                name = day + "_" + item + "_" + prompt
-                print "- gui: " + name
-                print "  elements:"
-                print "  - type: button_group"
-                print "    label: " + item + " " + prompt
-                print "    label_string: " + \
-                    (";".join(phrase["responses"]) + ";next_phrase;next_segment;panic") #.strip(";")
-                print "    topic: " + gui_prefix + name
+    for f in dialogue_info:
+        for day in f:
+            for item in f[day]:
+                for prompt in f[day][item]:
+                    phrase = f[day][item][prompt]
+                    if not (phrase["type"] == "question" or phrase["type"] == "select"):
+                        continue
+                    name = day + "_" + item + "_" + prompt
+                    print "- gui: " + name
+                    print "  elements:"
+                    print "  - type: button_group"
+                    print "    label: " + item + " " + prompt
+                    print "    label_string: " + \
+                        (";".join(phrase["responses"]) + ";next_phrase;next_segment;panic") #.strip(";")
+                    print "    topic: " + gui_prefix + name
 
     for lesson in food_info:
         foods = food_info[lesson]["none"].keys() 

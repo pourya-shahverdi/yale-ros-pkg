@@ -24,7 +24,6 @@ def main():
 
     if not rospy.has_param("~max_time"):
         rospy.set_param("~max_time", 600)
-    rospy.set_param("~start_time", 0)
 
     day = rospy.get_param("~lesson")
     day_num = rospy.get_param("~day")
@@ -89,6 +88,17 @@ def main():
         food_state = FoodChoiceDay2(dm, tm, info, dialogue_info["foods"],food_info)
  
     with sm:
+        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
+                               transitions={'panic':'SLEEP',
+                                            'continue':'WORKOUT',
+                                            'end':'OUTRO',
+                                            'timeout':'OUTRO'})         
+
+
+        smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info["outro"]),
+                               transitions={'end':'SLEEP',
+                                            'panic':'SLEEP'})
+
         '''smach.StateMachine.add('F_CHOICE', food_state,
                                transitions={'panic':'end',
                                             'next_round':'F_CHOICE',
@@ -99,8 +109,7 @@ def main():
                                             'continue':'WORKOUT',
                                             'end':'end',
                                             'timeout':'end'})'''
- 
-       
+
 
 
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
@@ -114,16 +123,10 @@ def main():
                                             'next_round':'F_CHOICE',
                                             'end':'WORKOUT',
                                             'timeout':'OUTRO'})
-        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
-                               transitions={'panic':'SLEEP',
-                                            'continue':'WORKOUT',
-                                            'end':'OUTRO',
-                                            'timeout':'OUTRO'})
+ 
 
  
-        smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info["outro"]),
-                               transitions={'end':'SLEEP',
-                                            'panic':'SLEEP'})
+
 
     outcome = sm.execute()
 

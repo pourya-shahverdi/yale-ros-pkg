@@ -211,7 +211,8 @@ class DragonbotManager():
         # range for y (down/up): -300,300
         # range for z (near/far): 20,400
         # note: state variable can have values: off, random, <anything else>
-        
+        rospy.loginfo("Lookat: (" + str(x) + "," + str(y) + "," + str(z)+ ")")
+
         if x > 300:
             rospy.logwarn("Pose x value too large, setting to max value")
             x = 300
@@ -273,10 +274,11 @@ def main():
 
     #dm.load_phrases("phrases.yaml")
     rospy.sleep(3)
-    print("SLEEP")
-    dm.eye_close()
-    rospy.sleep(3)
-    dm.eye_open()
+    print("IMA LOOKIN ATCHOO")
+    dm.track_frame("head")
+    rospy.sleep(30)
+    print "LOOKAT OFF"
+    dm.track_off()
     
 if __name__ == '__main__':
     main()
