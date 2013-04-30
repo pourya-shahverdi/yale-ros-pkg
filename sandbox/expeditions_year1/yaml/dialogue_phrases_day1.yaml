@@ -72,7 +72,7 @@ lunchbox:
             phrase_ids: [08a-no_choice]
         why_choose:
             type: wait
-            phrase_ids: [04-p2-1-what_made_choose, 04-p2-2-what_made_pick, 04-p2-3-why_pick, 04-p2-4-hm_decide, 04-p2-5-why_go, 04-p2-6-what_like, 04-p2-7-interesting_choice, 04-p2-8-why_eat]
+            phrase_ids: [04-p2-1-what_made_choose, 04-p2-2-what_made_pick, 04-p2-3-why_pick, 04-p2-4-hm_decide, 04-p2-5-why_go, 04-p2-6-what_like, 04-p2-8-why_eat]
         none-milk:
             type: statement
             phrase_ids: [08b-milk]
