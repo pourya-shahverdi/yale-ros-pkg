@@ -43,7 +43,7 @@ class Intro(smach.State):
         self.dialogue = dialogue_info
         self.gui_prefix = "dragon_GUI/"
         self.segment = "intro"
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
 
     def execute(self, userdata):
         print "==============================================="
@@ -73,7 +73,7 @@ class FoodChoiceDay1(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.choices = {}
         self.segment = "foods"
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
 
 
     def execute(self, userdata):
@@ -174,7 +174,7 @@ class FoodChoiceDay2(smach.State):
         self.dialogue = dialogue_info
         self.segment = "foods"
         self.gui_prefix = "dragon_GUI/"
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
         self.sc = SoundClient()
         self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
 
@@ -512,7 +512,7 @@ class Workout(smach.State):
                       'Super_Mario_World_Swanky_Vegas_OC_ReMix.wav':120}
 
         self.current_song = ""
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
         self.vol = 0.3
 
 
@@ -830,7 +830,7 @@ class Outro(smach.State):
         self.gui_prefix = "dragon_GUI/"
         self.segment = "outro"
         self.dialogue_seen = []
-        self.dg = DialogueManager(self.dm, self.tm, self.gui_prefix, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
 
 
      def execute(self, userdata):

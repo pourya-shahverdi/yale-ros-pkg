@@ -94,78 +94,168 @@
 
 
 
-- gui: lunchbox_outro_wrap_up
+- gui: lunchbox1_outro_wrap_up
   elements:
   - type: button_group
     label: outro wrap_up
     label_string: dance;no_dance;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_outro_wrap_up
-- gui: lunchbox_intro_name
+    topic: dragon_GUI/lunchbox1_outro_wrap_up
+- gui: lunchbox1_intro_name
   elements:
   - type: button_group
     label: intro name
     label_string: give_name;cant_hear;not_name;give_up;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_intro_name
-- gui: lunchbox_intro_help_me
+    topic: dragon_GUI/lunchbox1_intro_name
+- gui: lunchbox1_intro_help_me
   elements:
   - type: button_group
     label: intro help_me
     label_string: help_yes;help_no;repeat_no;repeat_no2;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_intro_help_me
-- gui: lunchbox_intro_like_to_eat
+    topic: dragon_GUI/lunchbox1_intro_help_me
+- gui: lunchbox1_intro_like_to_eat
   elements:
   - type: button_group
     label: intro like_to_eat
     label_string: good_choice;non-human_choice;unknown_single;unknown_pl;favorite;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_intro_like_to_eat
-- gui: lunchbox_workout_finished_dancing
+    topic: dragon_GUI/lunchbox1_intro_like_to_eat
+- gui: lunchbox1_workout_finished_dancing
   elements:
   - type: button_group
     label: workout finished_dancing
     label_string: yes_finished;no_finished;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_finished_dancing
-- gui: lunchbox_workout_break1
+    topic: dragon_GUI/lunchbox1_workout_finished_dancing
+- gui: lunchbox1_workout_break1
   elements:
   - type: button_group
     label: workout break1
     label_string: yes_break1;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_break1
-- gui: lunchbox_workout_keep_going
+    topic: dragon_GUI/lunchbox1_workout_break1
+- gui: lunchbox1_workout_keep_going
   elements:
   - type: button_group
     label: workout keep_going
     label_string: dance_more;no_more;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_keep_going
-- gui: lunchbox_workout_break2
+    topic: dragon_GUI/lunchbox1_workout_keep_going
+- gui: lunchbox1_workout_break2
   elements:
   - type: button_group
     label: workout break2
     label_string: yes_break2;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_break2
-- gui: lunchbox_workout_intro
+    topic: dragon_GUI/lunchbox1_workout_break2
+- gui: lunchbox1_workout_intro
   elements:
   - type: button_group
     label: workout intro
     label_string: like_dance;no_like_dance;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_intro
-- gui: lunchbox_workout_victory_again
+    topic: dragon_GUI/lunchbox1_workout_intro
+- gui: lunchbox1_workout_victory_again
   elements:
   - type: button_group
     label: workout victory_again
     label_string: yes_victory;vic_again_no;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_victory_again
-- gui: lunchbox_workout_victory_dance
+    topic: dragon_GUI/lunchbox1_workout_victory_again
+- gui: lunchbox1_workout_victory_dance
   elements:
   - type: button_group
     label: workout victory_dance
     label_string: yes_victory;no_victory;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_victory_dance
-- gui: lunchbox_workout_new_song
+    topic: dragon_GUI/lunchbox1_workout_victory_dance
+- gui: lunchbox1_workout_new_song
   elements:
   - type: button_group
     label: workout new_song
     label_string: yes_change;no_change;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox_workout_new_song
+    topic: dragon_GUI/lunchbox1_workout_new_song
+- gui: lunchbox2_outro_wrap_up
+  elements:
+  - type: button_group
+    label: outro wrap_up
+    label_string: dance;no_dance;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_outro_wrap_up
+- gui: lunchbox2_foods_all_good
+  elements:
+  - type: button_group
+    label: foods all_good
+    label_string: okay;bad_reason;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_foods_all_good
+- gui: lunchbox2_intro_do_fun
+  elements:
+  - type: button_group
+    label: intro do_fun
+    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_do_fun
+- gui: lunchbox2_intro_know_fly
+  elements:
+  - type: button_group
+    label: intro know_fly
+    label_string: yes_know;no_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_know_fly
+- gui: lunchbox2_intro_what_learned
+  elements:
+  - type: button_group
+    label: intro what_learned
+    label_string: correct_learned;wrong_learned;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_what_learned
+- gui: lunchbox2_workout_finished_dancing
+  elements:
+  - type: button_group
+    label: workout finished_dancing
+    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_finished_dancing
+- gui: lunchbox2_workout_break1
+  elements:
+  - type: button_group
+    label: workout break1
+    label_string: yes_break1;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break1
+- gui: lunchbox2_workout_keep_going
+  elements:
+  - type: button_group
+    label: workout keep_going
+    label_string: dance_more;no_more;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_keep_going
+- gui: lunchbox2_workout_break2
+  elements:
+  - type: button_group
+    label: workout break2
+    label_string: yes_break2;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break2
+- gui: lunchbox2_workout_victory_again
+  elements:
+  - type: button_group
+    label: workout victory_again
+    label_string: vic_again_yes;vic_again_no;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_victory_again
+- gui: lunchbox2_workout_remember_exercise
+  elements:
+  - type: button_group
+    label: workout remember_exercise
+    label_string: is_dancing;no_remember;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_remember_exercise
+- gui: lunchbox2_workout_no_more
+  elements:
+  - type: button_group
+    label: workout no_more
+    label_string: yes_change;no_change-end;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_no_more
+- gui: lunchbox2_workout_victory_dance
+  elements:
+  - type: button_group
+    label: workout victory_dance
+    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_victory_dance
+- gui: lunchbox2_workout_no_remember
+  elements:
+  - type: button_group
+    label: workout no_remember
+    label_string: dancing;wrong_exercise;not_exercise;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_no_remember
+- gui: lunchbox2_workout_new_song
+  elements:
+  - type: button_group
+    label: workout new_song
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_new_song
 - gui: whole_grains
   elements:
   - type: button_group
