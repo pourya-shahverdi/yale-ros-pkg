@@ -20,3 +20,63 @@ Each dialogue is split up into a number of _dialogue items_, in a recursive stru
   * *Redirect*: A redirect is a dialogue item type used for internal convenience.  It simply plays the target dialogue item.
   * *Wait*: This is similar to a statement, except that a teleop interface is displayed for controlling when to move on to the next dialogue item.
   * *Select*: This dialogue item allows the operator to choose from among several responses (also dialogue items), similarly to a question but without any prompt being played by the robot.
+
+== Specifying the Dialogue ==
+
+Once you've written a script, you will need to split it up into phrases.  You will likely want these phrases to fit with the dialogue items described above.
+
+For each phrase, you will need:
+  # An audio recording of the phrase (*.wav or *.ogg)
+  # An annosoft (*.anno) file corresponding to the above audio
+
+You can also optionally include:
+  # An action file specifying robot behaviors corresponding to the behaviors associated with each phrase (*.act)
+  # A text file with the text of the phrase (*.txt)
+
+For a single phrase, the audio, annosoft, and text files must have the same base filename (e.g. "my_phrase.wav", "my_phrase.anno", "my_phrase.txt").  This base filename will be referred to throughout this tutorial as the _phrase*_id_. The action file can have a different name, as it is not uncommon to have similar actions associated with several phrases (e.g. smiling at the beginning of the phrase).  The action file specification is provided in the section "File Specifications" below.
+
+Once you have all of your phrases prepared, you will need to create a master list file, which has one line for each phrase, with the phrase_id and the associated action filename.  The audio, annosoft, text, and action files should all be stored in the same folder.
+
+Next, you need to generate the phrase yaml file, which is used by the dragonbot speech node.  To do this, run:
+
+{{{
+> rosrun dragonbot_teleop_dialogue anno_parser.py <list file> <output file> <data dir>
+}}}
+
+Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.
+
+Armed with your phrase_ids, you are ready to write the dialogue specification file.  The details on the format for this can be found in the section "File Specifications", below.  Once you've written your dialogue specification, you can check it by running the following script:
+
+{{{
+> rosrun dragonbot_teleop_dialogue check_dialogue.py <dialogue yaml file> <phrase yaml file>
+}}}
+
+Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.
+
+Finally, you're ready to run your dialogue using the DialogueManager class, which can be found in the _dragonbot_teleop_dialogue_ package as dialogue_manager.py.  Note that there are a few exceptions that can be thrown by the system. 
+
+Example:
+{{{
+#!/user/bin/python
+import roslib; roslib.load_manifest('expeditions_year1')
+import rospy
+from dialogue_manager import *
+from dragonbot_manager import DragonbotManager
+from tablet_manager import TabletManager
+
+
+def main():
+  try:
+    self.dg.play_dialogue("my_dialogue")
+  except PanicException:
+    return 'panic'
+  except NextStateException:
+    return 'end'
+  except NextPhraseException:
+    pass
+
+if __name__ == '__main__':
+    main()
+
+
+}}}
