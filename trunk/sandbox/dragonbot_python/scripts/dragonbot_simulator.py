@@ -3,7 +3,7 @@
 #Elaine Short
 #Dragonbot python interface
 
-import roslib; roslib.load_manifest('expeditions_year1')
+import roslib; roslib.load_manifest('dragonbot_python')
 import rospy
 import yaml
 from dragon_msgs.msg import *

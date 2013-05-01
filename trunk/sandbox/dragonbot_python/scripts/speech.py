@@ -3,7 +3,7 @@
 # Elaine Short
 # Dragonbot oculesic controller
 
-import roslib; roslib.load_manifest('expeditions_year1')
+import roslib; roslib.load_manifest('dragonbot_python')
 import rospy
 import actionlib
 from dragon_msgs.msg import *

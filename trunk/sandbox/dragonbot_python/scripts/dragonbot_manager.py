@@ -3,7 +3,7 @@
 #Elaine Short
 #Dragonbot python interface
 
-import roslib; roslib.load_manifest('expeditions_year1')
+import roslib; roslib.load_manifest('dragonbot_python')
 import rospy
 from threading import Thread
 from threading import Event
@@ -12,7 +12,6 @@ from dragon_msgs.msg import *
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
 import actionlib
-import time
 import tf
 
 class DragonbotManager():

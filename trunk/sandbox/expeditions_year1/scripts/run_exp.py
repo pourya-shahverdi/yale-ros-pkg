@@ -41,8 +41,9 @@ def main():
     dm = DragonbotManager()
     tm = TabletManager()
 
-    #info: day, lessons    
+    #info: day, lessons
     lessons = lesson_list[day]
+    day = day + str(day_num)
     info = (day,lessons)
     
     rospy.loginfo("Reading food phrases file.")
@@ -68,16 +69,13 @@ def main():
     food_info = yaml.load(s)
 
     rospy.loginfo("Reading other dialogue phrases file.")
-    if day_num == 1:
-        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/dialogue_phrases_day1.yaml", 'r') as f:
-            s = f.read()
-    else:
-        with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/dialogue_phrases_day2.yaml", 'r') as f:
-            s = f.read()
-
+    with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/dialogue_specification.yaml", 'r') as f:
+        s = f.read()
+    
     # file format is:
-            
+    
     dialogue_info = yaml.load(s)[day]
+    
 
     #rospy.loginfo("Loading phrase information file.")
     #dm.load_phrases("phrases.yaml")

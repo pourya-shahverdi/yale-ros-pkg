@@ -1,2 +1,2 @@
 #!/bin/bash
-./scripts/anno_parser.py ./phrases/list.txt ./yaml/phrases.yaml $PWD/phrases/data
+rosrun dragonbot_teleop_dialogue anno_parser.py $PWD/phrases/list.txt $PWD/yaml/phrases.yaml $PWD/phrases/data

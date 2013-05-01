@@ -1,0 +1,19 @@
+<package>
+  <description brief="dragonbot_python">
+
+     dragonbot_python
+
+  </description>
+  <author>Elaine</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragonbot_python</url>
+  <depend package="rospy"/>
+  <depend package="actionlib"/>
+  <depend package="dragon_msgs"/>
+  <depend package="sound_play"/>
+  <depend package="tf"/>
+
+</package>
+
+
