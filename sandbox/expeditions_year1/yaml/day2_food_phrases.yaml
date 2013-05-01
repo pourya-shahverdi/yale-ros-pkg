@@ -1,4 +1,4 @@
-lunchbox:
+lunchbox2:
     bad: [choc_milk, soda, white_bread, muffin, bagel]
     good: [milk, water, wheat_bread, wh_bagel]
     sometimes: [juice]

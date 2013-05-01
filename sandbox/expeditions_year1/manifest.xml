@@ -17,6 +17,8 @@
   <depend package="dragon_msgs"/>
   <depend package="tf" />
   <depend package="interface_srv" />
+  <depend package="dragonbot_teleop_dialogue" />
+  <depend package="dragonbot_python" />
 </package>
 
 

@@ -5,7 +5,6 @@
 
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
-from dragonbot_simulator import DragonbotManager
 from std_msgs.msg import String
 from std_msgs.msg import Int32
 from std_msgs.msg import Duration
@@ -136,38 +135,3 @@ class TabletManager():
         
     def get_topics(self):
         return self.subs.keys()
-
-
-def main():
-    rospy.init_node('test_tablet')
-    print str(GUIElement.BUTTON_ID)
-    tm = TabletManager()
-    selected_foods = []
-    gui_name = "lunchbox_" + "_".join(selected_foods)
-    tm.change(gui_name)
-    panicked = False
-    while not rospy.is_shutdown() and not panicked:
-        resp = tm.wait_for_press("dragon_GUI/food_select")
-
-        if resp == "panic":
-            panicked = True
-            continue
-        elif resp == "GO":
-            print "GO GO GO GO GO"
-        elif resp == "reminder":
-            print "I'm reminding you!"
-        elif resp == "next":
-            print "Go to the next thing"
-        elif resp == "--":
-            continue
-        elif resp in selected_foods:
-            selected_foods.remove(resp)
-        else:
-            selected_foods.append(resp)
-            selected_foods.sort()
-        gui_name = "lunchbox_" + "_".join(selected_foods)
-        tm.change(gui_name)
-
-if __name__ == '__main__':
-    main()
-

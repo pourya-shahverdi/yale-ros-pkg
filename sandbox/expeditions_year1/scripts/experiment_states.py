@@ -186,6 +186,7 @@ class FoodChoiceDay2(smach.State):
         self.first_round = True
         self.selected_foods = []
         self.first_time = True
+        self.sometimes_feedback = {food:False for food in self.fp["sometimes"]}
         
         self.exp_start_time = rospy.Time.now()
         self.duration = rospy.Duration(rospy.get_param("~max_time"))
@@ -400,15 +401,19 @@ class FoodChoiceDay2(smach.State):
             rospy.loginfo("ding")
             self.sc.playWave(self.music_folder + "ding.wav")
             rospy.sleep(1.0)
-            
-            '''try:
-                self.dg.play_dialogue(phrases["missing_noise"])
-            except PanicException:
-                return 'panic'
-            except NextStateException:
-                return 'end'
-            except NextPhraseException:
-                pass'''
+
+            if not len(filter(lambda f: not self.sometimes_feedback[f], sometimes_foods)) == 0:
+                target_food = random.choice(filter(lambda f: not self.sometimes_feedback[f], sometimes_foods))
+                rospy.loginfo("Playing sometimes feedback for food: " + str(target_food))
+                try:
+                    self.dg.play_dialogue(feedback_phrase)
+                    self.sometimes_feedback[target_food] = True
+                except PanicException:
+                    return 'panic'
+                except NextStateException:
+                    return 'end'
+                except NextPhraseException:
+                    pass
 
             # if there's a specific target group
             if not self.target_group == "all":
