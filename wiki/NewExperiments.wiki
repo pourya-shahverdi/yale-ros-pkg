@@ -26,12 +26,12 @@ Each dialogue is split up into a number of _dialogue items_, in a recursive stru
 Once you've written a script, you will need to split it up into phrases.  You will likely want these phrases to fit with the dialogue items described above.
 
 For each phrase, you will need:
-  # An audio recording of the phrase (*.wav or *.ogg)
-  # An annosoft (*.anno) file corresponding to the above audio
+  # An audio recording of the phrase (`*`.wav or `*`.ogg)
+  # An annosoft (`*`.anno) file corresponding to the above audio
 
 You can also optionally include:
-  # An action file specifying robot behaviors corresponding to the behaviors associated with each phrase (*.act)
-  # A text file with the text of the phrase (*.txt)
+  # An action file specifying robot behaviors corresponding to the behaviors associated with each phrase (`*`.act)
+  # A text file with the text of the phrase (`*`.txt)
 
 For a single phrase, the audio, annosoft, and text files must have the same base filename (e.g. "my_phrase.wav", "my_phrase.anno", "my_phrase.txt").  This base filename will be referred to throughout this tutorial as the _phrase`_`id_. The action file can have a different name, as it is not uncommon to have similar actions associated with several phrases (e.g. smiling at the beginning of the phrase).  The action file specification is provided in the section "File Specifications" below.
 
@@ -69,14 +69,16 @@ def main():
   try:
     self.dg.play_dialogue("my_dialogue")
   except PanicException:
-    return 'panic'
+    return 'AHHH PANIC! SOMETHING BAD HAPPENED!'
   except NextStateException:
-    return 'end'
+    return 'I want to end the dialogue, but nothing bad happened'
   except NextPhraseException:
+    # Ignore this
     pass
+  return "Finished dialogue successfully"
 
 if __name__ == '__main__':
-    main()
+    print main()
 
 
 }}}
