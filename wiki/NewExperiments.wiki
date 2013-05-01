@@ -33,7 +33,7 @@ You can also optionally include:
   # An action file specifying robot behaviors corresponding to the behaviors associated with each phrase (*.act)
   # A text file with the text of the phrase (*.txt)
 
-For a single phrase, the audio, annosoft, and text files must have the same base filename (e.g. "my_phrase.wav", "my_phrase.anno", "my_phrase.txt").  This base filename will be referred to throughout this tutorial as the _phrase*_id_. The action file can have a different name, as it is not uncommon to have similar actions associated with several phrases (e.g. smiling at the beginning of the phrase).  The action file specification is provided in the section "File Specifications" below.
+For a single phrase, the audio, annosoft, and text files must have the same base filename (e.g. "my_phrase.wav", "my_phrase.anno", "my_phrase.txt").  This base filename will be referred to throughout this tutorial as the _phrase`_`id_. The action file can have a different name, as it is not uncommon to have similar actions associated with several phrases (e.g. smiling at the beginning of the phrase).  The action file specification is provided in the section "File Specifications" below.
 
 Once you have all of your phrases prepared, you will need to create a master list file, which has one line for each phrase, with the phrase_id and the associated action filename.  The audio, annosoft, text, and action files should all be stored in the same folder.
 
