@@ -1,10 +1,12 @@
 <launch>
-  <include file="$(find dragonbot_python)/launch/dragonbot_python_nodes.launch" />
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output ="screen"/>
+  <node name="dragon_speech" pkg="dragonbot_python" type="speech.py" args="$(find expeditions_year1)/yaml/phrases.yaml" output="screen"/>
+  <node name="dragon_tracking" pkg="dragonbot_python" type="tf_tracker.py" output="screen"/>
   <include file="$(find interface_srv)/launch/dragon_gui.launch" />
   <include file="$(find expeditions_year1)/launch/transforms.launch" /> 
   
-  <include file="$(find audio_capture)/launch/capture.launch" />
-  <include file="$(find uvc_camera)/launch/camera_node.launch" /> 
+  <!-- <include file="$(find audio_capture)/launch/capture.launch" /> -->
+  <!-- <include file="$(find uvc_camera)/launch/camera_node.launch" /> -->
 </launch>
 
 <!--  <node name="joint_position_publisher_node" pkg="joint_position_publisher" type="joint_position_publisher_node" args="192.168.2.101 2701" output="screen"/> -->
