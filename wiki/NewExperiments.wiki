@@ -2,12 +2,21 @@
 
 = Introduction =
 
-Add your content here.
+Existing support code makes it easy to develop new experiments with teleoperated dialogue.  These instructions explain how to develop a new teleoperated interaction.  Before you can do this, you will need to:
+  # Install the repository and all of the dragonbot code: [http://code.google.com/p/yale-ros-pkg/wiki/DragonbotPubSubInstall].
+  # Acquire a copy of the [http://www.annosoft.com/ Annosoft Lipsync Tool]
 
+= Developing your Dialogue =
 
-= Details =
+To run a teleoperated dialogue with the dragonbot, you will need audio files, optional text files, annosoft files, and a dialogue specification.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Dialogue Items ==
+
+Each dialogue is split up into a number of _dialogue items_, in a recursive structure.  A dialogue item might link to several pre-recorded speech acts, referred to here as _phrases_. Each dialogue item can be one of several types:
+  * *Statement*: A statement is the simplest kind of dialogue item.  It involves any amount of speech, after which the system will move to the next item.  Statements are the leaf nodes in the dialogue tree.  A single statement can link to several phrases, and will choose randomly from among them (e.g. "great!", "good job", and "awesome" might be phrases all associated with a single postive_reinforcement statement).
+  * *Dialogue*: A dialogue is any number of dialogue items, to be played in order.
+  * *Question*: A question is any amount of speech, after which there will be several options for user response, each of which triggers a response from the robot.  Some of the responses are terminal responses, after which the system moves on to the next phrase, while any non-terminal responses will not change the teleop interface, allowing another response to be selected (note: the question is not repeated).  A response can be any other dialogue item, including another question.  As with phrases, a question can be associated with several phrases, which are chosen from randomly.
+  * *Backstory*: A backstory is a collection of dialogue items.  The first time the backstory is encountered by the system, the first dialogue item is played.  Every subsequent time the backstory is encountered, a dialogue item is chosen from among the 2nd-nth items in the list, where n is the length of the list.
+  * *Redirect*: A redirect is a dialogue item type used for internal convenience.  It simply plays the target dialogue item.
+  * *Wait*: This is similar to a statement, except that a teleop interface is displayed for controlling when to move on to the next dialogue item.
+  * *Select*: This dialogue item allows the operator to choose from among several responses (also dialogue items), similarly to a question but without any prompt being played by the robot.
