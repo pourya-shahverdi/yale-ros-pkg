@@ -150,12 +150,17 @@ class SpeechPlayServer():
             elif a["type"] == "pose":
                 rospy.loginfo("Pose " + str(a))
                 igoal = dragon_msgs.msg.IKGoal(vel = a["vel"],
-                                              acc = a["acc"],
-                                              x = a["x"],
-                                              y = a["y"],
-                                              z = a["z"],
-                                              theta = a["theta"],
-                                              neck = a["neck"])
+                                               acc = a["acc"],
+                                               x = a["x"],
+                                               y = a["y"],
+                                               z = a["z"],
+                                               theta = a["theta"],
+                                               neck = a["neck"],
+                                               state = "on")
+                self.ik_client.send_goal(igoal)
+            elif a["type"] == "pose_off":
+                rospy.loginfo("Pose off")
+                igoal = dragon_msgs.msg.IKGoal(state = "off")
                 self.ik_client.send_goal(igoal)
             else:
                 rospy.logwarn("action not recognized")

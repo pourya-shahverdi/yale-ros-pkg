@@ -25,6 +25,14 @@ def main():
     label: wakeup
     topic: dragon_GUI/sleep
 
+
+- gui: stopped_dancing
+  elements:
+  - type: button_group
+    label: Child stopped dancing?
+    label_string: music_up;music_down;not_dancing;stopped;music_stopped;next;panic
+    topic: dragon_GUI/stopped_dancing
+
 '''
 
 

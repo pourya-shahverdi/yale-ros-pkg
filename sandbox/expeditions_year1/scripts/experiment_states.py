@@ -26,6 +26,7 @@ class Sleep(smach.State):
         print "==============================================="
         print "+                   SLEEPING                  +"
         print "-----------------------------------------------"
+        self.dm.stop_speech()
         self.dm.eye_close()
         self.tm.change("sleep")
         self.tm.wait_for_press("/dragon_GUI/sleep")   
@@ -48,6 +49,9 @@ class Intro(smach.State):
         print "+              INTRO DIALOGUE                 +"
         print "-----------------------------------------------"
 
+        rospy.set_param("~first_time_foods", True)
+
+
         try:
             self.dg.play_dialogue("intro_dialogue")
         except PanicException:
@@ -56,6 +60,8 @@ class Intro(smach.State):
             return 'end'
         except NextPhraseException:
             pass
+
+
         return 'end'
 
 
@@ -181,18 +187,18 @@ class FoodChoiceDay2(smach.State):
         self.target_group = "all"
         self.first_round = True
         self.selected_foods = []
-        self.first_time = True
         self.sometimes_feedback = {food:False for food in self.fp["sometimes"]}
         
-        self.exp_start_time = rospy.Time.now()
-        self.duration = rospy.Duration(rospy.get_param("~max_time"))
+        self.exp_start_time = rospy.get_param("~start_time")
+        self.duration = rospy.get_param("~max_time")
 
     def execute(self, userdata):
         print "==============================================="
         print "+                FOOD DIALOGUE                +"
         print "-----------------------------------------------"
-
-        if rospy.Time.now()-self.exp_start_time > self.duration:
+        
+        self.exp_start_time = rospy.get_param("~start_time")
+        if rospy.Time.now().secs -self.exp_start_time > self.duration:
             try:
                 self.dg.play_dialogue("timeout")
             except PanicException:
@@ -212,7 +218,7 @@ class FoodChoiceDay2(smach.State):
 
         phrases = self.fp["phrases"]
         
-        if self.first_time:
+        if rospy.get_param("~first_time_foods"):
             try:
                 self.dg.play_dialogue(phrases["intro"])
             except PanicException:
@@ -221,7 +227,7 @@ class FoodChoiceDay2(smach.State):
                 return 'end'
             except NextPhraseException:
                 pass
-            self.first_time = False
+            rospy.set_param("~first_time_foods", False)
 
 
         while not rospy.is_shutdown():
@@ -400,6 +406,7 @@ class FoodChoiceDay2(smach.State):
 
             if not len(filter(lambda f: not self.sometimes_feedback[f], sometimes_foods)) == 0:
                 target_food = random.choice(filter(lambda f: not self.sometimes_feedback[f], sometimes_foods))
+                feedback_phrase = self.fp["phrases"]["specific"][target_food][0]
                 rospy.loginfo("Playing sometimes feedback for food: " + str(target_food))
                 try:
                     self.dg.play_dialogue(feedback_phrase)
@@ -586,6 +593,7 @@ class Workout(smach.State):
         rospy.sleep(delay_adjust)
         nbreaks = 1
         dance_start = rospy.Time.now()
+        not_dancing_counter = 0
         print "Time elapsed (game): " + str((rospy.Time.now()-dance_start).secs)
         print "Time elapsed (experiment): " + str(rospy.Time.now().secs-start)
 
@@ -661,7 +669,7 @@ class Workout(smach.State):
                 self.dm.pose_off()
                 self.sc.stopAll()
                 return "panic"
-            elif p == "dancing":
+            elif p == "music_up":
                 self.vol = self.vol + 0.1
                 if self.vol > 1.0:
                     rospy.loginfo("At max volume")
@@ -669,7 +677,7 @@ class Workout(smach.State):
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                 self.tm.change("stopped_dancing")
                 continue
-            elif p == "not_dancing":
+            elif p == "music_down":
                 self.vol = self.vol - 0.1
                 if self.vol < 0.0:
                     rospy.loginfo("At min volume")
@@ -688,6 +696,26 @@ class Workout(smach.State):
                 move_sleep = rospy.Duration(60/bpm)
                 self.sc.playWave(self.music_folder + self.current_song)
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                self.tm.change("stopped_dancing")
+                continue
+            elif p == "not_dancing":
+                not_dancing_counter += 1
+                try:
+                    resp = self.dg.play_dialogue("not_dancing" + str(not_dancing_counter))
+                except PanicException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'panic'
+                except NextStateException:
+                    self.dm.pose_off()
+                    self.sc.stopAll()
+                    return 'end'
+                except NextPhraseException:
+                    pass
+                
+                if "yes_finished" in resp:
+                    break
+                self.sc.playWave(self.music_folder + self.current_song)
                 self.tm.change("stopped_dancing")
                 continue
             elif p == "stopped":
@@ -749,7 +777,7 @@ class Workout(smach.State):
             m = self.poses[routine[move]]
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             i = i + 1
-            if i % 30 == 0:
+            if i % 10 == 0:
                 try:
                     self.dg.play_dialogue("energized_comment", interrupt = False)
                 except PanicException:

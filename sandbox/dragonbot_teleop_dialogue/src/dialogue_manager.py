@@ -93,10 +93,10 @@ class DialogueManager():
                 except NextPhraseException:
                     return responses
 
-        elif dialogue_item["type"] == "choice":
+        elif dialogue_item["type"] == "select":
             gui_name = self.dialogue_name + "_" + item_id
             self.tm.change(gui_name)
-            resp = self.tm.wait_for_press(self.gui_prefix + self.gui_name)
+            resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
             try:
                 responses = responses + self.play_dialogue(resp, interrupt, wait_for_finish)
             except NextPhraseException:
