@@ -249,7 +249,7 @@ Next, you need to generate the phrase yaml file, which is used by the dragonbot 
 > rosrun dragonbot_teleop_dialogue anno_parser.py <list file> <output file> <data dir>
 }}}
 
-Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.
+Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.  For an example, see expeditions_year1/regen_phrases.sh.
 
 
 
@@ -261,21 +261,37 @@ Armed with your phrase_ids, you are ready to write the dialogue specification fi
 > rosrun dragonbot_teleop_dialogue check_dialogue.py <dialogue yaml file> <phrase yaml file>
 }}}
 
-Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.
+Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.  For an example, see expeditions_year1/check_dialogue.sh
 
 === Generating the GUI ===
 
-Next, you need to generate the teleop GUI to go with the dialogue.  Run the following:
+Next, you need to generate the teleop GUI to go with the dialogue.  You can add items to the gui with an optional additional file.  The GUI will also generate the standard dragonbot teleop GUI, which can be used to control the robot directly by running:
+{{{
+> rosrun dragonbot_python dragonbot_teleop.py
+}}}
+
+
+
+Run the following:
 
 {{{
 > rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
 }}}
 
-
+You may need to provide full paths to the files.  For an example, see expeditions_year1/regen_gui.sh
 
 === Writing the Code ===
 
-Finally, you're ready to run your dialogue using the DialogueManager class, which can be found in the _dragonbot_teleop_dialogue_ package as dialogue_manager.py.  Note that there are a few exceptions that can be thrown by the system. 
+Finally, you're ready to run your dialogue using the DialogueManager class, which can be found in the _dragonbot_teleop_dialogue_ package as dialogue_manager.py.  Note that there are a few exceptions that can be thrown by the system:
+  * PanicException & NextStateException: These are thrown when "panic" or "next_segment", respectively, is pressed as a response to a question.  There are two exceptions here so that you can handle them differently if desired.
+  * NextPhraseException: This will move to the next phrase in a dialogue.  It is currently possible for the exception to be thrown from the dialogue manager, and can be safely ignored.  This is scheduled to be fixed (so that it will not be thrown at all) in later iterations.
+
+The constructor for DialogueManager takes 4 arguments:
+  * robot_manager: a DragonbotManager object
+  * tm: a TabletManager object
+  * dialogue_name: used to determine the name of the auto-generated GUI
+  * dialogue: a dialogue from your specification file.  Each dialogue manager only handles one dialogue.
+
 
 Example:
 {{{
@@ -288,7 +304,7 @@ from tablet_manager import TabletManager
 
 
 def main():
-  dm = DratonbotManager()
+  dm = DragonbotManager()
   tm = TabletManager()
   with open("dialogue_spec.yaml") as f:
     s = f.read()
@@ -314,3 +330,24 @@ if __name__ == '__main__':
 }}}
 
 === Running the Teleoperated Dialogue ===
+
+To run the dialogue, first start up the robot:
+  # Run the dragonbot_relay:
+{{{
+> roslaunch dragonbot_relay dragonbot_relay.launch
+}}}
+  # Run the dragonbot pubsub:
+{{{
+> roscd dragonbot_pubsub
+> build/install/dragonbot_pubsub/bin/dragonbot_pubsub edu.yale.dragonbot.DragonbotNode
+}}}
+  # Set the IP and hostname, and run the background nodes
+{{{
+> export ROS_IP=[your IP address here]
+> export ROS_HOSTNAME=[your IP address here]
+> roslaunch expeditions_year1 background_nodes.launch
+}}}
+  # Start the tablet and connect to your computer.  It should display a long list of GUIs.
+  # Run your script!
+
+Note that the GUI will only change when the system plays a question, select, or wait dialogue item.  Right now, this means that the "panic", "next_phrase" and "next_state" buttons will only work (i.e. interrupt the robot) during a question, select, or wait dialogue item.
