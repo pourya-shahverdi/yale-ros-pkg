@@ -74,7 +74,7 @@ def main():
     
     # file format is:
     
-    dialogue_info = yaml.load(s)[day]
+    dialogue_info = yaml.load(s)
     
 
     #rospy.loginfo("Loading phrase information file.")
@@ -82,29 +82,15 @@ def main():
     #rospy.loginfo("Done loading files.")
 
     if day_num == 1:
-        food_state = FoodChoiceDay1(dm, tm, info, dialogue_info["foods"],food_info)
+        food_state = FoodChoiceDay1(dm, tm, info, dialogue_info[day + "_foods"],food_info)
     elif day_num == 2:
-        food_state = FoodChoiceDay2(dm, tm, info, dialogue_info["foods"],food_info)
+        food_state = FoodChoiceDay2(dm, tm, info, dialogue_info[day + "_foods"],food_info)
  
     with sm:
-        '''smach.StateMachine.add('F_CHOICE', food_state,
-                               transitions={'panic':'end',
-                                            'next_round':'F_CHOICE',
-                                            'end':'end',
-                                            'timeout':'OUTRO'})
-        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
-                               transitions={'panic':'end',
-                                            'continue':'WORKOUT',
-                                            'end':'end',
-                                            'timeout':'end'})'''
- 
-       
-
-
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
                                             'done':'end'})
-        smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info["intro"]),
+        smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info[day + "_intro"]),
                                transitions={'panic':'SLEEP',
                                             'end':'F_CHOICE'})
         smach.StateMachine.add('F_CHOICE', food_state,
@@ -112,14 +98,14 @@ def main():
                                             'next_round':'F_CHOICE',
                                             'end':'WORKOUT',
                                             'timeout':'OUTRO'})
-        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info["workout"]),
+        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info[day + "_workout"]),
                                transitions={'panic':'SLEEP',
                                             'continue':'WORKOUT',
                                             'end':'OUTRO',
                                             'timeout':'OUTRO'})
 
  
-        smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info["outro"]),
+        smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info[day + "_outro"]),
                                transitions={'end':'SLEEP',
                                             'panic':'SLEEP'})
 

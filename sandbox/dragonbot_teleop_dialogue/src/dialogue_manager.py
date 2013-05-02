@@ -18,14 +18,13 @@ class NextPhraseException(Exception): pass
 
 
 class DialogueManager():
-    def __init__(self, robot_manager, tm, dialogue_name, dialogue, session_name):
+    def __init__(self, robot_manager, tm, dialogue_name, dialogue):
         #robot manager needs methods "say" and "stop_speech"
         self.robot_manager = robot_manager
         self.tm = tm
-        self.gui_prefix = "dragon_GUI/"
-        self.segment = dialogue_name
+        self.gui_prefix = "dragon_GUI/" 
         self.dialogue = dialogue
-        self.day = session_name
+        self.dialogue_name = dialogue_name
 
         self.seen = []
 
@@ -77,7 +76,7 @@ class DialogueManager():
                 return []
 
         elif dialogue_item["type"] == "question":
-            gui_name = self.day + "_" + self.segment + "_" + item_id
+            gui_name = self.dialogue_name + "_" + item_id
             self.tm.change(gui_name)
             self.robot_manager.say(random.choice(dialogue_item["phrase_ids"]), interrupt = True)
             resp = self.tm.wait_for_press(self.gui_prefix + gui_name)
@@ -95,7 +94,7 @@ class DialogueManager():
                     return responses
 
         elif dialogue_item["type"] == "choice":
-            gui_name = self.day + "_" + self.segment + "_" + item_id
+            gui_name = self.dialogue_name + "_" + item_id
             self.tm.change(gui_name)
             resp = self.tm.wait_for_press(self.gui_prefix + self.gui_name)
             try:

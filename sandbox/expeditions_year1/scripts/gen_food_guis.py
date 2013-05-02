@@ -19,6 +19,15 @@ def main():
 
     food_info2 = yaml.load(s)
 
+    print '''- gui: sleep
+  elements:
+  - type: button
+    label: wakeup
+    topic: dragon_GUI/sleep
+
+'''
+
+
     for lesson in food_info:
         foods = food_info[lesson]["none"].keys() 
         print "- gui: " + lesson

@@ -41,9 +41,7 @@ class Intro(smach.State):
         self.tm = tm
         self.day, self.lesson = exp_info
         self.dialogue = dialogue_info
-        self.gui_prefix = "dragon_GUI/"
-        self.segment = "intro"
-        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.day + "_intro", self.dialogue)
 
     def execute(self, userdata):
         print "==============================================="
@@ -72,8 +70,7 @@ class FoodChoiceDay1(smach.State):
         self.dialogue = dialogue_info
         self.gui_prefix = "dragon_GUI/"
         self.choices = {}
-        self.segment = "foods"
-        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.day + "_foods", self.dialogue)
 
 
     def execute(self, userdata):
@@ -172,9 +169,8 @@ class FoodChoiceDay2(smach.State):
         self.fp = food_phrases[self.day]
         self.all_foods = self.fp["bad"] + self.fp["good"] + self.fp["sometimes"]
         self.dialogue = dialogue_info
-        self.segment = "foods"
         self.gui_prefix = "dragon_GUI/"
-        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.day + "_foods", self.dialogue)
         self.sc = SoundClient()
         self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
 
@@ -493,7 +489,6 @@ class Workout(smach.State):
         #self.workout_phrases = workout_info
         self.day, self.lesson = info
         self.gui_prefix = "dragon_GUI/"
-        self.segment = "workout"
         self.seen_victory = False
 
         self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
@@ -512,7 +507,7 @@ class Workout(smach.State):
                       'Super_Mario_World_Swanky_Vegas_OC_ReMix.wav':120}
 
         self.current_song = ""
-        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.day + "_workout", self.dialogue)
         self.vol = 0.3
 
 
@@ -828,9 +823,8 @@ class Outro(smach.State):
         self.day, self.lesson = exp_info
         self.dialogue = dialogue_info
         self.gui_prefix = "dragon_GUI/"
-        self.segment = "outro"
         self.dialogue_seen = []
-        self.dg = DialogueManager(self.dm, self.tm, self.segment, self.dialogue, self.day)
+        self.dg = DialogueManager(self.dm, self.tm, self.day + "_outro", self.dialogue)
 
 
      def execute(self, userdata):
