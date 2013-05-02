@@ -65,7 +65,7 @@ my_dialogue:
     items: [hello, give_name, what_name, how_are_you, guess_fav_color, bring_crayon, bye]
   hello:
     type: statement
-    phrase_ids: [hey, hi, yo, bonjour, hola, hello]
+    phrase_ids: [hey, hi, hello]
   give_name:
     type: statement
     phrase_ids: [my_name_is]
