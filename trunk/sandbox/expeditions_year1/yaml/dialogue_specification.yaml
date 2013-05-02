@@ -610,6 +610,9 @@ lunchbox2_foods:
     cavities_reminder:
         type: statement
         phrase_ids: [d2-12-p2-cavities_second]
+    timeout:
+        type: statement
+        phrase_ids: [d2-25-timeout]
 lunchbox2_workout:
     intro_dialogue:
         type: dialogue
@@ -648,6 +651,18 @@ lunchbox2_workout:
     music:
         type: statement
         phrase_ids: [d2-19-music_player]
+    not_dancing1:
+        type: statement
+        phrase_ids: [d2-29-1-please_dance_with_me]
+    not_dancing2:
+        type: statement
+        phrase_ids: [d2-29-2-come_on_follow_along]
+    not_dancing3:
+        type: statement
+        phrase_ids: [d2-29-3-other_movement]
+    not_dancing4:
+        type: redirect
+        goal: finished_dancing
     energized_comment:
         type: statement
         phrase_ids: [d2-20a-hip_hop,d2-20b-woohoo,d2-20c-groovin,d2-20d-la_da_dee,d2-20e-yeah,d2-20f-woot_woot,d2-20g-move_arms_feet,d2-20h-rock_socks,d2-20i-professional_dancer,d2-20j-dont_forget_to_breathe,d2-20k-different_from_dragon_dancing,d2-20l-all_day_long,d2-20m-feel_healthy,d2-20n-practicing_moves]

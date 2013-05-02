@@ -19,7 +19,7 @@
   start: 6.0
   end: 7.0
 - type: pose
-  end: 7.2
+  start: 7.2
   vel: 0
   acc: 0
   x: 0
@@ -38,3 +38,5 @@
   start: 0.0
 - type: blink
   start: 0.0
+- type: pose_off
+  start: 9.0

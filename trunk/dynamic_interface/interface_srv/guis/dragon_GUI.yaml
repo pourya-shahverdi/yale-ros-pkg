@@ -89,6 +89,14 @@
     topic: dragon_GUI/sleep
 
 
+- gui: stopped_dancing
+  elements:
+  - type: button_group
+    label: Child stopped dancing?
+    label_string: music_up;music_down;not_dancing;stopped;music_stopped;next;panic
+    topic: dragon_GUI/stopped_dancing
+
+
 - gui: whole_grains
   elements:
   - type: button_group
@@ -14548,24 +14556,18 @@
     label: lunchbox2_workout finished_dancing
     label_string: yes_finished;no_finished;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_workout_finished_dancing
-- gui: lunchbox2_workout_break1
-  elements:
-  - type: button_group
-    label: lunchbox2_workout break1
-    label_string: yes_break1;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_break1
 - gui: lunchbox2_workout_keep_going
   elements:
   - type: button_group
     label: lunchbox2_workout keep_going
     label_string: dance_more;no_more;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_workout_keep_going
-- gui: lunchbox2_workout_break2
+- gui: lunchbox2_workout_break1
   elements:
   - type: button_group
-    label: lunchbox2_workout break2
-    label_string: yes_break2;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_break2
+    label: lunchbox2_workout break1
+    label_string: yes_break1;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break1
 - gui: lunchbox2_workout_victory_again
   elements:
   - type: button_group
@@ -14578,6 +14580,12 @@
     label: lunchbox2_workout remember_exercise
     label_string: is_dancing;no_remember;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_workout_remember_exercise
+- gui: lunchbox2_workout_break2
+  elements:
+  - type: button_group
+    label: lunchbox2_workout break2
+    label_string: yes_break2;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break2
 - gui: lunchbox2_workout_no_more
   elements:
   - type: button_group
