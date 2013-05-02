@@ -24,10 +24,206 @@ Each dialogue is split up into a number of _dialogue items_, in a recursive stru
   * *Select*: This dialogue item allows the operator to choose from among several responses (also dialogue items), similarly to a question but without any prompt being played by the robot.
 
 === Dialogue Specification File Format ===
+The dialogue specification file uses the [http://pyyaml.org/ yaml] file format.  A single file may contain several dialogues, which group the individual dialogue items.  Dialogue items may not link to items outside of their dialogue.  Names of dialogue items must be unique within each dialogue.  Some of the information within each dialogue item is specific to certain types.  The format is as follows:
 
+{{{
+<dialogue name>:
+  <dialogue item name>:
+    type: <dialogue, question, statement, wait, redirect, select, or backstory>
+    [items: <for dialogue and backstory items, the list of dialogue items to choose from>]
+    [phrase_ids: <for all items except dialogue and backstory, the ID of the phrases to choose from to play for the item>]
+    [responses: <for question and select items, the dialogue items the operator should choose from>]
+    [terminal: <for question items, the options that will cause the system to move on>]
+    [goal: <for redirect items, the name of the target dialogue item>]
+}}}
+
+In summary, the required information for each type is as follows:
+  * question
+    * type
+    * phrase`_`ids
+    * responses
+    * terminal
+  * statement & wait
+    * type
+    * phrase`_`ids
+  * redirect
+    * type
+    * goal
+  * select
+    * type
+    * responses
+  * backstory & dialogue
+    * type
+    * items
+
+The following is an example of a dialogue (in which the robot greets the user, then has them guess the robot's favorite color, then asks them to bring it a crayon in that color):
+
+{{{
+my_dialogue:
+  introduction:
+    type: dialogue
+    items: [hello, give_name, what_name, how_are_you, guess_fav_color, bring_crayon, bye]
+  hello:
+    type: statement
+    phrase_ids: [hey, hi, yo, bonjour, hola, hello]
+  give_name:
+    type: statement
+    phrase_ids: [my_name_is]
+  how_are_you:
+    type: select
+    responses: [good_answer, bad_answer]
+  guess_fav_color:
+    type: question
+    phrase_ids: [can_you_guess]
+    responses: [red, green, blue, grey, brown, cerulean, other]
+    terminal: [blue, cerulean]
+  yuck_ew:
+    type: statement
+    phrase_ids: [ew_gross_color]
+  brown:
+    type: redirect
+    goal: yuck_ew
+  grey:
+    type: redirect
+    goal: yuck_ew
+  cerulean:
+    type: dialogue
+    items: [same_as_blue, blue]
+  same_as_blue:
+    type: statement
+    phrase_ids: [thats_like_blue]
+  blue:
+    type: statement
+    phrase_ids: [yeah_blue]
+  red:
+    type: backstory
+    items: [red_ugly, remember_ugly, remember_hate]
+  red_ugly:
+    type: statement
+    phrase_ids: [red_is_dumb_color]
+  remember_ugly:
+    type: statement
+    phrase_ids: [remember_thats_ugly]
+  remember_hate
+    type: statement
+    phrase_ids: [remember_i_hate]
+  green:
+    type: statement
+    phrase_ids: [not_green]
+  other:
+    type: statement
+    phrase_ids: [thats_not_it]
+  bring_crayon:
+    type: wait
+    phrase_ids: [bring_me_blue_crayon]
+  bye:
+    type: statement
+    phrase_ids: [thanks_bye]
+}}}
+
+Note that phrase_ids are not the names of dialogue items (although they may be the same, but rather link into the phrase file.  Instructions on generating the phrase file appear in the next section, "Preparing your Dialogue".
 
 === Action File Format ===
 
+The action file allows you to specify actions that go along with a pre-recorded phrase. Every action requires a start time (in seconds from the beginning of the phrase).  Some require additional information (see example below).  The actions available are:
+  * expression: play one of the pre-loaded face-only animations
+  * motion: play one of the pre-loaded full-body animations
+  * lookat: look at a specified x,y,z point (will hold until lookat_off or the end of a phrase)
+  * lookat_off: return to idle lookat behavior
+  * lookat_frame: look at a specified tf frame (will hold until lookat_off or the end of a phrase)
+  * eye_close: close the eyes
+  * eye_open: open the eyes
+  * track: track a target tf frame (will hold until track_off or the end of a phrase)
+  * track_off: return to idle lookat behavior
+  * pose: set the robot's body to a specified position (x,y,z,theta,neck) (will hold until pose_off or the end of a phrase)
+  * pose_off: return the robot's body to idle behavior
+
+
+The motions (full-body animations) available for the dragonbot are:
+  * afraid
+  * blech
+  * idunno
+  * interest
+  * mmhmmm
+  * question
+  * wakeup
+  * yes
+  * anticipation
+  * farted
+  * i_like_it
+  * ilikeit
+  * laugh1
+  * mph
+  * surprise
+  * yay
+  * yummm
+  * bite
+  * hungry
+  * i_want_it
+  * iwantit
+  * meh
+  * no
+  * think
+  * yawn
+
+
+The expressions (face-only animations) available are:
+  * angry
+  * frightened
+  * puppy
+  * sipping
+  * confused
+  * lovestruck
+  * sad
+  * tasting
+  * disgusted
+  * mischievous
+  * surprised
+
+
+{{{
+- type: expression
+  id: puppy
+  start: 1.0
+- type: motion
+  id: farted
+  start: 4.0
+- type: track
+  target: target_tf
+  start: 3.0
+- type: track_off
+  start: 4.0
+- type: lookat
+  x: 300
+  y: 0
+  z: 0
+  start: 5.0
+- type: lookat_off
+  start: 6.0
+  end: 7.0
+- type: pose
+  start: 7.2
+  vel: 0
+  acc: 0
+  x: 0
+  y: 0
+  z: 0
+  theta: 0
+  neck: 0
+- type: pose_off
+  start: 9.0
+- type: lookat_off:
+  start: 0.0
+- type: lookat_frame
+  start: 0.0
+  target: target_tf
+- type: eye_open
+  start: 0.0
+- type: eye_close
+  start: 0.0
+- type: blink
+  start: 0.0
+}}}
 
 == Preparing your Dialogue ==
 
