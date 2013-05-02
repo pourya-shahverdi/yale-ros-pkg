@@ -8,9 +8,11 @@ Existing support code makes it easy to develop new experiments with teleoperated
 
 = Developing your Dialogue =
 
-To run a teleoperated dialogue with the dragonbot, you will need audio files, optional text files, annosoft files, and a dialogue specification.
+To run a teleoperated dialogue with the dragonbot, you will need audio files, optional text files, annosoft files, optional action files, and a dialogue specification.
 
-== Dialogue Items ==
+== Background Information ==
+
+=== Dialogue Structure ===
 
 Each dialogue is split up into a number of _dialogue items_, in a recursive structure.  A dialogue item might link to several pre-recorded speech acts, referred to here as _phrases_. Each dialogue item can be one of several types:
   * *Statement*: A statement is the simplest kind of dialogue item.  It involves any amount of speech, after which the system will move to the next item.  Statements are the leaf nodes in the dialogue tree.  A single statement can link to several phrases, and will choose randomly from among them (e.g. "great!", "good job", and "awesome" might be phrases all associated with a single postive_reinforcement statement).
@@ -21,7 +23,15 @@ Each dialogue is split up into a number of _dialogue items_, in a recursive stru
   * *Wait*: This is similar to a statement, except that a teleop interface is displayed for controlling when to move on to the next dialogue item.
   * *Select*: This dialogue item allows the operator to choose from among several responses (also dialogue items), similarly to a question but without any prompt being played by the robot.
 
-== Specifying the Dialogue ==
+=== Dialogue Specification File Format ===
+
+
+=== Action File Format ===
+
+
+== Preparing your Dialogue ==
+
+=== Generating the Phrase File ===
 
 Once you've written a script, you will need to split it up into phrases.  You will likely want these phrases to fit with the dialogue items described above.
 
@@ -45,6 +55,10 @@ Next, you need to generate the phrase yaml file, which is used by the dragonbot 
 
 Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.
 
+
+
+=== Writing & Checking the Dialogue Specification ===
+
 Armed with your phrase_ids, you are ready to write the dialogue specification file.  The details on the format for this can be found in the section "File Specifications", below.  Once you've written your dialogue specification, you can check it by running the following script:
 
 {{{
@@ -52,6 +66,16 @@ Armed with your phrase_ids, you are ready to write the dialogue specification fi
 }}}
 
 Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.
+
+
+
+=== Generating the GUI ===
+
+
+
+
+
+=== Writing the Code ===
 
 Finally, you're ready to run your dialogue using the DialogueManager class, which can be found in the _dragonbot_teleop_dialogue_ package as dialogue_manager.py.  Note that there are a few exceptions that can be thrown by the system. 
 
@@ -66,6 +90,14 @@ from tablet_manager import TabletManager
 
 
 def main():
+  dm = DratonbotManager()
+  tm = TabletManager()
+  with open("dialogue_spec.yaml") as f:
+    s = f.read()
+  dialogues = yaml.load(s)["experiment_dialogues.yaml"]
+  
+  dg = DialogueManager(dm, tm, "introduction", dialogues["introduction"])
+
   try:
     self.dg.play_dialogue("my_dialogue")
   except PanicException:
@@ -82,3 +114,5 @@ if __name__ == '__main__':
 
 
 }}}
+
+=== Running the Teleoperated Dialogue ===
