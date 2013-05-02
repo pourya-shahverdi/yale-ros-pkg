@@ -255,19 +255,21 @@ Where the filenames are given with their full paths, and data dir is the full pa
 
 === Writing & Checking the Dialogue Specification ===
 
-Armed with your phrase_ids, you are ready to write the dialogue specification file.  The details on the format for this can be found in the section "File Specifications", below.  Once you've written your dialogue specification, you can check it by running the following script:
+Armed with your phrase_ids, you are ready to write the dialogue specification file.  The details on the format for this can be found in the section "File Specifications", above.  Once you've written your dialogue specification, you can check it by running the following script:
 
 {{{
 > rosrun dragonbot_teleop_dialogue check_dialogue.py <dialogue yaml file> <phrase yaml file>
 }}}
 
-Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.
-
-
+Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.
 
 === Generating the GUI ===
 
+Next, you need to generate the teleop GUI to go with the dialogue.  Run the following:
 
+{{{
+> rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
+}}}
 
 
 
