@@ -363,8 +363,8 @@ To run the dialogue, first start up the robot:
 {{{
 > roscd dragonbot_teleop_dialogue/example
 > roslaunch background_nodes.launch
-}}}
-But if you're running your own dialogue, you will need to
+}}} 
+    But if you're running your own dialogue, you will need to
 {{{
 > rosrun soundplay_node soundplay_node.py
 > rosrun dragonbot_python speech.py <path to your phrases file>
