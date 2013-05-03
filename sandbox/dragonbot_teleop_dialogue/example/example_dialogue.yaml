@@ -1,7 +1,7 @@
 my_dialogue:
   introduction:
     type: dialogue
-    items: [hello, give_name, what_name, how_are_you, guess_fav_color, bring_crayon, bye]
+    items: [hello, give_name, how_are_you, guess_fav_color, bring_crayon, bye]
   hello:
     type: statement
     phrase_ids: [hey, hi, hello]
@@ -11,6 +11,12 @@ my_dialogue:
   how_are_you:
     type: select
     responses: [good_answer, bad_answer]
+  good_answer:
+    type: statement
+    phrase_ids: [great]
+  bad_answer:
+    type: statement
+    phrase_ids: [sorry]
   guess_fav_color:
     type: question
     phrase_ids: [can_you_guess]
@@ -30,7 +36,7 @@ my_dialogue:
     items: [same_as_blue, blue]
   same_as_blue:
     type: statement
-    phrase_ids: [thats_like_blue]
+    phrase_ids: [same_as_blue]
   blue:
     type: statement
     phrase_ids: [yeah_blue]
@@ -39,7 +45,7 @@ my_dialogue:
     items: [red_ugly, remember_ugly, remember_hate]
   red_ugly:
     type: statement
-    phrase_ids: [red_is_dumb_color]
+    phrase_ids: [red_ugly]
   remember_ugly:
     type: statement
     phrase_ids: [remember_thats_ugly]

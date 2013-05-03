@@ -13,3 +13,5 @@ same_as_blue
 thanks_bye
 thats_not_it
 yeah_blue
+great
+sorry

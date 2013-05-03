@@ -13,3 +13,5 @@ text2wave -o same_as_blue.wav same_as_blue.txt
 text2wave -o thanks_bye.wav thanks_bye.txt
 text2wave -o thats_not_it.wav thats_not_it.txt
 text2wave -o yeah_blue.wav yeah_blue.txt
+text2wave -o great.wav great.txt
+text2wave -o sorry.wav sorry.txt
