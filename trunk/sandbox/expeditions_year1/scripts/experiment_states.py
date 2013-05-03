@@ -185,7 +185,6 @@ class FoodChoiceDay2(smach.State):
         self.feedback_levels["reminders"] = 0
         self.prev_items = dict(good = [], bad = [], sometimes = [])
         self.target_group = "all"
-        self.first_round = True
         self.selected_foods = []
         self.sometimes_feedback = {food:False for food in self.fp["sometimes"]}
         
@@ -209,9 +208,6 @@ class FoodChoiceDay2(smach.State):
                 pass
             return 'timeout'
 
-        
-
-
         gui_name = self.day + "_" + "_".join(self.selected_foods)
         self.tm.change(gui_name)
         panicked = False
@@ -227,7 +223,6 @@ class FoodChoiceDay2(smach.State):
                 return 'end'
             except NextPhraseException:
                 pass
-            rospy.set_param("~first_time_foods", False)
 
 
         while not rospy.is_shutdown():
@@ -286,57 +281,58 @@ class FoodChoiceDay2(smach.State):
         added_items = filter(lambda f: f not in prev_items, self.selected_foods)
         removed_items = filter(lambda f: f not in self.selected_foods, prev_items)      
 
-        # only change feedback levels if something changed
-        if not (len(added_items) == 0 and len(removed_items) == 0):
-            # escalate level only if failed to improve from last time
-            # failure to improve: there were bad items before and we didn't
-            # remove one of the ones from the group we were targeting for 
-            # improvement or there were missing good foods and we didn't add 
-            # one of them from the group we were targeting
-            had_bad = len(self.prev_items["bad"]) > 0 
-            lacked_good = not set(self.prev_items["good"]) == set(self.fp["good"]) and not self.first_round
-        
+        # escalate level only if failed to improve from last time
+        # failure to improve: there were bad items before and we didn't
+        # remove one of the ones from the group we were targeting for 
+        # improvement or there were missing good foods and we didn't add 
+        # one of them from the group we were targeting
+        had_bad = len(self.prev_items["bad"]) > 0 
+        lacked_good = not set(self.prev_items["good"]) == set(self.fp["good"]) and not rospy.get_param("~first_time_foods")
 
-            rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
-            rospy.loginfo("Target group: " + self.target_group)
+
+        rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
+        rospy.loginfo("Target group: " + self.target_group)
+        if self.target_group == "all":
+            removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
+            added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
+        else:
+            removed_target_bad = len(set(removed_items) & set(self.fp["bad"]) & set(self.fp["groups"][self.target_group])) > 0
+            added_target_good = len(set(added_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
+
+
+
+        #reset target group and feedback levels if we're switching from 
+        #removing bad items to adding good items and vice versa
+        if had_bad and len(bad_foods) == 0:
+            self.target_group = "all"
+            self.feedback_levels["all"]["bad"] = 0
+            for g in self.fp["groups"].keys():
+                self.feedback_levels[g]["bad"] = 0
+        if not had_bad and len(bad_foods) > 0:
+            self.target_group = "all"
+            # reset good food feedback level
+            self.feedback_levels["all"]["good"] = 0
+            for g in self.fp["groups"].keys():
+                self.feedback_levels[g]["good"] = 0
+
+
+        if had_bad and not removed_target_bad:
             if self.target_group == "all":
-                removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
-                added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
+                self.feedback_levels["all"]["bad"] += 1
             else:
-                removed_target_bad = len(set(removed_items) & set(self.fp["bad"]) & set(self.fp["groups"][self.target_group])) > 0
-                added_target_good = len(set(added_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
-
-
-            #reset target group and feedback levels if we're switching from 
-            #removing bad items to adding good items and vice versa
-            if had_bad and len(bad_foods) == 0:
-                self.target_group = "all"
-                self.feedback_levels["all"]["bad"] = 0
                 for g in self.fp["groups"].keys():
-                    self.feedback_levels[g]["bad"] = 0
-            if not had_bad and len(bad_foods) > 0:
-                self.target_group = "all"
-                # reset good food feedback level
-                self.feedback_levels["all"]["good"] = 0
+                    if self.target_group == g:
+                        self.feedback_levels[g]["bad"] += 1
+
+        #only adjust good feedback level if no bad foods left
+        if lacked_good and not added_target_good and len(bad_foods) == 0:
+            if self.target_group == "all":
+                self.feedback_levels["all"]["good"] += 1
+            else:
                 for g in self.fp["groups"].keys():
-                    self.feedback_levels[g]["good"] = 0
+                    if self.target_group == g:
+                        self.feedback_levels[g]["good"] += 1
 
-
-            if had_bad and not removed_target_bad:
-                if self.target_group == "all":
-                    self.feedback_levels["all"]["bad"] += 1
-                else:
-                    for g in self.fp["groups"].keys():
-                        if self.target_group == g:
-                            self.feedback_levels[g]["bad"] += 1
-            elif lacked_good and not added_target_good:
-                if self.target_group == "all":
-                    self.feedback_levels["all"]["good"] += 1
-                else:
-                    for g in self.fp["groups"].keys():
-                        if self.target_group == g:
-                            self.feedback_levels[g]["good"] += 1
-                        
         self.first_round = False
 
         try:
@@ -355,22 +351,17 @@ class FoodChoiceDay2(smach.State):
             rospy.loginfo("BZZZZT")
             self.sc.playWave(self.music_folder + "bzzt.wav")
             rospy.sleep(2.0)
-            '''try:
-                self.dg.play_dialogue(phrases["bad_noise"])
-            except PanicException:
-                return 'panic'
-            except NextStateException:
-                return 'end'
-            except NextPhraseException:
-                pass'''
 
             # if the target group is specific and doesn't have any more bad items, switch targets
             if not self.target_group == "all" and len(set(bad_foods) & set(self.fp["groups"][self.target_group])) == 0:
+                rospy.loginfo("Switching target groups...")
                 bad_groups = []
                 for g in self.fp["groups"].keys():
                     if len(set(bad_foods) & set(self.fp["groups"][g])) > 0:
                         bad_groups.append(g)
                 self.target_group = random.choice(bad_groups)
+                rospy.loginfo("Switched to group: " + self.target_group)
+
 
             #figure out the correct feedback phrase
             feedback_phrase = ""
@@ -422,17 +413,19 @@ class FoodChoiceDay2(smach.State):
                 except NextPhraseException:
                     pass
 
-            # if there's a specific target group
+            # if there's a specific target group and it's not missing any more good items, switch targets
             if not self.target_group == "all":
                 target_good = set(self.fp["groups"][self.target_group]) & set(self.fp["good"])
                 # if the target group isn't missing any more good items
-                if not target_good.issubset(set(good_foods)):
+                if target_good == (set(good_foods) & set(self.fp["groups"][self.target_group])):
+                    rospy.loginfo("Switching target groups...")
                     good_groups = []
                     for g in self.fp["groups"].keys():
                         group_good = set(self.fp["groups"][g]) & set(self.fp["good"])
-                        if not group_good.issubset(set(good_foods)):
+                        if not group_good == (set(good_foods) & set(self.fp["groups"][g])):
                             good_groups.append(g)
                     self.target_group = random.choice(good_groups)
+                    rospy.loginfo("Switched to group: " + self.target_group)
 
             #figure out the correct feedback phrase
             feedback_phrase = ""
@@ -483,6 +476,8 @@ class FoodChoiceDay2(smach.State):
         self.prev_items["bad"] = bad_foods
         self.prev_items["sometimes"] = sometimes_foods
 
+        
+        rospy.set_param("~first_time_foods", False)
         return 'next_round'
 
 

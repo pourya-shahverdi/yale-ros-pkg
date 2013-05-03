@@ -12,6 +12,7 @@ from dragon_msgs.msg import *
 from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
 import actionlib
+from actionlib_msgs.msg import *
 import tf
 
 class DragonbotManager():
@@ -150,9 +151,11 @@ class DragonbotManager():
                 recognized = True
         if recognized:
             self.express_client.send_goal(goal)
-            rospy.loginfo("Waiting for expression server result")
+            rospy.loginfo("Dragonbot Manager Waiting for expression server result")
             if wait:
-                self.express_client.wait_for_result()
+                self.express_client.wait_for_result(rospy.Duration(5.0))
+                if not self.express_client.get_state() == GoalStatus.SUCCEEDED:
+                    rospy.logwarn("Dragonbot Manager gave up waiting for expression server")
         else:
             rospy.logwarn("Expression/Motion not recognized")
 
