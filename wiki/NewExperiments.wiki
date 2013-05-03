@@ -354,11 +354,21 @@ To run the dialogue, first start up the robot:
 > roscd dragonbot_pubsub
 > build/install/dragonbot_pubsub/bin/dragonbot_pubsub edu.yale.dragonbot.DragonbotNode
 }}}
-  # Set the IP and hostname, and run the background nodes
+  # Set the IP and hostname
 {{{
 > export ROS_IP=[your IP address here]
 > export ROS_HOSTNAME=[your IP address here]
-> roslaunch expeditions_year1 background_nodes.launch
+}}}
+  # Run the background nodes.  In the example, you can just run:
+{{{
+> roscd dragonbot_teleop_dialogue/example
+> roslaunch background_nodes.launch
+}}}
+But if you're running your own dialogue, you will need to
+{{{
+> rosrun soundplay_node soundplay_node.py
+> rosrun dragonbot_python speech.py <path to your phrases file>
+> rosrun dragonbot_python tf_tracker.py
 }}}
   # Start the tablet and connect to your computer.  It should display a long list of GUIs.
   # Run your script!
