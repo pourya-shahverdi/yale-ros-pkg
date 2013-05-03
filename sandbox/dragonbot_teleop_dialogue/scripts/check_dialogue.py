@@ -31,7 +31,7 @@ def main():
     print "ERRORS:"
     print "++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-    for session_name,phrases in sessions.items():
+    for session_name,phrases in dialogue.items():
         for phrase_name,info in phrases.items():
             error_intro = "Error in dialogue: " + session_name + " phrase: " + phrase_name + ": "
             if not "type" in info.keys():
@@ -104,7 +104,7 @@ def main():
                     continue
                 for response in info["responses"]:
                     if not response in phrases.keys():
-                        print  error_intro + "item: " + phrase + " is not a phrase in the session"
+                        print  error_intro + "item: " + response + " is not a phrase in the session"
                         continue
             else:
                 print error_intro + "invalid type"
