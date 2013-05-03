@@ -295,6 +295,7 @@ class FoodChoiceDay2(smach.State):
         
 
         rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
+        rospy.loginfo("Target group: " + self.target_group)
         if self.target_group == "all":
             removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
             added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
