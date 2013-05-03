@@ -47,7 +47,7 @@ def main():
 
     for day in food_info2:
         all_foods = food_info2[day]["bad"]+food_info2[day]["good"]+ food_info2[day]["sometimes"]
-        all_foods.sort()
+        all_foods = all_foods.sorted()
 
         print "- gui: " + day + "_"
         print "  elements:"
@@ -86,7 +86,7 @@ def main():
             foods = combinations(all_foods, i)
             for food_combo in foods:
                 food_combo = list(food_combo)
-                food_combo.sort()
+                food_combo = food_combo.sorted()
                 print "- gui: " + day + "_" + "_".join(food_combo)
                 print "  elements:"
                 print "  - type: button_group"
