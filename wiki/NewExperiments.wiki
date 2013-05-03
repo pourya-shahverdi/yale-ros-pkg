@@ -288,7 +288,7 @@ Run the following:
 > rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
 }}}
 
-You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_gui.sh regen_gui.sh]
+You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_gui.sh regen_gui.sh].  Note that this _*WILL OVERWRITE THE GUI*_ that background nodes uses.  You'll need to run the regen_gui.sh script in the expeditions_year1 folder if you want to run the experiment after this.
 
 === Writing the Code ===
 
@@ -339,7 +339,7 @@ if __name__ == '__main__':
 
 }}}
 
-This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example.py example.py]
+This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example.py example.py].  If you have run regen_phrases.py and regen_gui.py, in that order, you should be able to run the script following the below instructions.
 
 
 === Running the Teleoperated Dialogue ===
