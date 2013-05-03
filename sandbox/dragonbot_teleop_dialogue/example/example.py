@@ -9,14 +9,14 @@ from tablet_manager import TabletManager
 def main():
   dm = DragonbotManager()
   tm = TabletManager()
-  with open("dialogue_spec.yaml") as f:
+  with open("example_dialogue.yaml") as f:
     s = f.read()
-  dialogues = yaml.load(s)["experiment_dialogues.yaml"]
+  dialogues = yaml.load(s)
   
-  dg = DialogueManager(dm, tm, "introduction", dialogues["introduction"])
+  dg = DialogueManager(dm, tm, "my_dialogue", dialogues["my_dialogue"])
 
   try:
-    self.dg.play_dialogue("my_dialogue")
+    self.dg.play_dialogue("introduction")
   except PanicException:
     return 'AHHH PANIC! SOMETHING BAD HAPPENED!'
   except NextStateException:
@@ -28,4 +28,5 @@ def main():
 
 if __name__ == '__main__':
     print main()
+
 
