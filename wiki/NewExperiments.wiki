@@ -233,7 +233,7 @@ The expressions (face-only animations) available are:
   start: 0.0
 }}}
 
-This example can be found as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example.act example.act]
+This example can be found as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example.act example.act]
 
 == Preparing your Dialogue ==
 
@@ -259,7 +259,7 @@ Next, you need to generate the phrase yaml file, which is used by the dragonbot 
 > rosrun dragonbot_teleop_dialogue anno_parser.py <list file> <output file> <data dir>
 }}}
 
-Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/regen_phrases.sh regen_phrases.sh]
+Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_phrases.sh regen_phrases.sh]
 
 
 
@@ -271,7 +271,7 @@ Armed with your phrase_ids, you are ready to write the dialogue specification fi
 > rosrun dragonbot_teleop_dialogue check_dialogue.py <dialogue yaml file> <phrase yaml file>
 }}}
 
-Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/check_dialogue.sh check_dialogue.sh]
+Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/check_dialogue.sh check_dialogue.sh]
 
 === Generating the GUI ===
 
@@ -288,7 +288,7 @@ Run the following:
 > rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
 }}}
 
-You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/regen_gui.sh regen_gui.sh]
+You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_gui.sh regen_gui.sh]
 
 === Writing the Code ===
 
@@ -339,7 +339,7 @@ if __name__ == '__main__':
 
 }}}
 
-This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example.py example.py]
+This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example.py example.py]
 
 
 === Running the Teleoperated Dialogue ===
