@@ -570,7 +570,7 @@ lunchbox2_foods:
         phrase_ids: [d2-11f-p2-2-missing_good_drink_prompt_two_water]
     okay_but_juice:
         type: dialogue
-        items: [sometimes_food, cavities_backstory]
+        items: [sometimes_food]
     sometimes_food:
         type: statement
         phrase_ids: [d2-11g-p1-sometimes_food_prompt_one]
