@@ -47,7 +47,7 @@ def main():
 
     for day in food_info2:
         all_foods = food_info2[day]["bad"]+food_info2[day]["good"]+ food_info2[day]["sometimes"]
-        all_foods = all_foods.sorted()
+        all_foods = sorted(all_foods, key=str.lower)
 
         print "- gui: " + day + "_"
         print "  elements:"
@@ -86,7 +86,7 @@ def main():
             foods = combinations(all_foods, i)
             for food_combo in foods:
                 food_combo = list(food_combo)
-                food_combo = food_combo.sorted()
+                food_combo = sorted(food_combo, key=str.lower)
                 print "- gui: " + day + "_" + "_".join(food_combo)
                 print "  elements:"
                 print "  - type: button_group"
@@ -95,7 +95,7 @@ def main():
                 print "    topic: " + gui_prefix + "food_select"
                 print "  - type: button_group"
                 print "    label: \"Unselected Foods: Press to select\""
-                print "    label_string: " + ";".join(list(set(all_foods) - set(food_combo)))
+                print "    label_string: " + ";".join(sorted(list(set(all_foods) - set(food_combo)), key=str.lower))
                 print "    topic: " + gui_prefix + "food_select"
                 print "  - type: button_group"
                 print "    label: \"GO (press to activate \'magic plate\')\""
