@@ -1,0 +1,7 @@
+<launch>
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output ="screen"/>
+  <node name="dragon_speech" pkg="dragonbot_python" type="speech.py" args="$(find dragonbot_teleop_dialogue)/example/phrases.yaml" output="screen"/>
+  <node name="dragon_tracking" pkg="dragonbot_python" type="tf_tracker.py" output="screen"/>
+  <include file="$(find interface_srv)/launch/dragon_gui.launch" />
+</launch>
+

@@ -15,3 +15,4 @@ text2wave -o thats_not_it.wav thats_not_it.txt
 text2wave -o yeah_blue.wav yeah_blue.txt
 text2wave -o great.wav great.txt
 text2wave -o sorry.wav sorry.txt
+text2wave -o how_are_you.wav how_are_you.txt

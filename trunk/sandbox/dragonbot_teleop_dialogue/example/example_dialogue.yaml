@@ -1,7 +1,7 @@
 my_dialogue:
   introduction:
     type: dialogue
-    items: [hello, give_name, how_are_you, guess_fav_color, bring_crayon, bye]
+    items: [hello, give_name, how_are_you,how_are_you_resp, guess_fav_color, bring_crayon, bye]
   hello:
     type: statement
     phrase_ids: [hey, hi, hello]
@@ -9,6 +9,9 @@ my_dialogue:
     type: statement
     phrase_ids: [my_name_is]
   how_are_you:
+    type: statement
+    phrase_ids: [how_are_you]
+  how_are_you_resp:
     type: select
     responses: [good_answer, bad_answer]
   good_answer:
