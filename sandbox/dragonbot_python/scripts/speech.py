@@ -93,7 +93,7 @@ class SpeechPlayServer():
                 continue
 
             if a["type"] == "viseme":
-                #print "Viseme: " + a["id"]
+                #rospy.loginfo("Viseme: " + a["id"])
                 vgoal = dragon_msgs.msg.VisemeGoal(constant=a["id"])
                 self.viseme_client.send_goal(vgoal)
                 self.feedback.viseme = a["id"]
@@ -176,9 +176,11 @@ class SpeechPlayServer():
             self.track_client.send_goal(goal)
             self.server.set_preempted()
         else:
+            rospy.loginfo("Waiting for end")
             while a["type"] == "viseme" and (rospy.Time.now()-time+timing_adjust <
                rospy.Duration.from_sec(a["end"])):
                 pass
+            rospy.loginfo("At end -- Success")
             self.result.result = "SUCCESS"
             self.viseme_client.cancel_all_goals()
             self.express_client.cancel_all_goals()

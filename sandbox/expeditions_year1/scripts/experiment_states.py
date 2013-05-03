@@ -708,7 +708,7 @@ class Workout(smach.State):
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                 self.tm.change("stopped_dancing")
                 continue
-            elif p == "not_dancing":
+            elif p == "never_dancing":
                 not_dancing_counter += 1
                 try:
                     resp = self.dg.play_dialogue("not_dancing" + str(not_dancing_counter))
@@ -728,7 +728,7 @@ class Workout(smach.State):
                 self.sc.playWave(self.music_folder + self.current_song)
                 self.tm.change("stopped_dancing")
                 continue
-            elif p == "stopped":
+            elif p == "stopped_dancing":
                 self.sc.stopAll()
                 try:
                     resp = self.dg.play_dialogue("stop_dancing", interrupt = True)

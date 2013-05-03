@@ -115,11 +115,12 @@ class DragonbotManager():
         self.track_client.send_goal(goal)
 
     def say(self, phrase_name,interrupt = True, wait = False):
-         goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name, interrupt=interrupt)
-         self.speech_client.send_goal(goal)
-         if wait:
-             rospy.loginfo("Waiting for speech server result")
-             self.speech_client.wait_for_result()
+        rospy.loginfo("Saying: " + phrase_name)
+        goal = dragon_msgs.msg.SpeechPlayGoal(phrase=phrase_name, interrupt=interrupt)
+        self.speech_client.send_goal(goal)
+        if wait:
+            rospy.loginfo("Waiting for speech server result")
+            self.speech_client.wait_for_result()
 
 
     #loads phrases from a yaml file
