@@ -291,7 +291,7 @@ Run the following:
 > rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
 }}}
 
-You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_gui.sh regen_gui.sh].  Note that this _*WILL OVERWRITE THE GUI*_ that background nodes uses.  You'll need to run the regen_gui.sh script in the expeditions_year1 folder if you want to run the experiment after this.
+You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/regen_gui.sh regen_gui.sh].  Note that this script writes directly to the interface_srv/guis folder and _*WILL OVERWRITE THE GUI*_ that background nodes uses for the expeditions year 1 experiment.  You'll need to run the regen_gui.sh script in the expeditions_year1 folder if you want to run the experiment after this.
 
 === Writing the Code ===
 
