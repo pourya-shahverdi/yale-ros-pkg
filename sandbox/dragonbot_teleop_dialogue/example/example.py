@@ -1,9 +1,10 @@
-#!/user/bin/python
+#!/usr/bin/env python
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
 from dialogue_manager import *
 from dragonbot_manager import DragonbotManager
 from tablet_manager import TabletManager
+import yaml
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
   dg = DialogueManager(dm, tm, "my_dialogue", dialogues["my_dialogue"])
 
   try:
-    self.dg.play_dialogue("introduction")
+    dg.play_dialogue("introduction")
   except PanicException:
     return 'AHHH PANIC! SOMETHING BAD HAPPENED!'
   except NextStateException:
@@ -27,6 +28,7 @@ def main():
   return "Finished dialogue successfully"
 
 if __name__ == '__main__':
-    print main()
+  rospy.init_node("example_dialogue")
+  print main()
 
 
