@@ -30,7 +30,7 @@ def main():
   elements:
   - type: button_group
     label: Child stopped dancing?
-    label_string: music_up;music_down;not_dancing;stopped;music_stopped;next;panic
+    label_string: music_up;music_down;never_dancing;stopped_dancing;music_stopped;next;panic
     topic: dragon_GUI/stopped_dancing
 
 '''

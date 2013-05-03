@@ -680,8 +680,8 @@ lunchbox2_workout:
     no_more:
         type: question
         phrase_ids: [14-p3-different_song]
-        responses: [yes_change, no_change-end]
-        terminal: [yes_change, no_change-end]
+        responses: [yes_change, no_change]
+        terminal: [yes_change, no_change]
     yes_change:
         type: statement
         phrase_ids: [d2-22-p5-okay_go]
