@@ -6,6 +6,8 @@ Existing support code makes it easy to develop new experiments with teleoperated
   # Install the repository and all of the dragonbot code: [http://code.google.com/p/yale-ros-pkg/wiki/DragonbotPubSubInstall].
   # Acquire a copy of the [http://www.annosoft.com/ Annosoft Lipsync Tool]
 
+All the examples in the following text can be found in the [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/ dragonbot_teleop_dialogue] package, in the folder "example".
+
 = Developing your Dialogue =
 
 To run a teleoperated dialogue with the dragonbot, you will need audio files, optional text files, annosoft files, optional action files, and a dialogue specification.
@@ -56,13 +58,13 @@ In summary, the required information for each type is as follows:
     * type
     * items
 
-The following is an example of a dialogue (in which the robot greets the user, then has them guess the robot's favorite color, then asks them to bring it a crayon in that color):
+The following ([http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example_dialogue.yaml example_dialogue.yaml]) is an example of a dialogue (in which the robot greets the user, then has them guess the robot's favorite color, then asks them to bring it a crayon in that color).
 
 {{{
 my_dialogue:
   introduction:
     type: dialogue
-    items: [hello, give_name, what_name, how_are_you, guess_fav_color, bring_crayon, bye]
+    items: [hello, give_name, how_are_you, guess_fav_color, bring_crayon, bye]
   hello:
     type: statement
     phrase_ids: [hey, hi, hello]
@@ -72,6 +74,12 @@ my_dialogue:
   how_are_you:
     type: select
     responses: [good_answer, bad_answer]
+  good_answer:
+    type: statement
+    phrase_ids: [great]
+  bad_answer:
+    type: statement
+    phrase_ids: [sorry]
   guess_fav_color:
     type: question
     phrase_ids: [can_you_guess]
@@ -91,7 +99,7 @@ my_dialogue:
     items: [same_as_blue, blue]
   same_as_blue:
     type: statement
-    phrase_ids: [thats_like_blue]
+    phrase_ids: [same_as_blue]
   blue:
     type: statement
     phrase_ids: [yeah_blue]
@@ -100,11 +108,11 @@ my_dialogue:
     items: [red_ugly, remember_ugly, remember_hate]
   red_ugly:
     type: statement
-    phrase_ids: [red_is_dumb_color]
+    phrase_ids: [red_ugly]
   remember_ugly:
     type: statement
     phrase_ids: [remember_thats_ugly]
-  remember_hate
+  remember_hate:
     type: statement
     phrase_ids: [remember_i_hate]
   green:
@@ -225,6 +233,8 @@ The expressions (face-only animations) available are:
   start: 0.0
 }}}
 
+This example can be found as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example.act example.act]
+
 == Preparing your Dialogue ==
 
 === Generating the Phrase File ===
@@ -241,7 +251,7 @@ You can also optionally include:
 
 For a single phrase, the audio, annosoft, and text files must have the same base filename (e.g. "my_phrase.wav", "my_phrase.anno", "my_phrase.txt").  This base filename will be referred to throughout this tutorial as the _phrase`_`id_. The action file can have a different name, as it is not uncommon to have similar actions associated with several phrases (e.g. smiling at the beginning of the phrase).  The action file specification is provided in the section "File Specifications" below.
 
-Once you have all of your phrases prepared, you will need to create a master list file, which has one line for each phrase, with the phrase_id and the associated action filename.  The audio, annosoft, text, and action files should all be stored in the same folder.
+Once you have all of your phrases prepared, you will need to create a master list file, which has one (optional) line for each phrase (see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/list.txt dragonbot_teleop_dialogue/example/list.txt]), with the phrase_id and the associated action filename.  The audio, annosoft, text, and action files should all be stored in the same folder.
 
 Next, you need to generate the phrase yaml file, which is used by the dragonbot speech node.  To do this, run:
 
@@ -249,7 +259,7 @@ Next, you need to generate the phrase yaml file, which is used by the dragonbot 
 > rosrun dragonbot_teleop_dialogue anno_parser.py <list file> <output file> <data dir>
 }}}
 
-Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.  For an example, see expeditions_year1/regen_phrases.sh.
+Where the filenames are given with their full paths, and data dir is the full path to the directory containing the audio, annosoft, text, and action files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/regen_phrases.sh regen_phrases.sh]
 
 
 
@@ -261,7 +271,7 @@ Armed with your phrase_ids, you are ready to write the dialogue specification fi
 > rosrun dragonbot_teleop_dialogue check_dialogue.py <dialogue yaml file> <phrase yaml file>
 }}}
 
-Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.  For an example, see expeditions_year1/check_dialogue.sh
+Where the dialogue yaml file is the specification file you wrote, and the phrase yaml file is the file generated above.  This script will let you know if any of the tags are wrong, if you're trying to link to dialogue items that don't exist, and if you're trying to link to phrase IDs that don't exist.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/check_dialogue.sh check_dialogue.sh]
 
 === Generating the GUI ===
 
@@ -278,7 +288,7 @@ Run the following:
 > rosrun dragonbot_teleop_dialogue gen_gui.py [-i <optional yaml with additional guis in the interface_srv format>] [-o <output GUI file -- prints to stdout if not specified>] <your dialogue specification file>
 }}}
 
-You may need to provide full paths to the files.  For an example, see expeditions_year1/regen_gui.sh
+You may need to provide full paths to the files.  For an example, see [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/regen_gui.sh regen_gui.sh]
 
 === Writing the Code ===
 
@@ -328,6 +338,9 @@ if __name__ == '__main__':
 
 
 }}}
+
+This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example.py example.py]
+
 
 === Running the Teleoperated Dialogue ===
 
