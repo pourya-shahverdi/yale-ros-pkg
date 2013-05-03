@@ -223,6 +223,17 @@ class FoodChoiceDay2(smach.State):
                 return 'end'
             except NextPhraseException:
                 pass
+            # reset everything
+            
+            self.target_group = "all"
+            self.feedback_levels["all"]["bad"] = 0
+            for g in self.fp["groups"].keys():
+                self.feedback_levels[g]["bad"] = 0
+            self.feedback_levels["all"]["good"] = 0
+            for g in self.fp["groups"].keys():
+                self.feedback_levels[g]["good"] = 0
+            self.selected_foods = []
+
 
 
         while not rospy.is_shutdown():
