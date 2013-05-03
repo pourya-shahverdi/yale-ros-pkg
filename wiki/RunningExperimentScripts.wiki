@@ -15,6 +15,11 @@ Before you can run the experiment scripts, you will need to install the reposito
 {{{
 > ifconfig
 }}}
+  # If you've changed the dialogue or generated the new gui file in the example for developing new experiments, you'll need to regenerate the GUI:
+{{{
+> roscd expeditions_year1
+> ./regen_gui.sh
+}}}
 
 = Running the Background Nodes =
   # In a new terminal window, start the dragonbot relay:
