@@ -64,7 +64,7 @@ The following ([http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbo
 my_dialogue:
   introduction:
     type: dialogue
-    items: [hello, give_name, how_are_you, guess_fav_color, bring_crayon, bye]
+    items: [hello, give_name, how_are_you,how_are_you_resp, guess_fav_color, bring_crayon, bye]
   hello:
     type: statement
     phrase_ids: [hey, hi, hello]
@@ -72,6 +72,9 @@ my_dialogue:
     type: statement
     phrase_ids: [my_name_is]
   how_are_you:
+    type: statement
+    phrase_ids: [how_are_you]
+  how_are_you_resp:
     type: select
     responses: [good_answer, bad_answer]
   good_answer:
@@ -305,12 +308,13 @@ The constructor for DialogueManager takes 4 arguments:
 
 Example:
 {{{
-#!/user/bin/python
+#!/usr/bin/env python
 import roslib; roslib.load_manifest('expeditions_year1')
 import rospy
 from dialogue_manager import *
 from dragonbot_manager import DragonbotManager
 from tablet_manager import TabletManager
+import yaml
 
 
 def main():
@@ -323,7 +327,7 @@ def main():
   dg = DialogueManager(dm, tm, "my_dialogue", dialogues["my_dialogue"])
 
   try:
-    self.dg.play_dialogue("introduction")
+    dg.play_dialogue("introduction")
   except PanicException:
     return 'AHHH PANIC! SOMETHING BAD HAPPENED!'
   except NextStateException:
@@ -334,9 +338,8 @@ def main():
   return "Finished dialogue successfully"
 
 if __name__ == '__main__':
-    print main()
-
-
+  rospy.init_node("example_dialogue")
+  print main()
 }}}
 
 This file can be found in the examples folder as [http://code.google.com/p/yale-ros-pkg/source/browse/trunk/sandbox/dragonbot_teleop_dialogue/example/example.py example.py].  If you have run regen_phrases.py and regen_gui.py, in that order, you should be able to run the script following the below instructions.
