@@ -284,55 +284,58 @@ class FoodChoiceDay2(smach.State):
         prev_items = self.prev_items["bad"] + self.prev_items["good"] + self.prev_items["sometimes"]
 
         added_items = filter(lambda f: f not in prev_items, self.selected_foods)
-        removed_items = filter(lambda f: f not in self.selected_foods, prev_items)            
-        # escalate level only if failed to improve from last time
-        # failure to improve: there were bad items before and we didn't
-        # remove one of the ones from the group we were targeting for 
-        # improvement or there were missing good foods and we didn't add 
-        # one of them from the group we were targeting
-        had_bad = len(self.prev_items["bad"]) > 0 
-        lacked_good = not set(self.prev_items["good"]) == set(self.fp["good"]) and not self.first_round
+        removed_items = filter(lambda f: f not in self.selected_foods, prev_items)      
+
+        # only change feedback levels if something changed
+        if not (len(added_items) == 0 and len(removed_items) == 0):
+            # escalate level only if failed to improve from last time
+            # failure to improve: there were bad items before and we didn't
+            # remove one of the ones from the group we were targeting for 
+            # improvement or there were missing good foods and we didn't add 
+            # one of them from the group we were targeting
+            had_bad = len(self.prev_items["bad"]) > 0 
+            lacked_good = not set(self.prev_items["good"]) == set(self.fp["good"]) and not self.first_round
         
 
-        rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
-        rospy.loginfo("Target group: " + self.target_group)
-        if self.target_group == "all":
-            removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
-            added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
-        else:
-            removed_target_bad = len(set(removed_items) & set(self.fp["bad"]) & set(self.fp["groups"][self.target_group])) > 0
-            added_target_good = len(set(added_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
-
-
-        #reset target group and feedback levels if we're switching from 
-        #removing bad items to adding good items and vice versa
-        if had_bad and len(bad_foods) == 0:
-            self.target_group = "all"
-            self.feedback_levels["all"]["bad"] = 0
-            for g in self.fp["groups"].keys():
-                self.feedback_levels[g]["bad"] = 0
-        if not had_bad and len(bad_foods) > 0:
-            self.target_group = "all"
-            # reset good food feedback level
-            self.feedback_levels["all"]["good"] = 0
-            for g in self.fp["groups"].keys():
-                self.feedback_levels[g]["good"] = 0
-
-
-        if had_bad and not removed_target_bad:
+            rospy.loginfo("Added foods: " + str(added_items) + " Removed foods: " + str(removed_items))
+            rospy.loginfo("Target group: " + self.target_group)
             if self.target_group == "all":
-                self.feedback_levels["all"]["bad"] += 1
+                removed_target_bad = len(set(removed_items) & set(self.fp["bad"])) > 0
+                added_target_good = len(set(added_items) & set(self.fp["good"])) > 0
             else:
+                removed_target_bad = len(set(removed_items) & set(self.fp["bad"]) & set(self.fp["groups"][self.target_group])) > 0
+                added_target_good = len(set(added_items) & set(self.fp["good"]) & set(self.fp["groups"][self.target_group])) > 0
+
+
+            #reset target group and feedback levels if we're switching from 
+            #removing bad items to adding good items and vice versa
+            if had_bad and len(bad_foods) == 0:
+                self.target_group = "all"
+                self.feedback_levels["all"]["bad"] = 0
                 for g in self.fp["groups"].keys():
-                    if self.target_group == g:
-                        self.feedback_levels[g]["bad"] += 1
-        elif lacked_good and not added_target_good:
-            if self.target_group == "all":
-                self.feedback_levels["all"]["good"] += 1
-            else:
+                    self.feedback_levels[g]["bad"] = 0
+            if not had_bad and len(bad_foods) > 0:
+                self.target_group = "all"
+                # reset good food feedback level
+                self.feedback_levels["all"]["good"] = 0
                 for g in self.fp["groups"].keys():
-                    if self.target_group == g:
-                        self.feedback_levels[g]["good"] += 1
+                    self.feedback_levels[g]["good"] = 0
+
+
+            if had_bad and not removed_target_bad:
+                if self.target_group == "all":
+                    self.feedback_levels["all"]["bad"] += 1
+                else:
+                    for g in self.fp["groups"].keys():
+                        if self.target_group == g:
+                            self.feedback_levels[g]["bad"] += 1
+            elif lacked_good and not added_target_good:
+                if self.target_group == "all":
+                    self.feedback_levels["all"]["good"] += 1
+                else:
+                    for g in self.fp["groups"].keys():
+                        if self.target_group == g:
+                            self.feedback_levels[g]["good"] += 1
                         
         self.first_round = False
 
