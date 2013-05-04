@@ -1,4 +1,4 @@
 #yes
 - type: motion
-  id: yes
+  id: "yes"
   start: 0.0

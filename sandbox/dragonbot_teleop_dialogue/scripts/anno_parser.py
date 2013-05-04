@@ -59,7 +59,11 @@ def main():
 
     with open(sys.argv[1], 'r') as f_in:
             for line in f_in:
-                name =  line.strip().split()[0]
+                stripline =  line.strip().split()
+                if len(stripline) > 0:
+                    name = stripline[0]
+                else:
+                    continue
                 try:
                     with open(data_dir + "/" + name + ".txt") as textfile:
                         text = textfile.read()
