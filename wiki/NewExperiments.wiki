@@ -160,7 +160,7 @@ The motions (full-body animations) available for the dragonbot are:
   * mmhmmm
   * question
   * wakeup
-  * yes
+  * "yes"
   * anticipation
   * farted
   * i_like_it
@@ -175,7 +175,7 @@ The motions (full-body animations) available for the dragonbot are:
   * i_want_it
   * iwantit
   * meh
-  * no
+  * "no"
   * think
   * yawn
 
