@@ -149,6 +149,8 @@ The action file allows you to specify actions that go along with a pre-recorded 
   * pose: set the robot's body to a specified position (x,y,z,theta,neck) (will hold until pose_off or the end of a phrase)
   * pose_off: return the robot's body to idle behavior
 
+One quirk of the yaml file format is that while you usually don't need to put strings in quotes, typing 'yes' and 'no' without quotes will parse as <True> and <False>, respectively.  *_You will need to put the 'yes' and 'no' motion labels in quotes_*
+
 
 The motions (full-body animations) available for the dragonbot are:
   * afraid
