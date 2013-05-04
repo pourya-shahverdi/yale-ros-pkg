@@ -328,7 +328,8 @@ d2-28-4-see_you_next_time
 d2-28-5-see_ya_later
 d2-28-6-see_ya_soon
 d2-28-7-catch_ya_later
-d2-28-8-bye_for_nowd2-30-1-ahh_noise
+d2-28-8-bye_for_now
+d2-30-1-ahh_noise
 d2-30-2-quick_off_plate
 d2-30-3-yikes
 d2-30-4-eesh
