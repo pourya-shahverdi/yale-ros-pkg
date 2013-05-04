@@ -551,6 +551,11 @@ class Workout(smach.State):
         except NextPhraseException:
             pass
         self.seen_victory = True
+
+    def bpm_adjust(self, bpm):
+        while bpm > 70:
+            bpm = bpm/2
+        return bpm
         
 
     def execute(self, userdata):
@@ -575,7 +580,7 @@ class Workout(smach.State):
         i = 0
         v = 1
         a = 0.5
-        bpm = bpm/4
+        bpm = self.bpm_adjust(bpm)
 
         time_adjust = rospy.Duration(0.0)
         delay_adjust = rospy.Duration(0.0)
@@ -601,7 +606,9 @@ class Workout(smach.State):
             pass
         self.tm.change("stopped_dancing")
         rospy.sleep(delay_adjust)
+        next_break = rospy.Time.now() + self.break_time
         nbreaks = 1
+        rospy.loginfo("Next break: " + str(next_break.secs))
         dance_start = rospy.Time.now()
         not_dancing_counter = 0
         print "Time elapsed (game): " + str((rospy.Time.now()-dance_start).secs)
@@ -610,7 +617,8 @@ class Workout(smach.State):
         while rospy.Time.now().secs-start < self.duration and not rospy.is_shutdown():
             print "Time elapsed (game): " + str((rospy.Time.now()-dance_start).secs)
             print "Time elapsed (experiment): " + str(rospy.Time.now().secs-start)
-            if rospy.Time.now()-dance_start > self.break_time * nbreaks:
+            print "Time until next break: " + str((next_break - rospy.Time.now()).secs)
+            if rospy.Time.now() > next_break:
                 if nbreaks == 1:
                     break_phrase = "new_song"
                 elif nbreaks == 2:
@@ -636,20 +644,23 @@ class Workout(smach.State):
                 except NextPhraseException:
                     pass
 
+
                 if "yes_change" in resp:
                     song, bpm = random.choice(self.songs.items())
                     while song == self.current_song:
                         #note that this will break if there's only one song
                         song, bpm = random.choice(self.songs.items())
                     self.current_song = song
-                    bpm = bpm/4
+                    bpm = self.bpm_adjust(bpm)
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.sc.waveVol(self.music_folder + self.current_song, self.vol)
+                    next_break = rospy.Time.now() + self.break_time
+                    rospy.loginfo("Next break: " + str(next_break.secs))
                     self.tm.change("stopped_dancing")
                     continue
 
-                if "yes_break1" in resp or "yes_break2" in resp:
+                if "yes_break1" in resp or "yes_break2" in resp and not "hum" in resp:
                     try:
                         self.do_victory()
                     except PanicException:
@@ -667,6 +678,8 @@ class Workout(smach.State):
                     break
 
                 self.sc.playWave(self.music_folder + self.current_song)
+                next_break = rospy.Time.now() + self.break_time
+                rospy.loginfo("Next break: " + str(next_break.secs))
                 self.tm.change("stopped_dancing")
                 continue
                 
@@ -702,7 +715,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                     song, bpm = random.choice(self.songs.items())
                 self.current_song = song
-                bpm = bpm/4
+                bpm = self.bpm_adjust(bpm)
                 move_sleep = rospy.Duration(60/bpm)
                 self.sc.playWave(self.music_folder + self.current_song)
                 self.sc.waveVol(self.music_folder + self.current_song, self.vol)
@@ -752,7 +765,7 @@ class Workout(smach.State):
                         #note that this will break if there's only one song
                         song, bpm = random.choice(self.songs.items())
                     self.current_song = song
-                    bpm = bpm/4
+                    bpm = self.bpm_adjust(bpm)
                     move_sleep = rospy.Duration(60/bpm)
                     self.sc.playWave(self.music_folder + self.current_song)
                     self.sc.waveVol(self.music_folder + self.current_song, self.vol)

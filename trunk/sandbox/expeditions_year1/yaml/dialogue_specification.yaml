@@ -757,7 +757,7 @@ lunchbox2_workout:
         phrase_ids: [d2-24-p2-new_dance_next_time]
     yes_victory:
         type: statement
-        phrase_ids: [d2-23a-if_yes]
+        phrase_ids: [d2-31-1-yes_the_rocket]
     no_victory:
         type: statement
         phrase_ids: [d2-23b-if_no]

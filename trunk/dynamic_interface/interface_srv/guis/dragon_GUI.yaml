@@ -93,7 +93,7 @@
   elements:
   - type: button_group
     label: Child stopped dancing?
-    label_string: music_up;music_down;not_dancing;stopped;music_stopped;next;panic
+    label_string: music_up;music_down;never_dancing;stopped_dancing;music_stopped;next;panic
     topic: dragon_GUI/stopped_dancing
 
 
@@ -14590,7 +14590,7 @@
   elements:
   - type: button_group
     label: lunchbox2_workout no_more
-    label_string: yes_change;no_change-end;next_phrase;next_segment;panic
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_workout_no_more
 - gui: lunchbox2_workout_victory_dance
   elements:

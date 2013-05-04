@@ -54,6 +54,7 @@ class DragonbotManager():
         self.lookat_client.send_goal(goal)
         goal = dragon_msgs.msg.TrackGoal(on = False)
         self.track_client.send_goal(goal)
+        self.blink_client.cancel_all_goals()
         self.pose_off()
 
         self.expressions = ["angry",
