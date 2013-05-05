@@ -1,0 +1,10 @@
+#chips
+- type: motion
+  id: blech
+  start: 0.0
+- type: motion
+  id: mph
+  start: 5.0
+- type: motion
+  id: yay
+  start: 8.0
