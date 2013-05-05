@@ -61,6 +61,7 @@ class SpeechPlayServer():
         preempted = False
 
         if goal.interrupt == True:
+            rospy.loginfo("Speech: cancelling all goals")
             self.express_client.cancel_all_goals()
             self.viseme_client.cancel_all_goals()
             self.sound_client.stopAll()
@@ -81,8 +82,10 @@ class SpeechPlayServer():
                                  key=lambda action: action["start"])
         
         #self.sound_client.stopAll()
+        rospy.loginfo("Speech: playing wave file")
         self.sound_client.playWave(self.phrases[goal.phrase]["file"])
         for a in ordered_actions:
+            rospy.loginfo("Playing action: " + str(a))
             while rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(a["start"]) and not self.server.is_preempt_requested():
                 pass
             if self.server.is_preempt_requested():
@@ -191,8 +194,9 @@ class SpeechPlayServer():
             goal = dragon_msgs.msg.TrackGoal(on = False)
             self.track_client.send_goal(goal)
             self.server.set_succeeded(self.result)
-        
-
+        rospy.logwarn("Speech: the code should probably never reach this point. Setting succeeded anyway.")
+        self.result.result="SUCCESS"
+        self.server.set_succeeded(self.result)
 
 if __name__ == '__main__':
     rospy.init_node('dragonbot_speech')
