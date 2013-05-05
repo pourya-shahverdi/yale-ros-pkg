@@ -1,0 +1,13 @@
+#training_is_working.wav
+- type: motion
+  id: yay
+  start: 0.0
+- type: motion
+  id: anticipation
+  start: 3.0
+- type: motion
+  id: anticipation
+  start: 7.0
+- type: motion
+  id: yay.act
+  start: 11.0
