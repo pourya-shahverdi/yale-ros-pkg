@@ -502,6 +502,7 @@ class Workout(smach.State):
         self.exp_start = rospy.get_param("~start_time")
         self.duration = rospy.get_param("~max_time")
         self.break_time = rospy.Duration(60)
+        self.encouragement_every = 10
         self.dialogue = dialogue_info
         #self.workout_phrases = workout_info
         self.day, self.lesson = info
@@ -723,6 +724,8 @@ class Workout(smach.State):
                 continue
             elif p == "never_dancing":
                 not_dancing_counter += 1
+                if not_dancing_counter > 4:
+                    not_dancing_counter = 4
                 try:
                     resp = self.dg.play_dialogue("not_dancing" + str(not_dancing_counter))
                 except PanicException:
@@ -800,7 +803,7 @@ class Workout(smach.State):
             m = self.poses[routine[move]]
             self.dm.pose(x = m[0], y = m[1], z =m[2], vel = v, acc = a)
             i = i + 1
-            if i % 10 == 0:
+            if i % self.encouragement_every == 0:
                 try:
                     self.dg.play_dialogue("energized_comment", interrupt = False)
                 except PanicException:

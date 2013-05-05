@@ -121,7 +121,9 @@ class DragonbotManager():
         self.speech_client.send_goal(goal)
         if wait:
             rospy.loginfo("Waiting for speech server result")
-            self.speech_client.wait_for_result()
+            self.speech_client.wait_for_result(rospy.Duration(60.0))
+            if not self.speech_client.get_state() == GoalStatus.SUCCEEDED:
+                rospy.logwarn("Dragonbot Manager gave up waiting for speech result. This is likely a problem.")
 
 
     #loads phrases from a yaml file
