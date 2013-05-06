@@ -535,6 +535,9 @@ class Workout(smach.State):
         a = .08
         routine = ['up','down','up','down','up']
 
+        self.dm.pose_off()
+        self.dm.pose(0,0,0,vel=v, acc=a)
+
         if not self.seen_victory:
             try:
                 self.dg.play_dialogue("victory_dance")

@@ -178,6 +178,7 @@ class SpeechPlayServer():
             goal = dragon_msgs.msg.TrackGoal(on = False)
             self.track_client.send_goal(goal)
             self.server.set_preempted()
+            return
         else:
             rospy.loginfo("Waiting for end")
             while a["type"] == "viseme" and (rospy.Time.now()-time+timing_adjust <
@@ -194,6 +195,7 @@ class SpeechPlayServer():
             goal = dragon_msgs.msg.TrackGoal(on = False)
             self.track_client.send_goal(goal)
             self.server.set_succeeded(self.result)
+            return
         rospy.logwarn("Speech: the code should probably never reach this point. Setting succeeded anyway.")
         self.result.result="SUCCESS"
         self.server.set_succeeded(self.result)
