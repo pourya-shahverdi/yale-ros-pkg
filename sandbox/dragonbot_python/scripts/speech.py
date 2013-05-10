@@ -62,7 +62,7 @@ class SpeechPlayServer():
 
         if goal.interrupt == True:
             rospy.loginfo("Speech: cancelling all goals")
-            self.express_client.cancel_all_goals()
+            #self.express_client.cancel_all_goals()
             self.viseme_client.cancel_all_goals()
             self.sound_client.stopAll()
             lgoal = dragon_msgs.msg.LookatGoal(state = "off")
@@ -86,8 +86,9 @@ class SpeechPlayServer():
         self.sound_client.playWave(self.phrases[goal.phrase]["file"])
         for a in ordered_actions:
             rospy.loginfo("Playing action: " + str(a))
-            while rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(a["start"]) and not self.server.is_preempt_requested():
-                pass
+            if a["type"] == "viseme":
+                while rospy.Time.now()-time+timing_adjust < rospy.Duration.from_sec(a["start"]) and not self.server.is_preempt_requested():
+                    pass
             if self.server.is_preempt_requested():
                 preempted = True
                 break
@@ -170,7 +171,7 @@ class SpeechPlayServer():
           
         if preempted:
             rospy.loginfo("Preempted")
-            self.express_client.cancel_all_goals()
+            #self.express_client.cancel_all_goals()
             self.viseme_client.cancel_all_goals()
             self.sound_client.stopAll()
             goal = dragon_msgs.msg.LookatGoal(state = "off")
@@ -187,7 +188,7 @@ class SpeechPlayServer():
             rospy.loginfo("At end -- Success")
             self.result.result = "SUCCESS"
             self.viseme_client.cancel_all_goals()
-            self.express_client.cancel_all_goals()
+            #self.express_client.cancel_all_goals()
             goal = dragon_msgs.msg.LookatGoal(state = "off")
             self.lookat_client.send_goal(goal)
             #bgoal = dragon_msgs.msg.BlinkGoal(constant = "STOP")

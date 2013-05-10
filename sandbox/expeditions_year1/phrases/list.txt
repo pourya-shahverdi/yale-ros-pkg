@@ -339,36 +339,3 @@ d2-29-2-come_on_follow_along
 d2-29-3-other_movement
 d2-31-1-yes_the_rocket yay.act
 d2-31-2-dont_know_the_rocket
-d3-01a-great yay.act
-d3-01b-aw_too_bad sad.act
-d3-01c-huh
-d3-01-hi_there anticipation.act
-d3-02a-right_bigger yay.act
-d3-02b-aw_bigger anticipation.act
-d3-02-look_at_wings yes.act
-d3-03-training_is_working d3-03-training_is_working.act
-d3-04-better_snacks d3-04-better_snacks.act
-d3-05a-yes yes.act
-d3-05b-no no.act
-d3-05c-other_bad question.act
-d3-05d-other_weird yay.act
-d3-05-snack_after_school d3-05-snack_after_school.act
-d3-06a-wouldnt_fly d3-06a-wouldnt_fly.act
-d3-06b-actually_like_that question.act
-d3-06c-never_tried anticipation.act
-d3-06d-love_eating_that yay.act
-d3-06-kinds_of_snacks d3-06-kinds_of_snacks.act
-d3-07a-flamin_hot_cheetos d3-07-chips.act
-d3-07b-bbq_lays d3-07-chips.act
-d3-07c-snickers
-d3-07d-trail_mix yay.act
-d3-07e-banana ilikeit.act
-d3-07-look_in_pantry anticipation.act
-d3-08a-picked_that_last_time
-d3-08b-sour_cream_and_onion_lays_after_chips_or_candy blech.act
-d3-08c-doritos_nacho_cheese_ater_chips_or_candy blech.act
-d3-08d-mandms_after_chips_or_candy mph.act
-d3-08e-p1-apple yay.act
-d3-08e-p2a-something_to_do_with_health_or_the_heart yay.act
-d3-08e-p2b-no_or_no_response yay.act
-d3-08f-carrots_and_hummus yay.act

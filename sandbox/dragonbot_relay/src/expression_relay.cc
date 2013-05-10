@@ -48,13 +48,13 @@ class ExpressionActionServer
       ROS_INFO( "motion: %s", motion_.c_str() );
       while( (goal->type == "expression" && expression_ == "IDLE") || (goal->type == "motion" && motion_ == "IDLE" ) )
       {
-        // check for preempts
+        /*// check for preempts
         if( as_.isPreemptRequested() || !ros::ok() )
         {
           ROS_INFO( "expression preempted" );
           as_.setPreempted();
           return;
-        }
+	  }*/
 
         ros::Duration( 0.33 ).sleep();
         ros::spinOnce();
@@ -66,16 +66,16 @@ class ExpressionActionServer
 
       while( (goal->type == "expression" && expression_ == cur) || (goal->type == "motion" && motion_ == cur ) )
       {
-        // check for preempts
+        /*// check for preempts
         if( as_.isPreemptRequested() || !ros::ok() )
         {
           ROS_INFO( "expression preempted" );
           as_.setPreempted();
           return;
-        }
+	  }*/
         ros::Duration( 0.33 ).sleep();
         ros::spinOnce();
-      }
+	}
 
       as_.setSucceeded(result_);
     }

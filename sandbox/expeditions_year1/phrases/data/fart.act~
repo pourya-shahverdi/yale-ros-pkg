@@ -1,4 +1,15 @@
 #for good choices
 - type: motion
-  id: yummm
+  id: farted
   start: 0.0
+- type: pose
+  start: 1.0
+  vel: 1
+  acc: 0.8
+  x: 0
+  y: 0
+  z: 0
+  theta: 0
+  neck: 0
+- type: pose_off
+  start: 1.5

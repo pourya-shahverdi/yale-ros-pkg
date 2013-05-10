@@ -141,10 +141,10 @@ class FoodChoiceDay1(smach.State):
                         self.dg.play_dialogue("why_choose")
                         first = False
                     self.dm.express("tasting", wait = True)
-                if resp in current_lesson["terminal"]:
+                '''if resp in current_lesson["terminal"]:
                     self.dm.express("yummm", wait = False)
                 else:
-                    self.dm.express("blech", wait = False)
+                    self.dm.express("disgusted", wait = False)'''
                 try:
                     self.dg.play_dialogue(current_lesson[prev][resp])
                 except PanicException:
@@ -512,10 +512,10 @@ class Workout(smach.State):
         self.music_folder = roslib.packages.get_pkg_dir("expeditions_year1")+ "/music/"
     
         #pose is: x, y, z, (theta, neck, vel, acc [optional])
-        self.poses = {'right': (0, 2.4, 0),
-                      'left': (0, -2.4, 0),
-                      'up': (0, 0, 2),
-                      'down': (0, 0, -2)}
+        self.poses = {'right': (0, 2.4, .5),
+                      'left': (0, -2.4, .5),
+                      'up': (0, 0, 3),
+                      'down': (0, 0, 0)}
         # song and bpm
         self.songs = {'mario_yoshi.wav':104,
                       'Donkey_Kong_Country_Jungle_Stomp_OC_ReMix.wav':84,
@@ -682,6 +682,7 @@ class Workout(smach.State):
                     break
 
                 self.sc.playWave(self.music_folder + self.current_song)
+                self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                 next_break = rospy.Time.now() + self.break_time
                 rospy.loginfo("Next break: " + str(next_break.secs))
                 self.tm.change("stopped_dancing")
@@ -745,6 +746,7 @@ class Workout(smach.State):
                 if "yes_finished" in resp:
                     break
                 self.sc.playWave(self.music_folder + self.current_song)
+                self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                 self.tm.change("stopped_dancing")
                 continue
             elif p == "stopped_dancing":
@@ -763,6 +765,7 @@ class Workout(smach.State):
                     pass
                 if "dance_more" in resp:
                     self.sc.playWave(self.music_folder + self.current_song)
+                    self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                     self.tm.change("stopped_dancing")
                     continue
                 if "yes_change" in resp:
@@ -799,6 +802,7 @@ class Workout(smach.State):
                         break
                     else:
                         self.sc.playWave(self.music_folder + self.current_song)
+                        self.sc.waveVol(self.music_folder + self.current_song, self.vol)
                         self.tm.change("stopped_dancing")
                         continue
             

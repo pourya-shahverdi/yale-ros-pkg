@@ -49,7 +49,7 @@ class DragonbotManager():
 
         rospy.loginfo("Zeroing dragonbot")
         self.viseme_client.cancel_all_goals()
-        self.express_client.cancel_all_goals()
+        #self.express_client.cancel_all_goals()
         goal = dragon_msgs.msg.LookatGoal(state = "off")
         self.lookat_client.send_goal(goal)
         goal = dragon_msgs.msg.TrackGoal(on = False)
@@ -98,7 +98,7 @@ class DragonbotManager():
     def stop_speech(self):
         rospy.loginfo("Zeroing dragonbot")
         self.viseme_client.cancel_all_goals()
-        self.express_client.cancel_all_goals()
+        #self.express_client.cancel_all_goals()
         goal = dragon_msgs.msg.LookatGoal(state = "off")
         self.lookat_client.send_goal(goal)
         goal = dragon_msgs.msg.TrackGoal(on = False)
@@ -160,6 +160,7 @@ class DragonbotManager():
                 self.express_client.wait_for_result(rospy.Duration(5.0))
                 if not self.express_client.get_state() == GoalStatus.SUCCEEDED:
                     rospy.logwarn("Dragonbot Manager gave up waiting for expression server")
+                self.zero_pose()
         else:
             rospy.logwarn("Expression/Motion not recognized")
 
@@ -168,6 +169,13 @@ class DragonbotManager():
         #return
 
         rospy.loginfo("Idling dragonbot")
+        goal = dragon_msgs.msg.IKGoal(state = "off", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
+        self.ik_client.send_goal(goal)
+
+    def zero_pose(self):
+        goal = dragon_msgs.msg.IKGoal(state = "on", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
+        self.ik_client.send_goal(goal)
+        rospy.sleep(1.0)
         goal = dragon_msgs.msg.IKGoal(state = "off", vel = 0.03, acc = 0.0004, x = 0, y = 0, z = 0, theta = 0, neck = 0)
         self.ik_client.send_goal(goal)
         
@@ -202,7 +210,7 @@ class DragonbotManager():
         if y < -2.49:
             rospy.logwarn("Pose y value too small, setting to min value")
             y = -2.49
-        if z > 2.6:
+        if z > 3.0:
             rospy.logwarn("Pose z value too large, setting to max value")
             z = 2.6
         if z < -2.0:
@@ -279,12 +287,14 @@ def main():
     dm = DragonbotManager()
 
     #dm.load_phrases("phrases.yaml")
-    rospy.sleep(3)
-    print("IMA LOOKIN ATCHOO")
-    dm.track_frame("head")
-    rospy.sleep(30)
-    print "LOOKAT OFF"
-    dm.track_off()
+    dm.express("question")
+    dm.zero_pose()
+    dm.express("surprise")
+    dm.zero_pose()
+    print "waiting..."
+    rospy.sleep(3.0)
+
+
     
 if __name__ == '__main__':
     main()

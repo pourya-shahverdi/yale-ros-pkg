@@ -1,7 +1,7 @@
 #02-what_eat.wav
 - type: motion
   id: hungry
-  start: 0.0
+  start: 0.5
 - type: expression
   id: mischievous
   start: 4.0
