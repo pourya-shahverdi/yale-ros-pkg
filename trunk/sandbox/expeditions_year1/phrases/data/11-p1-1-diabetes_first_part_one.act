@@ -1,5 +1,1 @@
-#11-p1-diabetes_first_part_one.wav
-- type: motion
-  id: anticipation
-  start: 0.0
-
+- {id: puppy, start: 0.0, type: expression}

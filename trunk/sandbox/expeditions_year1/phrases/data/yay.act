@@ -1,5 +1,1 @@
-#yay
-- type: motion
-  id: yay
-  start: 0.0
-
+- {id: mischievous, start: 0.0, type: expression}

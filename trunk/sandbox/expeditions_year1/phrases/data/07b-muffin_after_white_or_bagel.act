@@ -1,7 +1,2 @@
-#07b-muffin_after_white_or_bagel.wav
-- type: motion
-  id: blech
-  start: 0.0
-- type: motion
-  id: no
-  start: 5.0
+- {id: disgusted, start: 0.0, type: expression}
+- {id: false, start: 5.0, type: expression}
