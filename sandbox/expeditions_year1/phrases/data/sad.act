@@ -1,4 +1,1 @@
-#sad
-- type: motion
-  id: sad
-  start: 0.0
+- {id: sad, start: 0.0, type: expression}

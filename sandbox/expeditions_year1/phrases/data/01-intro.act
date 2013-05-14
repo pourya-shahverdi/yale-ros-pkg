@@ -1,4 +1,1 @@
-#01-intro.wav
-- type: motion
-  id: question
-  start: 1.7
+- {id: confused, start: 1.7, type: expression}

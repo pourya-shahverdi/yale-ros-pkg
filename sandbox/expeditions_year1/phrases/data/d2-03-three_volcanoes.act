@@ -1,7 +1,2 @@
-#d2-03-three_volcanoes.wav
-- type: motion
-  id: iwantit
-  start: 8.0
-- type: motion
-  id: anticipation
-  start: 11.0
+- {id: puppy, start: 8.0, type: expression}
+- {id: puppy, start: 11.0, type: expression}
