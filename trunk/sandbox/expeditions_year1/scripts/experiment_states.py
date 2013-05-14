@@ -96,7 +96,7 @@ class FoodChoiceDay1(smach.State):
         print "+                FOOD DIALOGUE                +"
         print "-----------------------------------------------"
  
-        self.dm.express("hungry", wait = False)
+        self.dm.express("puppy", wait = False)
         try:
             self.dg.play_dialogue(current_lesson["intro"], wait_for_finish = False)
         except PanicException:
@@ -160,8 +160,6 @@ class FoodChoiceDay1(smach.State):
                 resp = self.tm.wait_for_press(self.gui_prefix + lesson_name)
         if lesson_name == "drinks":
             self.dm.express("sipping", wait = True)
-        else:
-            self.dm.express("bite", wait = True)
         print str(self.choices)
         return 'next_round'
 
@@ -568,7 +566,6 @@ class Workout(smach.State):
         print "+                WORKOUT GAME                 +"
         print "-----------------------------------------------"
  
-        self.dm.express("anticipation", wait = False)
         try:
             #TODO: play correct outro statement
             self.dg.play_dialogue("intro_dialogue")
@@ -578,7 +575,7 @@ class Workout(smach.State):
             return 'end'
         except NextPhraseException:
             pass
-        routine = ['left','right','left','right','up','down']
+        routine = ['up','down']
 
         self.current_song, bpm = random.choice(self.songs.items())
         i = 0
