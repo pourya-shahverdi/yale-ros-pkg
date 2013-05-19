@@ -1,0 +1,6 @@
+version 1.2
+audio d3-23-new_victory_dance.wav
+text_file d3-23-new_victory_dance.txt
+%%-begin-anno-text-%% Ok. I've got a new victory dance, in case I win the dragon race. Do you want to see?
+%%-end-anno-text-%%
+end_markers

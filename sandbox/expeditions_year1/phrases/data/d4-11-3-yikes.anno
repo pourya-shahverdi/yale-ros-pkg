@@ -1,0 +1,6 @@
+version 1.2
+audio d4-11-3-yikes.wav
+text_file d4-11-3-yikes.txt
+%%-begin-anno-text-%% Yikes! Looks like some of that food won't help me with the dragon race. Can you switch around the foods to ones that will help?
+%%-end-anno-text-%%
+end_markers

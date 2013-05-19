@@ -1,0 +1,60 @@
+version 1.2
+audio d4-05a-if_yes.wav
+text_file d4-05a-if_yes.txt
+phn_vis 0 33 1 x 1
+phn 5 345 8 x
+phn_vis 33 66 1 x 1
+phn_vis 66 100 1 x 1
+phn_vis 100 133 1 x 1
+phn_vis 133 166 1 x 1
+phn_vis 166 200 1 x 1
+phn_vis 200 233 1 x 1
+phn_env 233 533 y 9 266 0 300 0.126931 333 0.300287 366 0.65 400 0.308899 433 0.234842 466 0.155105 499 0.0330144 533 0
+phn_vis 233 266 1 x 1
+phn_vis 266 300 2 x 0.873069 y 0.126931
+phn_vis 300 333 2 x 0.699713 y 0.300287
+phn_env 332 833 EH 9 366 0 400 0.524771 433 0.638705 466 0.761376 499 0.949209 533 1 766 1 800 0.813455 833 0
+phn_vis 333 366 2 y 0.65 x 0.35
+word 345 1065 YES
+phn 345 415 65 y
+phn_vis 366 400 3 EH 0.524771 y 0.308899 x 0.16633
+phn_vis 400 433 3 EH 0.638705 y 0.234842 x 0.126453
+phn 415 805 152 EH
+phn_vis 433 466 3 EH 0.761376 y 0.155105 x 0.0835183
+phn_vis 466 499 3 EH 0.949209 y 0.0330144 x 0.017777
+phn_vis 499 533 1 EH 1
+phn_vis 533 566 1 EH 1
+phn_vis 566 600 1 EH 1
+phn_vis 600 633 1 EH 1
+phn_vis 633 666 1 EH 1
+phn_vis 666 700 1 EH 1
+phn_vis 700 733 1 EH 1
+phn_env 733 1100 s 5 766 0 800 0.0250182 833 0.134113 1066 0.134113 1100 0
+phn_vis 733 766 1 EH 1
+phn_vis 766 800 3 EH 0.813455 x 0.161527 s 0.0250182
+phn_vis 800 833 2 x 0.865887 s 0.134113
+phn 805 1065 13 s
+phn_vis 833 866 2 x 0.865887 s 0.134113
+phn_vis 866 899 2 x 0.865887 s 0.134113
+phn_vis 899 933 2 x 0.865887 s 0.134113
+phn_vis 933 966 2 x 0.865887 s 0.134113
+phn_vis 966 999 2 x 0.865887 s 0.134113
+phn_vis 999 1033 2 x 0.865887 s 0.134113
+phn_vis 1033 1066 2 x 0.865887 s 0.134113
+phn 1065 1505 0 x
+phn_vis 1066 1100 1 x 1
+phn_vis 1100 1133 1 x 1
+phn_vis 1133 1166 1 x 1
+phn_vis 1166 1200 1 x 1
+phn_vis 1200 1233 1 x 1
+phn_vis 1233 1266 1 x 1
+phn_vis 1266 1300 1 x 1
+phn_vis 1300 1333 1 x 1
+phn_vis 1333 1366 1 x 1
+phn_vis 1366 1400 1 x 1
+phn_vis 1400 1433 1 x 1
+phn_vis 1433 1466 1 x 1
+phn_vis 1466 1500 1 x 1
+%%-begin-anno-text-%% YES
+%%-end-anno-text-%%
+end_markers
