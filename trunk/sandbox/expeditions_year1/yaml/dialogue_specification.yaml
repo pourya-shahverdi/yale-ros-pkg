@@ -395,7 +395,7 @@ lunchbox1_workout:
 lunchbox1_outro:
     outro_dialogue:
         type: dialogue
-        items: [fun, wrap_up, nap, bye]
+        items: [fun, nap, bye]
     fun:
         type: statement
         phrase_ids: [18-p1-phew_fun]
@@ -778,7 +778,7 @@ lunchbox2_workout:
 lunchbox2_outro:
     outro_dialogue:
         type: dialogue
-        items: [fun, wrap_up, nap, bye]
+        items: [fun, nap, bye]
     fun:
         type: statement
         phrase_ids: [d2-26-p1-phew_fun]

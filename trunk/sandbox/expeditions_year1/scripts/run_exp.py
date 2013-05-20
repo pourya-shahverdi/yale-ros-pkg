@@ -96,13 +96,13 @@ def main():
         smach.StateMachine.add('F_CHOICE', food_state,
                                transitions={'panic':'SLEEP',
                                             'next_round':'F_CHOICE',
-                                            'end':'WORKOUT',
-                                            'timeout':'OUTRO'})
-        smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info[day + "_workout"]),
-                               transitions={'panic':'SLEEP',
-                                            'continue':'WORKOUT',
                                             'end':'OUTRO',
                                             'timeout':'OUTRO'})
+        #smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info[day + "_workout"]),
+        #                       transitions={'panic':'SLEEP',
+        #                                    'continue':'WORKOUT',
+        #                                    'end':'OUTRO',
+        #                                    'timeout':'OUTRO'})
 
  
         smach.StateMachine.add('OUTRO', Outro(dm, tm, info, dialogue_info[day + "_outro"]),

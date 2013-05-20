@@ -590,7 +590,10 @@ class Workout(smach.State):
         self.dm.pose(0,0,0)
 
         #play workout routine
-        start = rospy.get_param("~start_time")
+        #below for timeout from beginning of experiment
+        #start = rospy.get_param("~start_time")
+        #below for timeout from beginning of workout game
+        start = rospy.Time.now().secs
         self.sc.playWave(self.music_folder + self.current_song)
         self.sc.waveVol(self.music_folder + self.current_song, self.vol)
         try:
