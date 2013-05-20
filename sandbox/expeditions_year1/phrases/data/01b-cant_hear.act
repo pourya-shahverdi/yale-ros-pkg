@@ -1,5 +1,1 @@
-#01b-cant_hear.wav
-- type: expression
-  id: confused
-  start: 0.0
-
+- {id: confused, start: 0.0, type: expression}

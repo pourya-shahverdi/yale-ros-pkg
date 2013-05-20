@@ -1,5 +1,1 @@
-#for bad choices
-- type: motion
-  id: mph
-  start: 0.0
-
+- {id: disgusted, start: 0.0, type: expression}

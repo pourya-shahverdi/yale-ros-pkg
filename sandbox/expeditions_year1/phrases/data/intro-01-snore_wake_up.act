@@ -1,6 +1,2 @@
-#intro-01-snore_wake_up.wav
-- type: eye_close
-  start: 0.0
-- type: motion
-  id: wakeup
-  start: 6.0
+- {start: 0.0, type: eye_close}
+- {id: surprised, start: 6.0, type: expression}

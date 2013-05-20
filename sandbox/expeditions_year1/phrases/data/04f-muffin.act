@@ -1,4 +1,1 @@
-#04f-muffin.wav
-- type: motion
-  id: idunno
-  start: 9.0
+- {id: confused, start: 9.0, type: expression}
