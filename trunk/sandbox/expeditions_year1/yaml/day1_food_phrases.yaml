@@ -54,3 +54,41 @@ whole_grains:
         bagel: muffin-bagel
         whbagel: muffin-whbagel
         muffin: grain_repeat
+snacks1:
+    intro: snack1_intro
+    no_choice: snack1_no_choice
+    terminal: [banana, mix]
+    none:
+        banana: none-banana
+        mix: none-mix
+        candy: none-candy
+        cheetos: none-cheetos
+    candy:
+        banana: candy-banana
+        mix: candy-mix
+        candy: snack1_repeat
+        cheetos: candy-cheetos
+    cheetos:
+        banana: cheetos-banana
+        mix: cheetos-mix
+        candy: cheetos-candy
+        cheetos: snack1_repeat
+snacks2:
+    intro: snacks2_intro
+    no_choice: snacks2_no_choice
+    terminal: [apple, carrots]
+    none:    
+        churro: none-churro
+        chips: none-chips
+        apple: none-apple
+        carrots: none-carrots
+    churro:
+        churro: snacks2_repeat
+        chips: churro-chips
+        apple: churro-apple
+        carrots: churro-carrots
+    chips:
+        churro: chips-churro
+        chips: snacks2_repeat
+        apple: chips-apple
+        carrots: chips-carrots
