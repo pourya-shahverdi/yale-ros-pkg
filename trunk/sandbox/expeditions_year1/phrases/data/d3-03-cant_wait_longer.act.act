@@ -1,0 +1,2 @@
+- {id: puppy, start: 0.0, type: expression}
+- {id: surprised, start: 11.0, type: expression}
