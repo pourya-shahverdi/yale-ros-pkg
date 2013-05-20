@@ -339,13 +339,13 @@ d2-29-2-come_on_follow_along
 d2-29-3-other_movement
 d2-31-1-yes_the_rocket yay.act
 d2-31-2-dont_know_the_rocket
-d3-01-hi_friend
-d3-02a-coolio
-d3-02b-does_sound_fun
-d3-02c-wish
-d3-02d-nice
+d3-01-hi_friend yay.act
+d3-02a-coolio yay.act
+d3-02b-does_sound_fun ilikeit.act
+d3-02c-wish anticipation.act
+d3-02d-nice yay.act
 d3-02e-okay
-d3-02f-stinky
+d3-02f-stinky blech.act
 d3-02-fun_healthy_things
 d3-03-cant_wait_longer
 d3-04a-if_yes
