@@ -339,106 +339,106 @@ d2-29-2-come_on_follow_along
 d2-29-3-other_movement
 d2-31-1-yes_the_rocket yay.act
 d2-31-2-dont_know_the_rocket
-d3-01-hi_friend yay.act
-d3-02a-coolio yay.act
-d3-02b-does_sound_fun ilikeit.act
+d3-01-hi_friend mischievous.act
+d3-02a-coolio mischievous.act
+d3-02b-does_sound_fun puppy.act
 d3-02c-wish anticipation.act
-d3-02d-nice yay.act
+d3-02d-nice mischievous.act
 d3-02e-okay
-d3-02f-stinky blech.act
+d3-02f-stinky disgusted.act
 d3-02-fun_healthy_things
-d3-03-cant_wait_longer
-d3-04a-if_yes
-d3-04b-if_no
-d3-04c-if_no_response_or_irrelevant_reponse
-d3-04-help_choose_snacks
-d3-05a-if_something_healthy
+d3-03-cant_wait_longer d3-03-cant_wait_longer.act
+d3-04a-if_yes mischevious.act
+d3-04b-if_no sad.act
+d3-04c-if_no_response_or_irrelevant_reponse puppy.act
+d3-04-help_choose_snacks d3-04-help_choose_snacks.act
+d3-05a-if_something_healthy lovestruck.act
 d3-05b-if_something_okay
-d3-05c-if_something_unhealthy
+d3-05c-if_something_unhealthy disgusted.act
 d3-05d-unknown_or_odd_food_choice_singular
 d3-05e-unknown_or_odd_food_choice_plural
 d3-05f-no_response_or_doesnt_know
-d3-05-your_favorite_snacks
+d3-05-your_favorite_snacks d3-05-your_favorite_snacks.act
 d3-06-first_bag_of_snacks
-d3-07-1-what_made_choose
-d3-07-2-what_made_pick
-d3-07-3-why_pick
-d3-07-4-hm_decide
-d3-07-5-why_go
-d3-07-6-what_like
-d3-07-7-interesting_choice
-d3-07-8-why_eat
+d3-07-1-what_made_choose confused.act
+d3-07-2-what_made_pick confused.act
+d3-07-3-why_pick confused.act
+d3-07-4-hm_decide confused.act
+d3-07-5-why_go confused.act
+d3-07-6-what_like confused.act
+d3-07-7-interesting_choice confused.act
+d3-07-8-why_eat confused.act
 d3-08-if_no_choice
-d3-09a-banana
-d3-09b-trail_mix
-d3-09c-candy
-d3-09d-flamin_hot_cheetos
+d3-09a-banana lovestruck.act
+d3-09b-trail_mix lovestruck.act
+d3-09c-candy confused.act
+d3-09d-flamin_hot_cheetos disgusted.act
 d3-10a-no_choice
 d3-10b-repeated_choice
-d3-10c-banana_after_cheetos
-d3-10d-banana_after_candy
-d3-10e-trail_mix_after_candy
-d3-10f-trail_mix_after_cheetos
-d3-10g-candy_after_cheetos
-d3-10h-cheetos_after_candy
+d3-10c-banana_after_cheetos puppy.act
+d3-10d-banana_after_candy puppy.act
+d3-10e-trail_mix_after_candy puppy.act
+d3-10f-trail_mix_after_cheetos puppy.act
+d3-10g-candy_after_cheetos disgusted.act
+d3-10h-cheetos_after_candy disgusted.act
 d3-11-second_bag_of_snacks
-d3-12-1-what_made_choose
-d3-12-2-what_made_pick
-d3-12-3-why_pick
-d3-12-4-hm_decide
-d3-12-5-why_go
-d3-12-6-what_like
-d3-12-7-interesting_choice
-d3-12-8-why_eat
+d3-12-1-what_made_choose confused.act
+d3-12-2-what_made_pick confused.act
+d3-12-3-why_pick confused.act
+d3-12-4-hm_decide confused.act
+d3-12-5-why_go confused.act
+d3-12-6-what_like confused.act
+d3-12-7-interesting_choice confused.act
+d3-12-8-why_eat confused.act
 d3-13-if_no_choice
-d3-14a-churros
-d3-14b-potato_chips
-d3-14c-apple
-d3-14d-carrots_and_hummus
+d3-14a-churros disgusted.act
+d3-14b-potato_chips disgusted.act
+d3-14c-apple lovestruck.act
+d3-14d-carrots_and_hummus lovestruck.act
 d3-15a-no_choice
 d3-15b-repeated_choice
-d3-15c-potato_chips_after_churros
-d3-15d-churros_after_potato_chips
-d3-15e-apple_after_potato_chips_or_churros
-d3-15f-carrots_and_hummus_after_chips_or_churros
-d3-16-thank_you_snacks
+d3-15c-potato_chips_after_churros sad.act
+d3-15d-churros_after_potato_chips sad.act
+d3-15e-apple_after_potato_chips_or_churros puppy.act
+d3-15f-carrots_and_hummus_after_chips_or_churros puppy.act
+d3-16-thank_you_snacks lovestruck.act
 d3-17-p1-want_to_dance
 d3-17-p2-1-ask_alternate_move_around
-d3-17-p2-2-do_alternate_move_around
+d3-17-p2-2-do_alternate_move_around puppy.act
 d3-18-p1-magical_music_player
 d3-18-p2-both_dance
-d3-19a-yay_blast
-d3-19b-groovin_new_wings
-d3-19c-dance_the_volcano
-d3-19d-super_cool_dancer
+d3-19a-yay_blast puppy.act
+d3-19b-groovin_new_wings lovestruck.act
+d3-19c-dance_the_volcano puppy.act
+d3-19d-super_cool_dancer puppy.act
 d3-19e-someone_practicing
-d3-19f-love_this_song
-d3-19g-groovy
+d3-19f-love_this_song lovestruck.act
+d3-19g-groovy puppy.act
 d3-19h-break_it_down
 d3-19i-better_every_time
 d3-19j-oh_yeah
 d3-19k-move_feet_arms
-d3-19l-dancey_pants
+d3-19l-dancey_pants puppy.act
 d3-19m-feel_so_strong
-d3-19n-rock_and_roll
-d3-20-1-please_dance_with_me
+d3-19n-rock_and_roll puppy.act
+d3-20-1-please_dance_with_me sad.act
 d3-20-2-come_on_follow_along
 d3-20-3-other_movement
 d3-20-4-want_to_watch_dancing
 d3-20-5-ill_dance
-d3-20-6-aw_okay
+d3-20-6-aw_okay sad.act
 d3-20-7-join_in_if_you_want
-d3-21a-great_dancer
-d3-21b-dynamite
-d3-21c-show_best_move
+d3-21a-great_dancer puppy.act
+d3-21b-dynamite lovestruck.act
+d3-21c-show_best_move puppy.act
 d3-21d-is_that_all_youve_got
-d3-21e-cant_stop_dancing
-d3-21f-farts_whoops
+d3-21e-cant_stop_dancing puppy.act
+d3-21f-farts_whoops surprised.act
 d3-22-p10-victory_dance
-d3-22-p11-back_to_dancing
+d3-22-p11-back_to_dancing puppy.act
 d3-22-p12-another_break
 d3-22-p13-then_well_keep_dancing
-d3-22-p14-victory_dance_again
+d3-22-p14-victory_dance_again confused.act
 d3-22-p15-okay_victory_dance_again
 d3-22-p16-p1-quick_break
 d3-22-p16-p2-good_break
@@ -446,21 +446,21 @@ d3-22-p17-finished_dancing
 d3-22-p18-great_job_dancing
 d3-22-p19-back_to_dancing
 d3-22-p1-dance_more
-d3-22-p2-yippee
+d3-22-p2-yippee puppy.act
 d3-22-p3-done_now
 d3-22-p4-why_not_keep_dancing
 d3-22-p5-different_song
 d3-22-p6-okay_go
-d3-22-p7-keep_grooving_to_this_one
+d3-22-p7-keep_grooving_to_this_one lovestruck.act
 d3-22-p8-change_it_up
 d3-22-p9-break
-d3-23a-if_yes
-d3-23b-if_no
+d3-23a-if_yes surprise.act
+d3-23b-if_no sad.act
 d3-23c-dont_know
 d3-23-new_victory_dance
-d3-24-p1-what_think
+d3-24-p1-what_think puppy.act
 d3-24-p2-new_dance_next_time
-d3-25-timeout
+d3-25-timeout sad.act
 d3-26-p1-phew_fun_moving
-d3-26-p2-user_didnt_dance
+d3-26-p2-user_didnt_dance sad.act
 d3-26-p3-naptime_best_snacks
