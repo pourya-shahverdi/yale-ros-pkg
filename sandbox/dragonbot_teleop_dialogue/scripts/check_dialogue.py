@@ -33,6 +33,7 @@ def main():
 
     for session_name,phrases in dialogue.items():
         for phrase_name,info in phrases.items():
+            #print "Checking session: " + session_name + ", phrase: " + phrase_name
             error_intro = "Error in dialogue: " + session_name + " phrase: " + phrase_name + ": "
             if not "type" in info.keys():
                 print error_intro + "no type given"

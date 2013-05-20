@@ -71,21 +71,25 @@ def main():
                     #print "Error opening textfile"
                     text = "<" + name + " missing text>"
                 visemes = []
-                with open(data_dir +"/"+ name + ".anno") as annofile:
-                    it = 0
-                    for item in annofile:
-                        viseme = item.strip().split()
-                        if viseme[0] == "phn":
-                            if viseme[4] in vis_transl:
-                                t = vis_transl[viseme[4]]
-                            else:
-                                print "Warning: unknown viseme"
-                                continue
-                            visemes.append({"type": "viseme",
-                                                           "id":t,
-                                                           "start":float(viseme[1])/1000,
-                                                           "end":float(viseme[2])/1000})
-                            it = it + 1
+               
+                try: 
+                    with open(data_dir +"/"+ name + ".anno") as annofile:
+                        it = 0
+                        for item in annofile:
+                            viseme = item.strip().split()
+                            if viseme[0] == "phn":
+                                if viseme[4] in vis_transl:
+                                    t = vis_transl[viseme[4]]
+                                else:
+                                    print "Warning: unknown viseme"
+                                    continue
+                                visemes.append({"type": "viseme",
+                                                               "id":t,
+                                                               "start":float(viseme[1])/1000,
+                                                               "end":float(viseme[2])/1000})
+                                it = it + 1
+                except IOError:
+                    print "Warning: " + name + " missing .anno file"
                 actions = []
                 if len(line.strip().split()) > 1:
                     with open(data_dir + "/" + line.strip().split()[1], 'r') as actfile:
