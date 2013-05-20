@@ -395,7 +395,7 @@ lunchbox1_workout:
 lunchbox1_outro:
     outro_dialogue:
         type: dialogue
-        items: [fun, nap, bye]
+        items: [fun, wrap_up, nap, bye]
     fun:
         type: statement
         phrase_ids: [18-p1-phew_fun]
@@ -778,7 +778,7 @@ lunchbox2_workout:
 lunchbox2_outro:
     outro_dialogue:
         type: dialogue
-        items: [fun, nap, bye]
+        items: [fun, wrap_up, nap, bye]
     fun:
         type: statement
         phrase_ids: [d2-26-p1-phew_fun]
@@ -797,3 +797,156 @@ lunchbox2_outro:
     bye:
         type: statement
         phrase_ids: [d2-28-1-goodbye,d2-28-2-bye,d2-28-3-buh_bye,d2-28-4-see_you_next_time,d2-28-5-see_ya_later,d2-28-6-see_ya_soon,d2-28-7-catch_ya_later,d2-28-8-bye_for_now]
+snacks1_intro:
+    intro_dialogue:
+        type: dialogue
+        items: [hi_friend, fun_things, cant_wait, help_choose, fav_snacks]
+    fun_things:
+        type: question
+        phrase_ids: [d3-02-fun_healthy_things]
+        responses: [good_resp, bad_resp]
+        terminal: []
+    good_resp:
+        type: statement
+        phrase_ids: [d3-02a-coolio,d3-02b-does_sound_fun,d3-02c-wish,d3-02d-nice]
+    bad_resp:
+        type: statement
+        phrase_ids: [d3-02f-stinky]
+    hi_friend:
+        type: statement
+        phrase_ids: [d3-01-hi_friend]
+    cant_wait:
+        type: statement
+        phrase_ids: [d3-03-cant_wait_longer]
+    help_choose:
+        type: question
+        phrase_ids: [d3-04-help_choose_snacks]
+        responses: [yes_help, no_help, irrelevant_or_no_resp]
+        terminal: [yes_help, no_help, irrelevant_or_no_resp]
+    yes_help:
+        type: statement
+        phrase_ids: [d3-04a-if_yes]
+    no_help:
+        type: statement
+        phrase_ids: [d3-04b-if_no]
+    irrelevant_or_no_resp:
+        type: statement
+        phrase_ids: [d3-04c-if_no_response_or_irrelevant_reponse]
+    fav_snacks:
+        type: question
+        phrase_ids: [d3-05-your_favorite_snacks]
+        responses: [healthy, okay_snack, unhealthy, unknown_singular, unknown_plural, dont_know]
+        terminal: [healthy, okay_snack, unhealthy, unknown_singular, unknown_plural, dont_know]
+    healthy:
+        type: statement
+        phrase_ids: [d3-05a-if_something_healthy]
+    okay_snack:
+        type: statement
+        phrase_ids: [d3-05b-if_something_okay]
+    unhealthy:
+        type: statement
+        phrase_ids: [d3-05c-if_something_unhealthy]
+    unknown_singular:
+        type: statement
+        phrase_ids: [d3-05d-unknown_or_odd_food_choice_singular]
+    unknown_plural:
+        type: statement
+        phrase_ids: [d3-05e-unknown_or_odd_food_choice_plural]
+    dont_know:
+        type: statement
+        phrase_ids: [d3-05f-no_response_or_doesnt_know]
+snacks1_foods:
+    snack1_intro:
+        type: statement
+        phrase_ids: [d3-06-first_bag_of_snacks]
+    why_choose:
+        type: wait
+        phrase_ids: [d3-07-1-what_made_choose,d3-07-2-what_made_pick,d3-07-3-why_pick,d3-07-4-hm_decide,d3-07-5-why_go,d3-07-6-what_like,d3-07-7-interesting_choice,d3-07-8-why_eat]
+    snack1_no_choice:
+        type: statement
+        phrase_ids: [d3-08-if_no_choice]
+    none-banana:
+        type: statement
+        phrase_ids: [d3-09a-banana]
+    none-mix:
+        type: statement
+        phrase_ids: [d3-09b-trail_mix]
+    none-candy:
+        type: statement
+        phrase_ids: [d3-09c-candy]
+    none-cheetos:
+        type: statement
+        phrase_ids: [d3-09d-flamin_hot_cheetos]
+    candy-banana:
+        type: statement
+        phrase_ids: [d3-10d-banana_after_candy]
+    candy-mix:
+        type: statement
+        phrase_ids: [d3-10e-trail_mix_after_candy]
+    candy-cheetos:
+        type: statement
+        phrase_ids: [d3-10h-cheetos_after_candy]
+    cheetos-banana:
+        type: statement
+        phrase_ids: [d3-10c-banana_after_cheetos]
+    cheetos-mix:
+        type: statement
+        phrase_ids: [d3-10f-trail_mix_after_cheetos]
+    cheetos-candy:
+        type: statement
+        phrase_ids: [d3-10g-candy_after_cheetos]
+    snack1_repeat:
+        type: statement
+        phrase_ids: [d3-10b-repeated_choice]
+    snacks2_intro:
+        type: statement
+        phrase_ids: [d3-11-second_bag_of_snacks]
+    snacks2_no_choice:
+        type: statement
+        phrase_ids: [d3-13-if_no_choice]
+    none-chips:
+        type: statement
+        phrase_ids: [d3-14b-potato_chips]
+    none-apple:
+        type: statement
+        phrase_ids: [d3-14c-apple]
+    none-carrots:
+        type: statement
+        phrase_ids: [d3-14d-carrots_and_hummus]
+    none-churro:
+        type: statement
+        phrase_ids: [d3-14a-churros]
+    snacks2_repeat:
+        type: statement
+        phrase_ids: [d3-15b-repeated_choice]
+    churro-chips:
+        type: statement
+        phrase_ids: [d3-15c-potato_chips_after_churros]
+    churro-apple:
+        type: statement
+        phrase_ids: [d3-15e-apple_after_potato_chips_or_churros]
+    churro-carrots:
+        type: statement
+        phrase_ids: [d3-15f-carrots_and_hummus_after_chips_or_churros]
+    chips-churro:
+        type: statement
+        phrase_ids: [d3-15d-churros_after_potato_chips]
+    chips-apple:
+        type: statement
+        phrase_ids: [d3-15e-apple_after_potato_chips_or_churros]
+    chips-carrots:
+        type: statement
+        phrase_ids: [d3-15f-carrots_and_hummus_after_chips_or_churros]
+snacks1_outro:
+    outro_dialogue:
+        type: dialogue
+        items: [thanks_help, phew_fun, nap_time]
+    thanks_help:
+        type: statement
+        phrase_ids: [d3-16-thank_you_snacks]
+    phew_fun:
+        type: statement
+        phrase_ids: [d3-26-p1-phew_fun_moving]
+    nap_time:
+        type: statement
+        phrase_ids: [d3-26-p3-naptime_best_snacks]
