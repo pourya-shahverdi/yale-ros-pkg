@@ -1,5 +1,1 @@
-#for good choices
-- type: motion
-  id: yummm
-  start: 0.0
-
+- {id: lovestruck, start: 0.0, type: expression}

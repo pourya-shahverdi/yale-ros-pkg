@@ -1,5 +1,1 @@
-#01c-not_name.wav
-- type: expression
-  id: mischevious
-  start: 0.0
-
+- {id: mischevious, start: 0.0, type: expression}

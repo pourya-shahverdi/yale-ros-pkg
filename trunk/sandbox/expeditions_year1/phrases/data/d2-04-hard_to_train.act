@@ -1,13 +1,4 @@
-#d2-4-hard_to_train.wav
-- type: motion
-  id: mph
-  start: 0.0
-- type: motion
-  id: sad
-  start: 7.0
-- type: motion
-  id: anticipation
-  start: 16.0
-- type: motion
-  id: yay
-  start: 19.0
+- {id: sad, start: 0.0, type: expression}
+- {id: sad, start: 7.0, type: expression}
+- {id: puppy, start: 16.0, type: expression}
+- {id: lovestruck, start: 19.0, type: expression}

@@ -1,4 +1,1 @@
-#06-p2-vitamins_second.wav
-- type: motion
-  id: yes
-  start: 1.0
+- {id: lovestruck, start: 1.0, type: expression}

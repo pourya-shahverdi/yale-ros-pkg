@@ -1,4 +1,1 @@
-#05-p1-fiber_first.wav
-- type: motion
-  id: mmhmmm
-  start: 7.0
+- {id: puppy, start: 7.0, type: expression}
