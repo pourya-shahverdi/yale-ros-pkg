@@ -1,0 +1,4 @@
+- {id: lovestruck, start: 6.0, type: expression}
+- {id: confused, start: 18.0, type: expression}
+- {id: surprised, start: 32.0, type: expression}
+- {id: lovestruck, start: 38.0, type: expression}

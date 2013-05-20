@@ -1,0 +1,7 @@
+#03-p1-hear_race.wav
+- type: motion
+  id: surprise
+  start: 0.0
+- type: motion
+  id: question
+  start: 3.0

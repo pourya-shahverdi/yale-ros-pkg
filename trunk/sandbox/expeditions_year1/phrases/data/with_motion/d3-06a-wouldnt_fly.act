@@ -1,0 +1,7 @@
+#wouldnt_fly.wav
+- type: motion
+  id: ilikeit
+  start: 0.0
+- type: motion
+  id: sad
+  start: 3.0

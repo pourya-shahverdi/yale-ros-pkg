@@ -1,0 +1,4 @@
+#hungry
+- type: motion
+  id: hungry
+  start: 0.0

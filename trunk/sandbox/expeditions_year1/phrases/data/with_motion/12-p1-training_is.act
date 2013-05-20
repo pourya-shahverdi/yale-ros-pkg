@@ -1,0 +1,7 @@
+#12-p1-training_is.wav
+- type: motion
+  id: interest
+  start: 0.0
+- type: motion
+  id: yay
+  start: 4.0

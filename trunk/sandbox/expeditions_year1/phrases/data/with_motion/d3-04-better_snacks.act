@@ -1,0 +1,7 @@
+#better_snacks.wav
+- type: motion
+  id: yes
+  start: 0.0
+- type: motion
+  id: anticipation
+  start: 4.0
