@@ -1,1 +1,5 @@
-- {id: disgusted, start: 0.0, type: expression}
+#for bad choices
+- type: expression
+  id: disgusted
+  start: 0.0
+

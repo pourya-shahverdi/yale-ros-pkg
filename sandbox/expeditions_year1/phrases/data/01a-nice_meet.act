@@ -1,1 +1,5 @@
-- {id: lovestruck, start: 0.0, type: expression}
+#01a-nice_meet.wav
+- type: motion
+  id: yay
+  start: 0.0
+

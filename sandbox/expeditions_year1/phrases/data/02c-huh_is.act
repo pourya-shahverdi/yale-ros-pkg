@@ -1,1 +1,5 @@
-- {id: confused, start: 0.0, type: expression}
+#02c-huh_is.wav
+- type: motion
+  id: confused
+  start: 0.0
+

@@ -1,2 +1,7 @@
-- {id: lovestruck, start: 0.0, type: expression}
-- {id: sad, start: 3.0, type: expression}
+#wouldnt_fly.wav
+- type: motion
+  id: ilikeit
+  start: 0.0
+- type: motion
+  id: sad
+  start: 3.0

@@ -1,1 +1,6 @@
-- {id: puppy, start: 7.0, type: expression}
+#d2-14-p1-fiber_first
+- type: motion
+  id: anticipation
+  start: 7.0
+
+

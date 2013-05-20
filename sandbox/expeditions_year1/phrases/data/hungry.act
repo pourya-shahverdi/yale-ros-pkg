@@ -1,1 +1,4 @@
-- {id: puppy, start: 0.0, type: expression}
+#hungry
+- type: motion
+  id: hungry
+  start: 0.0
