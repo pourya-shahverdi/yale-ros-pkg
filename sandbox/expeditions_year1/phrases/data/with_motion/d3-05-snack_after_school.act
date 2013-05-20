@@ -1,0 +1,10 @@
+#snack_after_school.wav
+- type: motion
+  id: anticipation
+  start: 0.0
+- type: motion
+  id: hungry
+  start: 4.0
+- type: motion
+  id: question
+  start: 7.0

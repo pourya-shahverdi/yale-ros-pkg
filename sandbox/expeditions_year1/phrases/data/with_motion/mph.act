@@ -1,0 +1,5 @@
+#for bad choices
+- type: motion
+  id: mph
+  start: 0.0
+

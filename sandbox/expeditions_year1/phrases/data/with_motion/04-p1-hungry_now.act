@@ -1,0 +1,7 @@
+#04-p1-hungry_now.wav
+- type: motion
+  id: hungry
+  start: 0.0
+- type: motion
+  id: idunno
+  start: 4.0

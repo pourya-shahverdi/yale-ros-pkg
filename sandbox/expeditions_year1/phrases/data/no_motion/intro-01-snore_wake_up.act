@@ -1,0 +1,2 @@
+- {start: 0.0, type: eye_close}
+- {id: surprised, start: 6.0, type: expression}
