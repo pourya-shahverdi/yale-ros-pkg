@@ -861,7 +861,7 @@ snacks1_foods:
         phrase_ids: [d3-06-first_bag_of_snacks]
     why_choose:
         type: wait
-        phrase_ids: [d3-07-1-what_made_choose,d3-07-2-what_made_pick,d3-07-3-why_pick,d3-07-4-hm_decide,d3-07-5-why_go,d3-07-6-what_like,d3-07-7-interesting_choice,d3-07-8-why_eat]
+        phrase_ids: [d3-07-1-what_made_choose,d3-07-2-what_made_pick,d3-07-3-why_pick,d3-07-4-hm_decide,d3-07-5-why_go,d3-07-6-what_like,d3-07-8-why_eat]
     snack1_no_choice:
         type: statement
         phrase_ids: [d3-08-if_no_choice]
