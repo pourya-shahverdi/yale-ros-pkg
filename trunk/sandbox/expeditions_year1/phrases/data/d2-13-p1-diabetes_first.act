@@ -1,3 +1,13 @@
-- {id: puppy, start: 0.0, type: expression}
-- {id: sad, start: 8.0, type: expression}
-- {id: angry, start: 20.0, type: expression}
+#d2-13-p1-diabetes_first
+- type: motion
+  id: anticipation
+  start: 0.0
+- type: motion
+  id: sad
+  start: 8.0
+- type: motion
+  id: mph
+  start: 20.0
+
+
+

@@ -1,3 +1,11 @@
-- {id: puppy, start: 0.0, type: expression}
-- {id: angry, start: 4.0, type: expression}
-- {id: confused, start: 9.0, type: expression}
+#kinds_of_snacks.wav
+- type: motion
+  id: anticipation
+  start: 0.0
+- type: motion
+  id: meh
+  start: 4.0
+- type: motion
+  id: question
+  start: 9.0
+

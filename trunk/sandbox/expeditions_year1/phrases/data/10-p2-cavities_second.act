@@ -1,1 +1,5 @@
-- {id: sad, start: 0.0, type: expression}
+#10-p2-cavities_second.wav
+- type: motion
+  id: sad
+  start: 0.0
+

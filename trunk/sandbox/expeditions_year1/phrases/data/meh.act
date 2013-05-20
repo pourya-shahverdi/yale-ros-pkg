@@ -1,1 +1,4 @@
-- {id: angry, start: 0.0, type: expression}
+#meh
+- type: motion
+  id: meh
+  start: 0.0

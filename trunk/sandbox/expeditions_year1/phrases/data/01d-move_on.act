@@ -1,1 +1,5 @@
-- {id: sad, start: 0.0, type: expression}
+#01d-move_on.wav
+- type: expression
+  id: sad
+  start: 0.0
+

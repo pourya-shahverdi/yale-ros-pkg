@@ -1,1 +1,4 @@
-- {id: lovestruck, start: 9.0, type: expression}
+#12-p2-speak_of_training
+- type: expression
+  id: lovestruck
+  start: 9.0

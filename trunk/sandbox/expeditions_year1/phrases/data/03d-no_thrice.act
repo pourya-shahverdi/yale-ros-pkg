@@ -1,1 +1,4 @@
-- {id: sad, start: 3.0, type: expression}
+#03d-no_thrice.wav
+- type: expression
+  id: sad
+  start: 3.0
