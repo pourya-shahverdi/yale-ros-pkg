@@ -1,0 +1,78 @@
+version 1.2
+audio d3-22-p2-yippee.wav
+text_file d3-22-p2-yippee.txt
+phn_vis 0 33 1 x 1
+phn 5 435 30 x
+phn_vis 33 66 1 x 1
+phn_vis 66 100 1 x 1
+phn_vis 100 133 1 x 1
+phn_vis 133 166 1 x 1
+phn_vis 166 200 1 x 1
+phn_vis 200 233 1 x 1
+phn_vis 233 266 1 x 1
+phn_vis 266 300 1 x 1
+phn_vis 300 333 1 x 1
+phn_env 332 566 y 7 366 0 400 0.195243 433 0.332203 466 0.608289 499 0.393599 533 0.214961 566 0
+phn_vis 333 366 1 x 1
+phn_vis 366 400 2 x 0.804757 y 0.195243
+phn_env 399 566 IH 5 433 0 466 0.0417112 499 0.256401 533 0.255906 566 0
+phn_vis 400 433 2 x 0.667797 y 0.332203
+phn_vis 433 466 3 y 0.608289 x 0.35 IH 0.0417112
+word 435 1325 Yippee
+phn 435 495 65 y
+phn_env 465 733 p 7 499 0 533 0.182176 566 0.661038 633 0.661038 666 0.121602 700 0.0374838 733 0
+phn_vis 466 499 3 y 0.393599 x 0.35 IH 0.256401
+phn 495 545 65 IH
+phn_vis 499 533 4 x 0.346958 IH 0.255906 y 0.214961 p 0.182176
+phn_vis 533 566 2 p 0.661038 x 0.338962
+phn 545 645 66 p
+phn_vis 566 600 2 p 0.661038 x 0.338962
+phn_env 600 1366 IY 8 633 0 666 0.816044 700 0.943296 733 1 1266 1 1300 0.961469 1333 0.829609 1366 0
+phn_vis 600 633 2 p 0.661038 x 0.338962
+phn_vis 633 666 3 IY 0.816044 p 0.121602 x 0.0623541
+phn 645 1325 229 IY
+phn_vis 666 700 3 IY 0.943296 p 0.0374838 x 0.0192207
+phn_vis 700 733 1 IY 1
+phn_vis 733 766 1 IY 1
+phn_vis 766 800 1 IY 1
+phn_vis 800 833 1 IY 1
+phn_vis 833 866 1 IY 1
+phn_vis 866 899 1 IY 1
+phn_vis 899 933 1 IY 1
+phn_vis 933 966 1 IY 1
+phn_vis 966 999 1 IY 1
+phn_vis 999 1033 1 IY 1
+phn_vis 1033 1066 1 IY 1
+phn_vis 1066 1100 1 IY 1
+phn_vis 1100 1133 1 IY 1
+phn_vis 1133 1166 1 IY 1
+phn_vis 1166 1200 1 IY 1
+phn_vis 1200 1233 1 IY 1
+phn_vis 1233 1266 1 IY 1
+phn_vis 1266 1300 2 IY 0.961469 x 0.0385313
+phn_vis 1300 1333 2 IY 0.829609 x 0.170391
+punct 1325 2005 !
+phn 1325 2005 0 x
+phn_vis 1333 1366 1 x 1
+phn_vis 1366 1400 1 x 1
+phn_vis 1400 1433 1 x 1
+phn_vis 1433 1466 1 x 1
+phn_vis 1466 1500 1 x 1
+phn_vis 1500 1533 1 x 1
+phn_vis 1533 1566 1 x 1
+phn_vis 1566 1600 1 x 1
+phn_vis 1600 1633 1 x 1
+phn_vis 1633 1666 1 x 1
+phn_vis 1666 1699 1 x 1
+phn_vis 1699 1733 1 x 1
+phn_vis 1733 1766 1 x 1
+phn_vis 1766 1799 1 x 1
+phn_vis 1799 1833 1 x 1
+phn_vis 1833 1866 1 x 1
+phn_vis 1866 1899 1 x 1
+phn_vis 1899 1933 1 x 1
+phn_vis 1933 1966 1 x 1
+phn_vis 1966 1999 1 x 1
+%%-begin-anno-text-%% Yippee!
+%%-end-anno-text-%%
+end_markers
