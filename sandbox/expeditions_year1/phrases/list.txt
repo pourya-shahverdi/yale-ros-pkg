@@ -348,7 +348,7 @@ d3-02e-okay
 d3-02f-stinky disgusted.act
 d3-02-fun_healthy_things
 d3-03-cant_wait_longer d3-03-cant_wait_longer.act
-d3-04a-if_yes mischevious.act
+d3-04a-if_yes mischievous.act
 d3-04b-if_no sad.act
 d3-04c-if_no_response_or_irrelevant_reponse puppy.act
 d3-04-help_choose_snacks d3-04-help_choose_snacks.act
@@ -454,7 +454,7 @@ d3-22-p6-okay_go
 d3-22-p7-keep_grooving_to_this_one lovestruck.act
 d3-22-p8-change_it_up
 d3-22-p9-break
-d3-23a-if_yes surprise.act
+d3-23a-if_yes surprised.act
 d3-23b-if_no sad.act
 d3-23c-dont_know
 d3-23-new_victory_dance
