@@ -38,22 +38,25 @@ snacks2:
     sometimes: []
     groups:
         snacks: [candy, cheetos, chips, churros, banana, mix, apple, carrot]
-    reminders: [reminder]
-    success: all_good
-    missing_all:
-        snacks: [reminder1, reminder2, reminder3]
-    missing_good:
-        all: [missing_good]
-        snacks: []
-    has_bad:
-        all: [has_bad]
-        snacks: []
-    specific:
-        candy: [candy1, candy2, candy3]
-        cheetos: [cheetos1, cheetos2, cheetos3]
-        chips: [chips1, chips2, chips3]
-        churros: [churros1, churros2, churros3]
-        banana: [banana1, banana2, banana3]
-        mix: [mix1, mix2, mix3]
-        apple: [apple1, apple2, apple3]
-        carrot: [carrot1, carrot2, carrot3]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder]
+        success: all_good
+        missing_all:
+            snacks: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            snacks: []
+        has_bad:
+            all: [has_bad]
+            snacks: []
+        specific:
+            candy: [candy1, candy2, candy3]
+            cheetos: [cheetos1, cheetos2, cheetos3]
+            chips: [chips1, chips2, chips3]
+            churros: [churros1, churros2, churros3]
+            banana: [banana1, banana2, banana3]
+            mix: [mix1, mix2, mix3]
+            apple: [apple1, apple2, apple3]
+            carrot: [carrot1, carrot2, carrot3]
