@@ -325,7 +325,7 @@ class FoodChoiceDay2(smach.State):
             for g in self.fp["groups"].keys():
                 self.feedback_levels[g]["good"] = 0
 
-        replaced_bad = len(self.seen_bad & bad_foods) > 0
+        replaced_bad = len(self.seen_bad & set(bad_foods)) > 0
 
         #escalate if there was a bad item and no bad item was removed,
         #or if the kid added a bad item they've seen before
