@@ -950,3 +950,210 @@ snacks1_outro:
     nap_time:
         type: statement
         phrase_ids: [d3-26-p3-naptime_best_snacks]
+snacks2_intro:
+    intro_dialogue:
+        type: dialogue
+        items: [hey_friend, feel_bad, what_learned]
+    hey_friend:
+        type: question
+        phrase_ids: [d4-01-heya_human_friend]
+        responses: [good_resp, bad_resp, dont_know]
+        terminal: []
+    good_resp:
+        type: statement
+        phrase_ids: [d4-02a-super_cool, d4-02b-sounds_fun, d4-02c-wish]
+    bad_resp:
+        type: statement
+        phrase_ids: [d4-02g-stinky]
+    dont_know:
+        type: statement
+        phrase_ids: [d4-02f-okay]
+    feel_bad:
+        type: question
+        phrase_ids: [d4-03-been_unhealthy]
+        responses: [yes_unhealthy, yes_unhealthy_example, no_unhealthy, dont_know_unhealthy]
+        terminal: [yes_unhealthy_example, no_unhealthy, dont_know_unhealthy]
+    yes_unhealthy:
+        type: statement
+        phrase_ids: [d4-03a-if_yes]
+    yes_unhealthy_example:
+        type: statement
+        phrase_ids: [d4-03b-if_yes_with_example]
+    no_unhealthy:
+        type: statement
+        phrase_ids: [d4-03c-if_no]
+    dont_know_unhealthy:
+        type: statement
+        phrase_ids: [d4-03d-i_dont_know_or_no_response]
+    what_learned:
+        type: question
+        phrase_ids: [d4-04-learned_last_time_snacks]
+        responses: [learned_correct, learned_incorrect, learned_dont_know]
+        terminal: [learned_correct, learned_incorrect, learned_dont_know]
+    learned_correct:
+        type: statement
+        phrase_ids: [d4-04a-if_correct]
+    learned_incorrect:
+        type: statement
+        phrase_ids: [d4-04b-if_wrong_or_dont_know_or_no_response]
+    learned_dont_know:
+        type: redirect
+        goal: learned_incorrect
+snacks2_foods:
+    intro:
+        type: dialogue
+        items: [guess_plate, use_plate, remember_rhyme, lets_go]
+    guess_plate:
+        type: question
+        phrase_ids: [d4-05-remember_magic_plate]
+        responses: [yes_plate, no_plate, dont_know_plate]
+        terminal: [yes_plate, no_plate, dont_know_plate]
+    yes_plate:
+        type: statement
+        phrase_ids: [d4-06a-if_yes_and_correct]
+    no_plate:
+        type: statement
+        phrase_ids: [d4-06b-if_no_or_dont_know_or_no_response]
+    dont_know_plate:
+        type: statement
+        phrase_ids: [d4-06b-if_no_or_dont_know_or_no_response]
+    use_plate:
+        type: statement
+        phrase_ids: [d4-06-p1-have_to_use_magic_plate]
+    remember_rhyme:
+        type: question
+        phrase_ids: [d4-06-p2-remember_rhyme_magic_plate]
+        responses: [rhyme_correct, rhyme_incorrect, rhyme_dont_know]
+        terminal: [rhyme_correct, rhyme_incorrect, rhyme_dont_know]
+    rhyme_correct:
+        type: statement
+        phrase_ids: [d4-06a-if_yes_and_correct]
+    rhyme_incorrect:
+        type: redirect
+        goal: rhyme_dont_know
+    rhyme_dont_know:
+        type: dialogue
+        items: [rhyme_reminder, rhyme]
+    rhyme_reminder:
+        type: statement
+        phrase_ids: [d4-06b-if_no_or_dont_know_or_no_response]
+    rhyme:
+        type: statement
+        phrase_ids: [d4-07-1-roar_more]
+    lets_go:
+        type: statement
+        phrase_ids: [d4-08-round_one_snacks]
+    plate_chant:
+        type: dialogue
+        items: [rhyme_intro, rhyme]
+    rhyme_intro:
+        type: statement
+        phrase_ids: [d4-09-1-great_words,d4-09-2-now_we_say_words,d4-09-3-wonder_if_healthy_words,d4-09-4-remember_words,d4-09-5-cool_words]
+    timeout:
+        type: statement
+        phrase_ids: [d4-23-1-snacks_round_two_time_is_out_training]
+    all_good:
+        type: question
+        phrase_ids: [d4-10-good_choices_snacks]
+        responses: [correct_why, incorrect_why, dont_know_why]
+        terminal: [correct_why, incorrect_why, dont_know_why]
+    correct_why:
+        type: statement
+        phrase_ids: [d4-10b-if_childs_reason_is_right]
+    incorrect_why:
+        type: statement
+        phrase_ids: [d4-10a-if_childs_reason_for_this_is_wrong]
+    dont_know_why:
+        type: statement
+        phrase_ids: [d4-10c-dont_know_or_no_response]
+    reminder1:
+        type: statement
+        phrase_ids: [d4-20-1-reminder_level_one]
+    reminder2:
+        type: statement
+        phrase_ids: [d4-20-2-reminder_level_two]
+    reminder3:
+        type: statement
+        phrase_ids: [d4-20-3-reminder_level_three]
+    has_bad:
+        type: statement
+        phrase_ids: [d4-19-1-ahh_noise, d4-19-2-quick_off_plate, d4-19-3-yikes, d4-19-4-eesh, d4-19-5-whoops_tummy]
+    missing_good:
+        type: statement
+        phrase_ids: [d4-21-1-something_missing_snacks, d4-21-3-almost_all_snacks]
+    candy1:
+        type: statement
+        phrase_ids: [d4-14b-p1-candy_prompt_one]
+    candy2:
+        type: statement
+        phrase_ids: [d4-14b-p2-candy_prompt_two]
+    candy3:
+        type: statement
+        phrase_ids: [d4-14b-p3-candy_prompt_three]
+    cheetos1:
+        type: statement
+        phrase_ids: [d4-14a-p1-cheeto_puffs_prompt_one]
+    cheetos2:
+        type: statement
+        phrase_ids: [d4-14a-p2-cheeto_puffs_prompt_two]
+    cheetos3:
+        type: statement
+        phrase_ids: [d4-14a-p3-cheeto_puffs_prompt_three]
+    chips1:
+        type: statement
+        phrase_ids: [d4-22f-p1-doritos_prompt_one]
+    chips2:
+        type: statement
+        phrase_ids: [d4-22f-p2-doritos_prompt_two]
+    chips3:
+        type: statement
+        phrase_ids: [d4-22f-p3-doritos_prompt_three]
+    churros1:
+        type: statement
+        phrase_ids: [d4-22e-p1-churros_prompt_one]
+    churros2:
+        type: statement
+        phrase_ids: [d4-22e-p2-churros_prompt_two]
+    churros3:
+        type: statement
+        phrase_ids: [d4-22e-p3-churros_prompt_three]
+    banana1:
+        type: statement
+        phrase_ids: [d4-14c-p1-missing_banana_prompt_one]
+    banana2:
+        type: statement
+        phrase_ids: [d4-14c-p2-missing_banana_prompt_two]
+    banana3:
+        type: statement
+        phrase_ids: [d4-14c-p3-missing_banana_prompt_three]
+    mix1:
+        type: statement
+        phrase_ids: [d4-14d-p1-missing_trail_mix_prompt_one]
+    mix2:
+        type: statement
+        phrase_ids: [d4-14d-p2-missing_trail_mix_prompt_two]
+    mix3:
+        type: statement
+        phrase_ids: [d4-14d-p3-missing_trail_mix_prompt_three]
+    apple1:
+        type: statement
+        phrase_ids: [d4-22g-p1-missing_apple_prompt_one]
+    apple2:
+        type: statement
+        phrase_ids: [d4-22g-p2-missing_apple_prompt_two]
+    apple3:
+        type: statement
+        phrase_ids: [d4-22g-p3-missing_apple_prompt_three]
+    carrot1:
+        type: statement
+        phrase_ids: [d4-22h-p1-missing_carrots_and_hummus_prompt_one]
+    carrot2:
+        type: statement
+        phrase_ids: [d4-22h-p2-missing_carrots_and_hummus_prompt_two]
+    carrot3:
+        type: statement
+        phrase_ids: [d4-22h-p3-missing_carrots_and_hummus_prompt_three]
+snacks2_outro:
+    outro_dialouge:
+        type: statement
+        phrase_ids: [d4-33-1-outro_time_is_out_training]

@@ -9,8 +9,6 @@ lunchbox2:
         intro: intro
         plate_chant: plate_chant
         success: all_good
-        bad_noise: has_bad
-        missing_noise: missing_good
         reminders: [reminder]
         missing_all:
             breads: [want_food, pick_bread]
@@ -34,3 +32,28 @@ lunchbox2:
             milk: [pick_milk]
             water: [pick_water]
             juice: [okay_but_juice]
+snacks2:
+    bad: [candy, cheetos, chips, churros]
+    good: [banana, mix, apple, carrot]
+    sometimes: []
+    groups:
+        snacks: [candy, cheetos, chips, churros, banana, mix, apple, carrot]
+    reminders: [reminder]
+    success: all_good
+    missing_all:
+        snacks: [reminder1, reminder2, reminder3]
+    missing_good:
+        all: [missing_good]
+        snacks: []
+    has_bad:
+        all: [has_bad]
+        snacks: []
+    specific:
+        candy: [candy1, candy2, candy3]
+        cheetos: [cheetos1, cheetos2, cheetos3]
+        chips: [chips1, chips2, chips3]
+        churros: [churros1, churros2, churros3]
+        banana: [banana1, banana2, banana3]
+        mix: [mix1, mix2, mix3]
+        apple: [apple1, apple2, apple3]
+        carrot: [carrot1, carrot2, carrot3]
