@@ -460,7 +460,7 @@ class FoodChoiceDay2(smach.State):
                     #give specific feedback
                     food_options = list((set(self.fp["groups"][self.target_group]) & set(self.fp["good"]))-set(good_foods))
                     food_target = random.choice(food_options)
-                    level = min(len(self.fp["phrases"]["specivfic"][food_target])-1, self.feedback_levels[self.target_group]["good"]-len(self.fp["phrases"]["missing_good"][self.target_group]))
+                    level = min(len(self.fp["phrases"]["specific"][food_target])-1, self.feedback_levels[self.target_group]["good"]-len(self.fp["phrases"]["missing_good"][self.target_group]))
 
                     feedback_phrase = self.fp["phrases"]["specific"][food_target][level]
             else:
