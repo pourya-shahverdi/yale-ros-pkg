@@ -188,6 +188,7 @@ class FoodChoiceDay2(smach.State):
         
         self.exp_start_time = rospy.get_param("~start_time")
         self.duration = rospy.get_param("~max_time")
+        self.seen_bad = set()
 
     def execute(self, userdata):
         print "==============================================="
@@ -324,8 +325,11 @@ class FoodChoiceDay2(smach.State):
             for g in self.fp["groups"].keys():
                 self.feedback_levels[g]["good"] = 0
 
+        replaced_bad = len(self.seen_bad & bad_foods) > 0
 
-        if had_bad and not removed_target_bad:
+        #escalate if there was a bad item and no bad item was removed,
+        #or if the kid added a bad item they've seen before
+        if (had_bad and not removed_target_bad) or replaced_bad:
             if self.target_group == "all":
                 self.feedback_levels["all"]["bad"] += 1
             else:
@@ -388,7 +392,9 @@ class FoodChoiceDay2(smach.State):
                 else:
                     #give specific feedback
                     food_options = list(set(bad_foods) & set(self.fp["groups"][self.target_group]))
-                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)][0]
+                    food_target = random.choice(food_options)
+                    level = min(len(self.fp["phrases"]["specfic"][food_target])-1, self.feedback_levels[self.target_group]["bad"]-len(self.fp["phrases"]["has_bad"][self.target_group]))
+                    feedback_phrase = self.fp["phrases"]["specific"][food_target][level]
             else:
                 feedback_phrase = self.fp["phrases"]["has_bad"][self.target_group][self.feedback_levels[self.target_group]["bad"]]
             
@@ -453,7 +459,10 @@ class FoodChoiceDay2(smach.State):
                 else:
                     #give specific feedback
                     food_options = list((set(self.fp["groups"][self.target_group]) & set(self.fp["good"]))-set(good_foods))
-                    feedback_phrase = self.fp["phrases"]["specific"][random.choice(food_options)][0]
+                    food_target = random.choice(food_options)
+                    level = min(len(self.fp["phrases"]["specfic"][food_target])-1, self.feedback_levels[self.target_group]["good"]-len(self.fp["phrases"]["missing_good"][self.target_group]))
+
+                    feedback_phrase = self.fp["phrases"]["specific"][food_target][level]
             else:
                 feedback_phrase = self.fp["phrases"]["missing_good"][self.target_group][self.feedback_levels[self.target_group]["good"]]
             
@@ -484,6 +493,7 @@ class FoodChoiceDay2(smach.State):
         self.prev_items["good"] = good_foods
         self.prev_items["bad"] = bad_foods
         self.prev_items["sometimes"] = sometimes_foods
+        self.seen_bad = self.seen_bad | set(bad_foods)
 
         
         rospy.set_param("~first_time_foods", False)
