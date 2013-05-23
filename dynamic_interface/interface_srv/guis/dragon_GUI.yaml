@@ -103,6 +103,18 @@
     label: whole_grains
     label_string: bagel;muffin;white;grain;whbagel;no_choice;next;panic
     topic: dragon_GUI/whole_grains
+- gui: snacks1
+  elements:
+  - type: button_group
+    label: snacks1
+    label_string: cheetos;mix;banana;candy;no_choice;next;panic
+    topic: dragon_GUI/snacks1
+- gui: snacks2
+  elements:
+  - type: button_group
+    label: snacks2
+    label_string: carrots;chips;apple;churro;no_choice;next;panic
+    topic: dragon_GUI/snacks2
 - gui: drinks
   elements:
   - type: button_group
@@ -14447,6 +14459,3592 @@
     label: "GO (press to activate 'magic plate')"
     label_string: GO;reminder;next;panic
     topic: dragon_GUI/food_select
+- gui: snacks2_
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: '--'
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: '--'
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_chips
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_candy_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple;banana
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_chips_churros
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;chips;churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_chips_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;chips;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: churros
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_cheetos_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;cheetos;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: chips
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_carrot_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;carrot;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: cheetos
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_candy_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;candy;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: carrot
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_banana_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;banana;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: candy
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_apple_candy_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: apple;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: banana
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: snacks2_banana_candy_carrot_cheetos_chips_churros_mix
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: banana;candy;carrot;cheetos;chips;churros;mix
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: apple
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
 
 - gui: lunchbox2_outro_wrap_up
   elements:
@@ -14466,6 +18064,66 @@
     label: lunchbox1_outro wrap_up
     label_string: dance;no_dance;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox1_outro_wrap_up
+- gui: lunchbox2_workout_finished_dancing
+  elements:
+  - type: button_group
+    label: lunchbox2_workout finished_dancing
+    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_finished_dancing
+- gui: lunchbox2_workout_keep_going
+  elements:
+  - type: button_group
+    label: lunchbox2_workout keep_going
+    label_string: dance_more;no_more;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_keep_going
+- gui: lunchbox2_workout_break1
+  elements:
+  - type: button_group
+    label: lunchbox2_workout break1
+    label_string: yes_break1;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break1
+- gui: lunchbox2_workout_victory_again
+  elements:
+  - type: button_group
+    label: lunchbox2_workout victory_again
+    label_string: vic_again_yes;vic_again_no;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_victory_again
+- gui: lunchbox2_workout_remember_exercise
+  elements:
+  - type: button_group
+    label: lunchbox2_workout remember_exercise
+    label_string: is_dancing;no_remember;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_remember_exercise
+- gui: lunchbox2_workout_break2
+  elements:
+  - type: button_group
+    label: lunchbox2_workout break2
+    label_string: yes_break2;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_break2
+- gui: lunchbox2_workout_no_more
+  elements:
+  - type: button_group
+    label: lunchbox2_workout no_more
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_no_more
+- gui: lunchbox2_workout_victory_dance
+  elements:
+  - type: button_group
+    label: lunchbox2_workout victory_dance
+    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_victory_dance
+- gui: lunchbox2_workout_no_remember
+  elements:
+  - type: button_group
+    label: lunchbox2_workout no_remember
+    label_string: dancing;wrong_exercise;not_exercise;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_no_remember
+- gui: lunchbox2_workout_new_song
+  elements:
+  - type: button_group
+    label: lunchbox2_workout new_song
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_workout_new_song
 - gui: lunchbox2_intro_do_fun
   elements:
   - type: button_group
@@ -14550,63 +18208,57 @@
     label: lunchbox1_workout new_song
     label_string: yes_change;no_change;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox1_workout_new_song
-- gui: lunchbox2_workout_finished_dancing
+- gui: snacks1_intro_fun_things
   elements:
   - type: button_group
-    label: lunchbox2_workout finished_dancing
-    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_finished_dancing
-- gui: lunchbox2_workout_keep_going
+    label: snacks1_intro fun_things
+    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_fun_things
+- gui: snacks1_intro_fav_snacks
   elements:
   - type: button_group
-    label: lunchbox2_workout keep_going
-    label_string: dance_more;no_more;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_keep_going
-- gui: lunchbox2_workout_break1
+    label: snacks1_intro fav_snacks
+    label_string: healthy;okay_snack;unhealthy;unknown_singular;unknown_plural;dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_fav_snacks
+- gui: snacks1_intro_help_choose
   elements:
   - type: button_group
-    label: lunchbox2_workout break1
-    label_string: yes_break1;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_break1
-- gui: lunchbox2_workout_victory_again
+    label: snacks1_intro help_choose
+    label_string: yes_help;no_help;irrelevant_or_no_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_help_choose
+- gui: snacks2_foods_remember_rhyme
   elements:
   - type: button_group
-    label: lunchbox2_workout victory_again
-    label_string: vic_again_yes;vic_again_no;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_victory_again
-- gui: lunchbox2_workout_remember_exercise
+    label: snacks2_foods remember_rhyme
+    label_string: rhyme_correct;rhyme_incorrect;rhyme_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_foods_remember_rhyme
+- gui: snacks2_foods_all_good
   elements:
   - type: button_group
-    label: lunchbox2_workout remember_exercise
-    label_string: is_dancing;no_remember;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_remember_exercise
-- gui: lunchbox2_workout_break2
+    label: snacks2_foods all_good
+    label_string: correct_why;incorrect_why;dont_know_why;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_foods_all_good
+- gui: snacks2_foods_guess_plate
   elements:
   - type: button_group
-    label: lunchbox2_workout break2
-    label_string: yes_break2;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_break2
-- gui: lunchbox2_workout_no_more
+    label: snacks2_foods guess_plate
+    label_string: yes_plate;no_plate;dont_know_plate;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_foods_guess_plate
+- gui: snacks2_intro_feel_bad
   elements:
   - type: button_group
-    label: lunchbox2_workout no_more
-    label_string: yes_change;no_change;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_no_more
-- gui: lunchbox2_workout_victory_dance
+    label: snacks2_intro feel_bad
+    label_string: yes_unhealthy;yes_unhealthy_example;no_unhealthy;dont_know_unhealthy;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_intro_feel_bad
+- gui: snacks2_intro_hey_friend
   elements:
   - type: button_group
-    label: lunchbox2_workout victory_dance
-    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_victory_dance
-- gui: lunchbox2_workout_no_remember
+    label: snacks2_intro hey_friend
+    label_string: good_resp;bad_resp;dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_intro_hey_friend
+- gui: snacks2_intro_what_learned
   elements:
   - type: button_group
-    label: lunchbox2_workout no_remember
-    label_string: dancing;wrong_exercise;not_exercise;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_no_remember
-- gui: lunchbox2_workout_new_song
-  elements:
-  - type: button_group
-    label: lunchbox2_workout new_song
-    label_string: yes_change;no_change;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_workout_new_song
+    label: snacks2_intro what_learned
+    label_string: learned_correct;learned_incorrect;learned_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks2_intro_what_learned
