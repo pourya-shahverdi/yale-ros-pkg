@@ -207,9 +207,7 @@ class FoodChoiceDay2(smach.State):
                 pass
             return 'timeout'
 
-        gui_name = self.day + "_" + "_".join(self.selected_foods)
-        self.tm.change(gui_name)
-        panicked = False
+
 
         phrases = self.fp["phrases"]
         
@@ -234,9 +232,10 @@ class FoodChoiceDay2(smach.State):
             self.selected_foods = []
 
 
-
+        gui_name = self.day + "_" + "_".join(self.selected_foods)
+        self.tm.change(gui_name)
+        panicked = False
         while not rospy.is_shutdown():
-            print "waiting for food choice..."
             resp = self.tm.wait_for_press("dragon_GUI/food_select")
             if resp == "panic":
                 return 'panic'
