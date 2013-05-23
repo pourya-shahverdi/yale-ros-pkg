@@ -47,10 +47,10 @@ snacks2:
             snacks: [reminder1, reminder2, reminder3]
         missing_good:
             all: [missing_good]
-            snacks: []
+            snacks: [missing_good]
         has_bad:
             all: [has_bad]
-            snacks: []
+            snacks: [has_bad]
         specific:
             candy: [candy1, candy2, candy3]
             cheetos: [cheetos1, cheetos2, cheetos3]
