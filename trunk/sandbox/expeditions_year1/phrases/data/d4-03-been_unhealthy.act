@@ -1,0 +1,3 @@
+- {id: sad, start: 0.0, type: expression}
+- {id: disgusted, start: 12.0, type: expression}
+- {id: puppy, start: 17.0, type: expression}
