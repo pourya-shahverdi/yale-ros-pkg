@@ -37,7 +37,14 @@ snacks2:
     good: [banana, mix, apple, carrot]
     sometimes: []
     groups:
-        snacks: [candy, cheetos, chips, churros, banana, mix, apple, carrot]
+	    candy: [candy]
+	    cheetos: [cheetos]
+	    chips: [chips]
+	    churros: [churros]
+	    banana: [banana]
+	    mix: [mix]
+	    apple: [apple]
+	    carrot: [carrot]
     phrases:
         intro: intro
         plate_chant: plate_chant
@@ -47,16 +54,22 @@ snacks2:
             snacks: [reminder1, reminder2, reminder3]
         missing_good:
             all: [missing_good]
-            snacks: [missing_good]
+	        banana: [banana1, banana2]
+	        mix: [mix1, mix2]
+	        apple: [apple1, apple2]
+	        carrot: [carrot1, carrot2]
         has_bad:
             all: [has_bad]
-            snacks: [has_bad]
+            candy: [candy1, candy2]
+	        cheetos: [cheetos1, cheetos2]
+	        chips: [chips1, chips2]
+	        churros: [churros1, churros2]
         specific:
-            candy: [candy1, candy2, candy3]
-            cheetos: [cheetos1, cheetos2, cheetos3]
-            chips: [chips1, chips2, chips3]
-            churros: [churros1, churros2, churros3]
-            banana: [banana1, banana2, banana3]
-            mix: [mix1, mix2, mix3]
-            apple: [apple1, apple2, apple3]
-            carrot: [carrot1, carrot2, carrot3]
+            candy: [candy3]
+            cheetos: [cheetos3]
+            chips: [chips3]
+            churros: [churros3]
+            banana: [banana3]
+            mix: [mix3]
+            apple: [apple3]
+            carrot: [carrot3]
