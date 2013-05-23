@@ -473,7 +473,7 @@ d4-02e-no_clue confused.act
 d4-02f-okay 
 d4-02g-stinky disgusted.act
 d4-03a-if_yes puppy.act
-d4-03-been_unhealthy !!!
+d4-03-been_unhealthy d4-03-been_unhealthy.act
 d4-03b-if_yes_with_example sad.act
 d4-03c-if_no 
 d4-03d-i_dont_know_or_no_response
