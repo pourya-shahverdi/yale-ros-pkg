@@ -41,7 +41,7 @@ snacks2:
     phrases:
         intro: intro
         plate_chant: plate_chant
-        reminders: [reminder]
+        reminders: [reminder1]
         success: all_good
         missing_all:
             snacks: [reminder1, reminder2, reminder3]
