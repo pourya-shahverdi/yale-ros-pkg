@@ -1154,6 +1154,6 @@ snacks2_foods:
         type: statement
         phrase_ids: [d4-22h-p3-missing_carrots_and_hummus_prompt_three]
 snacks2_outro:
-    outro_dialouge:
+    outro_dialogue:
         type: statement
         phrase_ids: [d4-33-1-outro_time_is_out_training]
