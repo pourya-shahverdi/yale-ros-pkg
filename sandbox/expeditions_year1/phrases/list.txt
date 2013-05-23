@@ -464,63 +464,63 @@ d3-25-timeout sad.act
 d3-26-p1-phew_fun_moving
 d3-26-p2-user_didnt_dance sad.act
 d3-26-p3-naptime_best_snacks
-d4-01-heya_human_friend
-d4-02a-super_cool
-d4-02b-sounds_fun
-d4-02c-wish
-d4-02d-nice
-d4-02e-no_clue
-d4-02f-okay
-d4-02g-stinky
-d4-03a-if_yes
-d4-03-been_unhealthy
-d4-03b-if_yes_with_example
-d4-03c-if_no
+d4-01-heya_human_friend puppy.act
+d4-02a-super_cool lovestruck.act
+d4-02b-sounds_fun mischievous.act
+d4-02c-wish mischievous.act
+d4-02d-nice mischievous.act
+d4-02e-no_clue confused.act
+d4-02f-okay 
+d4-02g-stinky disgusted.act
+d4-03a-if_yes puppy.act
+d4-03-been_unhealthy !!!
+d4-03b-if_yes_with_example sad.act
+d4-03c-if_no 
 d4-03d-i_dont_know_or_no_response
-d4-04a-if_correct
-d4-04b-if_wrong_or_dont_know_or_no_response
+d4-04a-if_correct surprise.act
+d4-04b-if_wrong_or_dont_know_or_no_response sad.act
 d4-04-learned_last_time_snacks
-d4-05a-if_yes
-d4-05b-if_yes_and_magic_plate
+d4-05a-if_yes lovestruck.act
+d4-05b-if_yes_and_magic_plate lovestruck.act
 d4-05c-if_no_or_dont_know_or_no_response
-d4-05-remember_magic_plate
-d4-06a-if_yes_and_correct
+d4-05-remember_magic_plate d4-05-remember_magic_plate.act
+d4-06a-if_yes_and_correct puppy.act
 d4-06b-if_no_or_dont_know_or_no_response
-d4-06-p1-have_to_use_magic_plate
-d4-06-p2-remember_rhyme_magic_plate
-d4-07-10-nom_plate_great
-d4-07-1-roar_more
-d4-07-2-healthy_great
-d4-07-3-grow_no
-d4-07-4-find_mind
-d4-07-5-plate_race
-d4-07-6-know_grow
-d4-07-7-skoo_plate_great
-d4-07-8-taste_race
-d4-07-9-dum_tum
+d4-06-p1-have_to_use_magic_plate d4-06-p1-have_to_use_magic_plate.act
+d4-06-p2-remember_rhyme_magic_plate d4-06-p2-remember_rhyme_magic_plate.act
+d4-07-10-nom_plate_great puppy.act
+d4-07-1-roar_more puppy.act
+d4-07-2-healthy_great puppy.act
+d4-07-3-grow_no puppy.act
+d4-07-4-find_mind puppy.act
+d4-07-5-plate_race puppy.act
+d4-07-6-know_grow puppy.act
+d4-07-7-skoo_plate_great puppy.act
+d4-07-8-taste_race puppy.act
+d4-07-9-dum_tum puppy.act
 d4-08-round_one_snacks
 d4-09-1-great_words
-d4-09-2-now_we_say_words
+d4-09-2-now_we_say_words puppy.act
 d4-09-3-wonder_if_healthy_words
 d4-09-4-remember_words
-d4-09-5-cool_words
+d4-09-5-cool_words puppy.act
 d4-10a-if_childs_reason_for_this_is_wrong
-d4-10b-if_childs_reason_is_right
+d4-10b-if_childs_reason_is_right puppy.act
 d4-10c-dont_know_or_no_response
-d4-10-good_choices_snacks
-d4-11-1-ahh_noise
-d4-11-2-quick_off_plate
-d4-11-3-yikes
-d4-11-4-eesh
-d4-11-5-whoops_tummy
+d4-10-good_choices_snacks lovestruck.act
+d4-11-1-ahh_noise disgusted.act
+d4-11-2-quick_off_plate surprised.act
+d4-11-3-yikes surprised.act
+d4-11-4-eesh surprised.act
+d4-11-5-whoops_tummy sad.act
 d4-12-1-reminder_level_one
-d4-12-2-reminder_level_two
+d4-12-2-reminder_level_two puppy.act
 d4-12-3-reminder_level_three
 d4-13-1-something_missing_snacks
 d4-13-2-p1-other_snacks
 d4-13-2-p2-dont_know
-d4-13-3-almost_all_snacks
-d4-13-4-p1-weird_noise_snacks
+d4-13-3-almost_all_snacks surprised.act
+d4-13-4-p1-weird_noise_snacks disgusted.act
 d4-13-4-p2-dont_know
 d4-14a-p1-cheeto_puffs_prompt_one
 d4-14a-p2-cheeto_puffs_prompt_two
@@ -534,31 +534,31 @@ d4-14c-p3-missing_banana_prompt_three
 d4-14d-p1-missing_trail_mix_prompt_one
 d4-14d-p2-missing_trail_mix_prompt_two
 d4-14d-p3-missing_trail_mix_prompt_three
-d4-15-1-snacks_round_one_time_is_out_training
-d4-15-2-snacks_round_one_time_is_out_naptime
+d4-15-1-snacks_round_one_time_is_out_training d4-15-1-snacks_round_one_time_is_out_training.act
+d4-15-2-snacks_round_one_time_is_out_naptime d4-15-2-snacks_round_one_time_is_out_naptime.act
 d4-16-round_two_snacks
-d4-17-1-great_words
+d4-17-1-great_words puppy.act
 d4-17-2-now_we_say_words
 d4-17-3-wonder_if_healthy_words
-d4-17-4-remember_words
-d4-17-5-cool_words
-d4-18a-if_childs_reason_for_this_is_wrong
-d4-18b-if_childs_reason_is_right
+d4-17-4-remember_words puppy.act
+d4-17-5-cool_words puppy.act
+d4-18a-if_childs_reason_for_this_is_wrong mischievous.act
+d4-18b-if_childs_reason_is_right lovestruck.act
 d4-18c-dont_know_or_no_response
-d4-18-good_choices_snacks
-d4-19-1-ahh_noise
-d4-19-2-quick_off_plate
-d4-19-3-yikes
-d4-19-4-eesh
-d4-19-5-whoops_tummy
+d4-18-good_choices_snacks puppy.act
+d4-19-1-ahh_noise disgusted.act
+d4-19-2-quick_off_plate disgusted.act
+d4-19-3-yikes disgusted.act
+d4-19-4-eesh disgusted.act
+d4-19-5-whoops_tummy surprised.act
 d4-20-1-reminder_level_one
 d4-20-2-reminder_level_two
 d4-20-3-reminder_level_three
-d4-21-1-something_missing_snacks
+d4-21-1-something_missing_snacks surprised.act
 d4-21-2-p1-other_snacks
 d4-21-2-p2-dont_know
 d4-21-3-almost_all_snacks
-d4-21-4-p1-weird_noise_snacks
+d4-21-4-p1-weird_noise_snacks surprised.act
 d4-21-4-p2-dont_know
 d4-22e-p1-churros_prompt_one
 d4-22e-p2-churros_prompt_two
@@ -572,11 +572,11 @@ d4-22g-p3-missing_apple_prompt_three
 d4-22h-p1-missing_carrots_and_hummus_prompt_one
 d4-22h-p2-missing_carrots_and_hummus_prompt_two
 d4-22h-p3-missing_carrots_and_hummus_prompt_three
-d4-23-1-snacks_round_two_time_is_out_training
-d4-23-2-snacks_round_two_time_is_out_naptime
-d4-33-1-outro_time_is_out_training
-d4-33-2-p1-outro_time_is_out_naptime_pre_fart
-d4-33-2-p2-outro_time_is_out_naptime_post_fart
+d4-23-1-snacks_round_two_time_is_out_training d4-15-1-snacks_round_one_time_is_out_training.act
+d4-23-2-snacks_round_two_time_is_out_naptime d4-15-2-snacks_round_one_time_is_out_naptime.act
+d4-33-1-outro_time_is_out_training surprised.act
+d4-33-2-p1-outro_time_is_out_naptime_pre_fart puppy.act
+d4-33-2-p2-outro_time_is_out_naptime_post_fart surprised.act
 d4-34-p1-phew_fun_feeling_better
 d4-34-p2-user_didnt_dance
-d4-34-p3-naptime_train
+d4-34-p3-naptime_train puppy.act
