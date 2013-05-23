@@ -236,6 +236,7 @@ class FoodChoiceDay2(smach.State):
 
 
         while not rospy.is_shutdown():
+            print "waiting for food choice..."
             resp = self.tm.wait_for_press("dragon_GUI/food_select")
             if resp == "panic":
                 return 'panic'
