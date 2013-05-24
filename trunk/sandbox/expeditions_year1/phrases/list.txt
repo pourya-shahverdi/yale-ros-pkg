@@ -477,7 +477,7 @@ d4-03-been_unhealthy d4-03-been_unhealthy.act
 d4-03b-if_yes_with_example sad.act
 d4-03c-if_no 
 d4-03d-i_dont_know_or_no_response
-d4-04a-if_correct surprise.act
+d4-04a-if_correct surprised.act
 d4-04b-if_wrong_or_dont_know_or_no_response sad.act
 d4-04-learned_last_time_snacks
 d4-05a-if_yes lovestruck.act

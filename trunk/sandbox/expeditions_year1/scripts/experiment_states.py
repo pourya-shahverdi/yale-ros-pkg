@@ -903,7 +903,7 @@ class Outro(smach.State):
          print "==============================================="
          print "+                   OUTRO                     +"
          print "-----------------------------------------------"
-         self.dm.express("yawn")
+         #self.dm.express("yawn")
          try:
              self.dg.play_dialogue("outro_dialogue")
          except PanicException:
