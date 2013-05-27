@@ -1480,6 +1480,7 @@ meals2_intro:
         type: question
         phrase_ids: [d6-03-will_you_help_one_last_time]
         responses: [yes_help, no_help, dont_know]
+        terminal: [yes_help, no_help, dont_know]
     yes_help:
         type: statement
         phrase_ids: [d6-03a-if_yes]
@@ -1510,6 +1511,7 @@ meals2_dinner_foods:
         type: question
         phrase_ids: [d6-05a-b-yes_but_no_elaboration]
         responses: [color, other_answer]
+        terminal: [color, other_answer]
     color:
         type: statement
         phrase_ids: [d6-05a-b-p1-color]
@@ -1648,6 +1650,7 @@ meals2_dinner_foods:
         type: question
         phrase_ids: [d6-14a-p2-yes_but_no_elaboration]
         responses: [because_vitamins, dont_know_why1, other_valid_answer, wrong_answer]
+        terminal: [because_vitamins, dont_know_why1, other_valid_answer, wrong_answer]
     dont_know_why1:
         type: statement
         phrase_ids: [d6-14a-p2-2-dont_know_or_no_response]
@@ -1790,19 +1793,50 @@ meals2_breakfast_foods:
         terminal: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
     missing_good:
         type: statement
-        phrase_ids: [d6-26-1-something_missing_breakfast, d6-26-2-p1-other_breakfast, d6-26-3-almost_all_breakfast, d6-26-4-p1-weird_noise_breakfast
+        phrase_ids: [d6-26-1-something_missing_breakfast, d6-26-2-p1-other_breakfast, d6-26-3-almost_all_breakfast, d6-26-4-p1-weird_noise_breakfast]
     has_bad:
+        type: statement
+        phrase_ids: [d6-24-1-ahh_noise, d6-24-2-quick_off_plate, d6-24-3-yikes, d6-24-4-eesh, d6-24-5-whoops_tummy]
     egg1:
+        type: statement
+        phrase_ids: [d6-27c-p1-missing_egg_prompt_one]
     egg2:
+        type: statement
+        phrase_ids: [d6-27c-p2-missing_egg_prompt_two]
     egg3:
+        type: statement
+        phrase_ids: [d6-27c-p3-missing_egg_prompt_three]
     juice1:
+        type: statement
+        phrase_ids: [d6-27b-p1-juice_prompt_one]
     juice2:
+        type: statement
+        phrase_ids: [d6-27b-p2-juice_prompt_two]
     juice3:
+        type: statement
+        phrase_ids: [d6-27b-p3-juice_prompt_three]
     donut1:
+        type: statement
+        phrase_ids: [d6-27a-p1-donuts_prompt_one]
     donut2:
+        type: statement
+        phrase_ids: [d6-27a-p2-donuts_prompt_two]
     donut3:
+        type: statement
+        phrase_ids: [d6-27a-p3-donuts_prompt_three]
     orange1:
+        type: statement
+        phrase_ids: [d6-27d-p1-missing_orange_prompt_one]
     orange2:
+        type: statement
+        phrase_ids: [d6-27d-p2-missing_orange_prompt_two]
     orange3:
+        type: statement
+        phrase_ids: [d6-27d-p3-missing_orange_prompt_three]
+    timeout:
+        type: statement
+        phrase_ids: [d6-29-breakfast_round_two_time_is_out]
 meals2_outro:
     outro_dialogue:
+        type: statement
+        phrase_ids: [d6-39-outro_time_is_out]
