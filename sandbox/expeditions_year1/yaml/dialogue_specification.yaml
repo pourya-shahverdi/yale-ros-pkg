@@ -1621,13 +1621,13 @@ meals2_dinner_foods:
         phrase_ids: [d6-11-pick_out_healthiest_dinner_foods]
     reminder1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-16-1-reminder_level_one]
     reminder2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-16-2-reminder_level_two]
     reminder3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-16-3-reminder_level_three]
     all_good:
         type: question
         phrase_ids: [d6-13-picked_all_healthy_foods_right_away]
@@ -1669,69 +1669,47 @@ meals2_dinner_foods:
         terminal:  [because_vitamins, yes_no_elaboration, other_valid_answer, dont_know_why1, wrong_answer]
     missing_good:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-17-1-something_missing_dinner_foods, d6-17-2-p1-other_dinner_foods, d6-17-3-almost_all_dinner_foods, d6-17-4-p1-weird_noise_dinner_foods]
     has_bad:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-15-1-ahh_noise, d6-15-2-quick_off_plate, d6-15-3-yikes, d6-15-4-eesh, d6-15-5-whoops_tummy]
     potato1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18a-p1-mashed_potatoes_prompt_one]
     potato2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18a-p2-mashed_potatoes_prompt_two]
     potato3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18a-p3-mashed_potatoes_prompt_three]
     roll1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18b-p1-roll_prompt_one]
     roll2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18b-p2-roll_prompt_two]
     roll3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18b-p3-roll_prompt_three]
     broc1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18c-p1-missing_broccoli_prompt_one]
     broc2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18c-p2-missing_broccoli_prompt_two]
     broc3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18c-p3-missing_broccoli_prompt_three]
     salad1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18d-p1-missing_salad_prompt_one]
     salad2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18d-p2-missing_salad_prompt_two]
     salad3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-18d-p3-missing_salad_prompt_three]
     timeout: 
         type: statement
-        phrase_ids: []
-meals2_breakfast_foods:
-    intro:
-    plate_chant:
-    reminder1:
-    reminder2:
-    reminder3:
-    all_good:
-    missing_good:
-    has_bad:
-    egg1:
-    egg2:
-    egg3:
-    juice1:
-    juice2:
-    juice3:
-    donut1:
-    donut2:
-    donut3:
-    orange1:
-    orange2:
-    orange3:
-meals2_outro:
-    outro_dialogue:
+        phrase_ids: [d6-19-1-dinner_foods_round_one_time_is_out]
+
