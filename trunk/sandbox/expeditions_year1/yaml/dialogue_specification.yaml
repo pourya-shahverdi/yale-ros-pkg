@@ -1193,6 +1193,9 @@ meals1_intro:
         type: statement
         phrase_ids: [d5-03-p2-lay_down_and_sleep]
 meals1_foods:
+    why_choose:
+        type: statement
+        phrase_ids: []
     breakfast1_intro:
         type: dialogue
         items: [do_eat_breakfast, grocery_store]
@@ -1712,4 +1715,48 @@ meals2_dinner_foods:
     timeout: 
         type: statement
         phrase_ids: [d6-19-1-dinner_foods_round_one_time_is_out]
-
+meals2_breakfast_foods:
+    intro:
+        type: dialogue
+        items: [wowie, other_foods]
+    wowie:
+        type: statement
+        phrase_ids: []
+    other_foods:
+        type: statement
+        phrase_ids: []
+    plate_chant:
+        type: dialogue
+        items: [rhyme_intro, rhyme]
+    rhyme_intro:
+        type: statement
+        phrase_ids: []
+    rhyme:
+        type: statement
+        phrase_ids: [d6-09-1-roar_more]
+    reminder1:
+        type: statement
+        phrase_ids: []
+    reminder2:
+        type: statement
+        phrase_ids: []
+    reminder3:
+        type: statement
+        phrase_ids: []
+    all_good:
+    missing_good:
+    has_bad:
+    egg1:
+    egg2:
+    egg3:
+    juice1:
+    juice2:
+    juice3:
+    donut1:
+    donut2:
+    donut3:
+    orange1:
+    orange2:
+    orange3:
+meals2_outro:
+    outro_dialogue:
