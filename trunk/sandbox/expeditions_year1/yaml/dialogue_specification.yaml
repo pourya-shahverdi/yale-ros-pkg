@@ -1157,3 +1157,284 @@ snacks2_outro:
     outro_dialogue:
         type: statement
         phrase_ids: [d4-33-1-outro_time_is_out_training]
+meals1_intro:
+    intro_dialogue:
+        type: dialogue
+        items: [whats_up, wanna_do, sleepy, sleepy2]
+    whats_up:
+        type: question
+        phrase_ids: [d5-01-hiya_friend]
+        responses: [good_resp, bad_resp, dont_know]
+        terminal: []
+    good_resp:
+        type: statement
+        phrase_ids: [d5-01a-woo, d5-01b-so_cool]
+    bad_resp:
+        type: statement
+        phrase_ids: [d5-01e-aw_phooey, d5-01f-frown_upside_down]
+    dont_know:
+        type: statement
+        phrase_ids: [d5-01c-dont_know]
+    wanna_do:
+        type: question
+        phrase_ids: [d5-02-anything_you_want_to_do]
+        responses: [yes_activity, no_or_dont_know]
+        terminal: [yes_activity, no_or_dont_know]
+    yes_activity:
+        type: statement
+        phrase_ids: [d5-02a-if_yes_or_good_activity]
+    no_or_dont_know:
+        type: statement
+        phrase_ids: [d5-02b-if_no_or_dont_know_or_no_response]
+    sleepy:
+        type: statement
+        phrase_ids: [d5-03-p1-learn_about_healthier_meals]
+    sleepy2:
+        type: statement
+        phrase_ids: [d5-03-p2-lay_down_and_sleep]
+meals1_foods:
+    breakfast1_intro:
+        type: dialogue
+        items: [do_eat_breakfast, grocery_store]
+    do_eat_breakfast:
+        type: question
+        phrase_ids: [d5-04-do_you_eat_breakfast]
+        responses: [yes_breakfast, silence_or_dont_know, no_breakfast]
+        terminal: [yes_breakfast, silence_or_dont_know, no_breakfast]
+    yes_breakfast:
+        type: statement
+        phrase_ids: [d5-04a-if_yes]
+    silence_or_dont_know:
+        type: statement
+        phrase_ids: [d5-04b-no_response_or_doesnt_know]
+    no_breakfast:
+        type: statement
+        phrase_ids: [d5-04c-if_no]
+    grocery_store:
+        type: statement
+        phrase_ids: [d5-05-p1-choose_cereal]
+    breakfast1_no_choice:
+        type: statement
+        phrase_ids: [d5-05-p2-1-choose_you_would_eat, d5-05-p2-2-choose_youve_eaten_before, d5-05-p2-3-choose_looks_yummiest]
+    breakfast1_repeat:
+        type: statement
+        phrase_ids: [d5-07b-repeated_choice]
+    none-oatmeal:
+        type: question
+        phrase_ids: [d5-06b-oatmeal_squares]
+        responses: [because_oatmeal_healthy, no_sugar, dont_know_oatmeal]
+        terminal: [because_oatmeal_healthy, no_sugar, dont_know_oatmeal]
+    because_oatmeal_healthy:
+        type: statement
+        phrase_ids: [d5-06c-a-general_answer]
+    no_sugar:
+        type: statement
+        phrase_ids: [d5-06c-a-p1-sugar_or_sweet]
+    dont_know_oatmeal:
+        type: statement
+        phrase_ids: [d5-06c-a-p2-dont_know_or_wrong]
+    none-fiber:
+        type: dialogue
+        items: [slurp, why_fiber1]
+    slurp:
+        type: statement
+        phrase_ids: [d5-06a-p1-slurps_lips]
+    why_fiber1:
+        type: question
+        phrase_ids: [d5-06a-p2-fiber_one]
+        responses: [because_fiber, dont_know_fiber, because_its_healthy]
+        terminal: [because_fiber, dont_know_fiber, because_its_healthy]
+    because_fiber:
+        type: dialogue
+        items: [because_fiber1, because_fiber2]
+    because_fiber1:
+        type: statement
+        phrase_ids: [d5-06a-a-p1-1-great_answer_pre_thump]
+    because_fiber2:
+        type: statement
+        phrase_ids: [d5-06a-a-p1-2-great_answer_post_thump]
+    dont_know_fiber:
+        type: statement
+        phrase_ids: [d5-06a-c-doesnt_know_or_no_answer_or_wrong]
+    because_its_healthy:
+        type: question
+        phrase_ids: [d5-06a-a-general_answer]
+        responses: [good_for_heart, close_answer, dont_know_why]
+        terminal: [good_for_heart, close_answer, dont_know_why]
+    good_for_heart:
+        type: redirect
+        goal: because_fiber
+    close_answer:
+        type: statement
+        phrase_ids: [d5-06a-a-p2-so_so_answer]
+    dont_know_why:
+        type: statement
+        phrase_ids: [d5-06a-a-p3-dont_know_or_wrong]
+    none-cheerios:
+        type: statement
+        phrase_ids: [d5-06d-cheerios]
+    none-charms:
+        type: question
+        phrase_ids: [d5-06c-lucky_charms]
+        responses: [because_sugar, not_healthy, dont_know_or_wrong]
+        terminal: [because_sugar, not_healthy, dont_know_or_wrong]
+    not_healthy:
+        type: question
+        phrase_ids: [d5-06c-a-general_answer]
+        responses: [because_of_sugar, dont_know_or_wrong]
+        terminal: [because_of_sugar, dont_know_or_wrong]
+    because_of_sugar:
+        type: statement
+        phrase_ids: [d5-06c-a-p1-sugar_or_sweet]
+    because_sugar:
+        type: statement
+        phrase_ids: [d5-06c-b-great_answer]
+    dont_know_or_wrong:
+        type: statement
+        phrase_ids: [d5-06c-a-p2-dont_know_or_wrong]
+    none-kix:
+        type: dialogue
+        items: [eating_air, so_airy]
+    eating_air:
+        type: statement
+        phrase_ids: [d5-06e-p1-eating_air]
+    so_airy:
+        type: statement
+        phrase_ids: [d5-06e-p2-so_airy]
+    cheerios-oatmeal:
+        type: redirect
+        goal: none-oatmeal
+    cheerios-fiber:
+        type: redirect
+        goal: none-fiber
+    cheerios-charms:
+        type: question
+        phrase_ids: [d5-08a-2-lucky_charms_after_any_cheerios]
+        responses: [because_sugar, not_healthy, dont_know_or_wrong]
+        terminal: [because_sugar, not_healthy, dont_know_or_wrong]
+    cheerios-kix:
+        type: statement
+        phrase_ids: [d5-08c-kix_after_cheerios]
+    charms-oatmeal:
+        type: redirect
+        goal: none-oatmeal
+    charms-fiber:
+        type: redirect
+        goal: none-fiber
+    charms-cheerios:
+        type: statement
+        phrase_ids: [d5-08d-cheerios_after_lucky_charms]
+    charms-kix:
+        type: statement
+        phrase_ids: [d5-08b-kix_after_lucky_charms]
+    kix-oatmeal:
+        type: redirect
+        goal: none-oatmeal
+    kix-fiber:
+        type: redirect
+        goal: none-fiber
+    kix-cheerios:
+        type: statement
+        phrase_ids: [d5-08c-kix_after_cheerios]
+    kix-charms:
+        type: question
+        phrase_ids: [d5-08a-1-lucky_charms_after_any_kix]
+        responses: [because_sugar, not_healthy, dont_know_or_wrong]
+        terminal: [because_sugar, not_healthy, dont_know_or_wrong]
+    dinner_intro:
+        type: statement
+        phrase_ids: [d5-10-1-p1-choose_eat_during_dinner]
+    dinner_no_choice:
+        type: statement
+        phrase_ids: [d5-10-1-p1-choose_eat_during_dinner,d5-10-2-p1-choose_youve_eaten_before,d5-10-3-choose_looks_yummiest]
+    dinner_repeat:
+        type: statement
+        phrase_ids: [d5-12b-repeated_choice]
+    none-carrots:
+        type: question
+        phrase_ids: [d5-11d-carrots]
+        responses: [yes_vitamins, yes_healthy, no_dont_know_wrong]
+        terminal: [yes_vitamins, yes_healthy, no_dont_know_wrong]
+    yes_vitamins:
+        type: statement
+        phrase_ids: [d5-11d-a-yes_vitamins]
+    yes_healthy:
+        type: statement
+        phrase_ids: [d5-11d-b-yes_healthy_keep_us_from_getting_sick]
+    no_dont_know_wrong:
+        type: statement
+        phrase_ids: [d5-11d-c-no_or_no_response_or_wrong_or_dont_know]
+    none-beans:
+        type: question
+        phrase_ids: [d5-11c-green_beans]
+        responses: [vitamins_or_fiber, just_yes, dunno_no_resp_wrong]
+        terminal: [vitamins_or_fiber, just_yes, dunno_no_resp_wrong]
+    vitamins_or_fiber:
+        type: statement
+        phrase_ids: [d5-11c-a-yes_or_correct]
+    just_yes:
+        type: question
+        phrase_ids: [d5-11c-b-just_yes]
+        responses: [vitamins_or_fiber, dunno_no_resp_wrong]
+        terminal: [vitamins_or_fiber, dunno_no_resp_wrong]
+    dunno_no_resp_wrong:
+        type: statement
+        phrase_ids: [d5-11c-c-dont_know_or_no_response_or_wrong]
+    none-fries:
+        type: question
+        phrase_ids: [d5-11a-french_fries]
+        responses: [yes_and_demo, yes_no_demo, no_or_wrong]
+        terminal: [yes_and_demo, yes_no_demo, no_or_wrong]
+    yes_and_demo:
+        type: statement
+        phrase_ids: [d5-11a-a-if_yes_and_demonstrates]
+    yes_no_demo:
+        type: statement
+        phrase_ids: [d5-11a-b-if_yes_but_no_demonstration]
+    no_or_wrong:
+        type: statement
+        phrase_ids: [d5-11a-c-if_no_or_wrong_or_dont_know]
+    none-rice:
+        type: question
+        phrase_ids: [d5-11b-rice]
+        responses: [yes_keep_healthy, no_wrong_dont_know]
+        terminal: [yes_keep_healthy, no_wrong_dont_know]
+    yes_keep_healthy:
+        type: statement
+        phrase_ids: [d5-11b-a-yes_or_correct]
+    no_wrong_dont_know:
+        type: statement
+        phrase_ids: [d5-11b-b-no_or_wrong_or_no_response_or_dont_know]
+    fries-carrots:
+        type: redirect
+        goal: none-carrots
+    fries-beans:
+        type: redirect
+        goal: none-beans
+    fries-rice:
+        type: question
+        phrase_ids: [d5-12d-rice_after_french_fries]
+        responses: [yes_keep_healthy, no_wrong_dont_know]
+        terminal: [yes_keep_healthy, no_wrong_dont_know]
+    rice-carrots:
+        type: redirect
+        goal: none-carrots
+    rice-beans:
+        type: redirect
+        goal: none-beans
+    rice-fries:
+        type: redirect
+        goal: none-fries
+meals1_outro:
+    outro_dialogue:
+        type: dialogue
+        items: [all_right, wings_crossed, naptime]
+    naptime:
+        type: statement
+        phrase_ids: [d5-24-p3-naptime_healthy_dinner_veggies]
+    all_right:
+        type: statement
+        phrase_ids: [d5-13-p1-no_items]
+    wings_crossed:
+        type: statement
+        phrase_ids: [d5-13-p2-no_items]    
