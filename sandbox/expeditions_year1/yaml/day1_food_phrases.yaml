@@ -92,3 +92,50 @@ snacks2:
         chips: snacks2_repeat
         apple: chips-apple
         carrots: chips-carrots
+breakfast:
+    intro: breakfast1_intro
+    no_choice: breakfast1_no_choice
+    terminal: [oatmeal, fiber]
+    none:
+        oatmeal: none-oatmeal
+        fiber: none-fiber
+        cheerios: none-cheerios
+        charms: none-charms
+        kix: none-kix
+    cheerios:
+        oatmeal: cheerios-oatmeal
+        fiber: cheerios-fiber
+        cheerios: breakfast1_repeat
+        charms: cheerios-charms
+        kix: cheerios-kix
+    charms:
+        oatmeal: charms-oatmeal
+        fiber: charms-fiber
+        cheerios: charms-cheerios
+        charms: breakfast1_repeat
+        kix: charms-kix
+    kix:
+        oatmeal: kix-oatmeal
+        fiber: kix-fiber
+        cheerios: kix-cheerios
+        charms: kix-charms
+        kix: breakfast1_repeat
+dinner:
+    intro: dinner_intro
+    no_choice: dinner_no_choice
+    terminal: [carrots, beans]
+    none:
+        carrots: none-carrots
+        beans: none-beans
+        fries: none-fries
+        rice: none-rice
+    fries:
+        carrots: fries-carrots
+        beans: fries-beans
+        fries: dinner_repeat
+        rice: fries-rice
+    rice:
+        carrots: rice-carrots
+        beans: rice-beans
+        fries: rice-fries
+        rice: dinner_repeat
