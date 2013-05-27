@@ -72,19 +72,19 @@ lunchbox1_foods:
     why_choose:
         type: wait
         phrase_ids: [04-p2-1-what_made_choose, 04-p2-2-what_made_pick, 04-p2-3-why_pick, 04-p2-4-hm_decide, 04-p2-5-why_go, 04-p2-6-what_like, 04-p2-8-why_eat]
-    none-milk:
+    none_milk:
         type: statement
         phrase_ids: [08b-milk]
-    none-water:
+    none_water:
         type: statement
         phrase_ids: [08c-water]
-    none-choco_milk:
+    none_choco_milk:
         type: statement
         phrase_ids: [08d-chocolate_milk]
-    none-juice:
+    none_juice:
         type: statement
         phrase_ids: [08e-juice]
-    none-soda:
+    none_soda:
         type: dialogue
         items: [soda1, soda2]
     soda1:
@@ -96,42 +96,42 @@ lunchbox1_foods:
     dr_repeat:
         type: statement
         phrase_ids: [09a-repeated_choice]
-    choc-juice:
+    choc_juice:
         type: statement
         phrase_ids: [09e-p1-juice_after_chocolate_milk]
-    choc-soda:
+    choc_soda:
         type: redirect
-        goal: none-soda
-    choc-milk:
+        goal: none_soda
+    choc_milk:
         type: redirect
-        goal: none-milk
-    choc-water:
+        goal: none_milk
+    choc_water:
         type: redirect
-        goal: none-water
-    juice-choc:
+        goal: none_water
+    juice_choc:
         type: statement
         phrase_ids: [09d-chocolate_milk_after_juice]
-    juice-soda:
+    juice_soda:
         type: redirect
-        goal: none-soda
-    juice-milk:
+        goal: none_soda
+    juice_milk:
         type: redirect
-        goal: none-milk
-    juice-water:
+        goal: none_milk
+    juice_water:
         type: redirect
-        goal: none-water
-    soda-choc:
+        goal: none_water
+    soda_choc:
         type: statement
         phrase_ids: [09c-chocolate_milk_after_soda]
-    soda-juice:
+    soda_juice:
         type: statement
         phrase_ids: [09e-p2-juice_after_soda]
-    soda-milk:
+    soda_milk:
         type: redirect
-        goal: none-milk
-    soda-water:
+        goal: none_milk
+    soda_water:
         type: redirect
-        goal: none-water
+        goal: none_water
     diabetes_backstory:
         type: backstory
         items: [diabetes_first, diabetes_reminder]
@@ -162,60 +162,60 @@ lunchbox1_foods:
     bread_no_choice:
         type: statement
         phrase_ids: [04a-no_choice]
-    none-white:
+    none_white:
         type: statement
         phrase_ids: [04b-white]
-    none-grain:
+    none_grain:
         type: statement
         phrase_ids:  [04c-whole_grain]
-    none-bagel:
+    none_bagel:
         type: statement
         phrase_ids:  [04d-bagel]
-    none-whbagel:
+    none_whbagel:
         type: statement
         phrase_ids: [04e-whole_wheat_bagel]
-    none-muffin:
+    none_muffin:
         type: statement
         phrase_ids: [04f-muffin]
     grain_repeat:
         type: statement
         phrase_ids: [07a-repeated_choice]
-    white-grain:
+    white_grain:
         type: redirect
-        goal: none-grain
-    white-bagel:
+        goal: none_grain
+    white_bagel:
         type: statement
         phrase_ids: [07c-bagel_after_white_or_vise_versa]
-    white-whbagel:
+    white_whbagel:
         type: redirect
-        goal: none-whbagel
-    white-muffin:
+        goal: none_whbagel
+    white_muffin:
         type: statement
         phrase_ids: [07b-muffin_after_white_or_bagel]
-    bagel-white:
+    bagel_white:
         type: redirect
-        goal: white-bagel
-    bagel-grain:
+        goal: white_bagel
+    bagel_grain:
         type: redirect
-        goal: none-grain
-    bagel-whbagel:
+        goal: none_grain
+    bagel_whbagel:
         type: redirect
-        goal: none-whbagel
-    bagel-muffin:
+        goal: none_whbagel
+    bagel_muffin:
         type: redirect
-        goal: white-muffin
-    muffin-white:
+        goal: white_muffin
+    muffin_white:
         type: statement
         phrase_ids: [07d-white_or_bagel_after_muffin]
-    muffin-grain:
+    muffin_grain:
         type: redirect
-        goal: none-grain
-    muffin-bagel:
+        goal: none_grain
+    muffin_bagel:
         type: redirect
-        goal: muffin-white
-    muffin-whbagel:
+        goal: muffin_white
+    muffin_whbagel:
         type: redirect
-        goal: none-whbagel
+        goal: none_whbagel
     fiber_backstory:
         type: backstory
         items: [fiber_first, fiber_reminder]
@@ -241,10 +241,10 @@ lunchbox1_workout:
     outro-bread-water:
         type: statement
         phrase_ids: [12-p1-3-whole_grain_bread_and_water]
-    outro-bagel-milk:
+    outro-bagel_milk:
         type: statement
         phrase_ids: [12-p1-2-whole_wheat_bagel_and_milk]
-    outro-bagel-water:
+    outro-bagel_water:
         type: statement
         phrase_ids: [12-p1-4-whole_wheat_bagel_and_water]
     training_backstory:
@@ -865,34 +865,34 @@ snacks1_foods:
     snack1_no_choice:
         type: statement
         phrase_ids: [d3-08-if_no_choice]
-    none-banana:
+    none_banana:
         type: statement
         phrase_ids: [d3-09a-banana]
-    none-mix:
+    none_mix:
         type: statement
         phrase_ids: [d3-09b-trail_mix]
-    none-candy:
+    none_candy:
         type: statement
         phrase_ids: [d3-09c-candy]
-    none-cheetos:
+    none_cheetos:
         type: statement
         phrase_ids: [d3-09d-flamin_hot_cheetos]
-    candy-banana:
+    candy_banana:
         type: statement
         phrase_ids: [d3-10d-banana_after_candy]
-    candy-mix:
+    candy_mix:
         type: statement
         phrase_ids: [d3-10e-trail_mix_after_candy]
-    candy-cheetos:
+    candy_cheetos:
         type: statement
         phrase_ids: [d3-10h-cheetos_after_candy]
-    cheetos-banana:
+    cheetos_banana:
         type: statement
         phrase_ids: [d3-10c-banana_after_cheetos]
-    cheetos-mix:
+    cheetos_mix:
         type: statement
         phrase_ids: [d3-10f-trail_mix_after_cheetos]
-    cheetos-candy:
+    cheetos_candy:
         type: statement
         phrase_ids: [d3-10g-candy_after_cheetos]
     snack1_repeat:
@@ -904,37 +904,37 @@ snacks1_foods:
     snacks2_no_choice:
         type: statement
         phrase_ids: [d3-13-if_no_choice]
-    none-chips:
+    none_chips:
         type: statement
         phrase_ids: [d3-14b-potato_chips]
-    none-apple:
+    none_apple:
         type: statement
         phrase_ids: [d3-14c-apple]
-    none-carrots:
+    none_carrots:
         type: statement
         phrase_ids: [d3-14d-carrots_and_hummus]
-    none-churro:
+    none_churro:
         type: statement
         phrase_ids: [d3-14a-churros]
     snacks2_repeat:
         type: statement
         phrase_ids: [d3-15b-repeated_choice]
-    churro-chips:
+    churro_chips:
         type: statement
         phrase_ids: [d3-15c-potato_chips_after_churros]
-    churro-apple:
+    churro_apple:
         type: statement
         phrase_ids: [d3-15e-apple_after_potato_chips_or_churros]
-    churro-carrots:
+    churro_carrots:
         type: statement
         phrase_ids: [d3-15f-carrots_and_hummus_after_chips_or_churros]
-    chips-churro:
+    chips_churro:
         type: statement
         phrase_ids: [d3-15d-churros_after_potato_chips]
-    chips-apple:
+    chips_apple:
         type: statement
         phrase_ids: [d3-15e-apple_after_potato_chips_or_churros]
-    chips-carrots:
+    chips_carrots:
         type: statement
         phrase_ids: [d3-15f-carrots_and_hummus_after_chips_or_churros]
 snacks1_outro:
@@ -1222,7 +1222,7 @@ meals1_foods:
     breakfast1_repeat:
         type: statement
         phrase_ids: [d5-07b-repeated_choice]
-    none-oatmeal:
+    none_oatmeal:
         type: question
         phrase_ids: [d5-06b-oatmeal_squares]
         responses: [because_oatmeal_healthy, no_sugar, dont_know_oatmeal]
@@ -1236,7 +1236,7 @@ meals1_foods:
     dont_know_oatmeal:
         type: statement
         phrase_ids: [d5-06c-a-p2-dont_know_or_wrong]
-    none-fiber:
+    none_fiber:
         type: dialogue
         items: [slurp, why_fiber1]
     slurp:
@@ -1273,10 +1273,10 @@ meals1_foods:
     dont_know_why:
         type: statement
         phrase_ids: [d5-06a-a-p3-dont_know_or_wrong]
-    none-cheerios:
+    none_cheerios:
         type: statement
         phrase_ids: [d5-06d-cheerios]
-    none-charms:
+    none_charms:
         type: question
         phrase_ids: [d5-06c-lucky_charms]
         responses: [because_sugar, not_healthy, dont_know_or_wrong]
@@ -1295,7 +1295,7 @@ meals1_foods:
     dont_know_or_wrong:
         type: statement
         phrase_ids: [d5-06c-a-p2-dont_know_or_wrong]
-    none-kix:
+    none_kix:
         type: dialogue
         items: [eating_air, so_airy]
     eating_air:
@@ -1304,42 +1304,42 @@ meals1_foods:
     so_airy:
         type: statement
         phrase_ids: [d5-06e-p2-so_airy]
-    cheerios-oatmeal:
+    cheerios_oatmeal:
         type: redirect
-        goal: none-oatmeal
-    cheerios-fiber:
+        goal: none_oatmeal
+    cheerios_fiber:
         type: redirect
-        goal: none-fiber
-    cheerios-charms:
+        goal: none_fiber
+    cheerios_charms:
         type: question
         phrase_ids: [d5-08a-2-lucky_charms_after_any_cheerios]
         responses: [because_sugar, not_healthy, dont_know_or_wrong]
         terminal: [because_sugar, not_healthy, dont_know_or_wrong]
-    cheerios-kix:
+    cheerios_kix:
         type: statement
         phrase_ids: [d5-08c-kix_after_cheerios]
-    charms-oatmeal:
+    charms_oatmeal:
         type: redirect
-        goal: none-oatmeal
-    charms-fiber:
+        goal: none_oatmeal
+    charms_fiber:
         type: redirect
-        goal: none-fiber
-    charms-cheerios:
+        goal: none_fiber
+    charms_cheerios:
         type: statement
         phrase_ids: [d5-08d-cheerios_after_lucky_charms]
-    charms-kix:
+    charms_kix:
         type: statement
         phrase_ids: [d5-08b-kix_after_lucky_charms]
-    kix-oatmeal:
+    kix_oatmeal:
         type: redirect
-        goal: none-oatmeal
-    kix-fiber:
+        goal: none_oatmeal
+    kix_fiber:
         type: redirect
-        goal: none-fiber
-    kix-cheerios:
+        goal: none_fiber
+    kix_cheerios:
         type: statement
         phrase_ids: [d5-08c-kix_after_cheerios]
-    kix-charms:
+    kix_charms:
         type: question
         phrase_ids: [d5-08a-1-lucky_charms_after_any_kix]
         responses: [because_sugar, not_healthy, dont_know_or_wrong]
@@ -1353,7 +1353,7 @@ meals1_foods:
     dinner_repeat:
         type: statement
         phrase_ids: [d5-12b-repeated_choice]
-    none-carrots:
+    none_carrots:
         type: question
         phrase_ids: [d5-11d-carrots]
         responses: [yes_vitamins, yes_healthy, no_dont_know_wrong]
@@ -1367,7 +1367,7 @@ meals1_foods:
     no_dont_know_wrong:
         type: statement
         phrase_ids: [d5-11d-c-no_or_no_response_or_wrong_or_dont_know]
-    none-beans:
+    none_beans:
         type: question
         phrase_ids: [d5-11c-green_beans]
         responses: [vitamins_or_fiber, just_yes, dunno_no_resp_wrong]
@@ -1383,7 +1383,7 @@ meals1_foods:
     dunno_no_resp_wrong:
         type: statement
         phrase_ids: [d5-11c-c-dont_know_or_no_response_or_wrong]
-    none-fries:
+    none_fries:
         type: question
         phrase_ids: [d5-11a-french_fries]
         responses: [yes_and_demo, yes_no_demo, no_or_wrong]
@@ -1397,7 +1397,7 @@ meals1_foods:
     no_or_wrong:
         type: statement
         phrase_ids: [d5-11a-c-if_no_or_wrong_or_dont_know]
-    none-rice:
+    none_rice:
         type: question
         phrase_ids: [d5-11b-rice]
         responses: [yes_keep_healthy, no_wrong_dont_know]
@@ -1408,26 +1408,26 @@ meals1_foods:
     no_wrong_dont_know:
         type: statement
         phrase_ids: [d5-11b-b-no_or_wrong_or_no_response_or_dont_know]
-    fries-carrots:
+    fries_carrots:
         type: redirect
-        goal: none-carrots
-    fries-beans:
+        goal: none_carrots
+    fries_beans:
         type: redirect
-        goal: none-beans
-    fries-rice:
+        goal: none_beans
+    fries_rice:
         type: question
         phrase_ids: [d5-12d-rice_after_french_fries]
         responses: [yes_keep_healthy, no_wrong_dont_know]
         terminal: [yes_keep_healthy, no_wrong_dont_know]
-    rice-carrots:
+    rice_carrots:
         type: redirect
-        goal: none-carrots
-    rice-beans:
+        goal: none_carrots
+    rice_beans:
         type: redirect
-        goal: none-beans
-    rice-fries:
+        goal: none_beans
+    rice_fries:
         type: redirect
-        goal: none-fries
+        goal: none_fries
 meals1_outro:
     outro_dialogue:
         type: dialogue
@@ -1721,30 +1721,76 @@ meals2_breakfast_foods:
         items: [wowie, other_foods]
     wowie:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-19-2-dinner_foods_round_one_continue]
     other_foods:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-20-pick_other_healthy_breakfast_foods]
     plate_chant:
         type: dialogue
         items: [rhyme_intro, rhyme]
     rhyme_intro:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-21-1-great_words, d6-21-2-now_we_say_words, d6-21-3-wonder_if_healthy_words_breakfast, d6-21-4-remember_words, d6-21-5-cool_words_breakfast]
     rhyme:
         type: statement
         phrase_ids: [d6-09-1-roar_more]
     reminder1:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-25-1-reminder_level_one]
     reminder2:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-25-2-reminder_level_two]
     reminder3:
         type: statement
-        phrase_ids: []
+        phrase_ids: [d6-25-3-reminder_level_three]
     all_good:
+        type: question
+        phrase_ids: [d6-22-all_healthy_breakfast_foods]
+        responses: [wrong_reason, correct_reason, no_resp_or_dont_know]
+        terminal: [wrong_reason, correct_reason, no_resp_or_dont_know]
+    wrong_reason:
+        type: question
+        phrase_ids: [d6-23a-if_users_reason_for_this_is_wrong]
+        responses: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
+        terminal: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
+    builds_muscles:
+        type: statement
+        phrase_ids: [d6-23a-p1-yes_and_correct]
+    yes_but_no_elaboration:
+        type: question
+        phrase_ids: [d6-23a-p2-yes_but_no_elaboration]
+        responses: [correct_muscles, still_incorrect]
+        terminal: [correct_muscles, still_incorrect]
+    correct_muscles:
+        type: statement
+        phrase_ids: [d6-23a-p2-1-correct]
+    still_incorrect:
+        type: question
+        phrase_ids: [d6-23a-p2-2-dont_know_or_wrong_or_no_response]
+        responses: [correct_muscles2, still_incorrect2]
+        terminal: [correct_muscles2, still_incorrect2]
+    correct_muscles2:
+        type: statement
+        phrase_ids: [d6-23a-p2-2-a-if_correct]
+    still_incorrect2:
+        type: statement
+        phrase_ids: [d6-23a-p2-2-b-if_still_doesnt_know]
+    dont_know_or_wrong:
+        type: redirect
+        goal: still_incorrect
+    correct_reason:
+        type: question
+        phrase_ids: [d6-23b-if_users_reason_is_right_or_partially_right]
+        responses: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
+        terminal: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong] 
+    no_resp_or_dont_know:
+        type: question
+        phrase_ids: [d6-23c-dont_know_or_no_response]
+        responses: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
+        terminal: [builds_muscles, yes_but_no_elaboration, dont_know_or_wrong]
     missing_good:
+        type: statement
+        phrase_ids: [d6-26-1-something_missing_breakfast, d6-26-2-p1-other_breakfast, d6-26-3-almost_all_breakfast, d6-26-4-p1-weird_noise_breakfast
     has_bad:
     egg1:
     egg2:
