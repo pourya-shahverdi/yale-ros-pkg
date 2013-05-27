@@ -51,7 +51,7 @@ snacks2:
         reminders: [reminder1, reminder2, reminder3]
         success: all_good
         missing_all:
-            snacks: [reminder1, reminder2, reminder3]
+            all: [reminder1, reminder2, reminder3]
         missing_good:
             all: [missing_good]
             banana: [banana1, banana2]
@@ -73,3 +73,63 @@ snacks2:
             mix: [mix3]
             apple: [apple3]
             carrot: [carrot3]
+meals2_breakfast:
+    bad: [juice, donut]
+    good: [orange, egg]
+    sometimes: []
+    groups:
+        juice: [juice]
+        orange: [orange]
+        egg: [egg]
+        donut: [donut]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder1, reminder2, reminder3]
+        success: all_good
+        missing_all:
+            all: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            egg: [egg1, egg2]
+            donut: [donut1, donut2]
+        has_bad:
+            all: [has_bad]
+            juice: [juice1, juice2]
+            orange: [orange1, orange2]
+        specific:
+            juice: [juice3]
+            orange: [orange3]
+            egg: [egg3]
+            donut: [donut3]
+meals2_dinner:
+    bad: [potato, roll]
+    good: [broccoli, salad]
+    sometimes: []
+    groups:
+        potato: [potato]
+        roll: [roll]
+        broccoli: [broccoli]
+        salad: [salad]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder1, reminder2, reminder3]
+        success: all_good
+        missing_all:
+            all: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            broccoli: [broc1, broc2]
+            salad: [salad1, salad2]
+        has_bad:
+            all: [has_bad]
+            potato: [potato1, potato2]
+            roll: [roll1, roll2]
+        specific:
+            potato: [potato3]
+            roll: [roll3]
+            broccoli: [broc3]
+            salad: [salad3]
+            
+
