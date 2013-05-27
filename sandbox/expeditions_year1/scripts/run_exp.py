@@ -33,7 +33,7 @@ def main():
 
     lesson_list = {'lunchbox':("whole_grains", "drinks"),
                    'snacks':("snacks1", "snacks2"),
-                   'meals':("breakfast1", "breakfast2", "dinner1", "dinner2")}
+                   'meals':("breakfast", "dinner")}
 
    
 
