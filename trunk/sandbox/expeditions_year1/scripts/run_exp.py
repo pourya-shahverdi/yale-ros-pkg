@@ -101,12 +101,12 @@ def main():
                                transitions={'panic':'SLEEP',
                                             'end':'F_CHOICE'})
         if day == "meals2":
-            smach.StateMachine.add('F_CHOICE1', food_state,
+            smach.StateMachine.add('F_CHOICE1', food_state1,
                                     transitions={'panic':'SLEEP',
                                                 'next_round':'F_CHOICE1',
                                                 'end':'F_CHOICE2',
                                                 'timeout':'OUTRO'})
-            smach.StateMachine.add('F_CHOICE2', food_state,
+            smach.StateMachine.add('F_CHOICE2', food_state2,
                                     transitions={'panic':'SLEEP',
                                                 'next_round':'F_CHOICE2',
                                                 'end':'OUTRO',
