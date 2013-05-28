@@ -1349,7 +1349,7 @@ meals1_foods:
         terminal: [because_sugar, not_healthy, dont_know_or_wrong]
     dinner_intro:
         type: statement
-        phrase_ids: [d5-10-1-p1-choose_eat_during_dinner]
+        phrase_ids: [d5-09-choose_dinner_sides]
     dinner_no_choice:
         type: statement
         phrase_ids: [d5-10-1-p1-choose_eat_during_dinner,d5-10-2-p1-choose_youve_eaten_before,d5-10-3-choose_looks_yummiest]
