@@ -95,7 +95,14 @@ class FoodChoiceDay1(smach.State):
         print "==============================================="
         print "+                FOOD DIALOGUE                +"
         print "-----------------------------------------------"
- 
+
+        if lesson_name == "breakfast":
+            self.dm.eye_close()
+            self.tm.change("sleep")
+            self.tm.wait_for_press("/dragon_GUI/sleep")   
+            self.dm.express("wakeup")
+            self.dm.eye_open() 
+
         self.dm.express("puppy", wait = False)
         try:
             self.dg.play_dialogue(current_lesson["intro"], wait_for_finish = False)
@@ -212,13 +219,6 @@ class FoodChoiceDay2(smach.State):
         phrases = self.fp["phrases"]
         
         if rospy.get_param("~first_time_foods"):
-            if self.day == "meals2_dinner":
-                self.dm.eye_close()
-                self.tm.change("sleep")
-                self.tm.wait_for_press("/dragon_GUI/sleep")   
-                self.dm.express("wakeup")
-                self.dm.eye_open()
-
             try:
                 self.dg.play_dialogue(phrases["intro"])
             except PanicException:
