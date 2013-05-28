@@ -1550,7 +1550,7 @@ meals2_dinner_foods:
         terminal: [colorful, yes_only, dunno_no_resp_wrong]
     use_plate:
         type: question
-        phrase_ids: []
+        phrase_ids: [d6-06-woo_what_use]
         responses: [magic_plate, dont_know_no_response]
         terminal: [magic_plate, dont_know_no_response]
     magic_plate:
