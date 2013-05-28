@@ -212,11 +212,19 @@ class FoodChoiceDay2(smach.State):
         phrases = self.fp["phrases"]
         
         if rospy.get_param("~first_time_foods"):
+            if self.day == "meals2_breakfast":
+                self.dm.eye_close()
+                self.tm.change("sleep")
+                self.tm.wait_for_press("/dragon_GUI/sleep")   
+                self.dm.express("wakeup")
+                self.dm.eye_open()
+
             try:
                 self.dg.play_dialogue(phrases["intro"])
             except PanicException:
                 return 'panic'
             except NextStateException:
+                rospy.set_param("~first_time_foods",True)
                 return 'end'
             except NextPhraseException:
                 pass
@@ -249,6 +257,7 @@ class FoodChoiceDay2(smach.State):
                 except PanicException:
                     return 'panic'
                 except NextStateException:
+                    rospy.set_param("~first_time_foods",True)
                     return 'end'
                 except NextPhraseException:
                     pass
@@ -256,6 +265,7 @@ class FoodChoiceDay2(smach.State):
                 if level < len(phrases["reminders"]) - 1:
                     self.feedback_levels["reminders"] += 1
             elif resp == "next":
+                rospy.set_param("~first_time_foods",True)
                 return 'end'
             elif resp == "--":
                 continue
@@ -354,6 +364,7 @@ class FoodChoiceDay2(smach.State):
         except PanicException:
             return 'panic'
         except NextStateException:
+            rospy.set_param("~first_time_foods",True)
             return 'end'
         except NextPhraseException:
             pass
@@ -406,6 +417,7 @@ class FoodChoiceDay2(smach.State):
                 except PanicException:
                     return 'panic'
                 except NextStateException:
+                    rospy.set_param("~first_time_foods",True)
                     return 'end'
                 except NextPhraseException:
                     pass
@@ -425,6 +437,7 @@ class FoodChoiceDay2(smach.State):
                 except PanicException:
                     return 'panic'
                 except NextStateException:
+                    rospy.set_param("~first_time_foods",True)
                     return 'end'
                 except NextPhraseException:
                     pass
@@ -474,6 +487,7 @@ class FoodChoiceDay2(smach.State):
                 except PanicException:
                     return 'panic'
                 except NextStateException:
+                    rospy.set_param("~first_time_foods",True)
                     return 'end'
                 except NextPhraseException:
                     pass
@@ -486,9 +500,11 @@ class FoodChoiceDay2(smach.State):
             except PanicException:
                 return 'panic'
             except NextStateException:
+                rospy.set_param("~first_time_foods",True)
                 return 'end'
             except NextPhraseException:
                 pass
+            rospy.set_param("~first_time_foods",True)
             return 'end'
 
         self.prev_items["good"] = good_foods
