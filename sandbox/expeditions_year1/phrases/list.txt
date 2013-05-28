@@ -827,3 +827,4 @@ d6-39-outro_time_is_out
 d6-40-p1-nice_job_fun
 d6-40-p2-user_didnt_dance
 d6-40-p3-wish_me_luck
+motion_thump

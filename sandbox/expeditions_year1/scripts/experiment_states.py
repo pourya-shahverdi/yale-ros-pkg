@@ -212,7 +212,7 @@ class FoodChoiceDay2(smach.State):
         phrases = self.fp["phrases"]
         
         if rospy.get_param("~first_time_foods"):
-            if self.day == "meals2_breakfast":
+            if self.day == "meals2_dinner":
                 self.dm.eye_close()
                 self.tm.change("sleep")
                 self.tm.wait_for_press("/dragon_GUI/sleep")   
