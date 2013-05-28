@@ -52,6 +52,7 @@ def main():
     elif day_num == 2:
         with open(roslib.packages.get_pkg_dir("expeditions_year1")+ "/yaml/day2_food_phrases.yaml", 'r') as f:
             s = f.read()
+
     else:
         print "Usage: day number must be 1 or 2"
         sys.exit()
@@ -82,9 +83,16 @@ def main():
 
     if day_num == 1:
         food_state = FoodChoiceDay1(dm, tm, info, dialogue_info[day + "_foods"],food_info)
-    elif day_num == 2:
+    elif day_num == 2 and not day == "meals2":
         food_state = FoodChoiceDay2(dm, tm, info, dialogue_info[day + "_foods"],food_info)
- 
+    elif day == "meals2":
+        day1 = day + "_dinner"
+        info1 = (day1,lessons)
+        food_state1 = FoodChoiceDay2(dm, tm, info1, dialogue_info[day1 + "_foods"],food_info)
+        day2 = day + "_breakfast"
+        info2 = (day2,lessons)
+        food_state2 = FoodChoiceDay2(dm, tm, info2, dialogue_info[day2 + "_foods"],food_info)
+
     with sm:
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
@@ -92,11 +100,23 @@ def main():
         smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info[day + "_intro"]),
                                transitions={'panic':'SLEEP',
                                             'end':'F_CHOICE'})
-        smach.StateMachine.add('F_CHOICE', food_state,
-                               transitions={'panic':'SLEEP',
-                                            'next_round':'F_CHOICE',
-                                            'end':'OUTRO',
-                                            'timeout':'OUTRO'})
+        if day == "meals2":
+            smach.StateMachine.add('F_CHOICE1', food_state,
+                                    transitions={'panic':'SLEEP',
+                                                'next_round':'F_CHOICE1',
+                                                'end':'F_CHOICE2',
+                                                'timeout':'OUTRO'})
+            smach.StateMachine.add('F_CHOICE2', food_state,
+                                    transitions={'panic':'SLEEP',
+                                                'next_round':'F_CHOICE2',
+                                                'end':'OUTRO',
+                                                'timeout':'OUTRO'})
+        else:
+            smach.StateMachine.add('F_CHOICE', food_state,
+                                   transitions={'panic':'SLEEP',
+                                                'next_round':'F_CHOICE',
+                                                'end':'OUTRO',
+                                                'timeout':'OUTRO'})
         #smach.StateMachine.add('WORKOUT', Workout(dm, tm, info, dialogue_info[day + "_workout"]),
         #                       transitions={'panic':'SLEEP',
         #                                    'continue':'WORKOUT',
