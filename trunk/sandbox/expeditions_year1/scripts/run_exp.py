@@ -97,10 +97,11 @@ def main():
         smach.StateMachine.add('SLEEP', Sleep(dm, tm, info),
                                transitions={'wakeup':'INTRO',
                                             'done':'end'})
-        smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info[day + "_intro"]),
-                               transitions={'panic':'SLEEP',
-                                            'end':'F_CHOICE'})
+        
         if day == "meals2":
+            smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info[day + "_intro"]),
+                                    transitions={'panic':'SLEEP',
+                                                'end':'F_CHOICE1'})
             smach.StateMachine.add('F_CHOICE1', food_state1,
                                     transitions={'panic':'SLEEP',
                                                 'next_round':'F_CHOICE1',
@@ -112,6 +113,9 @@ def main():
                                                 'end':'OUTRO',
                                                 'timeout':'OUTRO'})
         else:
+            smach.StateMachine.add('INTRO', Intro(dm, tm, info, dialogue_info[day + "_intro"]),
+                                    transitions={'panic':'SLEEP',
+                                                'end':'F_CHOICE'})
             smach.StateMachine.add('F_CHOICE', food_state,
                                    transitions={'panic':'SLEEP',
                                                 'next_round':'F_CHOICE',
