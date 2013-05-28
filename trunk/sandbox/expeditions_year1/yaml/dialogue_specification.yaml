@@ -1229,13 +1229,13 @@ meals1_foods:
         terminal: [because_oatmeal_healthy, no_sugar, dont_know_oatmeal]
     because_oatmeal_healthy:
         type: statement
-        phrase_ids: [d5-06c-a-general_answer]
+        phrase_ids: [d5-06b-a-general_answer]
     no_sugar:
         type: statement
-        phrase_ids: [d5-06c-a-p1-sugar_or_sweet]
+        phrase_ids: [d5-06b-b-great_answer]
     dont_know_oatmeal:
         type: statement
-        phrase_ids: [d5-06c-a-p2-dont_know_or_wrong]
+        phrase_ids: [d5-06b-c-dont_know_or_no_response]
     none_fiber:
         type: dialogue
         items: [slurp, why_fiber1]
@@ -1249,7 +1249,10 @@ meals1_foods:
         terminal: [because_fiber, dont_know_fiber, because_its_healthy]
     because_fiber:
         type: dialogue
-        items: [because_fiber1, because_fiber2]
+        items: [because_fiber1, thump, because_fiber2]
+    thump:
+        type: statement
+        phrase_ids: [motion_thump]
     because_fiber1:
         type: statement
         phrase_ids: [d5-06a-a-p1-1-great_answer_pre_thump]
