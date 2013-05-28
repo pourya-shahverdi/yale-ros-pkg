@@ -580,96 +580,96 @@ d4-33-2-p2-outro_time_is_out_naptime_post_fart surprised.act
 d4-34-p1-phew_fun_feeling_better
 d4-34-p2-user_didnt_dance
 d4-34-p3-naptime_train puppy.act
-d5-01a-woo
-d5-01b-so_cool
+d5-01a-woo lovestruck.act
+d5-01b-so_cool lovestruck.act
 d5-01c-dont_know
 d5-01d-hm_interesting
-d5-01e-aw_phooey
-d5-01f-frown_upside_down
-d5-01-hiya_friend
-d5-02a-if_yes_or_good_activity
-d5-02-anything_you_want_to_do
+d5-01e-aw_phooey sad.act
+d5-01f-frown_upside_down d5-01f-frown_upside_down.act
+d5-01-hiya_friend d5-01-hiya_friend.act
+d5-02a-if_yes_or_good_activity puppy.act
+d5-02-anything_you_want_to_do d5-02-anything_you_want_to_do.act
 d5-02b-if_no_or_dont_know_or_no_response
 d5-03-p1-learn_about_healthier_meals
-d5-03-p2-lay_down_and_sleep
-d5-04a-if_yes
+d5-03-p2-lay_down_and_sleep puppy.act
+d5-04a-if_yes lovestruck.act
 d5-04b-no_response_or_doesnt_know
-d5-04c-if_no
-d5-04-do_you_eat_breakfast
-d5-05-p1-choose_cereal
+d5-04c-if_no confused.act
+d5-04-do_you_eat_breakfast d5-04-do_you_eat_breakfast.act
+d5-05-p1-choose_cereal d5-05-p1-choose_cereal.act
 d5-05-p2-1-choose_you_would_eat
 d5-05-p2-2-choose_youve_eaten_before
 d5-05-p2-3-choose_looks_yummiest
 d5-06a-a-general_answer
-d5-06a-a-p1-1-great_answer_pre_thump
+d5-06a-a-p1-1-great_answer_pre_thump surprised.act
 d5-06a-a-p1-2-great_answer_post_thump
 d5-06a-a-p2-so_so_answer
-d5-06a-a-p3-dont_know_or_wrong
-d5-06a-c-doesnt_know_or_no_answer_or_wrong
+d5-06a-a-p3-dont_know_or_wrong confused.act
+d5-06a-c-doesnt_know_or_no_answer_or_wrong d5-06a-c-doesnt_know_or_no_answer_or_wrong.act
 d5-06a-p1-slurps_lips
-d5-06a-p2-fiber_one
-d5-06b-a-general_answer
+d5-06a-p2-fiber_one d5-06a-p2-fiber_one.act
+d5-06b-a-general_answer lovestruck.act
 d5-06b-b-great_answer
-d5-06b-c-dont_know_or_no_response
-d5-06b-oatmeal_squares
+d5-06b-c-dont_know_or_no_response puppy.act
+d5-06b-oatmeal_squares lovestruck.act
 d5-06c-a-general_answer
-d5-06c-a-p1-sugar_or_sweet
+d5-06c-a-p1-sugar_or_sweet surprised.act
 d5-06c-a-p2-dont_know_or_wrong
-d5-06c-b-great_answer
-d5-06c-lucky_charms
+d5-06c-b-great_answer surprised.act
+d5-06c-lucky_charms disgusted.act
 d5-06d-a-dont_know
-d5-06d-cheerios
-d5-06e-p1-eating_air
-d5-06e-p2-so_airy
+d5-06d-cheerios d5-06d-cheerios.act
+d5-06e-p1-eating_air disgusted.act
+d5-06e-p2-so_airy disgusted.act
 d5-07a-a-i_dont_know
 d5-07a-no_choice
 d5-07b-a-i_dont_know
 d5-07b-repeated_choice
-d5-08a-1-lucky_charms_after_any_kix
-d5-08a-2-lucky_charms_after_any_cheerios
-d5-08a-3-lucky_charms_after_any_kix_and_cheerios
-d5-08a-4-lucky_charms_after_any_kix_or_cheerios
+d5-08a-1-lucky_charms_after_any_kix d5-08a-1-lucky_charms_after_any_kix.act
+d5-08a-2-lucky_charms_after_any_cheerios d5-08a-2-lucky_charms_after_any_cheerios.act
+d5-08a-3-lucky_charms_after_any_kix_and_cheerios d5-08a-3-lucky_charms_after_any_kix_and_cheerios.act
+d5-08a-4-lucky_charms_after_any_kix_or_cheerios d5-08a-3-lucky_charms_after_any_kix_and_cheerios.act
 d5-08b-kix_after_lucky_charms
-d5-08c-a-i_dont_know
-d5-08c-kix_after_cheerios
+d5-08c-a-i_dont_know puppy.act
+d5-08c-kix_after_cheerios d5-08c-kix_after_cheerios.act
 d5-08d-a-i_dont_know
 d5-08d-cheerios_after_lucky_charms
 d5-08e-a-i_dont_know
-d5-08e-cheerios_after_kix
-d5-09-choose_dinner_sides
+d5-08e-cheerios_after_kix d5-08c-kix_after_cheerios.act
+d5-09-choose_dinner_sides d5-09-choose_dinner_sides.act
 d5-10-1-p1-choose_eat_during_dinner
 d5-10-1-p2-dont_know
 d5-10-2-p1-choose_youve_eaten_before
 d5-10-2-p2-dont_know
 d5-10-3-choose_looks_yummiest
-d5-11a-a-if_yes_and_demonstrates
-d5-11a-b-if_yes_but_no_demonstration
+d5-11a-a-if_yes_and_demonstrates lovestruck.act
+d5-11a-b-if_yes_but_no_demonstration lovestruck.act
 d5-11a-c-if_no_or_wrong_or_dont_know
-d5-11a-french_fries
-d5-11b-a-yes_or_correct
+d5-11a-french_fries disgusted.act
+d5-11b-a-yes_or_correct surprised.act
 d5-11b-b-no_or_wrong_or_no_response_or_dont_know
-d5-11b-rice
-d5-11c-a-yes_or_correct
+d5-11b-rice d5-11b-rice.act
+d5-11c-a-yes_or_correct lovestruck.act
 d5-11c-b-just_yes
-d5-11c-c-dont_know_or_no_response_or_wrong
-d5-11c-green_beans
-d5-11d-a-yes_vitamins
+d5-11c-c-dont_know_or_no_response_or_wrong lovestruck.act
+d5-11c-green_beans d5-11c-green_beans.act
+d5-11d-a-yes_vitamins surprised.act
 d5-11d-b-yes_healthy_keep_us_from_getting_sick
-d5-11d-carrots
+d5-11d-carrots d5-11c-green_beans.act
 d5-11d-c-no_or_no_response_or_wrong_or_dont_know
 d5-12a-a-dont_know
 d5-12a-no_choice
-d5-12b-repeated_choice
-d5-12d-rice_after_french_fries
-d5-13-p1-no_items
-d5-13-p2-no_items
-d5-13-1-fiber_one_and_green_beans
-d5-13-2-fiber_one_and_orange_carrots
-d5-13-3-oatmeal_squares_and_green_beans
-d5-13-4-oatmeal_squares_and_orange_carrots
+d5-12b-repeated_choice disgusted.act
+d5-12d-rice_after_french_fries d5-12d-rice_after_french_fries.act
+d5-13-p1-no_items lovestruck.act
+d5-13-p2-no_items puppy.act
+d5-13-1-fiber_one_and_green_beans d5-13-1-fiber_one_and_green_beans.act
+d5-13-2-fiber_one_and_orange_carrots d5-13-1-fiber_one_and_green_beans.act
+d5-13-3-oatmeal_squares_and_green_beans d5-13-1-fiber_one_and_green_beans.act
+d5-13-4-oatmeal_squares_and_orange_carrots d5-13-1-fiber_one_and_green_beans.act
 d5-24-p1-moving_around_great_training_stay_healthy
 d5-24-p2-user_didnt_dance
-d5-24-p3-naptime_healthy_dinner_veggies
+d5-24-p3-naptime_healthy_dinner_veggies d5-24-p3-naptime_healthy_dinner_veggies.act
 d6-01a-yes
 d6-01b-dont_know_or_no_response
 d6-01c-no

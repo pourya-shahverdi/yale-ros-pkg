@@ -1,0 +1,4 @@
+- {id: lovestruck, start: 0.0, type: expression}
+- {id: puppy, start: 3.0, type: expression}
+- {id: puppy, start: 7.0, type: expression}
+- {id: yay.act, start: 11.0, type: expression}
