@@ -1513,8 +1513,8 @@ meals2_dinner_foods:
     yes_only:
         type: question
         phrase_ids: [d6-05a-b-yes_but_no_elaboration]
-        responses: [color, other_answer]
-        terminal: [color, other_answer]
+        responses: [color, other_answers]
+        terminal: [color, other_answers]
     color:
         type: statement
         phrase_ids: [d6-05a-b-p1-color]
