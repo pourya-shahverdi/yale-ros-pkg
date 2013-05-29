@@ -92,11 +92,11 @@ meals2_breakfast:
         missing_good:
             all: [missing_good]
             egg: [egg1, egg2]
-            donut: [donut1, donut2]
+            orange: [orange1, orange2]
         has_bad:
             all: [has_bad]
             juice: [juice1, juice2]
-            orange: [orange1, orange2]
+            donut: [donut1, donut2]
         specific:
             juice: [juice3]
             orange: [orange3]

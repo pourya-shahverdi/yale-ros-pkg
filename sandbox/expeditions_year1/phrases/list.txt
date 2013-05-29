@@ -591,7 +591,7 @@ d5-02a-if_yes_or_good_activity puppy.act
 d5-02-anything_you_want_to_do d5-02-anything_you_want_to_do.act
 d5-02b-if_no_or_dont_know_or_no_response
 d5-03-p1-learn_about_healthier_meals
-d5-03-p2-lay_down_and_sleep puppy.act
+d5-03-p2-lay_down_and_sleep
 d5-04a-if_yes lovestruck.act
 d5-04b-no_response_or_doesnt_know
 d5-04c-if_no confused.act
