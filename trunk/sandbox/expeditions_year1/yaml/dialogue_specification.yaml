@@ -1555,7 +1555,7 @@ meals2_dinner_foods:
         terminal: [magic_plate, dont_know_no_response]
     magic_plate:
         type: statement
-        phrase_ids: [d6-06-woo_what_use]
+        phrase_ids: [d6-06a-if_correct_magic_plate]
     dont_know_no_response:
         type: question
         phrase_ids: [d6-06b-wrong_or_dont_know_or_no_response_try_to_lead]

@@ -97,12 +97,12 @@
     topic: dragon_GUI/stopped_dancing
 
 
-- gui: whole_grains
+- gui: dinner
   elements:
   - type: button_group
-    label: whole_grains
-    label_string: bagel;muffin;white;grain;whbagel;no_choice;next;panic
-    topic: dragon_GUI/whole_grains
+    label: dinner
+    label_string: beans;carrots;fries;rice;no_choice;next;panic
+    topic: dragon_GUI/dinner
 - gui: snacks1
   elements:
   - type: button_group
@@ -115,12 +115,476 @@
     label: snacks2
     label_string: carrots;chips;apple;churro;no_choice;next;panic
     topic: dragon_GUI/snacks2
+- gui: whole_grains
+  elements:
+  - type: button_group
+    label: whole_grains
+    label_string: bagel;muffin;white;grain;whbagel;no_choice;next;panic
+    topic: dragon_GUI/whole_grains
+- gui: breakfast
+  elements:
+  - type: button_group
+    label: breakfast
+    label_string: oatmeal;cheerios;kix;charms;fiber;no_choice;next;panic
+    topic: dragon_GUI/breakfast
 - gui: drinks
   elements:
   - type: button_group
     label: drinks
     label_string: water;juice;milk;chocolate_milk;soda;no_choice;next;panic
     topic: dragon_GUI/drinks
+- gui: meals2_dinner_
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: '--'
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;potato;roll;salad
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_potato_roll_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;potato;roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: '--'
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: potato;roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_potato
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: potato
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_roll
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;potato;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;potato;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_potato
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;potato
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_roll
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: potato;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: potato;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_potato_roll
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: potato;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_potato_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: potato;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_roll_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli;potato
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_potato_roll
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;potato;roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_potato_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;potato;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: roll
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_broccoli_roll_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: broccoli;roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: potato
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_dinner_potato_roll_salad
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: potato;roll;salad
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: broccoli
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: '--'
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;egg;juice;orange
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_egg_juice_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;egg;juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: '--'
+    topic: dragon_GUI/food_deselect
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: egg;juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_egg
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: egg
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_juice
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;egg;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;egg;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_egg
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;egg
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_juice
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: egg;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: egg;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_egg_juice
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: egg;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_egg_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: egg;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_juice_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut;egg
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_egg_juice
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;egg;juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_egg_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;egg;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: juice
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_donut_juice_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: donut;juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: egg
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
+- gui: meals2_breakfast_egg_juice_orange
+  elements:
+  - type: button_group
+    label: "Selected foods: Press to deselect"
+    label_string: egg;juice;orange
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "Unselected Foods: Press to select"
+    label_string: donut
+    topic: dragon_GUI/food_select
+  - type: button_group
+    label: "GO (press to activate 'magic plate')"
+    label_string: GO;reminder;next;panic
+    topic: dragon_GUI/food_select
 - gui: lunchbox2_
   elements:
   - type: button_group
@@ -18052,6 +18516,252 @@
     label: lunchbox2_outro wrap_up
     label_string: dance;no_dance;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_outro_wrap_up
+- gui: meals1_intro_wanna_do
+  elements:
+  - type: button_group
+    label: meals1_intro wanna_do
+    label_string: yes_activity;no_or_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_intro_wanna_do
+- gui: meals1_intro_whats_up
+  elements:
+  - type: button_group
+    label: meals1_intro whats_up
+    label_string: good_resp;bad_resp;dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_intro_whats_up
+- gui: lunchbox2_intro_do_fun
+  elements:
+  - type: button_group
+    label: lunchbox2_intro do_fun
+    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_do_fun
+- gui: lunchbox2_intro_know_fly
+  elements:
+  - type: button_group
+    label: lunchbox2_intro know_fly
+    label_string: yes_know;no_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_know_fly
+- gui: lunchbox2_intro_what_learned
+  elements:
+  - type: button_group
+    label: lunchbox2_intro what_learned
+    label_string: correct_learned;wrong_learned;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox2_intro_what_learned
+- gui: lunchbox1_intro_name
+  elements:
+  - type: button_group
+    label: lunchbox1_intro name
+    label_string: give_name;cant_hear;not_name;give_up;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_intro_name
+- gui: lunchbox1_intro_help_me
+  elements:
+  - type: button_group
+    label: lunchbox1_intro help_me
+    label_string: help_yes;help_no;repeat_no;repeat_no2;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_intro_help_me
+- gui: lunchbox1_intro_like_to_eat
+  elements:
+  - type: button_group
+    label: lunchbox1_intro like_to_eat
+    label_string: good_choice;non-human_choice;unknown_single;unknown_pl;favorite;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_intro_like_to_eat
+- gui: meals2_dinner_foods_dunno_no_resp_wrong
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods dunno_no_resp_wrong
+    label_string: color;other_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_dunno_no_resp_wrong
+- gui: meals2_dinner_foods_other_answer1
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods other_answer1
+    label_string: magic_plate;other_answer2;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_other_answer1
+- gui: meals2_dinner_foods_choose_healthy
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods choose_healthy
+    label_string: veggies;other_or_no_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_choose_healthy
+- gui: meals2_dinner_foods_what_learned
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods what_learned
+    label_string: choose_veggies;choose_healthy;dont_know_no_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_what_learned
+- gui: meals2_dinner_foods_remember_rhyme
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods remember_rhyme
+    label_string: right_rhyme;any_other_response;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_remember_rhyme
+- gui: meals2_dinner_foods_choose_veggies
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods choose_veggies
+    label_string: colorful;yes_only;dunno_no_resp_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_choose_veggies
+- gui: meals2_dinner_foods_all_good
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods all_good
+    label_string: correct_why;incorrect_why;correct_why_no_vitamins;dont_know_why;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_all_good
+- gui: meals2_dinner_foods_dont_know_no_response
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods dont_know_no_response
+    label_string: magic_plate;other_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_dont_know_no_response
+- gui: meals2_dinner_foods_yes_no_elaboration
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods yes_no_elaboration
+    label_string: because_vitamins;dont_know_why1;other_valid_answer;wrong_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_yes_no_elaboration
+- gui: meals2_dinner_foods_yes_only
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods yes_only
+    label_string: color;other_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_yes_only
+- gui: meals2_dinner_foods_incorrect_why
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods incorrect_why
+    label_string: because_vitamins;yes_no_elaboration;other_valid_answer;dont_know_why1;wrong_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_incorrect_why
+- gui: meals2_dinner_foods_other_answer
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods other_answer
+    label_string: magic_plate;other_answer1;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_other_answer
+- gui: meals2_dinner_foods_use_plate
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods use_plate
+    label_string: magic_plate;dont_know_no_response;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_use_plate
+- gui: meals2_dinner_foods_dont_know_no_resp
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods dont_know_no_resp
+    label_string: colorful;yes_only;dunno_no_resp_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_dont_know_no_resp
+- gui: meals2_dinner_foods_dont_know_why
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods dont_know_why
+    label_string: because_vitamins;yes_no_elaboration;other_valid_answer;dont_know_why1;wrong_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_dont_know_why
+- gui: meals2_dinner_foods_correct_why_no_vitamins
+  elements:
+  - type: button_group
+    label: meals2_dinner_foods correct_why_no_vitamins
+    label_string: because_vitamins;yes_no_elaboration;other_valid_answer;dont_know_why1;wrong_answer;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_dinner_foods_correct_why_no_vitamins
+- gui: snacks1_intro_fun_things
+  elements:
+  - type: button_group
+    label: snacks1_intro fun_things
+    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_fun_things
+- gui: snacks1_intro_fav_snacks
+  elements:
+  - type: button_group
+    label: snacks1_intro fav_snacks
+    label_string: healthy;okay_snack;unhealthy;unknown_singular;unknown_plural;dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_fav_snacks
+- gui: snacks1_intro_help_choose
+  elements:
+  - type: button_group
+    label: snacks1_intro help_choose
+    label_string: yes_help;no_help;irrelevant_or_no_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/snacks1_intro_help_choose
+- gui: meals1_foods_why_fiber1
+  elements:
+  - type: button_group
+    label: meals1_foods why_fiber1
+    label_string: because_fiber;dont_know_fiber;because_its_healthy;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_why_fiber1
+- gui: meals1_foods_do_eat_breakfast
+  elements:
+  - type: button_group
+    label: meals1_foods do_eat_breakfast
+    label_string: yes_breakfast;silence_or_dont_know;no_breakfast;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_do_eat_breakfast
+- gui: meals1_foods_none_rice
+  elements:
+  - type: button_group
+    label: meals1_foods none_rice
+    label_string: yes_keep_healthy;no_wrong_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_rice
+- gui: meals1_foods_none_beans
+  elements:
+  - type: button_group
+    label: meals1_foods none_beans
+    label_string: vitamins_or_fiber;just_yes;dunno_no_resp_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_beans
+- gui: meals1_foods_kix_charms
+  elements:
+  - type: button_group
+    label: meals1_foods kix_charms
+    label_string: because_sugar;not_healthy;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_kix_charms
+- gui: meals1_foods_not_healthy
+  elements:
+  - type: button_group
+    label: meals1_foods not_healthy
+    label_string: because_of_sugar;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_not_healthy
+- gui: meals1_foods_cheerios_charms
+  elements:
+  - type: button_group
+    label: meals1_foods cheerios_charms
+    label_string: because_sugar;not_healthy;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_cheerios_charms
+- gui: meals1_foods_because_its_healthy
+  elements:
+  - type: button_group
+    label: meals1_foods because_its_healthy
+    label_string: good_for_heart;close_answer;dont_know_why;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_because_its_healthy
+- gui: meals1_foods_none_fries
+  elements:
+  - type: button_group
+    label: meals1_foods none_fries
+    label_string: yes_and_demo;yes_no_demo;no_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_fries
+- gui: meals1_foods_fries_rice
+  elements:
+  - type: button_group
+    label: meals1_foods fries_rice
+    label_string: yes_keep_healthy;no_wrong_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_fries_rice
+- gui: meals1_foods_just_yes
+  elements:
+  - type: button_group
+    label: meals1_foods just_yes
+    label_string: vitamins_or_fiber;dunno_no_resp_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_just_yes
+- gui: meals1_foods_none_carrots
+  elements:
+  - type: button_group
+    label: meals1_foods none_carrots
+    label_string: yes_vitamins;yes_healthy;no_dont_know_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_carrots
+- gui: meals1_foods_none_charms
+  elements:
+  - type: button_group
+    label: meals1_foods none_charms
+    label_string: because_sugar;not_healthy;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_charms
+- gui: meals1_foods_none_oatmeal
+  elements:
+  - type: button_group
+    label: meals1_foods none_oatmeal
+    label_string: because_oatmeal_healthy;no_sugar;dont_know_oatmeal;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals1_foods_none_oatmeal
 - gui: lunchbox2_foods_all_good
   elements:
   - type: button_group
@@ -18064,6 +18774,54 @@
     label: lunchbox1_outro wrap_up
     label_string: dance;no_dance;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox1_outro_wrap_up
+- gui: lunchbox1_workout_finished_dancing
+  elements:
+  - type: button_group
+    label: lunchbox1_workout finished_dancing
+    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_finished_dancing
+- gui: lunchbox1_workout_break1
+  elements:
+  - type: button_group
+    label: lunchbox1_workout break1
+    label_string: yes_break1;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_break1
+- gui: lunchbox1_workout_keep_going
+  elements:
+  - type: button_group
+    label: lunchbox1_workout keep_going
+    label_string: dance_more;no_more;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_keep_going
+- gui: lunchbox1_workout_break2
+  elements:
+  - type: button_group
+    label: lunchbox1_workout break2
+    label_string: yes_break2;no_break;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_break2
+- gui: lunchbox1_workout_victory_again
+  elements:
+  - type: button_group
+    label: lunchbox1_workout victory_again
+    label_string: yes_victory;vic_again_no;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_victory_again
+- gui: lunchbox1_workout_victory_dance
+  elements:
+  - type: button_group
+    label: lunchbox1_workout victory_dance
+    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_victory_dance
+- gui: lunchbox1_workout_new_song
+  elements:
+  - type: button_group
+    label: lunchbox1_workout new_song
+    label_string: yes_change;no_change;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_new_song
+- gui: lunchbox1_workout_intro
+  elements:
+  - type: button_group
+    label: lunchbox1_workout intro
+    label_string: like_dance;no_like_dance;next_phrase;next_segment;panic
+    topic: dragon_GUI/lunchbox1_workout_intro
 - gui: lunchbox2_workout_finished_dancing
   elements:
   - type: button_group
@@ -18124,108 +18882,6 @@
     label: lunchbox2_workout new_song
     label_string: yes_change;no_change;next_phrase;next_segment;panic
     topic: dragon_GUI/lunchbox2_workout_new_song
-- gui: lunchbox2_intro_do_fun
-  elements:
-  - type: button_group
-    label: lunchbox2_intro do_fun
-    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_intro_do_fun
-- gui: lunchbox2_intro_know_fly
-  elements:
-  - type: button_group
-    label: lunchbox2_intro know_fly
-    label_string: yes_know;no_know;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_intro_know_fly
-- gui: lunchbox2_intro_what_learned
-  elements:
-  - type: button_group
-    label: lunchbox2_intro what_learned
-    label_string: correct_learned;wrong_learned;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox2_intro_what_learned
-- gui: lunchbox1_intro_name
-  elements:
-  - type: button_group
-    label: lunchbox1_intro name
-    label_string: give_name;cant_hear;not_name;give_up;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_intro_name
-- gui: lunchbox1_intro_help_me
-  elements:
-  - type: button_group
-    label: lunchbox1_intro help_me
-    label_string: help_yes;help_no;repeat_no;repeat_no2;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_intro_help_me
-- gui: lunchbox1_intro_like_to_eat
-  elements:
-  - type: button_group
-    label: lunchbox1_intro like_to_eat
-    label_string: good_choice;non-human_choice;unknown_single;unknown_pl;favorite;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_intro_like_to_eat
-- gui: lunchbox1_workout_finished_dancing
-  elements:
-  - type: button_group
-    label: lunchbox1_workout finished_dancing
-    label_string: yes_finished;no_finished;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_finished_dancing
-- gui: lunchbox1_workout_break1
-  elements:
-  - type: button_group
-    label: lunchbox1_workout break1
-    label_string: yes_break1;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_break1
-- gui: lunchbox1_workout_keep_going
-  elements:
-  - type: button_group
-    label: lunchbox1_workout keep_going
-    label_string: dance_more;no_more;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_keep_going
-- gui: lunchbox1_workout_break2
-  elements:
-  - type: button_group
-    label: lunchbox1_workout break2
-    label_string: yes_break2;no_break;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_break2
-- gui: lunchbox1_workout_intro
-  elements:
-  - type: button_group
-    label: lunchbox1_workout intro
-    label_string: like_dance;no_like_dance;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_intro
-- gui: lunchbox1_workout_victory_again
-  elements:
-  - type: button_group
-    label: lunchbox1_workout victory_again
-    label_string: yes_victory;vic_again_no;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_victory_again
-- gui: lunchbox1_workout_victory_dance
-  elements:
-  - type: button_group
-    label: lunchbox1_workout victory_dance
-    label_string: yes_victory;no_victory;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_victory_dance
-- gui: lunchbox1_workout_new_song
-  elements:
-  - type: button_group
-    label: lunchbox1_workout new_song
-    label_string: yes_change;no_change;next_phrase;next_segment;panic
-    topic: dragon_GUI/lunchbox1_workout_new_song
-- gui: snacks1_intro_fun_things
-  elements:
-  - type: button_group
-    label: snacks1_intro fun_things
-    label_string: good_resp;bad_resp;next_phrase;next_segment;panic
-    topic: dragon_GUI/snacks1_intro_fun_things
-- gui: snacks1_intro_fav_snacks
-  elements:
-  - type: button_group
-    label: snacks1_intro fav_snacks
-    label_string: healthy;okay_snack;unhealthy;unknown_singular;unknown_plural;dont_know;next_phrase;next_segment;panic
-    topic: dragon_GUI/snacks1_intro_fav_snacks
-- gui: snacks1_intro_help_choose
-  elements:
-  - type: button_group
-    label: snacks1_intro help_choose
-    label_string: yes_help;no_help;irrelevant_or_no_resp;next_phrase;next_segment;panic
-    topic: dragon_GUI/snacks1_intro_help_choose
 - gui: snacks2_foods_remember_rhyme
   elements:
   - type: button_group
@@ -18244,6 +18900,60 @@
     label: snacks2_foods guess_plate
     label_string: yes_plate;no_plate;dont_know_plate;next_phrase;next_segment;panic
     topic: dragon_GUI/snacks2_foods_guess_plate
+- gui: meals2_intro_think_ready
+  elements:
+  - type: button_group
+    label: meals2_intro think_ready
+    label_string: yes_ready;no_ready;dont_know_no_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_intro_think_ready
+- gui: meals2_intro_help_me
+  elements:
+  - type: button_group
+    label: meals2_intro help_me
+    label_string: yes_help;no_help;dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_intro_help_me
+- gui: meals2_intro_hi_friend
+  elements:
+  - type: button_group
+    label: meals2_intro hi_friend
+    label_string: yes_excited;dont_know_excited;no_excited;irrelevant_resp;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_intro_hi_friend
+- gui: meals2_breakfast_foods_wrong_reason
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods wrong_reason
+    label_string: builds_muscles;yes_but_no_elaboration;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_wrong_reason
+- gui: meals2_breakfast_foods_yes_but_no_elaboration
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods yes_but_no_elaboration
+    label_string: correct_muscles;still_incorrect;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_yes_but_no_elaboration
+- gui: meals2_breakfast_foods_still_incorrect
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods still_incorrect
+    label_string: correct_muscles2;still_incorrect2;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_still_incorrect
+- gui: meals2_breakfast_foods_no_resp_or_dont_know
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods no_resp_or_dont_know
+    label_string: builds_muscles;yes_but_no_elaboration;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_no_resp_or_dont_know
+- gui: meals2_breakfast_foods_all_good
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods all_good
+    label_string: wrong_reason;correct_reason;no_resp_or_dont_know;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_all_good
+- gui: meals2_breakfast_foods_correct_reason
+  elements:
+  - type: button_group
+    label: meals2_breakfast_foods correct_reason
+    label_string: builds_muscles;yes_but_no_elaboration;dont_know_or_wrong;next_phrase;next_segment;panic
+    topic: dragon_GUI/meals2_breakfast_foods_correct_reason
 - gui: snacks2_intro_feel_bad
   elements:
   - type: button_group
