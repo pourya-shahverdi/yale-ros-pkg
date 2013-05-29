@@ -1518,14 +1518,14 @@ meals2_dinner_foods:
     color:
         type: statement
         phrase_ids: [d6-05a-b-p1-color]
-    other_answer:
+    other_answers:
         type: statement
         phrase_ids: [d6-05a-c-p2-dont_know_or_no_response_or_wrong]
     dunno_no_resp_wrong:
         type: question
         phrase_ids: [d6-05a-c-no_or_dont_know_or_no_response_or_wrong]
-        responses: [color, other_answer]
-        terminal: [color, other_answer]
+        responses: [color, other_answers]
+        terminal: [color, other_answers]
     choose_healthy:
         type: question
         phrase_ids: [d6-05b-if_generally_correct]
