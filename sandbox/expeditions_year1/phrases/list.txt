@@ -671,8 +671,8 @@ d5-24-p1-moving_around_great_training_stay_healthy
 d5-24-p2-user_didnt_dance
 d5-24-p3-naptime_healthy_dinner_veggies d5-24-p3-naptime_healthy_dinner_veggies.act
 d6-01a-yes lovestruck.act
-d6-01b-dont_know_or_no_response surprise.act
-d6-01c-no surprise.act
+d6-01b-dont_know_or_no_response surprised.act
+d6-01c-no surprised.act
 d6-01d-random_response
 d6-01-hiya_almost_time lovestruck.act
 d6-02a-yes lovestruck.act
