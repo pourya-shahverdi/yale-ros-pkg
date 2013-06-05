@@ -3,18 +3,19 @@
 #Elaine Short
 #Tablet python interface
 
-import roslib; roslib.load_manifest('expeditions_year1')
+import roslib; roslib.load_manifest('dragonbot_teleop_dialogue')
 import rospy
-from dragonbot_simulator import DragonbotManager
 from std_msgs.msg import String
 from std_msgs.msg import Int32
 from std_msgs.msg import Duration
 from interface_srv.srv import *
 from interface_srv.msg import GUIElement
-import sys
+from Tkinter import *
+from tkFont import *
+
 
 class TabletSimulator():
-    def __init__(self):
+    def __init__(self, tk_master):
         rospy.wait_for_service('gui_srv')
         try:
             srv_gui = rospy.ServiceProxy('gui_srv', GUIList)
@@ -25,83 +26,63 @@ class TabletSimulator():
         self.guis = guis.guis
         self.topic_change_sub = rospy.Subscriber('/change_topic', String, self.topic_change) 
         self.gui_changed = False
-        print "Tablet Started"
-        
-        while not self.gui_changed and not rospy.is_shutdown():
-            rospy.sleep(0.5)
+        rospy.loginfo("Tablet Started")
 
-            
-        while not rospy.is_shutdown():
-            print '================================================='
-            print '          ' + self.goal_gui
-            print '================================================='
-            i = 0
-            for g in self.get_gui(self.goal_gui).elements:
-                i = i + 1
-                kind = g.type
-                if kind == GUIElement.BUTTON_ID:
-                    print str(i) + ": Button " + g.label
-                    print "    1: press button"
-                elif kind == GUIElement.BUTTONGROUP_ID:
-                    print  str(i) + ": Button Group " + g.label
-                    j = 0
-                    for l in g.label_string.split(';'):
-                        j = j + 1
-                        print "    " +  str(j) + ": " + l
-                elif kind == GUIElement.INTSLIDER_ID:
-                    print str(i) + ": Slider " + g.label
-            
-            self.gui_changed = False
-            while not self.gui_changed:
-                print '================================================='
-                print "Enter update: <element number>-<value> (e.g. 1-3)"
-                print '-------------------------------------------------'
-                s = raw_input()
-                try:
-                    vals = s.split('-')
-                    item = int(vals[0])
-                    value = int(vals[1])
-                except:
-                    print "Bad input"
-
-                gui_item = self.get_gui(self.goal_gui).elements[item-1]
-                kind = gui_item.type
-                if kind == GUIElement.BUTTON_ID:
-                    topic_type = Int32
-                    value = 0
-                elif kind == GUIElement.BUTTONGROUP_ID:
-                    topic_type = String
-                    value = gui_item.label_string.split(';')[value-1]
-                elif kind == GUIElement.INTSLIDER_ID:
-                    topic_type = Int32
-                    if value > gui_item.max or value < gui_item.min:
-                        print "Bad value."
-                        continue
-                p = rospy.Publisher(gui_item.topic, topic_type)
-
-                if self.gui_changed:
-                    break
-                else:
-                    p.publish(value)
-
+        self.window = tk_master
+        self.frame = Frame(self.window)
+        self.frame.grid(padx = 10, pady = 10)
 
     def get_gui(self, name):
         r = filter(lambda g: g.guiname == name, self.guis)
         return r[0]
 
+    def add_button_group(self, label_string, topic, row):
+        button_font = ("courier", 12)
+        labels = label_string.split(';')
+        i = 0
+        for label in labels:
+            cb = lambda l=label,t=topic: self.button_group_cb(t, l)
+            Button(self.frame, text=label, command = cb, font = button_font, padx=5, pady=5).grid(row=row, column = i)
+            i += 1
+
+    def button_group_cb(self, topic, button_name):
+        p = rospy.Publisher(topic, String)
+        p.publish(button_name)
+
+    def add_button(self, label, topic, row):
+        button_font = ("courier", 12)
+        Button(self.frame, text=label, command = lambda: self.button_cb(topic), font = button_font, padx=5, pady=5).grid(row=row)
+
+    def button_cb(self, topic):
+        p = rospy.Publisher(topic, Int32)
+        p.publish(0)
+
     def topic_change(self, data):
         print "Changing to GUI " + data.data
-        self.goal_gui = data.data
-        self.gui_changed = True
-
-    
-
+        for w in self.frame.grid_slaves():
+            w.grid_remove()
+        i = 0
+        for g in self.get_gui(data.data).elements:
+            kind = g.type
+            if kind == GUIElement.BUTTON_ID:
+                self.add_button(g.label, g.topic, i)
+            elif kind == GUIElement.BUTTONGROUP_ID:
+                self.add_button_group(g.label_string, g.topic, i)
+            else:
+                rospy.logwarn("Unsupported GUI element type")
+        
 
 def main():
-    rospy.init_node('sim_tablet')
-    TabletSimulator()
-    while not rospy.is_shutdown():
-        rospy.spin()
+    rospy.init_node('dyn_interface_GUI')
+    root = Tk()
+    root.title("Dynamic Interface GUI")
+    #root.minsize(100,50)
+    #sw = root.winfo_screenwidth()
+    #sh = root.winfo_screenheight()
+    #root.geometry("+" + str(sw/4) + "+" + str(sh/4))
+    TabletSimulator(root)
+    #while not rospy.is_shutdown():
+    root.mainloop()
 
 
 if __name__ == '__main__':

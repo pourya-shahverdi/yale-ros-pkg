@@ -14,6 +14,7 @@
   <depend package="sound_play"/>
   <depend package="tf"/>
   <depend package="dragonbot_python"/>
+  <depend package="interface_srv" />
 
 </package>
 
