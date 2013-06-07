@@ -11,6 +11,8 @@ from sound_play.msg import SoundRequest
 from sound_play.libsoundplay import SoundClient
 import yaml
 import sys
+import wave
+import contextlib
 
 class SpeechPlayServer():
     feedback = SpeechPlayFeedback()
@@ -21,7 +23,6 @@ class SpeechPlayServer():
         rospy.sleep(0.5)
         self.sound_client.stopAll()
      
-        #self.speech_client = actionlib.SimpleActionClient('/SpeechPlay_Server',SpeechPlayAction)
         self.express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
         self.viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
         self.ik_client = actionlib.SimpleActionClient('/IK_Server',IKAction)
@@ -52,7 +53,7 @@ class SpeechPlayServer():
         self.feedback.action = "none"
 
         rospy.loginfo("Starting server...")
-        self.server = actionlib.SimpleActionServer('SpeechPlay_Server', SpeechPlayAction, execute_cb=self.execute_cb)
+        self.server = actionlib.SimpleActionServer('SBPlayback_Server', SpeechPlayAction, execute_cb=self.execute_cb)
         self.server.start()
 
 
@@ -82,8 +83,15 @@ class SpeechPlayServer():
                                  key=lambda action: action["start"])
         
         #self.sound_client.stopAll()
-        rospy.loginfo("Speech: playing wave file")
-        self.sound_client.playWave(self.phrases[goal.phrase]["file"])
+        wave_file = self.phrases[goal.phrase]["file"]
+        wave_duration = 0.0
+        with contextlib.closing(wave.open(wave_file,'r')) as f:
+            frames=f.getnframes()
+            rate=f.getframerate()
+            wave_duration=frames/float(rate)
+
+        rospy.loginfo("Speech: playing wave file -- duration: " + str(wave_duration))
+        self.sound_client.playWave(wave_file)
         for a in ordered_actions:
             rospy.loginfo("Playing action: " + str(a))
             if a["type"] == "viseme":
@@ -182,8 +190,7 @@ class SpeechPlayServer():
             return
         else:
             rospy.loginfo("Waiting for end")
-            while a["type"] == "viseme" and (rospy.Time.now()-time+timing_adjust <
-               rospy.Duration.from_sec(a["end"])):
+            while (rospy.Time.now()-time+timing_adjust) < rospy.Duration.from_sec(wave_duration):
                 pass
             rospy.loginfo("At end -- Success")
             self.result.result = "SUCCESS"

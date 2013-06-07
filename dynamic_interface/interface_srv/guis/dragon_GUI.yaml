@@ -18568,7 +18568,7 @@
   elements:
   - type: button_group
     label: meals2_dinner_foods dunno_no_resp_wrong
-    label_string: color;other_answer;next_phrase;next_segment;panic
+    label_string: color;other_answers;next_phrase;next_segment;panic
     topic: dragon_GUI/meals2_dinner_foods_dunno_no_resp_wrong
 - gui: meals2_dinner_foods_other_answer1
   elements:
@@ -18622,7 +18622,7 @@
   elements:
   - type: button_group
     label: meals2_dinner_foods yes_only
-    label_string: color;other_answer;next_phrase;next_segment;panic
+    label_string: color;other_answers;next_phrase;next_segment;panic
     topic: dragon_GUI/meals2_dinner_foods_yes_only
 - gui: meals2_dinner_foods_incorrect_why
   elements:

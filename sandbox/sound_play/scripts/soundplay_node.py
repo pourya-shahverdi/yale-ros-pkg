@@ -150,7 +150,7 @@ class soundtype:
         finally:
             self.lock.release()
 
-    def command(self, cmd, arg = 0.0):
+    def command(self, cmd, arg = 1.0):
          if cmd == SoundRequest.PLAY_STOP:
              self.stop()
          elif cmd == SoundRequest.PLAY_ONCE:

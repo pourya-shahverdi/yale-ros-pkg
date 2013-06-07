@@ -34,7 +34,10 @@ class TabletSimulator():
 
     def get_gui(self, name):
         r = filter(lambda g: g.guiname == name, self.guis)
-        return r[0]
+        if len(r) == 0:
+            rospy.logwarn("Invalid GUI name")
+        else:
+            return r[0]
 
     def add_button_group(self, label_string, topic, row):
         button_font = ("courier", 12)
@@ -70,6 +73,7 @@ class TabletSimulator():
                 self.add_button_group(g.label_string, g.topic, i)
             else:
                 rospy.logwarn("Unsupported GUI element type")
+            i += 1
         
 
 def main():
