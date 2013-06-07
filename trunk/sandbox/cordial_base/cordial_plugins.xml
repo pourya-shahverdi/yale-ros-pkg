@@ -1,0 +1,6 @@
+<library path="lib/libcordial_plugins">
+  <class name="cordial_plugins_/base_plugin" type="cordial_plugin::BasePlugin" base_class_type="cordial_base::CordialBase">
+    <description>This is a base plugin.</description>
+  </class>
+</library>
+

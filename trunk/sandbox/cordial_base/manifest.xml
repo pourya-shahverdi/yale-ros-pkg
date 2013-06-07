@@ -1,0 +1,22 @@
+<package>
+  <description brief="cordial_base">
+
+     cordial_base
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cordial_base</url>
+  <depend package="pluginlib"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="tf"/>
+  
+  <export>
+    <cordial_base plugin="${prefix}/cordial_plugins.xml"/>
+  </export>
+
+</package>
+
+
