@@ -1,12 +1,10 @@
 #goal definition
-bool on
-string target
+string type
+string args
+duration target_duration
 ---
 #result definition
 string result
 ---
 #feedback
-string target
-float64 x
-float64 y
-float64 z
+string status
