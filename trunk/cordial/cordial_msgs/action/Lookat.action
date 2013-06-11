@@ -1,0 +1,11 @@
+#goal definition
+string state
+int32 x
+int32 y
+int32 z
+---
+#result definition
+string result
+---
+#feedback
+string status
