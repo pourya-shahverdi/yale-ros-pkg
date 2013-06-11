@@ -19,6 +19,18 @@ namespace cordial_plugin
       }
 
       std::string robot_name() {return _robot_name;}
+
+      bool viseme_init()
+      {
+        ROS_INFO( "Hello World! Base Plugin is working!" );
+      }
+      
+      void viseme_execute( const dragon_msgs::VisemeGoalConstPtr &goal )
+      {
+        ROS_INFO( "setting goal: %s", goal->constant.c_str() );
+        dragon_msgs::VisemeResult result;
+        viseme_as->setSucceeded(result);
+      }
   };
 }
 

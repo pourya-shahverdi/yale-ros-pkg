@@ -10,7 +10,7 @@ int main(int argc, char** argv)
   {
     base = poly_loader.createClassInstance("cordial_plugins_/base_plugin");
     base->initialize();
-    base->viseme_as_init();
+    base->viseme_init();
     ROS_INFO("Base Name: %s", base->robot_name().c_str());
   }
   catch(pluginlib::PluginlibException& ex)
