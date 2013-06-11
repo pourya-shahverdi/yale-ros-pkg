@@ -1,0 +1,4 @@
+<launch>
+  <param name="cordial_robot" type="str" value="cordial_plugins/cordial_dragonbot"/>
+  <node name="cordial_node" type="cordial_node" pkg="cordial_base" output="screen"/>
+</launch>
