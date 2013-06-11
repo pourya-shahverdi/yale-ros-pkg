@@ -1,0 +1,10 @@
+#goal definition
+string phrase
+bool interrupt
+---
+#result definition
+string result
+---
+#feedback
+string viseme
+string action

@@ -1,0 +1,16 @@
+<package>
+  <description brief="cordial_msgs">
+
+     cordial_msgs
+
+  </description>
+  <author>Elaine Short</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cordial_msgs</url>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

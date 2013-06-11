@@ -1,0 +1,16 @@
+<package>
+  <description brief="cordial_client">
+
+     cordial_client
+
+  </description>
+  <author>Elaine Short</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cordial_client</url>
+  <depend package="cordial_msgs"/>
+  <depend package="actionlib"/>
+
+</package>
+
+

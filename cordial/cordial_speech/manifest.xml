@@ -1,0 +1,18 @@
+<package>
+  <description brief="cordial_speech">
+
+     cordial_speech
+
+  </description>
+  <author>Elaine Short</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cordial_speech</url>
+  <depend package="cordial_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="sound_play"/>
+  <depend package="interface_srv"/>
+
+</package>
+
+
