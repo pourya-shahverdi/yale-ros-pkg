@@ -1,0 +1,6 @@
+<library path="lib/libcordial_dragonbot">
+  <class name="cordial_plugins/cordial_dragonbot" type="cordial_plugin::CordialDragonbot" base_class_type="cordial_base::CordialBase">
+    <description>Cordial Plugin for dragonbot</description>
+  </class>
+</library>
+

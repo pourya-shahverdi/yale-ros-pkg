@@ -1,0 +1,22 @@
+<package>
+  <description brief="cordial_dragonbot">
+
+     cordial_dragonbot
+
+  </description>
+  <author>David Feil-Seifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cordial_dragonbot</url>
+  <depend package="cordial_base"/>
+  <depend package="dragon_msgs"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/include"/>
+    <cordial_base plugin="${prefix}/cordial_dragonbot_plugin.xml"/>
+  </export>
+
+
+</package>
+
+
