@@ -1,9 +1,0 @@
-#goal definition
-#options: "once" "off" "start" "stop" (off & stop both open eyes)
-string constant
----
-#result definition
-string result
----
-#feedback
-string status
