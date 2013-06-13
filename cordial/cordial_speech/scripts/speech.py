@@ -6,7 +6,8 @@
 import roslib; roslib.load_manifest('dragonbot_python')
 import rospy
 import actionlib
-from cordial_msgs.msg import *
+from dragon_msgs.msg import *
+from cordial_sound.msg import *
 from cordial_sound.msg import SoundRequest
 from cordial_sound.libsoundplay import SoundClient
 
@@ -24,31 +25,23 @@ class SpeechPlayServer():
         rospy.sleep(0.5)
         self.sound_client.stopAll()
      
-        self.express_client = actionlib.SimpleActionClient('/ExpressionMotion_Server',ExpressionMotionAction)
+        #self.animation_client = actionlib.SimpleActionClient('/Animation_Server',ExpressionMotionAction)
         self.viseme_client = actionlib.SimpleActionClient('/Viseme_Server',VisemeAction)
-        self.ik_client = actionlib.SimpleActionClient('/IK_Server',IKAction)
-        self.lookat_client = actionlib.SimpleActionClient('/Lookat_Server',LookatAction)
-        self.track_client = actionlib.SimpleActionClient('/Track_Server',TrackAction)
-        self.blink_client = actionlib.SimpleActionClient('/Blink_Server',BlinkAction)
+        #self.lookat_client = actionlib.SimpleActionClient('/Lookat_Server',LookatAction)
 
         rospy.loginfo("Waiting for Cordial Action Servers")
-        rospy.loginfo(" --- Expression Motion")
-        self.express_client.wait_for_server()
+        #rospy.loginfo(" --- Animation")
+        #self.animation_client.wait_for_server()
         rospy.loginfo(" --- Visemes")
         self.viseme_client.wait_for_server()
-        rospy.loginfo(" --- IK")
-        self.ik_client.wait_for_server()
-        rospy.loginfo(" --- Lookat")
-        self.lookat_client.wait_for_server()
-        rospy.loginfo(" --- TF Tracking")
-        self.track_client.wait_for_server()
-        rospy.loginfo(" --- Blinking")
-        self.blink_client.wait_for_server()
+        #rospy.loginfo(" --- Lookat")
+        #self.lookat_client.wait_for_server()     
         rospy.loginfo("Action servers connected")
 
+        rospy.loginfo("Reading Phrase File")
         with open(phrase_file, 'r') as f:
             s = f.read()
-            self.phrases = yaml.load(s)      
+            self.phrases = yaml.load(s)     
         
         self.feedback.viseme = "IDLE"
         self.feedback.action = "none"
@@ -56,6 +49,7 @@ class SpeechPlayServer():
         rospy.loginfo("Starting server...")
         self.server = actionlib.SimpleActionServer('SBPlayback_Server', SpeechPlayAction, execute_cb=self.execute_cb)
         self.server.start()
+        rospy.loginfo("Server started")
 
 
     def execute_cb(self, goal):
@@ -64,20 +58,17 @@ class SpeechPlayServer():
 
         if goal.interrupt == True:
             rospy.loginfo("Speech: cancelling all goals")
-            #self.express_client.cancel_all_goals()
+            self.animation_client.cancel_all_goals()
             self.viseme_client.cancel_all_goals()
             self.sound_client.stopAll()
-            lgoal = dragon_msgs.msg.LookatGoal(state = "off")
-            self.lookat_client.send_goal(lgoal)
-            tgoal = dragon_msgs.msg.TrackGoal(on = False)
-            self.track_client.send_goal(tgoal)
-            
+            self.lookat_client.cancel_all_goals()
+                        
         timing_adjust = rospy.Duration.from_sec(0.2)
 
         try:
             actions = self.phrases[goal.phrase]["actions"]
         except KeyError:
-            rospy.logerr("Key %s not recognized"%goal.phrase)
+            rospy.logerr("Phrase id %s not recognized"%goal.phrase)
 
         time = rospy.Time.now()
         ordered_actions = sorted(actions, 
@@ -111,82 +102,31 @@ class SpeechPlayServer():
                 self.viseme_client.send_goal(vgoal)
                 self.feedback.viseme = a["id"]
                 self.server.publish_feedback(self.feedback)
-            elif a["type"] == "expression":
+            else:
+                rospy.logwarn("action not recognized")
+          
+            '''elif a["type"] == "animation":
                 rospy.loginfo("Expression: " + a["id"])
-                egoal = dragon_msgs.msg.ExpressionMotionGoal(type='expression',constant=a["id"])
-                self.express_client.send_goal(egoal)
-                self.feedback.action = a["id"]
-                self.server.publish_feedback(self.feedback)
-            elif a["type"] == "motion":
-                rospy.loginfo("Motion: " + str(a["id"]))
-                egoal = dragon_msgs.msg.ExpressionMotionGoal(type='motion',constant=a["id"])
+                egoal = cordial_msgs.msg.AnimationGoal(name=a["id"],constant=a["id"])
                 self.express_client.send_goal(egoal)
                 self.feedback.action = a["id"]
                 self.server.publish_feedback(self.feedback)
             elif a["type"] == "lookat":
-                rospy.loginfo("Lookat: x: " + str(a["x"]) + " y: " + str(a["y"]) + " z: " + str(a["z"]))
-                lgoal = dragon_msgs.msg.LookatGoal(x = a["x"], y = a["y"], z = a["z"])
-                self.lookat_client.send_goal(lgoal)
-            elif a["type"] == "lookat_frame":
                 rospy.loginfo("Lookat: target: " + a["target"])
-                try:
-                    (trans, rot) = self.tf_listener.lookupTransform('/dragonbot',frame, rospy.Time(0))
-                except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-                    rospy.logwarn("Error looking up transform.")
-                else:
-                    lgoal = dragon_msgs.msg.LookatGoal(x = trans[0]*100, y = trans[1]*100, z = trans[2]*100) #m to cm
-                    self.lookat_client.send_goal(lgoal)                
-            elif a["type"] == "lookat_off":
-                rospy.loginfo("Lookat off")
-                lgoal = dragon_msgs.msg.LookatGoal(state = "off")
-                self.lookat_client.send_goal(lgoal)
+                lgoal = dragon_msgs.msg.LookatGoal(target=a["target"], target_duration=rospy.Duration.from_sec(float(a["duration"])))
+                self.lookat_client.send_goal(lgoal)           
             elif a["type"] == "track":
                 rospy.loginfo("Track: " + a["target"])
                 tgoal = dragon_msgs.msg.TrackGoal(on = True, target = a["target"])
                 self.track_client.send_goal(tgoal)
-            elif a["type"] == "track_off":
-                rospy.loginfo("Tracking off")
-                tgoal = dragon_msgs.msg.TrackGoal(on = False)
-                self.track_client.send_goal(tgoal)
-            elif a["type"] == "eye_open":
-                rospy.loginfo("Eyes open")
-                bgoal = dragon_msgs.msg.BlinkGoal(constant = "STOP")
-                self.blink_client.send_goal(bgoal)
-            elif a["type"] == "eye_close":
-                rospy.loginfo("Eyes closed")
-                bgoal = dragon_msgs.msg.BlinkGoal(constant = "START")
-                self.blink_client.send_goal(bgoal)
-            elif a["type"] == "blink":
-                rospy.loginfo("Blink")
-                bgoal = dragon_msgs.msg.BlinkGoal(constant = "ONCE")
-                self.blink_client.send_goal(bgoal)
-            elif a["type"] == "pose":
-                rospy.loginfo("Pose " + str(a))
-                igoal = dragon_msgs.msg.IKGoal(vel = a["vel"],
-                                               acc = a["acc"],
-                                               x = a["x"],
-                                               y = a["y"],
-                                               z = a["z"],
-                                               theta = a["theta"],
-                                               neck = a["neck"],
-                                               state = "on")
-                self.ik_client.send_goal(igoal)
-            elif a["type"] == "pose_off":
-                rospy.loginfo("Pose off")
-                igoal = dragon_msgs.msg.IKGoal(state = "off")
-                self.ik_client.send_goal(igoal)
             else:
-                rospy.logwarn("action not recognized")
-          
+                rospy.logwarn("action not recognized")'''
+
         if preempted:
             rospy.loginfo("Preempted")
             #self.express_client.cancel_all_goals()
             self.viseme_client.cancel_all_goals()
             self.sound_client.stopAll()
-            goal = dragon_msgs.msg.LookatGoal(state = "off")
-            self.lookat_client.send_goal(goal)
-            goal = dragon_msgs.msg.TrackGoal(on = False)
-            self.track_client.send_goal(goal)
             self.server.set_preempted()
             return
         else:
@@ -196,13 +136,6 @@ class SpeechPlayServer():
             rospy.loginfo("At end -- Success")
             self.result.result = "SUCCESS"
             self.viseme_client.cancel_all_goals()
-            #self.express_client.cancel_all_goals()
-            goal = dragon_msgs.msg.LookatGoal(state = "off")
-            self.lookat_client.send_goal(goal)
-            #bgoal = dragon_msgs.msg.BlinkGoal(constant = "STOP")
-            #self.blink_client.send_goal(bgoal)
-            goal = dragon_msgs.msg.TrackGoal(on = False)
-            self.track_client.send_goal(goal)
             self.server.set_succeeded(self.result)
             return
         rospy.logwarn("Speech: the code should probably never reach this point. Setting succeeded anyway.")

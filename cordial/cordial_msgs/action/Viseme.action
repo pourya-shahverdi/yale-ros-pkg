@@ -1,5 +1,5 @@
 #goal definition
-string constant
+string name
 ---
 #result definition
 string result

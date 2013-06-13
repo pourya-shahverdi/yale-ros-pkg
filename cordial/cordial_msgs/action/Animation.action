@@ -1,5 +1,5 @@
 #goal definition
-string type
+string name
 string args
 duration target_duration
 ---
@@ -7,4 +7,4 @@ duration target_duration
 string result
 ---
 #feedback
-string status
+string name
