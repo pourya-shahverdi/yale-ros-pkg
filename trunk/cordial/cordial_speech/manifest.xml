@@ -8,9 +8,9 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/cordial_speech</url>
-  <depend package="cordial_msgs"/>
+  <depend package="dragon_msgs"/>
   <depend package="actionlib"/>
-  <depend package="sound_play"/>
+  <depend package="cordial_sound"/>
   <depend package="interface_srv"/>
 
 </package>
