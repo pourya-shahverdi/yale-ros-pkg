@@ -72,9 +72,11 @@ class TabletManager():
  
     def last_press(self, topic):
         topic = topic.strip('/')
+        rospy.logdebug("Tablet manager getting last press on topic: " + str(topic))
         return self.subs[topic]["last_press"]
 
     def wait_for_press(self,topic, value=None):
+        rospy.logdebug("Tablet manager waiting on topic: " + str(topic) + " for value: " + str(value))
         topic = topic.strip('/')
         if value == None:
             self.subs[topic]["pressed"] = False
@@ -101,14 +103,16 @@ class TabletManager():
 
                 
     def int_cb(self,data):
-        #print "got: " + str(data.data)
+        rospy.loginfo("Tablet manager got: " + str(data.data))
         topic = data._connection_header["topic"].strip('/')
+        rospy.loginfo("... on topic: " + topic)
         self.subs[topic]["pressed"] = True
         self.subs[topic]["last_press"] = data.data
 
     def string_cb(self,data):
-        #print "got: " + data.data
+        rospy.logdebug("Tablet manager got: " + data.data)
         topic = data._connection_header["topic"].strip('/')
+        rospy.loginfo("... on topic: " + topic)
         self.subs[topic]["pressed"] = True
         self.subs[topic]["last_press"] = data.data
 
@@ -116,7 +120,7 @@ class TabletManager():
     def dur_cb(self,data):
         secs = data.data.secs
         nsecs = data.data.nsecs
-        print "got: (" + str(secs) + "," + str(nsecs) + ")"
+        rospy.logdebug("Tablet manager got: (" + str(secs) + "," + str(nsecs) + ")")
         topic = data._connection_header["topic"].strip('/')
         self.subs[topic]["pressed"] = True
         self.subs[topic]["last_press"] = data.data
