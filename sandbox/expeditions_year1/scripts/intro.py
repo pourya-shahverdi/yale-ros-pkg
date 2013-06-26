@@ -28,14 +28,13 @@ def main():
             s = f.read()
 
     dialogue_name = "intro"
-    session_name = "introduction"
-    dialogue = yaml.load(s)[session_name]
+    dialogue = yaml.load(s)
     
-    dg = DialogueManager(dm, tm, "dragon_GUI/", dialogue_name, dialogue[dialogue_name], session_name)
+    dg = DialogueManager(tm, dialogue_name, dialogue[dialogue_name])
     
     dm.eye_close()
     tm.change("sleep")
-    while not rospy.is_shutdown() and not tm.last_press("/dragon_GUI/sleep") == 1:
+    while not rospy.is_shutdown() and not tm.last_press("/dragon_GUI/sleep") == 0:
         dm.say("intro-05-snore_sleep", wait = False)
         rospy.sleep(6.0)
     dm.express("wakeup")

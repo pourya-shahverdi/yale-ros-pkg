@@ -1,17 +1,16 @@
-introduction:
+intro:
+    intro_dialogue:
+        type: dialogue
+        items: [hey_there, intro, back_to_sleep]
+    wake_up:
+        type: statement
+        phrase_ids: [intro-01-snore_wake_up]
+    hey_there:
+        type: statement
+        phrase_ids: [intro-02-hey_there]
     intro:
-        intro_dialogue:
-            type: dialogue
-            items: [hey_there, intro, back_to_sleep]
-        wake_up:
-            type: statement
-            phrase_ids: [intro-01-snore_wake_up]
-        hey_there:
-            type: statement
-            phrase_ids: [intro-02-hey_there]
-        intro:
-            type: statement
-            phrase_ids: [intro-03-introduction]
-        back_to_sleep:
-            type: statement
-            phrase_ids: [intro-04-back_to_nap]
+        type: statement
+        phrase_ids: [intro-03-introduction]
+    back_to_sleep:
+        type: statement
+        phrase_ids: [intro-04-back_to_nap]
