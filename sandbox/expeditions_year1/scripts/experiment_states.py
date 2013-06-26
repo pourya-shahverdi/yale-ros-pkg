@@ -12,8 +12,8 @@ from actionlib.msg import *
 from dragonbot_manager import DragonbotManager
 #from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
-from sound_play.msg import SoundRequest
-from sound_play.libsoundplay import SoundClient
+from cordial_sound.msg import SoundRequest
+from cordial_sound.libsoundplay import SoundClient
 from dialogue_manager import *
 
 class Sleep(smach.State):

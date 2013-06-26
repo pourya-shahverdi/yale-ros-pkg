@@ -7,8 +7,8 @@ import roslib; roslib.load_manifest('dragonbot_python')
 import rospy
 import yaml
 from dragon_msgs.msg import *
-from sound_play.msg import SoundRequest
-from sound_play.libsoundplay import SoundClient
+from cordial_sound.msg import SoundRequest
+from cordial_sound.libsoundplay import SoundClient
 import actionlib
 import time
 import tf

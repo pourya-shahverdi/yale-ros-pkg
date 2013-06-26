@@ -9,8 +9,8 @@ from threading import Thread
 from threading import Event
 import yaml
 from dragon_msgs.msg import *
-from sound_play.msg import SoundRequest
-from sound_play.libsoundplay import SoundClient
+from cordial_sound.msg import SoundRequest
+from cordial_sound.libsoundplay import SoundClient
 import actionlib
 from actionlib_msgs.msg import *
 import tf
@@ -43,7 +43,7 @@ class DragonbotManager():
         rospy.loginfo(" --- TF Tracking")
         self.track_client.wait_for_server()
         rospy.loginfo(" --- Speech")
-        self.speech_client.wait_for_server()
+        #self.speech_client.wait_for_server()
 
         rospy.loginfo("Action servers connected")
 
