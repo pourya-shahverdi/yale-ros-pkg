@@ -8,8 +8,8 @@ import actionlib
 from actionlib import *
 from actionlib.msg import *
 from tablet_manager import TabletManager
-from sound_play.msg import SoundRequest
-from sound_play.libsoundplay import SoundClient
+from cordial_sound.msg import SoundRequest
+from cordial_sound.libsoundplay import SoundClient
 
 class PanicException(Exception): pass
 class NextStateException(Exception): pass

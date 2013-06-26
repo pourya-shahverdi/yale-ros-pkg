@@ -13,7 +13,7 @@
   <depend package="actionlib"/>
   <depend package="smach"/>
   <depend package="smach_ros"/>
-  <depend package="sound_play"/>
+  <depend package="cordial_sound"/>
   <depend package="dragon_msgs"/>
   <depend package="tf" />
   <depend package="interface_srv" />
