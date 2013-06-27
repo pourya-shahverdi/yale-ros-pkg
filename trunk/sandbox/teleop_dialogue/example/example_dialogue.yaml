@@ -1,0 +1,70 @@
+my_dialogue:
+  introduction:
+    type: dialogue
+    items: [hello, give_name, how_are_you,how_are_you_resp, guess_fav_color, bring_crayon, bye]
+  hello:
+    type: statement
+    phrase_ids: [hey, hi, hello]
+  give_name:
+    type: statement
+    phrase_ids: [my_name_is]
+  how_are_you:
+    type: statement
+    phrase_ids: [how_are_you]
+  how_are_you_resp:
+    type: select
+    responses: [good_answer, bad_answer]
+  good_answer:
+    type: statement
+    phrase_ids: [great]
+  bad_answer:
+    type: statement
+    phrase_ids: [sorry]
+  guess_fav_color:
+    type: question
+    phrase_ids: [can_you_guess]
+    responses: [red, green, blue, grey, brown, cerulean, other]
+    terminal: [blue, cerulean]
+  yuck_ew:
+    type: statement
+    phrase_ids: [ew_gross_color]
+  brown:
+    type: redirect
+    goal: yuck_ew
+  grey:
+    type: redirect
+    goal: yuck_ew
+  cerulean:
+    type: dialogue
+    items: [same_as_blue, blue]
+  same_as_blue:
+    type: statement
+    phrase_ids: [same_as_blue]
+  blue:
+    type: statement
+    phrase_ids: [yeah_blue]
+  red:
+    type: backstory
+    items: [red_ugly, remember_ugly, remember_hate]
+  red_ugly:
+    type: statement
+    phrase_ids: [red_ugly]
+  remember_ugly:
+    type: statement
+    phrase_ids: [remember_thats_ugly]
+  remember_hate:
+    type: statement
+    phrase_ids: [remember_i_hate]
+  green:
+    type: statement
+    phrase_ids: [not_green]
+  other:
+    type: statement
+    phrase_ids: [thats_not_it]
+  bring_crayon:
+    type: wait
+    phrase_ids: [bring_me_blue_crayon]
+  bye:
+    type: statement
+    phrase_ids: [thanks_bye]
+
