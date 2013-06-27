@@ -10,12 +10,8 @@
   <url>http://ros.org/wiki/dragonbot_teleop_dialogue</url>
   <depend package="rospy"/>
   <depend package="actionlib"/>
-  <depend package="dragon_msgs"/>
-  <depend package="cordial_sound"/>
-  <depend package="tf"/>
-  <depend package="dragonbot_python"/>
+  <depend package="cordial_speech"/>
   <depend package="interface_srv" />
-
 </package>
 
 

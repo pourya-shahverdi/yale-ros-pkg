@@ -8,9 +8,7 @@ import actionlib
 from actionlib import *
 from actionlib.msg import *
 from tablet_manager import TabletManager
-#from cordial_sound.msg import SoundRequest
-#from cordial_sound.libsoundplay import SoundClient
-from dragon_msgs.msg import *
+from cordial_speech.msg import *
 
 class PanicException(Exception): pass
 class NextStateException(Exception): pass

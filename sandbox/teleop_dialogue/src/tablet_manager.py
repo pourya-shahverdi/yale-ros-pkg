@@ -103,7 +103,7 @@ class TabletManager():
 
                 
     def int_cb(self,data):
-        rospy.loginfo("Tablet manager got: " + str(data.data))
+        rospy.logdebug("Tablet manager got: " + str(data.data))
         topic = data._connection_header["topic"].strip('/')
         rospy.loginfo("... on topic: " + topic)
         self.subs[topic]["pressed"] = True
