@@ -1,0 +1,135 @@
+lunchbox2:
+    bad: [choc_milk, soda, white_bread, muffin, bagel]
+    good: [milk, water, wheat_bread, wh_bagel]
+    sometimes: [juice]
+    groups: 
+        breads: [white_bread, muffin, bagel, wheat_bread, wh_bagel]
+        drinks: [choc_milk, soda, juice, milk, water]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        success: all_good
+        reminders: [reminder]
+        missing_all:
+            breads: [want_food, pick_bread]
+            drinks: [thirsty, pick_drink]
+        missing_good:
+            all: [missing_good]
+            breads: [pick_vitamins]
+            drinks: [pick_not_sweet]
+        has_bad:
+            all: [has_bad]
+            breads: [remember_fiber, pick_wheat]
+            drinks: [remember_sugar, pick_not_sugary]
+        specific:
+            wheat_bread: [try_wheat]
+            wh_bagel: [try_whbagel]
+            white_bread: [white_off]
+            muffin: [muffin_off]
+            bagel: [bagel_off]
+            choc_milk: [choc_off]
+            soda: [soda_off]
+            milk: [pick_milk]
+            water: [pick_water]
+            juice: [okay_but_juice]
+snacks2:
+    bad: [candy, cheetos, chips, churros]
+    good: [banana, mix, apple, carrot]
+    sometimes: []
+    groups:
+        candy: [candy]
+        cheetos: [cheetos]
+        chips: [chips]
+        churros: [churros]
+        banana: [banana]
+        mix: [mix]
+        apple: [apple]
+        carrot: [carrot]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder1, reminder2, reminder3]
+        success: all_good
+        missing_all:
+            all: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            banana: [banana1, banana2]
+            mix: [mix1, mix2]
+            apple: [apple1, apple2]
+            carrot: [carrot1, carrot2]
+        has_bad:
+            all: [has_bad]
+            candy: [candy1, candy2]
+            cheetos: [cheetos1, cheetos2]
+            chips: [chips1, chips2]
+            churros: [churros1, churros2]
+        specific:
+            candy: [candy3]
+            cheetos: [cheetos3]
+            chips: [chips3]
+            churros: [churros3]
+            banana: [banana3]
+            mix: [mix3]
+            apple: [apple3]
+            carrot: [carrot3]
+meals2_breakfast:
+    bad: [juice, donut]
+    good: [orange, egg]
+    sometimes: []
+    groups:
+        juice: [juice]
+        orange: [orange]
+        egg: [egg]
+        donut: [donut]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder1, reminder2, reminder3]
+        success: all_good
+        missing_all:
+            all: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            egg: [egg1, egg2]
+            orange: [orange1, orange2]
+        has_bad:
+            all: [has_bad]
+            juice: [juice1, juice2]
+            donut: [donut1, donut2]
+        specific:
+            juice: [juice3]
+            orange: [orange3]
+            egg: [egg3]
+            donut: [donut3]
+meals2_dinner:
+    bad: [potato, roll]
+    good: [broccoli, salad]
+    sometimes: []
+    groups:
+        potato: [potato]
+        roll: [roll]
+        broccoli: [broccoli]
+        salad: [salad]
+    phrases:
+        intro: intro
+        plate_chant: plate_chant
+        reminders: [reminder1, reminder2, reminder3]
+        success: all_good
+        missing_all:
+            all: [reminder1, reminder2, reminder3]
+        missing_good:
+            all: [missing_good]
+            broccoli: [broc1, broc2]
+            salad: [salad1, salad2]
+        has_bad:
+            all: [has_bad]
+            potato: [potato1, potato2]
+            roll: [roll1, roll2]
+        specific:
+            potato: [potato3]
+            roll: [roll3]
+            broccoli: [broc3]
+            salad: [salad3]
+            
+

@@ -1,0 +1,141 @@
+drinks:
+    intro: drink_intro 
+    no_choice: drink_no_choice
+    terminal: [milk,water]
+    none:
+        milk: none_milk
+        water: none_water
+        chocolate_milk: none_choco_milk
+        juice: none_juice
+        soda: none_soda
+    chocolate_milk:
+        chocolate_milk: dr_repeat
+        juice: choc_juice
+        soda: choc_soda
+        milk: choc_milk
+        water: choc_water
+    juice:
+        chocolate_milk: juice_choc
+        juice: dr_repeat
+        soda: juice_soda
+        milk: juice_milk
+        water: juice_water
+    soda:
+        chocolate_milk: soda_choc
+        juice: soda_juice
+        soda: dr_repeat
+        milk: soda_milk
+        water: soda_water
+whole_grains:
+    intro: bread_intro
+    no_choice: bread_no_choice
+    terminal: [grain, whbagel]
+    none:
+        white: none_white
+        grain: none_grain
+        bagel: none_bagel
+        whbagel: none_whbagel
+        muffin: none_muffin
+    white:
+        white: grain_repeat
+        grain: white_grain
+        bagel: white_bagel
+        whbagel: white_whbagel
+        muffin: white_muffin
+    bagel:
+        white: bagel_white
+        grain: bagel_grain
+        bagel: grain_repeat
+        whbagel: bagel_whbagel
+        muffin: bagel_muffin
+    muffin:
+        white: muffin_white
+        grain: muffin_grain
+        bagel: muffin_bagel
+        whbagel: muffin_whbagel
+        muffin: grain_repeat
+snacks1:
+    intro: snack1_intro
+    no_choice: snack1_no_choice
+    terminal: [banana, mix]
+    none:
+        banana: none_banana
+        mix: none_mix
+        candy: none_candy
+        cheetos: none_cheetos
+    candy:
+        banana: candy_banana
+        mix: candy_mix
+        candy: snack1_repeat
+        cheetos: candy_cheetos
+    cheetos:
+        banana: cheetos_banana
+        mix: cheetos_mix
+        candy: cheetos_candy
+        cheetos: snack1_repeat
+snacks2:
+    intro: snacks2_intro
+    no_choice: snacks2_no_choice
+    terminal: [apple, carrots]
+    none:    
+        churro: none_churro
+        chips: none_chips
+        apple: none_apple
+        carrots: none_carrots
+    churro:
+        churro: snacks2_repeat
+        chips: churro_chips
+        apple: churro_apple
+        carrots: churro_carrots
+    chips:
+        churro: chips_churro
+        chips: snacks2_repeat
+        apple: chips_apple
+        carrots: chips_carrots
+breakfast:
+    intro: breakfast1_intro
+    no_choice: breakfast1_no_choice
+    terminal: [oatmeal, fiber]
+    none:
+        oatmeal: none_oatmeal
+        fiber: none_fiber
+        cheerios: none_cheerios
+        charms: none_charms
+        kix: none_kix
+    cheerios:
+        oatmeal: cheerios_oatmeal
+        fiber: cheerios_fiber
+        cheerios: breakfast1_repeat
+        charms: cheerios_charms
+        kix: cheerios_kix
+    charms:
+        oatmeal: charms_oatmeal
+        fiber: charms_fiber
+        cheerios: charms_cheerios
+        charms: breakfast1_repeat
+        kix: charms_kix
+    kix:
+        oatmeal: kix_oatmeal
+        fiber: kix_fiber
+        cheerios: kix_cheerios
+        charms: kix_charms
+        kix: breakfast1_repeat
+dinner:
+    intro: dinner_intro
+    no_choice: dinner_no_choice
+    terminal: [carrots, beans]
+    none:
+        carrots: none_carrots
+        beans: none_beans
+        fries: none_fries
+        rice: none_rice
+    fries:
+        carrots: fries_carrots
+        beans: fries_beans
+        fries: dinner_repeat
+        rice: fries_rice
+    rice:
+        carrots: rice_carrots
+        beans: rice_beans
+        fries: rice_fries
+        rice: dinner_repeat
