@@ -1,7 +1,10 @@
 <launch>
+  <param name="cordial_robot" type="str" value="cordial_plugins/cordial_dragonbot"/>
+  <node name="cordial_node" type="cordial_node" pkg="cordial_base" output="screen"/>
   <node name="soundplay_node" pkg="cordial_sound" type="soundplay_node.py" output ="screen"/>
-  <node name="dragon_speech" pkg="dragonbot_python" type="speech.py" args="$(find expeditions_year1)/yaml/phrases.yaml" output="screen"/>
-  <node name="dragon_tracking" pkg="dragonbot_python" type="tf_tracker.py" output="screen"/>
+  <node name="dragon_speech" pkg="cordial_speech" type="speech.py" args="$(find expeditions_year1)/yaml/phrases.yaml" output="screen"/>
+
+  <!-- <node name="dragon_tracking" pkg="dragonbot_python" type="tf_tracker.py" output="screen"/> -->
   <include file="$(find interface_srv)/launch/dragon_gui.launch" />
   <include file="$(find expeditions_year1)/launch/transforms.launch" /> 
   
