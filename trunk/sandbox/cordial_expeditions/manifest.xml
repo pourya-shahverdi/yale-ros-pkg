@@ -17,8 +17,9 @@
   <depend package="dragon_msgs"/>
   <depend package="tf" />
   <depend package="interface_srv" />
-  <depend package="dragonbot_teleop_dialogue" />
-  <depend package="dragonbot_python" />
+  <depend package="teleop_dialogue" />
+  <depend package="cordial_speech" />
+  <depend package="cordial_base" />
 </package>
 
 

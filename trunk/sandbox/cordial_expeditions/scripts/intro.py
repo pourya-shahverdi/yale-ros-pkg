@@ -13,7 +13,6 @@ import sys
 from experiment_states import *
 
 from dragonbot_manager import DragonbotManager
-#from dragonbot_simulator import DragonbotManager
 from tablet_manager import TabletManager
 import yaml
 from dialogue_manager import *
