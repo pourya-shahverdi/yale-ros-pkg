@@ -105,6 +105,15 @@ public class DragonbotDriver extends AbstractNodeMain {
 
   protected XMLResults results = null;
 
+  protected int getId( java.util.ArrayList<MCBMiniBoard> boards, int set_id )
+  {
+    for( int i = 0; i < boards.size(); i++ )
+    {
+      if( boards.get(i).getId() == set_id ) return i;
+    }
+    return -1;
+  }
+
   // uses regular file system, override for android
   protected int parseConfigFile( String filename )
   {
@@ -158,6 +167,7 @@ public class DragonbotDriver extends AbstractNodeMain {
                   extraParams.put(new String(id+channel+MIN_TICKS),new Float(min_ticks));
                   extraParams.put(new String(id+channel+MAX_TICKS),new Float(max_ticks));
                   extraParams.put(new String(id+channel+TICKS_PER_UNIT),new Float(ticks_per_unit));
+                  System.out.println( "min ticks: " + new String(id+channel+MIN_TICKS) );
           
                   
                   System.out.println("channel : " + getTagValue("channel", eElement2));
@@ -170,7 +180,8 @@ public class DragonbotDriver extends AbstractNodeMain {
          }
       }
     } catch (Exception e) {
-    e.printStackTrace();
+      System.err.println( "things went wrong with lookup stuff" );
+      e.printStackTrace();
     }
 
     return -1;
@@ -207,14 +218,16 @@ public class DragonbotDriver extends AbstractNodeMain {
 
   private double radiansToTicks (String id, String channel, double radians)
   {
-
+      double coefficient = 1.0;
       if (!extraParams.containsKey(id+channel+TICKS_PER_UNIT))
       {
-          System.err.println("Could not access TICKS_PER_UNIT");
-          System.exit(0);
+          //System.err.println("Could not access TICKS_PER_UNIT");
+          //System.exit(0);
       }
-      
-      double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      else
+      {
+        coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      }
       double ticks = radians*coefficient;
       //System.out.println("Radians:"+radians+"-> Ticks:"+ticks);
       return ticks;
@@ -222,13 +235,15 @@ public class DragonbotDriver extends AbstractNodeMain {
 
   private double ticksToRadians (String id, String channel, double ticks)
   {
+    double coefficient = 1.0;
       if (!extraParams.containsKey(id+channel+TICKS_PER_UNIT))
       {
-          System.err.println("Could not access TICKS_PER_UNIT");
-          System.exit(0);
+          //System.err.println("Could not access TICKS_PER_UNIT");
+          //System.exit(0);
       }
-
-      double coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      else {
+        coefficient = extraParams.get(id+channel+TICKS_PER_UNIT).floatValue();
+      }
       double radians = ticks/coefficient;
       //System.out.println("Ticks:"+ticks+"-> Radians:"+radians);
       return radians;
@@ -273,7 +288,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
     //Example listener string /0_A_pgain
     for (int i=0;i<boards.size();i++){
-      final int i_f = i;
+      final int i_f = boards.get(i).getId();
       final char [] boardLetters = {'A','B'};
       for (int j = 0; j<boardLetters.length;j++){
         final int j_f = j;
@@ -318,8 +333,9 @@ public class DragonbotDriver extends AbstractNodeMain {
     
     for( int i = 0; i < boards.size(); i++ )
     {
-      names.add(i+"_A");
-      names.add(i+"_B");
+      System.out.println ("name board ID: " + boards.get(i).getId() );
+      names.add(boards.get(i).getId()+"_A");
+      names.add(boards.get(i).getId()+"_B");
       zeros[i*2] = 0;
       zeros[i*2+1] = 0;
     }
@@ -347,6 +363,7 @@ public class DragonbotDriver extends AbstractNodeMain {
           double[] cmd_vals = mJointCmd.getPosition();
 
           for( int i = 0; i < cnames.size(); i++ ) {
+            System.out.println( "cnames: " + cnames.get(i) );
             for( int j = 0; j < pnames.size(); j++ ) {
               if( pnames.get(j).equals(cnames.get(i)) ) {
                 //copy val into motor array
@@ -355,6 +372,7 @@ public class DragonbotDriver extends AbstractNodeMain {
 
                 double ticks = radiansToTicks(id, channel, motor_vals[i]);
                
+                System.out.println( "lookup: " + id+channel+MIN_TICKS );
                 double min = extraParams.get(id+channel+MIN_TICKS).floatValue();
                 double max = extraParams.get(id+channel+MAX_TICKS).floatValue();
 
@@ -401,8 +419,8 @@ public class DragonbotDriver extends AbstractNodeMain {
     
         for( int i = 0; i < boards.size(); i++ )
         {
-          names.add(i+"_A");
-          names.add(i+"_B");
+          names.add(boards.get(i).getId()+"_A");
+          names.add(boards.get(i).getId()+"_B");
           zeros[i*2] = 0;
           zeros[i*2+1] = 0;
         }
@@ -478,7 +496,8 @@ public class DragonbotDriver extends AbstractNodeMain {
         {
           // DONE: make work for muiltiple boards
           char motor_id = cmd_names.get(i).charAt(2);
-          int board_id = Integer.parseInt( cmd_names.get(i).substring(0,1) );
+          int set_id = Integer.parseInt( cmd_names.get(i).substring(0,1) );
+          int board_id = getId(boards, set_id);
           connectedNode.getLog().debug( "setting: "+motor_id+","+board_id );
           if( board_id >= 0 && board_id < boards.size() )
           {
@@ -495,8 +514,8 @@ public class DragonbotDriver extends AbstractNodeMain {
         double[] motor_vals = mJointMsg.getPosition();
         for( int i = 0; i < boards.size(); i++ )
         {
-          motor_vals[2*i+0] = ticksToRadians(new String(""+(i+1)), "A", boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) );
-          motor_vals[2*i+1] = ticksToRadians(new String(""+(i+1)), "B", boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) );
+          motor_vals[2*i+0] = ticksToRadians(new String(""+(boards.get(i).getId())), "A", boards.get(i).getChannelAParameter(ChannelParameter.CURRENT_TICK) );
+          motor_vals[2*i+1] = ticksToRadians(new String(""+(boards.get(i).getId())), "B", boards.get(i).getChannelBParameter(ChannelParameter.CURRENT_TICK) );
         }
         mJointMsg.setPosition(motor_vals);
         std_msgs.Header header = mJointMsg.getHeader();
