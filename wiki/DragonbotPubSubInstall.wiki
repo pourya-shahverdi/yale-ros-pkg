@@ -1,3 +1,7 @@
+= *THIS PAGE IS DEPRECATED! =
+==Please go to [http://robotics.usc.edu/git/sar-expeditions/pages/DragonbotPubSubInstall] for the new home of this information==
+
+
 #summary Installation instructions for the Dragonbot-Actionlib Repository
 
 = Introduction =
